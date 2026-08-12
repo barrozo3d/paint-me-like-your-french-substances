@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=-X5gKTjMGes
 author: Jared Chavez
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified (UI consistent with pre-12.1 era, approximate)"
+tags: [layers, fill-layer, paint-layer, masks, smart-material, generator, anchor-point, roughness, basecolor, metal-rough, pbr, ambient-occlusion, procedural, alpha, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-metal-from-scratch-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 16
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # TEXTURING METAL from Scratch in SUBSTANCE PAINTER
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-metal-from-scratch-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -489,30 +485,76 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:00] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_000.jpg
+- [1:26] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_001.jpg
+- [2:11] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_002.jpg
+- [3:26] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_003.jpg
+- [5:20] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_004.jpg
+- [7:04] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_005.jpg
+- [8:05] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_006.jpg
+- [9:38] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_007.jpg
+- [10:45] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_008.jpg
+- [12:11] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_009.jpg
+- [15:08] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_010.jpg
+- [18:10] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_011.jpg
+- [20:04] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_012.jpg
+- [22:29] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_013.jpg
+- [24:00] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_014.jpg
+- [26:07] tutorials/frames/texturing-metal-from-scratch-in-substance-painter/frame_015.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A complete, layer-by-layer live rebuild of a finished metal-armor texture (shoulder/collar piece) from a bare mesh to the final result, organized around a "big -> medium -> small" (primary/secondary/tertiary) detail pyramid: broad color+roughness variation first, then secondary-form grunge/wear buildup, then small, deliberately sparse tertiary details (fine scratches, localized rust, anchor-point-driven edge flakes).
 
 ### Summary
-[PENDING EXTRACTION]
+Explicitly framed as a follow-up/companion to an earlier video that introduced the big-medium-small texturing pyramid in the abstract — this one walks through a real finished metal texture by disabling every layer and rebuilding it back up step by step so the viewer can see exactly what each layer contributes. Starts from a bare/grey mesh, applies the built-in `Steel` smart material as a base, then spends the bulk of the video on primary-form work: alternating grunge-driven breakup passes across both Base Color and Roughness in parallel, a brown "grime/stain" color layer, a complementary blue color layer (chosen specifically because blue and orange are complementary and add richness), and a neutralizing "surface wear" blend pass that knocks contrast back down. Edge wear is introduced early via a generator mask that is then manually broken up with a paint layer so it doesn't read as a single contiguous cartoonish line. The gold trim gets the same layered treatment as a secondary pass. A `Grunge Wear` layer folder builds secondary-form buildup/grime in cracks and crevices, plus a subtle rain-streak detail added purely for environmental storytelling. Fine surface scratches are added last as tertiary detail, then deliberately toned back down where they became too eye-catching (demonstrated live with a "bad" over-amplified comparison). The final tertiary pass is rust — applied narrowly and graphically to a handful of specific, chosen focal areas rather than everywhere, at multiple levels of increasing localization and value/brightness, then finished with anchor-point-driven flake/peel masks along the rust edges for a final layer of small-scale controlled detail.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Strip the finished texture back to a bare starting point first** (toggle off every layer) — done deliberately as a teaching device so each subsequent layer's individual contribution is visible, not just the final stack.
+2. **Start from a smart material as a base, or from nothing — both are valid,** but the process/steps that follow are the same either way. Here: applied the built-in `Steel` smart material as an initial base layer purely for its color information (some scratch/highlight contrast) as a jumping-off point, explicitly flagged as not a finished look on its own.
+3. **First breakup pass:** add grunge-mask-driven layers on top of the base specifically to kill the material's inherent tiling uniformity — "we don't want the repeatability of the material to become present." Work in small black/dark passes affecting both Base Color and Roughness together.
+4. **Treat Color and Roughness as parallel, equally important channels throughout** — repeatedly emphasized: skipping the roughness map on metal specifically "is going to end up with something that feels very flat" — every breakup/grunge pass in this build touches both channels, not just color.
+5. **Push roughness variation to be visibly apparent, not just technically present:** demonstrated live by raising a roughness value until the effect visually disappears ("neutralized"), then lowering it back down to show the highlight-catching effect return — the point being to keep checking that a roughness pass is actually doing visible work in the render, not just existing in the stack.
+6. **Add color-variation "grime" layers with an implied material logic, even if abstracted:** a brown layer added heavy-handed at first, narrated as implying grease/grime/staining buildup rather than being literally simulated — explicitly stated as valuable even at a very subtle level because it adds "vibrancy," described as key to avoiding a flat/dead/lifeless CG material look.
+7. **Use complementary colors for richness:** a blue layer added specifically because blue and orange/brown are complementary — kept in a similar value range to the existing orange-brown base so it doesn't introduce excess contrast, just added color richness (worked through value, hue, and saturation together, not color alone).
+8. **Neutralize/blend the raw variation with a broad "surface wear" pass:** a blurred, low-detail gray layer applied over everything to bring down the harsh contrast between the freshly added distinct color patches — described as turning the "this looks like crap" raw variation stage into an actual usable foundation.
+9. **Add edge wear via a generator, then immediately hand-break it up:** apply an edge-detecting generator mask for wear, then add an extra `Paint Layer` on top to manually vary the line thickness/continuity and introduce "lost and found" line quality — explicit warning that leaving a generator's edge-wear result untouched "is going to be a dead giveaway that you are an inexperienced texturist," because generators apply uniformly across the whole model by default.
+10. **Repeat the same primary-pass process on secondary materials (here: gold trim):** block in the material's mask, add roughness variation, subtle color variation, another grunge/cloud breakup pass, then more edge wear — same recipe as the base metal, applied per-material.
+11. **Move into secondary-form buildup via a dedicated layer folder (`Grunge Wear`):** layer more roughness/color-breakup procedurals specifically simulating dirt/grunge collecting in cracks and crevices from imperfect cleaning — explicitly distinguished from the earlier primary-form breakup passes, which were about raw variation, not "stuff building up on the surface."
+12. **Add narrow, purpose-built storytelling details even at this stage:** a faint rain-streak grunge tiled over the surface, kept subtle enough to only catch light at glancing angles — justified narratively (the armor has been "out in the rain") rather than purely as a random noise pass.
+13. **Tertiary/fine-detail scratches must stay deliberately subtle — don't let this stage steal focus from secondary forms:** added lightly, then actively reviewed and toned down anywhere a scratch became too eye-catching, using a paint layer to break it up. Demonstrated with a live "bad" comparison — cranking scratch prominence up shows how it destroys focus/readability by giving the viewer's eye too many equally loud things to look at ("no nuance behind it... where are you trying to have me, as a viewer, look at this?").
+14. **Reintroduce and refine edge wear + push dirt/grime into cavities via Ambient Occlusion at this stage,** again deliberately broken up rather than left as the generator's raw output — folds AO-driven cavity buildup into the roughness map so pockets read as having accumulated grime, while keeping the earlier blue/orange color variation mostly (but not entirely) neutralized underneath.
+15. **Final tertiary polish is rust, used sparingly and graphically, not everywhere:** rust intentionally localized to a small number of chosen focal points (a dent, a scratch, near an interesting gold element) rather than scattered through every crack — explicit principle: "rust becomes a lot less important if you put it in every single crack and crevice... it becomes important when it becomes very limited and discreet." Built across multiple rust layers of increasing localization (broad mask -> refined to smaller graphic shapes -> an even-smaller-localized red pass -> a soft blending fine-rust splash across the whole model -> a brighter yellow-value rust layer for the highest-attention spots) — brighter/higher-value rust layers are explicitly used to control where the eye goes most.
+16. **Finish with anchor-point-driven edge flake/peel masks:** small height-based flake/peeling detail added around the rust edges, driven by anchor points referencing the rust layers below (confirmed live via the Properties panel showing `ANCHOR POINT`) — same anchor-point-as-mask-source technique demonstrated in this creator's masking-fundamentals video, applied here as the very last polish pass.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Base material:** built-in `Steel` smart material (starting point, not a finished result)
+- **Layer folders/groups confirmed from frames and transcript:** `Grunge Wear` (secondary-form buildup)
+- **Layer types used throughout:** grunge-mask-driven Fill/Generator layers (breakup passes affecting Base Color + Roughness together), `Paint Layer` (manual edge/scratch breakup, localized rust refinement), edge-detecting `Generator` mask (wear), Ambient-Occlusion-driven generator (grime in cavities), `Anchor Point`-referencing height/flake layer
+- **Channels worked in parallel, always:** `Base Color`, `Roughness` — repeatedly called out as the two channels that must move together for metal to read correctly
+- **Color choices:** brown/grime variation layer, blue layer chosen as the complementary color to the existing orange-brown base (kept in a similar value range to avoid excess contrast), a brighter yellow-value rust layer used specifically to draw more eye attention than the darker rust layers
+- **Rust build-up structure (increasing localization/value):** broad rust mask -> refined to small graphic shapes -> further localized red pass -> soft blending fine-rust splash (whole-model, low-key) -> brighter yellow-value rust for focal highlights
+- **UI panel confirmed in a captured frame:** `PROPERTIES - ANCHOR POINT` panel, visible while building the final flake/peel detail layer
+- **Engraved secondary detail visible on the gold trim in one frame:** small hand-carved-looking numeral/tick marks along the rim — part of the gold material's own secondary-form detail pass, not called out by name in the transcript but visible in the captured frame
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced — mechanically approachable (grunge fill layers, generators, paint layers — nothing exotic), but the actual craft content is almost entirely art-direction judgment: how much variation is enough vs. too much, when to stop letting a generator do the work, and where rust/scratches should and shouldn't go. A viewer needs to already be comfortable with Painter's layer stack to follow the pacing, since layers are added and evaluated rapidly without dwelling on individual UI clicks.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated explicitly. UI matches the same dark-theme layer-stack/fill-layer/generator layout seen throughout this creator's other videos (pre-12.1 era, not confirmed) — `TEXTURE SET SETTINGS` panel, standard Properties panel per layer type (including the `ANCHOR POINT` properties panel confirmed in-frame).
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, smart-material, generator, anchor-point, roughness, basecolor, metal-rough, pbr, ambient-occlusion, procedural, alpha, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — same creator; this video's final anchor-point-driven flake/peel mask (Key Step 16) is a direct production application of the anchor-point-as-mask-source technique taught there.
+- [REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER](realistic-creatures-hand-painted-textures-in-sustance-painter.md) — same creator; shares the "don't let the generator do all the work, manually break it up" principle (edge-detect masks there, edge-wear generator here) and the big-to-small/large-to-small detail hierarchy philosophy.
+- [How to TEXTURE in SUBSTANCE PAINTER | Creature TEXTURING](how-to-texture-in-substance-painter-creature-texturing.md) — same creator; shares the complementary-color reasoning (blue/orange here; explicit hue-and-saturation layering logic there) and the general principle that color variation is essential to avoid a flat, lifeless material.
+- Additional cross-links to other Jared Chavez tutorials will be added as more of his videos are ingested — see `tutorials/INDEX.md` for the current full list.
