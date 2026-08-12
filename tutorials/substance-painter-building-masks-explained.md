@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=um3YRzqwYU4
 author: Jared Chavez
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified (UI consistent with pre-12.1 era, approximate)"
+tags: [masks, layers, paint-layer, fill-layer, generator, smart-mask, curvature, ambient-occlusion, mesh-maps, tri-planar, procedural, alpha, blend-mode, anchor-point, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-painter-building-masks-explained/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # SUBSTANCE PAINTER: Building Masks Explained
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-painter-building-masks-explained <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -258,30 +254,72 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:54] tutorials/frames/substance-painter-building-masks-explained/frame_000.jpg
+- [1:12] tutorials/frames/substance-painter-building-masks-explained/frame_001.jpg
+- [5:10] tutorials/frames/substance-painter-building-masks-explained/frame_002.jpg
+- [5:53] tutorials/frames/substance-painter-building-masks-explained/frame_003.jpg
+- [6:26] tutorials/frames/substance-painter-building-masks-explained/frame_004.jpg
+- [9:54] tutorials/frames/substance-painter-building-masks-explained/frame_005.jpg
+- [10:25] tutorials/frames/substance-painter-building-masks-explained/frame_006.jpg
+- [11:39] tutorials/frames/substance-painter-building-masks-explained/frame_007.jpg
+- [13:53] tutorials/frames/substance-painter-building-masks-explained/frame_008.jpg
+- [15:50] tutorials/frames/substance-painter-building-masks-explained/frame_009.jpg
+- [17:02] tutorials/frames/substance-painter-building-masks-explained/frame_010.jpg
+- [20:44] tutorials/frames/substance-painter-building-masks-explained/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Building complex, "hand-authored-feeling" masks in Substance Painter by layering multiple masking methods on top of each other (manual paint, generators, tileable/procedural grunge textures, blend modes, filters, and anchor points) instead of relying on any single one alone.
 
 ### Summary
-[PENDING EXTRACTION]
+Jared Chavez walks through every masking primitive in Substance Painter, from simplest to most complex, then shows how his own production masks (on a reptilian/creature head) are actually built by stacking all of them together. He starts with manual black/white mask painting, moves through generators (curvature, dirt/occlusion presets, and the full bake-map-driven generator: AO, curvature, position, thickness, world-space normal), then tileable/procedural grunge and scratch textures with tri-planar projection to kill seams, then shows how blending modes (e.g. Linear Dodge) combine multiple stacked masks, how paint layers add manual "art direction" on top of procedural results, and finally how anchor points let a finished mask be referenced as a driver for a later layer/effect. The end result is a "flaked skin" buildup mask on the creature's face that would be unachievable from any single generator or texture alone.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Simple manual mask:** right-click a fill/material layer -> context menu offers `Add black mask`, `Add white mask`, `Add bitmap mask`, etc. `Add black mask` creates a fully black mask (nothing visible); select the mask, pick the paint tool, and paint white directly onto the mesh in the 3D viewport to reveal texture only where painted.
+2. **Isolate/view a mask channel independently:** Alt+click the mask thumbnail in the layer stack, OR use the channel dropdown next to the viewport and select `Mask`, OR tap `C` / `Shift+C` on the keyboard to cycle forward/backward through all channels (color, mask, individual PBR channels) — essential for judging a mask's actual grayscale values without the color layer in the way.
+3. **ID-mask color-select masking (mentioned, not demonstrated on this mesh):** if a texture set has a baked ID map, you can color-pick specific IDs (e.g. "leather," "metal") directly from the ID map to build a mask instantly — this creature had no ID map baked so it wasn't shown live, but flagged as a fast method for hard-surface/multi-material characters.
+4. **Stack paint layers on a mask non-destructively:** add multiple `Paint Layer`s on top of a mask (via the `+` at the bottom of the mask's sub-stack) so each pass of manual painting stays isolated and can be toggled off individually to revert without erasing work — described as "non-destructive" layered mask authoring.
+5. **Generators — smart-material-style presets:** the Shelf/Assets panel has many pre-built generator mask presets (Chavez says he typically only relies on 5-6 of these) that drop on as a fast starting point/base, meant to be refined afterward rather than used raw.
+6. **Generators — build your own via `Add Generator`:** opens a list including `Curvature` (drives off the baked curvature map; expandable to independently control small-detail vs. large-detail curvature response) and `Dirt`/occlusion-style presets (e.g. "Occlusion Strong," driven by the baked Ambient Occlusion map, collects in cavities).
+7. **Generator properties palette controls (bottom-left panel when generator/mask selected):** `Global Opacity` (overall strength), `Global Contrast` (contrast of the resulting grayscale mask — pulling it down flattens toward more mid-gray values), `Balance` (shifts where in the range detail collects), plus independent sliders for every baked mesh map feeding the generator (World Space Normal, Position, Thickness, Curvature, Ambient Occlusion) — each can be dialed up/down or disabled to change what drives the mask. Optional tileable texture inputs can also be layered onto a generator to add/subtract extra procedural detail.
+8. **Tileable/procedural grunge & scratch textures as a mask layer:** on the mask's sub-stack, add a `Fill Layer`, then drag a texture from the built-in Textures/Grunge shelf (e.g. `Grunge Map 13`, `Grunge Dirt Thin`) into the fill layer's Grayscale slot — this tiles the pattern across the whole mesh via UVs.
+9. **Fix UV-seam artifacts from tiled textures:** change the fill layer's `Projection` mode from the default UV-based projection to `Tri-planar` — this projects the texture from three world-space axes instead of following UV seams, eliminating the visible seam break (e.g. across the neck cut) at the cost of some minor per-axis blending "funkiness"; increasing the `Tiling` count tightens the pattern until it reads as seamless.
+10. **Procedural texture parameter control:** grunge/scratch textures expose their own grayscale-map parameters in the properties panel — `Balance` and `Contrast` on grunge maps; on more procedural ones like the "Scratches" texture: `Balance`, scratch `Quantity`, `Tiling`, `Blur`, and scratch length/thickness — Chavez calls Scratches one of his most-used, reliable procedural picks.
+11. **Blending modes combine stacked masks:** stacking a second generator/mask directly on top of a first (both inside the same mask's sub-stack) and changing the top one's blend mode from `Normal` (replaces) to `Linear Dodge` (adds/combines) merges the grayscale information of both rather than one overwriting the other — described as the key mechanic (with a "next video" teaser) for combining multiple generator passes into one richer mask.
+12. **Edge-degrade pass:** add another mask/generator specifically tuned to hit edges (a black-and-white edge mask), set to subtract from what's below it — removes white detail specifically at edges/rims, cleaning up over-strong generator results.
+13. **Refinement filters:** add a `Sharpen` filter on the mask stack to crunch/tighten detail (used here because the target look — flaked/cracked skin — needed harder edges); add further generator/tileable subtract passes to break up large uniform clumps into smaller, more organic, non-repeating clusters.
+14. **Final manual art-direction pass:** add one more `Paint Layer` on top of the whole procedural mask stack to manually erase/reduce the effect in specific areas where the procedural result reads as "too much" — Chavez frames this as reclaiming art-directorial control ("less is more") rather than trusting the procedural stack blindly. Finish with a `Blur Slope` filter to add irregularity to the remaining hard edges.
+15. **Anchor point as a mask-reuse mechanism:** once a complex mask is finished, add an `Anchor Point` on that layer so a later layer/effect elsewhere in the stack can reference this exact mask as an input (e.g. feeding it into a `Levels`-adjusted fill to drive edge-only detail, or into a height/displacement-driving effect) — lets one hand-built mask be reused as a mask *source* multiple times downstream without rebuilding it.
+16. **General philosophy stated repeatedly:** don't rely on any single masking method (paint-only, generator-only, or texture-only) in isolation — production-quality complex masks come from combining manual painting + generators (bake-map-driven) + tileable procedural textures + blend-mode stacking + filters + anchor-point reuse, refined iteratively, with the artist always making a final manual pass for art direction.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Mask creation:** right-click layer -> `Add black mask` / `Add white mask` / `Add bitmap mask`
+- **Mask sub-stack additions:** `Paint Layer`, `Fill Layer`, `Add Generator`, `Add Effect`/filters (`Sharpen`, `Blur Slope`), `Anchor Point`
+- **Generators used/shown:** `Curvature` (with small-detail/large-detail split control), `Occlusion Strong` (AO-driven preset), a custom edge-detecting generator for edge-degrade
+- **Generator/mask properties palette fields:** `Global Opacity`, `Global Contrast`, `Balance`, per-bake-map influence sliders (`World Space Normal`, `Position`, `Thickness`, `Curvature`, `Ambient Occlusion`), optional tileable-texture add-ins
+- **Fill-layer texture inputs:** built-in Grunge shelf textures (`Grunge Map 13`, `Grunge Dirt Thin`, `Scratches`), dropped into the Grayscale slot
+- **Fill-layer `Projection` dropdown:** default (UV-based) vs `Tri-planar` (seam-free world-space projection), plus `Tiling` count
+- **Scratches texture parameters:** `Balance`, scratch `Quantity`, `Tiling`, `Blur`, length/thickness
+- **Blend modes:** `Normal` (replace) vs `Linear Dodge` (additive combine) demonstrated for stacking two masks
+- **Channel isolation:** Alt+click mask thumbnail, viewport channel dropdown -> `Mask`, or `C`/`Shift+C` hotkeys to cycle channels
+- **Filters:** `Sharpen`, `Blur Slope`
+- **Anchor Point:** added on a finished mask layer so downstream layers/effects can pull it as a mask source
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced — the individual tools (paint mask, generator, fill layer with grunge texture) are beginner-accessible, but the video's real content is the *combination strategy* (stacking generators with blend modes, tri-planar seam fixes, anchor-point reuse) which assumes the viewer already knows the layer-stack basics.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated explicitly in the video or visible in any captured frame (no version string shown in title bar or About dialog). The UI matches the classic Substance Painter layer-stack + generator-properties layout (right-click context mask menu, generator `Projection`/`Tiling` fields, no Skew-specific baking/painting controls, no OpenPBR-labeled shader) — consistent with the Painter 8.x-11.x era per `references/version-tracker.md`, but this is an inference from UI layout only, not a confirmed version. Treat "App & Version" as **not specified — approximate pre-12.1 UI era**.
 
 ### Tags
-[PENDING EXTRACTION]
+masks, layers, paint-layer, fill-layer, generator, smart-mask, curvature, ambient-occlusion, mesh-maps, tri-planar, procedural, alpha, blend-mode, anchor-point, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- Cross-linked from other Jared Chavez tutorials in this knowledge base that build on the same masking primitives shown here (hand-painted texture videos reference this video's generator/blend-mode/anchor-point stack; the anchor-point-focused videos reference this video's anchor-point-as-mask-source technique introduced at [20:44]). See `tutorials/INDEX.md` for the full current list — this section is updated as those sibling tutorials are ingested.
