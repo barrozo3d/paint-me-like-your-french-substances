@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=dHATe4tKd_Q
 author: Logan Wiesen
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified (modern UI, standard Baking Mode/Mesh Map Bakers panel, no version-pinning element visible)"
+tags: [layers, fill-layer, paint-layer, masks, baking, mesh-maps, curvature, ambient-occlusion, thickness, world-space-normal, position-map, id-map, blend-mode, procedural, tri-planar, basecolor, roughness, normal-map, color-management, texture-set, export, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing Creatures for Games in Substance Painter | Full Process
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-creatures-for-games-in-substance-painter-full-process <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -604,30 +600,72 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [2:52] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_000.jpg
+- [5:15] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_001.jpg
+- [8:03] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_002.jpg
+- [11:34] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_003.jpg
+- [14:01] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_004.jpg
+- [19:31] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_005.jpg
+- [23:01] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_006.jpg
+- [30:16] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_007.jpg
+- [34:04] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_008.jpg
+- [52:46] tutorials/frames/texturing-creatures-for-games-in-substance-painter-full-process/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Full real-time/game-ready creature texturing pipeline built around one repeated principle: bake every useful mesh map from a high-detail ZBrush sculpt (curvature, AO, thickness, normal), stack those baked maps as color-driving utility layers first, then build up organic skin-tone variation through hand-painted color-temperature layers (yellow/blue/red/green) refined with tri-planar procedural breakup, validated throughout via an export-to-Blender feedback loop.
 
 ### Summary
-[PENDING EXTRACTION]
+A from-scratch, single continuous session (no chapter markers) creature-texturing walkthrough on a two-texture-set (body + mouth) game character. Opens with the video's central thesis — "you cannot out-texture a bad model," texturing quality is capped by sculpt quality — then covers the full bake setup (Automatic vs. Distance-Based cage, recommends Automatic despite its "experimental" label because it produces cleaner bakes even when the cage preview looks odd; a two-pass bake strategy: 1K for maps Painter just needs internally, 4K for the detail-carrying maps). Texturing proper starts from a flat pale/ghoulish base color and layers baked Curvature, Ambient Occlusion, and Thickness maps (each inverted via a Levels filter and tinted) as color-driving utility layers before any hand-painting begins — Thickness specifically tinted red and blended via Multiply to redistribute blood-flow color to hands/feet/head. The bulk of the video is hand-painted anatomical color-temperature layering: yellow where bone sits close to the skin (Screen blend, kept patchy/broken up rather than solid), blue for cool/bruised/cavity areas (Multiply, doubling as a hand-painted secondary AO/curvature pass), red for blood-flow and wound areas (Overlay/Screen/Soft Light), and an optional green pass for added organic color variation and bruising — all explicitly tied to storytelling (scars, burns, muscle striations reinforcing the sculpted narrative of a creature that's "been in a lot of fights"). Two tri-planar-projected procedural grunge "breakup" layers (contrasting orange and purple, Soft Light / Multiply) are added to integrate all the hand-painted color into one cohesive surface, followed by hand-painted vein detail using a dedicated vein alpha brush (used sparingly). A second curvature pass is layered on top later for extra crunch. The workflow is validated twice via a Color+Normal texture export into Blender/EEVEE with a 3-point light rig and Subsurface Scattering added on the shader side (normal map explicitly set to DirectX space) — first pass reveals over-saturated yellow/hands, prompting a return to Painter to tone those down and rebalance; ends with additional nail color, reordering the red layer above curvature for more pop, and a final Blender render with a rig/pose for a "menacing" presentation shot.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Model/sculpt quality gates texturing quality:** stated up front as the video's core principle — a well-built primary/secondary/tertiary sculpt (skin pores, scaly detail readable by eye) is what makes fast, high-quality texturing possible; texturing cannot fix a weak sculpt.
+2. **Export both a low-poly (bake target) and a decimated high-poly** (~800k points via Decimation Master, noted as low for a portfolio piece but fine for demonstration) mesh pair before baking.
+3. **Bake setup — cage choice:** tested `Distance Based` cage (tune max frontal distance as low as possible without red ray-miss artifacts) vs. the `Automatic` cage (marked "experimental" in the UI) — recommends Automatic as the default despite visually messy cage previews, because in practice it produced a cleaner bake with fewer artifacts; explicitly says to test both per-project.
+4. **Two-pass bake resolution strategy:** first bake `Normal`, `World Space Normal`, `ID`, `Ambient Occlusion`, `Curvature`, `Position`, and `Thickness` all at 1K just so Painter has the data it needs internally; then re-bake at 4K keeping only `Curvature`, `Ambient Occlusion`, and `Normal` (the maps that actually carry fine sculpted detail like skin pores) to save bake time on maps that don't need the extra resolution.
+5. **Verify the bake by orbiting/relighting before painting** — check for red/black artifact patches; also swap the default viewport environment away from the greenish-tinted default panorama to `Studio Tomoko` for neutral lighting during color work.
+6. **Set the base document/texture resolution to 4K** before painting so fine detail is visible while working, and lay down a flat, deliberately desaturated/pale base color plus a flat 0.5 base Roughness as the starting fill.
+7. **Layer baked Curvature first, as a "staple" utility layer:** new Fill Layer + black mask + fill sourced from the baked Curvature map, tinted dark, then run through a `Levels` filter with `Invert` checked so crevices read dark rather than light — described as functioning like a cavity map and "crunching" all the sculpted pore/detail data directly into the color map (compared explicitly to a Photoshop high-pass filter).
+8. **Layer baked Ambient Occlusion the same way** (Fill Layer, black mask, fill = baked AO map, darker tint, Levels+Invert), opacity pulled back until it reads as a subtle occlusion tint rather than an overpowering shadow pass.
+9. **Layer baked Thickness as a blood-flow color-distribution map:** same Fill-Layer-with-Levels-Invert recipe, tinted red, blend mode set to `Multiply` — because thinner geometry (hands, feet, mouth) reads redder on a thickness bake, this automatically redistributes warm color toward blood-flow-heavy extremities without hand-painting; opacity and hue tuned to taste.
+10. **Hand-paint yellow "bone proximity" tones:** new black-masked Paint Layer, yellow color, using a broken-up brush (`Dirt 2` alpha, size-pressure off / flow-pressure on, symmetry enabled) to paint only where bone sits close to the skin (sternum, ribs, skull, elbows/ulna, knuckles) — kept deliberately patchy/incomplete rather than solid fill, since solid coverage kills the underlying color breakup; blend mode set to `Screen` and opacity pulled down so it reads as bone showing through rather than a yellow overlay.
+11. **Tie every color-layer placement decision back to character storytelling:** explicitly frames yellow/blue/red placement, scars, wounds, and asymmetry as narrative tools ("a lot of the storytelling... is done through the sculpting... but you want the texturing to support the storytelling") — e.g. red stretched spine tips reading as pain, asymmetrical wounds reading as more believable/alive than symmetrical ones.
+12. **Hand-paint blue "cool/bruised/cavity" tones:** new black-masked Paint Layer, blue, functioning as a second hand-painted cavity/AO pass in crevices and bruise-prone areas; blend mode `Multiply` for deep blue-purple crevice pop; explicitly chosen as blue-tinted rather than pure black specifically to keep the model "saturated... alive," since pure black shading reads dead.
+13. **Hand-paint red "blood flow" tones:** new black-masked Paint Layer, bright red, concentrated on head/hands/wounds/veins-near-surface areas and any burn/scar storytelling zones (symmetry toggled off for asymmetrical damage like a one-sided facial burn); blend mode tested across `Overlay`, `Screen`, and `Soft Light` (creator's usual default is Soft Light) — explicitly framed as blend-mode choice varying per model, so testing is expected.
+14. **Optional green layer for extra organic variation:** duplicate one of the existing tone layers, recolor to green, apply sparingly/patchily as added bruising or general organic color variance — explicitly recommended as safe to push further than expected on creatures specifically (works for non-green base skin tones too, "still be those subtle yellow, blue and red tones... but there will still be" the base palette underneath).
+15. **Integrate all hand-painted tones with tri-planar procedural "breakup" layers:** new Fill Layer + black mask + fill sourced from a procedural grunge map (`Grunge Cobweb`, later duplicated onto `Burnt Concrete`), `Projection` set to `Triplanar` (avoids UV-stretch artifacts on organic geometry), tinted orange on one layer and purple on a duplicate, blend modes `Soft Light` and `Multiply` respectively — described as the step that pulls all the previously separate color passes together into one integrated-looking surface; tiling size adjusted to taste.
+16. **Trace veins with a dedicated alpha/brush** over the blue-tone layer specifically, used sparingly per the creator's own warning ("don't overuse this too much") since overuse reads as gimmicky rather than adding the intended "illusion of blood flow... helps things feel alive."
+17. **Second curvature pass added later for extra micro-detail "crunch":** a second Curvature-sourced Fill Layer added near the end of the session, deliberately over-exaggerated (levels crunched further than looks correct) with the explicit reasoning that pushing an effect further than expected and then dialing back tends to land closer to correct than being conservative from the start.
+18. **Validate via export-to-Blender feedback loop (used twice):** export Color + Normal only (4K) via the Export panel, re-import into Blender's Shader Editor, set the Normal map's color space to Non-Color and the normal map node to `DirectX` (matching Painter's default normal-map handedness), light with a simple 3-point rig, and add Subsurface Scattering on the shader for a closer approximation of final look — explicitly framed as necessary because Painter's own viewport has no SSS shader, so "you don't know exactly how your textures are going to look" without this round-trip.
+19. **Act on render feedback, then re-export and re-check:** first Blender pass revealed the yellow tones and hand saturation were too strong; returned to Painter to tone those down, added more yellow elsewhere for balance, adjusted thickness-layer strength on the hands, then re-exported and re-validated in Blender before final polish (added a separate nail-color layer, reordered the red wound-emphasis layer above curvature so wounds read more clearly, added a rig+pose in Blender for a presentation shot).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Bake maps used:** `Normal`, `World Space Normal`, `ID`, `Ambient Occlusion`, `Curvature`, `Position`, `Thickness` (1K internal pass) -> `Curvature`, `Ambient Occlusion`, `Normal` (4K detail pass)
+- **Bake cage options compared:** `Distance Based` (manual max frontal distance tuning) vs. `Automatic` (experimental, creator's recommended default)
+- **Utility-map color-driving layers (each: Fill Layer + black mask + fill = baked map + `Levels` filter with Invert):** Curvature (dark tint, "cavity map" behavior), Ambient Occlusion (dark tint, subtle opacity), Thickness (red tint, `Multiply` blend — blood-flow redistribution)
+- **Hand-painted anatomical tone layers (Paint Layer + black mask, symmetry toggled per-need):** Yellow/bone (`Dirt 2` brush alpha, size-pressure off, flow-pressure on, `Screen` blend), Blue/cool-cavity (`Multiply` blend), Red/blood-flow (`Overlay`/`Screen`/`Soft Light` blend, creator favors Soft Light), Green/extra-variation (duplicated + recolored tone layer)
+- **Procedural breakup layers:** `Grunge Cobweb` and `Burnt Concrete` procedural fills, `Projection` set to `Triplanar`, orange (`Soft Light`) and purple (`Multiply`) tints
+- **Detail brush:** dedicated vein alpha/brush for hand-traced vein tracery over the blue layer
+- **Export/validation loop:** Export panel (Color + Normal, 4K) -> Blender Shader Editor, Normal texture set to `Non-Color` color space, Normal Map node set to `DirectX`, 3-point light rig, EEVEE real-time viewport, Subsurface Scattering added on the shader side
+- **Base fill:** flat pale/desaturated Base Color + flat 0.5 Roughness starting point
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — the individual layer operations (Fill Layer + mask + Levels invert, Paint Layer, blend-mode stacking) are each simple, but the tutorial assumes comfort with baking setup, PBR/color-temperature theory for organic skin, and render-engine round-tripping (Blender/EEVEE, SSS, normal-map color-space handling) to get a production-quality result; paced quickly with minimal dwelling on individual UI clicks.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated explicitly on screen. Baking uses the modern `MESH MAP BAKERS` / `Common Settings` panel layout with `Automatic` and `Distance Based` cage options and per-map checkboxes (Normal, World Space Normal, Ambient Occlusion, Curvature, Position, Thickness) — consistent with the post-8.3 Baking Mode era generally seen across this skill's other ingested tutorials, but nothing in-frame pins an exact version.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, baking, mesh-maps, curvature, ambient-occlusion, thickness, world-space-normal, position-map, id-map, blend-mode, procedural, tri-planar, basecolor, roughness, normal-map, color-management, texture-set, export, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to TEXTURE in SUBSTANCE PAINTER | Creature TEXTURING](how-to-texture-in-substance-painter-creature-texturing.md) — different creator (Jared Chavez), also a from-scratch original-creature texturing process video; shares the sub-dermal/anatomical color-blocking philosophy (yellow/blue/purple zone logic there vs. yellow/blue/red/green color-temperature logic here) and the render-engine validation loop (Unreal there, Blender here).
+- [REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER](realistic-creatures-hand-painted-textures-in-sustance-painter.md) — different creator (Jared Chavez); shares the anatomy-driven color-zone blocking approach and large-to-small detail hierarchy for creature skin.
+- [How to make SKIN TEXTURES in Substance Painter](how-to-make-skin-textures-in-substance-painter.md) — different creator (J Hill); shares the baked-thickness-map-drives-blood-flow-color technique and the iterate-export-render validation loop (Marmoset there, Blender here).

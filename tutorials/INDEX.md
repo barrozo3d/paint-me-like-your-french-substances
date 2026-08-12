@@ -226,6 +226,16 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a.md
 
+### Texturing Creatures for Games in Substance Painter | Full Process
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=dHATe4tKd_Q
+- **Author:** Logan Wiesen
+- **App:** Substance 3D Painter
+- **Version:** not specified (modern Baking Mode UI)
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `baking` `mesh-maps` `curvature` `ambient-occlusion` `thickness` `world-space-normal` `position-map` `id-map` `blend-mode` `procedural` `tri-planar` `basecolor` `roughness` `normal-map` `color-management` `texture-set` `export` `advanced`
+- **Summary:** Full real-time creature texturing pipeline: bake curvature/AO/thickness/normal from a high-poly ZBrush sculpt, layer those baked maps as color-driving utility layers (thickness tinted red + Multiply for blood-flow color), then build organic skin variation through hand-painted yellow/blue/red/green anatomical color-temperature layers integrated with tri-planar procedural grunge breakup, validated via a Color+Normal export-to-Blender/EEVEE feedback loop with Subsurface Scattering.
+- **File:** tutorials/texturing-creatures-for-games-in-substance-painter-full-process.md
+
 ---
 
 ## Tag Reference
