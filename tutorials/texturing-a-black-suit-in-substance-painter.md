@@ -593,4 +593,5 @@ layers, fill-layer, paint-layer, masks, smart-material, generator, curvature, an
 ---
 
 ## Related Tutorials
-- This is the first 3DRedBox tutorial ingested into this knowledge base — cross-links to the rest of the creator's garment/prop texturing series (slipper, wooden stool, lace shorts, poison bottles, UDIM workflow deep-dive, shawl, tactical boots, UV-set/stencil video, NavyCap) will be added as those are ingested; see `tutorials/INDEX.md` for the current full list.
+- [How to texture a realistic slipper model](how-to-texture-a-realistic-slipper-model.md) — same creator (3DRedBox); shares the same overall production recipe (DCC-side mesh prep, 4K/64x-AA baking, layered smart-material-plus-hand-built-fill-layer construction) and both videos independently date to the same pre-11.0.0 tool-naming era.
+- More 3DRedBox tutorials (wooden stool, lace shorts, poison bottles, UDIM workflow deep-dive, shawl, tactical boots, UV-set/stencil video, NavyCap) will be cross-linked here as they are ingested — see `tutorials/INDEX.md` for the current full list.

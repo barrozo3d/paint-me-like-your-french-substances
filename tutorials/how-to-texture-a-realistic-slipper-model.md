@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=U5CZJAKU47s
 author: 3DRedBox
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen, but the stroke/stitching panel is explicitly titled 'PAINT ALONG PATH' (confirmed in captured frames) — per references/version-tracker.md this tool was named Paint along Path only from 9.0.0 until it was renamed Filled Path in 11.0.0 (then Ribbon in 11.1.0), which pins this video to the Painter 9.x-10.x window"
+tags: [layers, fill-layer, paint-layer, masks, smart-material, generator, curvature, anchor-point, blend-mode, ambient-occlusion, mesh-maps, baking, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, export-preset, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-texture-a-realistic-slipper-model/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 9
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to texture a realistic slipper model
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-texture-a-realistic-slipper-model <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -247,30 +243,65 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [3:15] tutorials/frames/how-to-texture-a-realistic-slipper-model/frame_000.jpg
+- [6:16] tutorials/frames/how-to-texture-a-realistic-slipper-model/frame_001.jpg
+- [7:33] tutorials/frames/how-to-texture-a-realistic-slipper-model/frame_002.jpg
+- [8:31] tutorials/frames/how-to-texture-a-realistic-slipper-model/frame_003.jpg
+- [9:17] tutorials/frames/how-to-texture-a-realistic-slipper-model/frame_004.jpg
+- [11:07] tutorials/frames/how-to-texture-a-realistic-slipper-model/frame_005.jpg
+- [15:31] tutorials/frames/how-to-texture-a-realistic-slipper-model/frame_006.jpg
+- [17:22] tutorials/frames/how-to-texture-a-realistic-slipper-model/frame_007.jpg
+- [21:07] tutorials/frames/how-to-texture-a-realistic-slipper-model/frame_008.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Full slipper texturing (plastic sole + herringbone fabric upper) built entirely inside Painter, with all fine detail — stitching, sole tread pattern, embossed logo/text, borders — generated from stacked anchor-point-referenced placeholder masks and the Paint Along Path stitching tool, rather than baked-in or hand-modeled geometry.
 
 ### Summary
-[PENDING EXTRACTION]
+Starts with a DCC-side prep note (duplicate + rotate the model upside-down to get workable access to the sole for texturing, separate from the baking/rendering-orientation mesh), then bakes 4K mesh maps at 64x AA. In Painter, the mesh is split into `Plastic`/`Fabric` folders via a Polygon-Fill mask, immediately backed by an inverted Anchor Point copy for reuse. The plastic sole is built by trialing several purchased smart materials, picking one, then gutting and rebuilding its layer stack (dual base colors, two color-variation passes, two surface-noise passes, dirt variation, roughness, scratch) plus a dedicated curvature-generator "edge roughness" layer for reflective highlights on edges. The fabric upper uses the built-in `Fabric Wool Herringbone` material for the top panel and a `Fabric TrapStitching`-driven Paint-Along-Path stitch line (Slant and Pin Stitches, then Straight Stitches with Leather-type puckering) for the visible seam around the shoe opening. The back half of the video is a deep-dive into building fine sole/branding detail without touching geometry: height-only "L1/L2/L3 Detail" fill layers combine gradient-linear fills, 3D word-pipe text meshlets, capsule shapes, strip patterns, anchor-point-referenced "placeholder mask" layers (used purely as reusable, invertible mask sources — never rendered directly) to lay out a tread pattern on the sole, a Bevel + Histogram Scan + Mask Outline filter chain to cut a clean border/divider line, and a final Ambient Occlusion generator (fed by two Edge Plus reference layers, one referencing Height and one referencing Normal) layered via a Pass-Through "edge collection" paint layer to unify the whole material.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Prep the mesh outside Painter first:** because Painter's viewport can't be freely rotated onto the mesh's own backface/underside for comfortable painting, duplicate and rotate the model upside-down into a second variant used purely for texturing access; keep the original orientation for baking/rendering.
+2. **New Project setup:** 2K document resolution, Normal Map Format set to `DirectX`, template `PBR Metallic Roughness`.
+3. **Bake mesh maps** at 4K output size, 64x anti-aliasing, then switch to the upside-down texturing variant of the mesh once baking completes.
+4. **Split the mesh into two base folders (`Plastic`, `Fabric`)** using a black mask + `Paint` + `Polygon Fill` mode to select/deselect UV islands (white = plastic sole, black = fabric upper); immediately add an `Anchor Point` to this split mask and load-and-invert it elsewhere for a free complementary mask.
+5. **Trial several purchased smart materials on the plastic sole** by toggling folders on/off to compare, pick the best base, then delete the rest and manually rebuild the layer stack rather than keeping the smart material as-is: two base colors (grey + lighter grey, second one paint-masked), two color-variation fills (opacity-tuned), two surface-noise fills, a dirt-variation fill, roughness, and a scratch layer — explicitly pruning "edge damage" and "triple-S" sub-layers that didn't suit this asset.
+6. **Add a dedicated `Edge Roughness` fill layer:** black mask + `Curvature` generator, tuned so the white (high-curvature/edge) areas get a higher reflective/roughness value — called out as adding "the highlight on the edge" for a more interesting render.
+7. **Build the fabric upper from two material passes:** a `Fabric Wool Herringbone` fill for the top panel (mask via Polygon Fill, pattern scaled ~3x, rotated ~110°), and a separate, darker fill for the inside lining driven by an inverted Anchor Point mask, with fiber-density parameters increased for a denser look.
+8. **Add stitching with the Paint Along Path tool:** draw a path along the top opening seam, set stitch type to `Slant and Pin Stitches` (invert path, size 5→3, refine path placement), add a black mask + Polygon Fill to prevent stitch data "leaking" past the seam boundary; for a second seam, switch stitch type to `Straight Stitches`, reduce stitch size (1→0.7), and change `Puckering` type from Thick Fabric to `Leather` for a tighter, more realistic pucker; duplicate the finished stitch line to the mirrored side.
+9. **Composite a "final polish" Pass-Through effect paint layer** (applied to all channels) stacking a `Sharpen` filter (~0.5) and duplicating it into a separate `Contrast` pass (color only) plus a `High to Normal` filter with `Use World Unit` off and intensity ~3, to punch up overall surface micro-detail before moving to fine hand-placed detail.
+10. **Build height-only "Detail" fill layers (L1/L2/L3) for hand-placed branding/graphic elements:** each is a black-masked fill with only the `Height` channel enabled (small negative offsets like -0.1/-0.2) so detail reads purely as embossed/debossed geometry, not color — built from a `Gradient Linear #2` fill (2D mode, scaled/rotated/duplicated into multiple short lines, blend mode `Linear Dodge`) for line accents, a `Comic Sans Bold` 3D-word-pipes text fill (UV wrap none, small scale, adjustable character spacing, mirrored copy for the opposite side) with a `Square` shape fill behind it as a border box (blend mode `Subtract` for the outline), and a capsule `Shape` fill for a separate size-label detail (also mirrored).
+11. **Build the sole tread pattern from reusable anchor-point "placeholder mask" layers:** create paint layers with no visible data purely to hold mask geometry (named e.g. `L3 Placeholder Mask 1/2`, colored red for visibility in the stack), fill them with white + Linear-Dodge-blended line fills to rough in tread "regions," anchor-point them, then reference/invert those anchor points from downstream `Strip` pattern fills (tiling 15, rotation ~120° and a duplicate at ~116°, blend mode `Multiply`) to lay repeating tread grooves only inside the defined regions — using a `Paint` layer with `Subtract` blend and manual polygon deselection (press X to deselect) to correct an over-broad inverted-mask selection along the way.
+12. **Refine the tread border/divider with a filter chain:** a placeholder mask built from a Polygon-Fill UV-island selection, run through `Bevel` → `Histogram Scan` (contrast + position tuning) → `Blur` filters to produce a clean, softened border line; combine with an inverted, `Subtract`-blended copy of the original region to knock out unwanted areas; use `Mask Outline` on another placeholder to derive a border-cut line, then a `Linear Dodge`-blended `Border Cut` anchor-point fill plus another `Blur` pass to finalize the divider groove around the tread pattern, before subtracting out the reserved label/text area.
+13. **Return to the plastic sole's second-color mask to add the logo/brand text as a final color detail:** re-select the relevant UV island in Polygon Fill mode, then paint-subtract everything except a `3D Art Box` text shape so only the brand text reads in the second (white) plastic color.
+14. **Finish with a unified Ambient Occlusion pass:** a Pass-Through "Edge Collection"/"Edge Plus" paint layer (applied to all channels) holds an Anchor Point; a new `AO`-only fill layer (black mask) uses the `Ambient Occlusion` generator set to `Macro Detail`, loading the Edge Plus anchor point twice — once with its Reference Channel set to `Height`, once set to `Normal` — then tuning the AO radius; noted that reordering this Edge Plus layer to sit before the fabric layers removes unwanted AO on the fabric if not desired, and that some detail layers (e.g. part of L2 Detail) may need to be toggled off if they read poorly once AO is applied.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Smart materials trialed/used:** multiple purchased plastic smart materials (trialed, then discarded in favor of a hand-rebuilt stack), `Fabric Wool Herringbone` (top panel), an unnamed darker fabric material (inside lining, fiber-density increased), `Fabric TrapStitching` material used by the stitch brush
+- **Generators used:** `Curvature` (edge roughness/reflectivity), `Ambient Occlusion` (Macro Detail mode, dual Edge-Plus-anchor references for Height and Normal)
+- **Stitching (Paint Along Path) settings:** stitch types `Slant and Pin Stitches` and `Straight Stitches`; `Puckering` type switched Thick Fabric → `Leather`; stitch size tuned 5→3 and 1→0.7 across the two seams
+- **Fills/patterns used:** `Gradient Linear #2`, `Strip` (tread grooves, tiling 15, rotation ~116-120°), `Square` (text border box), `Shape — Capsule` (size-label detail), `Comic Sans Bold` (3D word-pipes text, two placements incl. mirrored)
+- **Filters used:** `Sharpen` (~0.5), `Contrast` (color-only pass), `High to Normal` (World Unit off, intensity ~3), `Bevel`, `Histogram Scan`, `Blur` (used at multiple stages), `Mask Outline`
+- **Blend modes used:** `Soft Light` not used here (unlike the black-suit video) — this one leans on `Linear Dodge` (line/tread accents, border cut), `Multiply` (tread grooves), `Subtract` (mask corrections, border-text isolation, text-outline box)
+- **Anchor Point usage (heavy, this video's throughline):** one for the initial Plastic/Fabric mask split, one for the fabric inside-lining mask, several `Placeholder Mask` anchor points purpose-built purely to drive downstream tread/border fills (never rendered directly themselves), one `Border Cut` anchor point, one `Edge Plus` anchor point referenced twice with different Reference Channels (Height, Normal) for the AO pass
+- **Baking settings:** 4K output size, 64x anti-aliasing
+- **New Project settings:** 2K document resolution, DirectX normal format, PBR Metallic Roughness template
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — while the base plastic/fabric material building is approachable, the sole-tread and border detail work (Key Steps 10-12) is a genuinely advanced technique: multiple layers of anchor-point-referenced, never-rendered "placeholder mask" layers driving pattern generation, plus a multi-filter (Bevel/Histogram Scan/Mask Outline/Blur) border-cutting chain. Requires solid prior comfort with anchor points and generators to follow.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not stated on screen. The stitching tool's panel is explicitly titled `PAINT ALONG PATH` in multiple captured frames. Per `references/version-tracker.md`, this exact tool name was only in use from Painter 9.0.0 until it was renamed `Filled Path` in 11.0.0 (and later `Ribbon` in 11.1.0) — this pins the tutorial to the Painter 9.x-10.x window, consistent with the companion "Black Suit" video's separate 10.0.0+ dating from the same creator.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, smart-material, generator, curvature, anchor-point, blend-mode, ambient-occlusion, mesh-maps, baking, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, export-preset, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Texturing a Black Suit in Substance Painter](texturing-a-black-suit-in-substance-painter.md) — same creator (3DRedBox); shares the same overall production recipe (DCC-side mesh prep, 4K/64x-AA baking, layered smart-material-plus-hand-built-fill-layer construction) and both videos independently date to the same pre-11.0.0 tool-naming era.
