@@ -105,16 +105,6 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **File:** tutorials/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d.md
 
 
-### Texturing a Black Suit in Substance Painter
-- **Source:** YouTube
-- **URL:** https://www.youtube.com/watch?v=X24_IYUXOzU
-- **Author:** 3DRedBox
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/texturing-a-black-suit-in-substance-painter.md
-
 ### Tempering Colors in Substance Painter | Steel Heat Effects
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=Y3plK51emsA
