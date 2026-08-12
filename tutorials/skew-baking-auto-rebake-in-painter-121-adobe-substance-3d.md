@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=WwyElRpiQgY
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "12.1.0"
+tags: [baking, mesh-maps, ambient-occlusion, curvature, thickness, world-space-normal, high-to-low-poly, cage, painter-12, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Skew Baking & Auto Rebake in Painter 12.1 | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py skew-baking-auto-rebake-in-painter-121-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -152,30 +148,60 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:18] tutorials/frames/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d/frame_000.jpg
+- [0:42] tutorials/frames/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d/frame_001.jpg
+- [1:05] tutorials/frames/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d/frame_002.jpg
+- [1:54] tutorials/frames/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d/frame_003.jpg
+- [2:15] tutorials/frames/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d/frame_004.jpg
+- [3:01] tutorials/frames/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d/frame_005.jpg
+- [4:20] tutorials/frames/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d/frame_006.jpg
+- [6:22] tutorials/frames/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Painter 12.1's reorganized Baking Mode UI (mesh-map checklist, Common Settings split from per-map settings) plus the new **Skew Correction** paint tool that manually fixes ray-tracing skew errors, backed by an **Edge Protection** safeguard and **Auto Rebake**.
 
 ### Summary
-[PENDING EXTRACTION]
+Official Adobe walkthrough of what changed in Painter 12.1's Baking Mode: a reorganized Mesh Map Bakers checklist with Check All/individual toggles and per-map quick-view/auto-rebake buttons, Common Settings split into its own panel from per-map Mesh Map Settings (viewable together or split), and three new top-level tabs (Common Settings / Cage / Skew Correction) for faster navigation. The core new feature is Skew Correction: after loading a High Poly mesh, you can paint directly on the mesh to correct visible normal-map "skew" errors (baked-ray direction deviating from the expected surface), guided by a color-coded Skew Vectors overlay, with Edge Protection auto-masking UV borders/hard edges so seam artifacts aren't accidentally introduced, and Auto Rebake instantly refreshing the Normal map as you paint.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Enter Baking Mode (top toolbar button / F8).
+2. Mesh Map Bakers list is reorganized: `Check all`, then individual checkboxes for `Normal`, `World space normal`, `Ambient occlusion`, `Curvature`, `Position`, `Thickness`, `Height`, `Bent normals`, `Opacity`.
+3. `Common settings` is now a separate panel from per-map `Mesh Map Settings` — click a map to see its settings, click `Common settings` to see shared settings; both can be viewed together (default) or split into two side-by-side areas.
+4. Each individual map row gets two new quick-action buttons: instant "view baked map" (bakes just that map for preview) and an **auto rebake** toggle per map.
+5. Common Settings top nav is now split into 3 tabs — `Common settings`, `Cage`, `Skew correction` — clicking one jumps straight to that section.
+6. Skew Correction painting is grayed out until a **High Poly (HD) mesh** is loaded under Cage settings; hovering explains why.
+7. Loading the HD mesh and entering Skew Correction auto-triggers a Normal map bake (skew shows up most clearly there) — but only the *first* time; if Auto Rebake is toggled off once, it stays off and must be manually re-enabled.
+8. A **Skew Vectors** overlay ("Show vectors") visualizes the direction each baked ray was traced in; large deviation from the expected surface direction is the visible skew error. `Vectors length`, `Vectors UV density`, and `Vectors opacity` sliders control the overlay's display.
+9. Paint the correction with standard brush tools (hotkeys `1`/`2`/`4`, `X` to invert paint color black/white, symmetry supported); corrected areas render blue, and releasing the stroke triggers Auto Rebake immediately — only **one** map can be set to auto-rebake at a time, for performance.
+10. Painting skew correction across a UV seam can itself cause new errors (ray splits, missed areas) because of how rays are traced across seams — enable **Edge Protection** to auto-generate a protective mask along UV borders/hard edges (`Edge distance` and `Edge contrast` sliders adjust how far/soft the mask reaches).
+11. The **Polygon Fill** tool (fill whole polygons at once) pairs well with Edge Protection for a fast, blunt correction pass when precision isn't critical.
+12. The main Bake button changed: it's now a single action showing the total map count in brackets — `texture sets × UV tiles × checked maps` — with a dropdown beside it for quick single-map bakes; the sync-related menu wording was also harmonized (`checked` instead of `selected`, unified around the term `sync`).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Baking Mode (F8) — Mesh Map Bakers checklist: Normal, World Space Normal, Ambient Occlusion, Curvature, Position, Thickness, Height, Bent Normals, Opacity
+- Common Settings / Cage / Skew Correction tabs
+- Skew Vectors overlay — `Vectors length`, `Vectors UV density`, `Vectors opacity`
+- Edge Protection — `Edge distance`, `Edge contrast`
+- Polygon Fill tool (brush mode)
+- Auto Rebake (per-map toggle, one active at a time)
+- Bake button (shows map count = texture sets × UV tiles × checked maps) + quick single-map dropdown
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — assumes baseline familiarity with baking/mesh maps and high-to-low-poly workflows; the video itself only covers what's *new* in the UI/tools, not baking fundamentals.
 
 ### App & Version
-[PENDING EXTRACTION]
+**Substance 3D Painter 12.1.0** — confirmed directly from the on-screen viewport watermark text in captured frames ("Version: 12.1.0"). Cross-referenced against `references/release-notes-painter-12.1.md`: this video is a full, exact match for that file's documented 12.1.0 headline changes — "Skew Painting/baking with Edge Protection," "Auto rebake," and "Baking Mode UI split into Mesh Map/Common Settings" are all demonstrated here in detail, with no discrepancies found. This is the clearest possible confirmation of the backfilled release notes for this version.
 
 ### Tags
-[PENDING EXTRACTION]
+`baking` `mesh-maps` `ambient-occlusion` `curvature` `thickness` `world-space-normal` `high-to-low-poly` `cage` `painter-12` `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+No tutorial currently in the library shares 2+ tags on baking specifically — this is the knowledge base's first baking-focused entry. Forward cross-link: "Baking in Substance 3D Painter 8.3" (video ID `hYtHp4IXvsM`, planned later in this same ingest batch) covers the *pre*-Dedicated-Baking-Mode UI generation from `release-notes-painter-8.3.md` — pair the two once both exist for a clear before/after of how Painter's Baking Mode evolved (8.3.0's original dedicated mode → 12.1.0's mesh-map-checklist/Common-Settings-split/Skew-Correction refinement documented here).
