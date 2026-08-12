@@ -259,17 +259,6 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **File:** tutorials/texturing-a-worn-wooden-stool-in-substance-painter.md
 
 
-### Complex Wooden Medieval Door Tutorial in Substance 3D Painter
-- **Source:** YouTube
-- **URL:** https://www.youtube.com/watch?v=cRKK4YOXLtQ
-- **Author:** Abe Leal 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md
-
-
 ### Hand Painted Workflow in Substance 3D Painter | Adobe Substance 3D
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=8biEy1D30Bc
