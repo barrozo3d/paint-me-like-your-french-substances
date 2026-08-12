@@ -38,6 +38,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/how-to-texture-everything-in-substance-painter.md
 
+
+### How to TEXTURE in SUBSTANCE PAINTER | Creature TEXTURING
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=Lwep-faQVI0
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-texture-in-substance-painter-creature-texturing.md
+
 ---
 
 ## Tag Reference
