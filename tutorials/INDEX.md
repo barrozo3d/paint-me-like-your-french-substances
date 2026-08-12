@@ -115,6 +115,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/texturing-a-black-suit-in-substance-painter.md
 
+### Tempering Colors in Substance Painter | Steel Heat Effects
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=Y3plK51emsA
+- **Author:** Dolinskyi
+- **App:** Substance 3D Painter
+- **Version:** not specified (modern UI, post-8.3 baking-mode era)
+- **Tags:** `layers` `fill-layer` `masks` `anchor-point` `blend-mode` `smart-material` `procedural` `alpha` `roughness` `basecolor` `metal-rough` `intermediate`
+- **Summary:** Short technique video building a reusable heat-discoloration/oxide-rainbow "tempering colors" effect from a 10-stop reference chart: a paintable anchor-point mask drives a 10-color gradient filter, demonstrated from scratch, then via a ready-made smart material on a suppressor (localized barrel overheating) and a subtle reference-matched slider example.
+- **File:** tutorials/tempering-colors-in-substance-painter-steel-heat-effects.md
+
+
 ---
 
 ## Tag Reference
