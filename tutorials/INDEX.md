@@ -159,6 +159,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **File:** tutorials/texturing-a-black-suit-in-substance-painter.md
 
 
+
+### Substance 3D Painter 12.1 Beta: New Features, Faster Workflows, OpenPBR Support | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=z-xbXtyPykI
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob.md
+
 ---
 
 ## Tag Reference
