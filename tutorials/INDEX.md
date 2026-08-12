@@ -252,10 +252,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=sa_5vS4s_M0
 - **Author:** 3DRedBox
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; UI consistent with the pre-11.0-era seen in this creator's other videos
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `smart-material` `generator` `curvature` `anchor-point` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `texture-set` `uv` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `alpha` `procedural` `intermediate` `advanced`
+- **Summary:** Weathered rattan-and-wood stool texturing: an overlapping-UV texel-density trick for small repeated pieces (DCC-side), a smart-material-derived wood base rebuilt into fiber/edge-wear/dirt/damage passes, a compound dual-3D-Linear-Gradient dark-area mask combined via Linear Dodge and refined with an anchor-point-referenced multiply plus hand painting, a from-scratch forced-Normal-blend "underlayer wood" material with an anchor-point-driven Soft-Light border-effect for damage edges, and a Silver-Armor-based steel material for the joinery.
 - **File:** tutorials/texturing-a-worn-wooden-stool-in-substance-painter.md
 
 
@@ -279,6 +279,16 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d.md
+
+### Complex Wooden Medieval Door Tutorial in Substance 3D Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=cRKK4YOXLtQ
+- **Author:** Abe Leal 3D
+- **App:** Substance 3D Painter
+- **Version:** 11.0.0+ (Auto-Cage baking, Assets auto-update, and Bevel Smooth filter all confirmed on-screen — all introduced in 11.0.0 per release-notes-painter-11.0.md)
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `anchor-point` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `curvature` `thickness` `world-space-normal` `position-map` `high-to-low-poly` `cage` `udim` `texture-set` `procedural` `tri-planar` `alpha` `height` `roughness` `metallic` `basecolor` `MatFX` `advanced`
+- **Summary:** Adobe-sponsored showcase of fully non-destructive procedural "carving" for a multi-UDIM medieval door: Auto-Cage baking, a live-linked Photoshop-authored height-carving mask (Blur -> Bevel Smooth -> Blur Slope filter chain), a folder-level Anchor Point wired into downstream dirt/edge-wear generators' Micro Normal/Height so they correctly read into the carved crevices, Position-generator-driven moss placement, and a thickness-map-driven simulated subsurface-glow finishing trick.
+- **File:** tutorials/complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md
 
 ---
 

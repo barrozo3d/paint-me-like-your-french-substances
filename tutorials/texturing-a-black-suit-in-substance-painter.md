@@ -594,4 +594,5 @@ layers, fill-layer, paint-layer, masks, smart-material, generator, curvature, an
 
 ## Related Tutorials
 - [How to texture a realistic slipper model](how-to-texture-a-realistic-slipper-model.md) — same creator (3DRedBox); shares the same overall production recipe (DCC-side mesh prep, 4K/64x-AA baking, layered smart-material-plus-hand-built-fill-layer construction) and both videos independently date to the same pre-11.0.0 tool-naming era.
-- More 3DRedBox tutorials (wooden stool, lace shorts, poison bottles, UDIM workflow deep-dive, shawl, tactical boots, UV-set/stencil video, NavyCap) will be cross-linked here as they are ingested — see `tutorials/INDEX.md` for the current full list.
+- [Texturing a Worn Wooden Stool in Substance Painter](texturing-a-worn-wooden-stool-in-substance-painter.md) — same creator; shares the 4K/64x-AA baking recipe and the smart-material-plus-hand-built-fill-layer construction philosophy.
+- More 3DRedBox tutorials (lace shorts, poison bottles, UDIM workflow deep-dive, shawl, tactical boots, UV-set/stencil video, NavyCap) will be cross-linked here as they are ingested — see `tutorials/INDEX.md` for the current full list.

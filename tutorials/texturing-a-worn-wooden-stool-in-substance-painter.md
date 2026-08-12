@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=sa_5vS4s_M0
 author: 3DRedBox
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; UI (Texture Set Settings, standard Baking dialog, Fill/Generator/Paint properties layout) is consistent with the pre-11.0 era seen in this creator's other ingested videos, not independently confirmed here"
+tags: [layers, fill-layer, paint-layer, masks, smart-material, generator, curvature, anchor-point, blend-mode, baking, mesh-maps, ambient-occlusion, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 9
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing a Worn Wooden Stool in Substance Painter 🪑
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-a-worn-wooden-stool-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -360,30 +356,70 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:33] tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/frame_000.jpg
+- [4:42] tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/frame_001.jpg
+- [5:20] tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/frame_002.jpg
+- [6:11] tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/frame_003.jpg
+- [8:20] tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/frame_004.jpg
+- [10:13] tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/frame_005.jpg
+- [12:13] tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/frame_006.jpg
+- [13:46] tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/frame_007.jpg
+- [15:38] tutorials/frames/texturing-a-worn-wooden-stool-in-substance-painter/frame_008.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Weathered rattan/wicker-and-wood stool texturing using an overlapping-UV texel-density trick for small repeated pieces, a smart-material-derived wood base rebuilt layer-by-layer for grain/wear/dirt, a from-scratch "underlayer wood" material for damage borders, and a silver-armor-based steel material for the metal joinery.
 
 ### Summary
-[PENDING EXTRACTION]
+Opens with a texel-density problem-solving note: because the stool has many small repeated pieces (rope wraps, connectors), packing them into one shared UV space would tank texture resolution, so the creator uses an overlapping-UV technique in the DCC app — unwrapping key pieces once into the main UV tile, then duplicating and overlapping the rest so they sample the same texture data. Bakes 4K mesh maps at 64x AA (no high-poly needed here), then splits the model into Wood (big pieces), Wood (small pieces), and Steel folders by mask. The wood material starts from a purchased smart material, then is aggressively rebuilt: base layer roughness control, a wood-fiber pattern layer with tuned length/thickness/randomness/warp, a curvature-driven edge-wear mask, a UV-projected wood-grain-line layer with extra negative height for depth, a Pass-Through "AO/Height-to-Normal" effect layer (since export won't carry height/displacement, so normal intensity is boosted to compensate), then several rounds of grunge-driven "huge damage," dirt (two passes, one with directional blur), and a "dark area" layer whose mask is built from two opposed 3D Linear Gradients combined via Linear Dodge and further refined with an anchor-point-referenced multiply and hand-painted brush detail. Small pieces reuse the same material with the dark-area layer removed and a recolored base. A separate hand-built "UnderWoodLayer" material (using the built-in Wood Plane procedural, blend mode forced to Normal on all channels) becomes the base for a dedicated wood-damage system: a height-only paint mask for damage, a duplicated/blurred/subtracted "border effect" sublayer in Soft Light for a raised-edge damage look, then hand-painted damage strokes. Finishes with a roughness-variation fingerprint-pattern layer and a Silver Armor-based steel material with an added dirt fill for the metal joinery.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Solve small-piece texel density with an overlapping-UV technique in the DCC app** (not Painter): unwrap select pieces once into the main UV tile, then duplicate and overlap the remaining repeated small pieces so they read texture data from the same main-tile UVs, avoiding the resolution loss of packing everything into one shared space.
+2. **Bake mesh maps** at 4K output, 64x anti-aliasing (no high-poly source needed for this asset), then reload the baked model into Painter.
+3. **Split the model into three masked folders:** `Wood` (big pieces), `Wood` (small pieces), `Steel` (metal connectors).
+4. **Start the wood material from a purchased smart material** (loaded into the Wood folder), then aggressively rework it layer by layer rather than using it as-is: increase Texture Set Settings resolution 1K→2K for viewport clarity while working, fix base-layer rotation, and reduce a fill layer to Roughness-only so it can independently control roughness under the heavy dirt work to come.
+5. **Tune the wood-fiber pattern layer:** tiling 4→3, rotation ~90°, increased fiber length, slight thickness increase, `Random` pushed high, warp adjusted — aiming for a convincing grain look.
+6. **Build an edge-wear mask from the Curvature generator** (Image Inputs: Curvature Map, World Space Normals, Position Gradient), tuned via global balance to add whiteness/wear only on edges and the overall convex shape.
+7. **Add a separate wood-grain-line layer** with its mask's pattern `Projection` switched to `UV projection`, tiling ~2, increased thickness and random length; boost the parent layer's Height amount to a strong negative value (~-15) for real depth (compensated for later by AO/Height-to-Normal, since displacement/height won't be carried on export).
+8. **Add a Pass-Through "Effect" paint layer (applied to all channels)** holding two filters: an `Ambient Occlusion` filter (after first adding the `Ambient Occlusion` channel via Texture Set Settings) to darken deepened crevices, and a `Height to Normal` filter (`Use World Unit` off, Normal Intensity ~2) — explicitly there because height/displacement data won't survive the export, so normal intensity is boosted in its place.
+9. **Build up wear/damage/dirt in successive fill-layer passes, pruning unneeded smart-material sublayers as you go:** a `Grunge Leaks`-driven "huge damage" layer (tiling 3, rotated, offset tuned, opacity ~80); explicit removal of "edge damage" and "spot damage" sublayers that don't suit this wood (no real edges to speak of); a color-position layer with reduced opacity (~30) for subtle color variation; a `Dirt` generator pass with tuned dirt level/amount; a second dirt pass built from a plain grunge fill (no generator) with increased tiling, reduced balance, and a `Directional Blur` filter for streaked dirt.
+10. **Add a "Dark Area" fill layer** (Color + Roughness only, roughness ~0.8, dark color, opacity ~55-60) with a compound mask: a `Grunge Leaks`-style fill for base variation, two `3D Linear Gradient` generators (one inverted) combined via `Linear Dodge` to control where the dark area can appear (bottom-to-top and top-to-bottom falloff), an Anchor Point capturing this "gradient mask" so a separate fill layer can multiply the earlier grunge mask against this controlled area, contrast pushed up, then a hand-painted `Paint` layer in `Linear Dodge` blend (using a "Paint Box" brush/alpha from the asset library) to add manual variation on top.
+11. **Duplicate the finished wood material for the small pieces**, remove the Dark Area layer (not wanted there), and recolor the base from a reference image — a fast way to get a coherent but distinct small-piece variant.
+12. **Build a from-scratch "UnderWoodLayer" damage-base material:** load the built-in `Wood Plane` procedural material, but force its blend mode to `Normal` on every channel (via right-click → Apply to all channels, with all channels re-enabled) so it fully overrides layers below rather than blending; tune tiling (~3), reduce global distortion, adjust wood color, reduce veins density, enable a "main color fade," reduce fibers spread.
+13. **Mask the UnderWoodLayer with hand-painted damage**, adding a sublayer with Height only (negative ~-0.1) for areas with no real surface height difference; capture an Anchor Point on this mask.
+14. **Add a "Border Effect" layer** referencing that anchor point: load the underwood-layer mask, duplicate it with `Subtract` blend plus an increased `Blur` filter to carve a soft edge/border around each damage patch; isolate to Color/Height/Roughness only (no Metallic/Normal), pick pure white, set blend mode to `Soft Light` — produces a raised, worn-edge look around each damage spot.
+15. **Hand-paint the actual damage placement** using a chosen brush alpha (increased white value), reinforced by stencils when more control is needed; add several minor damage spots by hand.
+16. **Add a roughness-variation fill layer** (Roughness only) masked by a fingerprint-effect alpha fill (increased tiling, tuned/inverted balance) for fine-scale roughness breakup.
+17. **Build the steel material from the built-in `Silver Armor` smart material**, then add a `Dirt` fill layer (Color + Roughness + Metallic — dirt itself isn't metal, so Metallic is included specifically to knock it down) with roughness ~0.8 and a grey color, masked by the `Dirt` generator with tuned dirt level, to break up the otherwise-too-clean silver against the grungy wood.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Smart materials used:** unnamed purchased wood smart material (heavily reworked), built-in `Silver Armor` (steel base)
+- **Procedural material loaded in Material mode:** `Wood Plane` (forced Normal blend on all channels, underlayer damage base)
+- **Generators used:** `Curvature` (edge wear), `Dirt` (two contexts: wood dirt pass, steel dirt pass), `3D Linear Gradient` (dark-area falloff control, used twice — once inverted)
+- **Filters used:** `Ambient Occlusion`, `Height to Normal` (World Unit off, Intensity ~2), `Directional Blur`, `Blur` (border-effect softening)
+- **Fills used:** `Grunge Leaks` (huge damage, dark-area base), fingerprint-effect alpha (roughness variation), `Paint Box` brush/alpha (hand-painted variation detail)
+- **Blend modes used:** `Linear Dodge` (combining opposed gradients, hand-painted variation), `Multiply` (gradient-mask-controlled grunge), `Subtract` (border-effect carve), `Soft Light` (border-effect highlight), `Normal` forced on all channels (Wood Plane underlayer override)
+- **Anchor Point usage:** one anchor point on the dark-area's combined-gradient mask (referenced by a downstream multiply layer), one anchor point on the UnderWoodLayer's hand-painted damage mask (referenced by the Border Effect layer)
+- **Texture Set Settings:** viewport working resolution raised 1K→2K; `Ambient Occlusion` channel explicitly added before the AO filter could be used
+- **Baking settings:** 4K output, 64x anti-aliasing, no high-poly source
+- **UV technique (DCC-side, not Painter):** overlapping UVs — small repeated pieces duplicated and stacked onto the same UV space as a once-unwrapped main piece to preserve texel density without a shared/packed UV layout
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced — the wood-material rebuild and damage system (dark-area compound gradient mask, anchor-point-referenced border-effect layer, forced-Normal-blend underlayer trick) requires solid familiarity with generators, blend modes, and anchor points; the DCC-side overlapping-UV setup is a valuable but non-obvious prerequisite technique explained only briefly at the start.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not stated on screen or independently confirmable from this video alone. UI (Texture Set Settings panel, standard Baking Mesh Maps dialog, Fill/Generator/Paint properties layout) matches the pre-11.0-era UI seen in this creator's other ingested videos (Black Suit, Slipper), consistent with — but not independently proving — the same Painter 9.x-10.x window.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, smart-material, generator, curvature, anchor-point, blend-mode, baking, mesh-maps, ambient-occlusion, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Texturing a Black Suit in Substance Painter](texturing-a-black-suit-in-substance-painter.md) — same creator (3DRedBox); shares the 4K/64x-AA baking recipe and the general smart-material-plus-hand-built-fill-layer construction philosophy.
+- [How to texture a realistic slipper model](how-to-texture-a-realistic-slipper-model.md) — same creator; shares heavy anchor-point usage for building reusable, non-rendered mask sources (placeholder masks there, gradient/damage masks here) and the same Pass-Through "Effect" layer pattern for stacking AO/Height-to-Normal filters at the top of a material stack.

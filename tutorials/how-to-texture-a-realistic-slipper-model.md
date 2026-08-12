@@ -305,3 +305,4 @@ layers, fill-layer, paint-layer, masks, smart-material, generator, curvature, an
 
 ## Related Tutorials
 - [Texturing a Black Suit in Substance Painter](texturing-a-black-suit-in-substance-painter.md) — same creator (3DRedBox); shares the same overall production recipe (DCC-side mesh prep, 4K/64x-AA baking, layered smart-material-plus-hand-built-fill-layer construction) and both videos independently date to the same pre-11.0.0 tool-naming era.
+- [Texturing a Worn Wooden Stool in Substance Painter](texturing-a-worn-wooden-stool-in-substance-painter.md) — same creator; shares heavy anchor-point usage for building reusable, non-rendered mask sources (placeholder masks there, gradient/damage masks here) and the same Pass-Through "Effect" layer pattern for stacking AO/Height-to-Normal filters.
