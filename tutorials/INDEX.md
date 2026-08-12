@@ -126,6 +126,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **File:** tutorials/tempering-colors-in-substance-painter-steel-heat-effects.md
 
 
+
+### Creating Trim Sheet UVs for Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=Dp2ZpGIaumA
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
