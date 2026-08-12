@@ -279,6 +279,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Adobe-sponsored showcase of fully non-destructive procedural "carving" for a multi-UDIM medieval door: Auto-Cage baking, a live-linked Photoshop-authored height-carving mask (Blur -> Bevel Smooth -> Blur Slope filter chain), a folder-level Anchor Point wired into downstream dirt/edge-wear generators' Micro Normal/Height so they correctly read into the carved crevices, Position-generator-driven moss placement, and a thickness-map-driven simulated subsurface-glow finishing trick.
 - **File:** tutorials/complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md
 
+
+### Create Trim Sheets in Substance 3D Painter - Part 1 | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=dE4LWGMwypc
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
