@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=us4NAWtaRic
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (texturing) + Substance 3D Stager (rendering/presentation)"
+version: "not stated on screen; UI matches a modern PBR-Metal-Roughness-era Painter build (Anisotropy channel, UV Tile workflow, Inflate/Shrink Wrap filter, UV Border Distance generator all present) — not precisely pinnable to a single point release"
+tags: [layers, fill-layer, paint-layer, masks, generator, blend-mode, baking, texture-set, udim, uv, pbr, metal-rough, basecolor, roughness, height, normal-map, opacity, mesh-maps, ambient-occlusion, curvature, position-map, high-to-low-poly, procedural, alpha, export, export-preset, channel-packing, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Hero Assets for Fashion - 06 - Asset Texturing and Presentation | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance- <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -258,30 +254,75 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:39] tutorials/frames/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-/frame_000.jpg
+- [2:11] tutorials/frames/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-/frame_001.jpg
+- [3:20] tutorials/frames/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-/frame_002.jpg
+- [6:41] tutorials/frames/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-/frame_003.jpg
+- [8:20] tutorials/frames/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-/frame_004.jpg
+- [11:51] tutorials/frames/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-/frame_005.jpg
+- [14:14] tutorials/frames/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-/frame_006.jpg
+- [16:17] tutorials/frames/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Parametric (non-destructive, fill-layer-and-generator-driven rather than hand-painted/sculpted) fashion-fabric texturing of a dress in Substance Painter — layering large/medium/small height-based creases via UV Border Distance generators, procedural noises, and imported displacement maps — then presenting the result via Substance 3D Stager rendering.
 
 ### Summary
-[PENDING EXTRACTION]
+Final (chapter 6) installment of Adobe's "Hero Assets for Fashion" series; chapters 1-5 (not covered by this skill) build the base Silk Gazar fabric material in Designer/Sampler. This chapter applies that material to a dress mesh in Painter and builds up realism entirely through parametric fill layers rather than hand-sculpting: large sculpted-displacement folds, generator-masked medium/small procedural creases concentrated near seams, a French-seam flattening pass, an Inflate/Shrink Wrap filter pass, a Stock-image-driven grayscale crease overlay, and fully procedural machine-stitching built from two subtracted UV Border Distance generators plus a breakup texture — with a note that Painter's built-in Stitching tool (hand-placed, Shift-click for straight runs) is preferred for cases needing more precision/control. The video closes by sending the finished dress straight to Substance 3D Stager (bypassing manual texture export) to light, shoot, and render hero/product-style images, including a 3-point light rig, backdrop plane, 100mm product-photography focal length, per-UV-tile channel-map tweaks (editing the Opacity map in Photoshop for more sheer fabric, round-tripping back into Stager), and a final PSD-format render for post-work.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. New Project: Adobe Standard material template, load the dress mesh, set document resolution to 4K, enable **Use UV Tile workflow** (multiple UDIM-style tiles), disable Auto Unwrap to preserve existing UVs. UVs are laid out across 4 tiles, visible in the Texture Set List panel.
+2. In Shader Settings: disable Subsurface Scattering (not needed for this fabric), enable **Anisotropy** (needed to view/render the silk fabric's directional highlight correctly).
+3. In Texture Set Settings, click the **+** button to add custom channels: Anisotropy Level, Anisotropy Angle, and Opacity, alongside the default PBR channels.
+4. Bake mesh maps before texturing: select all tiles, set bake resolution to 4K, choose Normal / Ambient Occlusion / Curvature / Position bakers, load an optional high-poly mesh (exported at higher resolution from the fashion/sculpting app) for normal detail transfer — baking works fine without a high-poly source too. Run **Bake Selected Textures**; baked maps become visible per-channel in the 3D viewport and Texture Set Settings.
+5. Import the base fabric material: from Substance 3D Designer, use **Send to Substance 3D Painter** (same process from Sampler) to push the material into Painter's Assets panel, then drag-drop it onto the mesh to create a fill layer; adjust its exposed parameters and material styling/filtering.
+6. Large folds (pass 1 — sculpted displacement): create a fill layer with only the Height channel enabled, drag 4 pre-made displacement maps (one per UV tile, made in an external sculpting app) into the Height input, reduce layer strength, name and hide the layer. This "brings together the best of both worlds" — sculpt-quality large-scale detail on a fully parametric/non-destructive layer.
+7. Large folds (pass 2 — procedural, seam-concentrated): new fill layer with Height (and temporarily Color, for visualization) enabled; add a black mask; right-click the mask → add a **UV Border Distance** generator (generates a falloff area along the dress's UV-island borders, which correspond to its pattern seams); tune the mask to start strong at seam edges and taper toward pattern interiors; turn Color back off; add **3D Simplex Noise** to Height and tune scale for large seam-adjacent folds; add a **Blur** filter to the mask to remove a hard edge line caused by the generator.
+8. Medium creases: duplicate-free new fill layer, Height-only, apply the **Crystal 2** procedural texture, adjust its styling/size for medium wrinkles; mask with a UV Border Distance generator constrained near seams; add a low-intensity Blur to both material and mask for smoother creases; pull back layer opacity for subtlety.
+9. Small creases: **right-click → Duplicate Layer** on the medium-crease layer (carries over all parameters, masks, filters); increase material tiling and reduce scale to shrink the pattern; retune contrast/balance of the procedural texture; adjust blur filters on both material and mask for smoother transitions.
+10. Turn all crease layers back on together and balance opacities as a group — keep height opacities low overall since this is a formal dress and the effect should read as subtle.
+11. French seams: new fill layer with a black mask + UV Border Distance generator constrained to roughly 0.5cm on either side of the seam; leave fill material at default; in the Height channel set the layer's blend mode to **Replace** with opacity **10**, which partially overrides/flattens the height built up by earlier layers at the seam line; add a low-strength Blur to smooth the mask transition.
+12. Additional medium folds: a new fill layer using the **Inflate/Shrink Wrap** filter, whose many parameters can be combined to mimic specific fabric behaviors.
+13. Whole-dress creases from a reference image: import a monochrome grayscale/normal-map wrinkled-fabric image from Adobe Stock via the Assets panel **+** button (Type = Texture); new fill layer, Height-only (or Normal channel for a normal-map source), drag the image into the Height input; reposition/rescale using the 2D-view bounding box; add Blur to remove low-bit-depth graininess; lower Height opacity for subtlety.
+14. Procedural stitching: new fill layer, tuned rough/non-metallic material with positive Height for the thread material; add a black mask + UV Border Distance generator #1 (Balance 0.05, Contrast 1, Smoothness 0, Distance 0.1); add a second UV Border Distance generator on the same mask (same values except Balance 0.04) set to **Subtract** mode — the gap between the two generators becomes the visible stitching-line thickness; add a **Fabric Diagonal Thin** procedural texture fill on top of the generators (Tiling 10, Texture Style 16, mode Subtract) to break the continuous line into individual stitch marks; tune the stitching material's color/height; add a **Paint** filter to the mask and paint black by hand to remove unwanted auto-generated stitching in areas that shouldn't have it (this generator-based method affects all seams by default).
+15. Alternative manual stitching: create a paint layer and use Painter's built-in **Stitching** brush tools (supports running, double, and overlock stitch types plus multiple thread styles); recommended workflow is the 2D view with **Shift+click** to snap straight stitch runs between points — preferred when precision matters more than speed.
+16. Before export: rotate the viewport light around the dress to spot problem areas; the HDRI/environment can be swapped from Environment settings for different lighting previews (**Shift + right-click + drag** rotates the HDRI in Painter).
+17. Export: either File → Export Textures (set directory, template — PBR Metallic Roughness shown — file type, then Export for all channels/UV tiles), or skip manual export and use **Send to Substance 3D Stager** directly.
+18. In Stager: the model loads with all maps in place; enabling ray tracing renders it correctly (GPU rendering is generally faster). Iterate between Painter and Stager as needed (the video catches creases reading too strong in Stager and goes back to Painter to rebalance layer opacities, then re-sends).
+19. Lighting: drag a 3-point light rig from Starter Assets; select the environment in the Scene panel, hide the environment light, position/tune the key light (front-right, highlights dress features), fill light (front-left, softens key-light shadows), and evaluate whether a back light adds anything (removed here as unnecessary). **Shift + left-click + drag** rotates lights in Stager (mirrors Painter's HDRI-rotate gesture).
+20. Backdrop: drag a plane from Starter Assets, position/scale via the Transform panel, apply a gray Matte standard material from Stager's Basic Materials presets, darken its color to make the dress pop (treated as a placeholder — final backdrop work planned for Photoshop).
+21. Camera: add via the Camera menu, set resolution to 2K and focal length to 100mm (a product-photography-appropriate focal length to reduce perspective distortion).
+22. Per-tile channel tweaks in Stager: the Scene panel's Dress model folder expands into 4 objects (one per painted UV tile); select one, adjust channel-map strength, e.g. double-click the Opacity map thumbnail to open it directly in Photoshop, add an Adjustment Layer to darken it for a sheerer fabric look, save — Stager picks up the updated map automatically.
+23. Final render: Stager's Render module — pick camera + resolution + output name/format/directory; Medium preset is the everyday quality/speed balance, High preset (1000+ samples) for production; Stager auto-denoises to cut render time and fix fireflies; PSD output format is preferred for stills since it includes extra layers for easy object/background selection in post. A second camera was set up for a complementary close-up shot with adjusted lighting; final backdrop composited from downloaded Adobe Stock imagery. Notes Stager's latest release also supports animated turntables (360 rotation renders).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **New Project:** Adobe Standard material template; 4K resolution; UV Tile workflow enabled (4 tiles); Auto Unwrap off.
+- **Shader Settings:** Subsurface Scattering off; Anisotropy on.
+- **Texture Set Settings:** custom channels added — Anisotropy Level, Anisotropy Angle, Opacity.
+- **Baking:** Normal, Ambient Occlusion, Curvature, Position mesh maps at 4K, optional high-poly source mesh.
+- **Fill layers** (one per detail scale): large sculpted-displacement folds (Height-only, imported per-tile displacement maps), large procedural folds (3D Simplex Noise on Height + UV Border Distance mask + Blur), medium creases (Crystal 2 procedural + UV Border Distance mask + Blur, low opacity), small creases (duplicated medium layer, higher tiling/lower scale), French-seam flattening (Replace blend mode, opacity 10, UV Border Distance mask ~0.5cm), Inflate/Shrink Wrap filter pass, Adobe-Stock-image crease overlay (Height or Normal channel + Blur), procedural stitching (two UV Border Distance generators, one in Subtract mode, + Fabric Diagonal Thin procedural in Subtract mode + Paint filter cleanup on the mask).
+- **Generators used:** UV Border Distance (repeatedly, with Balance/Contrast/Smoothness/Distance parameters, sometimes stacked with a second instance in Subtract mode).
+- **Filters used:** Blur (masks and materials), Inflate/Shrink Wrap, Paint (manual mask cleanup).
+- **Manual tool alternative:** Stitching brush tool (running/double/overlock stitch types, multiple thread presets), used on a paint layer, Shift+click for straight runs in 2D view.
+- **Export:** File → Export Textures (PBR Metallic Roughness template shown) or direct **Send to Substance 3D Stager**.
+- **Substance 3D Stager:** ray tracing toggle; Starter Assets 3-point light rig; per-light Scene-panel controls (key/fill/back); backdrop plane + Basic Materials gray Matte preset; Camera (2K, 100mm focal length); per-UV-tile channel map editing (round-trip to Photoshop, e.g. Opacity map); Render module (Medium/High presets, 1000+ samples for production, auto-denoise, PSD export format for post-work layers); animated turntable support noted as a newer Stager feature.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced (heavy parametric-layer-stack construction, multiple generator/mask combinations, cross-app handoff to Stager).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter (texturing) handed off to Substance 3D Stager (rendering). No version number is stated on screen in either app; the feature set shown (Anisotropy channel, UV Tile workflow, Inflate/Shrink Wrap filter, UV Border Distance generator, Send to Stager button) is consistent with a modern PBR-Metal-Roughness-era Painter/Stager release but is not precisely pinnable to one point version from this video alone. Not usable as a hard version anchor — cross-reference against `references/version-tracker.md` only loosely.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers`, `fill-layer`, `paint-layer`, `masks`, `generator`, `blend-mode`, `baking`, `texture-set`, `udim`, `uv`, `pbr`, `metal-rough`, `basecolor`, `roughness`, `height`, `normal-map`, `opacity`, `mesh-maps`, `ambient-occlusion`, `curvature`, `position-map`, `high-to-low-poly`, `procedural`, `alpha`, `export`, `export-preset`, `channel-packing`, `intermediate`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Note on series scope:** this is chapter 6 of a longer "Hero Assets for Fashion" series; chapters 1-5 build the Silk Gazar base material in Substance 3D Designer/Sampler and are intentionally out of scope for this Painter-focused skill — this entry only covers the Painter-texturing/Stager-presentation chapter and assumes the base fabric material as a given input.
+- **Substance 3D Stager - Rendering assets from Substance 3D Painter** (`tutorials/substance-3d-stager---rendering-assets-from-substance-3d-painter.md`, if ingested) — dedicated deep-dive on the same Painter-to-Stager export/render handoff demonstrated in the second half of this video.
