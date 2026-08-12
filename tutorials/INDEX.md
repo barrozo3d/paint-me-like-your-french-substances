@@ -182,6 +182,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/substance-3d-painter-aces---02---ocio-acescg-in-painter.md
 
+
+### How to texture a realistic slipper model
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=U5CZJAKU47s
+- **Author:** 3DRedBox
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-texture-a-realistic-slipper-model.md
+
 ---
 
 ## Tag Reference
