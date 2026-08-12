@@ -93,6 +93,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/tempering-colors-in-substance-painter-steel-heat-effects.md
 
+
+### Skew Baking & Auto Rebake in Painter 12.1 | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=WwyElRpiQgY
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
