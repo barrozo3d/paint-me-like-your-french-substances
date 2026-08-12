@@ -1,0 +1,28 @@
+# Paint Me Like Your French Substances — Tutorial & Knowledge Base Index
+
+This is the skill's growing knowledge base, covering Adobe Substance 3D Painter. Every ingested tutorial, article, and documentation page is listed here.
+
+**To add a tutorial:** say "ingest this: [URL]" and the skill will fetch, structure, and add it here automatically.
+**To add a documentation page or article:** paste the content and say "ingest this article/doc".
+**To search:** look for tags matching the technique you need.
+
+*(Empty — add your first entry by saying "ingest this: [URL]")*
+
+---
+
+## Tag Reference
+
+Approved tag pool (see `SKILL.md` → "Approved tag pool" for the authoritative list):
+
+```
+layers, fill-layer, paint-layer, masks, smart-material, smart-mask, generator, anchor-point,
+blend-mode, baking, mesh-maps, ambient-occlusion, curvature, thickness, position-map, id-map,
+world-space-normal, high-to-low-poly, cage, udim, texture-set, uv,
+pbr, metal-rough, specular-glossiness, basecolor, roughness, metallic, height, normal-map,
+emissive, opacity, iray-render, viewport,
+particle-brush, alpha, tri-planar, procedural, MatFX, stencil,
+python-scripting, plugin, python-api, ui-plugin,
+export, export-preset, channel-packing, game-engine, unreal-export, unity-export, godot-export,
+color-management, texel-density,
+beginner, intermediate, advanced, expert
+```
