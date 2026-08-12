@@ -284,10 +284,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=dE4LWGMwypc
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `anchor-point` `blend-mode` `texture-set` `pbr` `metal-rough` `basecolor` `height` `normal-map` `opacity` `alpha` `procedural` `game-engine` `unreal-export` `intermediate` `advanced`
+- **Summary:** Part 1/2 of Adobe's Create Trim Sheets series (sci-fi corridor trim sheet). Builds a Color ID map (per-zone fill layers painted via the Polygon Fill Tool, one Anchor Point per mask for later reference), then two normal-detail techniques: height-based construction lines/rivets via the Tile Generator (Capsule pattern) constrained by an anchor-referenced Levels/Multiply mask, and true normal-map decal placement via the Projection tool + auto-generated Opacity-driven cutout masks for reuse as real decal geometry in Unreal Engine. Note: this video's Whisper transcript came back mis-detected as Dutch — Structured Notes were reconstructed from surviving English technical terms cross-checked against captured frames.
 - **File:** tutorials/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d.md
 
 

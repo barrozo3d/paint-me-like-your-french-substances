@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=dE4LWGMwypc
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; UI (Texture Set Settings custom channel add, Tile Generator, Anchor Point workflow, PBR Metal Rough + Alpha Test shader) matches a modern point release, not precisely pinnable"
+tags: [layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, texture-set, pbr, metal-rough, basecolor, height, normal-map, opacity, alpha, procedural, game-engine, unreal-export, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Create Trim Sheets in Substance 3D Painter - Part 1 | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -573,30 +569,73 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:09] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d/frame_000.jpg
+- [3:43] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d/frame_001.jpg
+- [6:09] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d/frame_002.jpg
+- [8:55] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d/frame_003.jpg
+- [10:39] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d/frame_004.jpg
+- [11:50] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d/frame_005.jpg
+- [14:00] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d/frame_006.jpg
+- [17:37] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Building a reusable trim sheet texture entirely inside Substance Painter — a subdivided plane painted into a Color ID map (with per-mask Anchor Points for later reference), then layered with height/normal panel detail using both procedural generators and hand-projected library normal maps — for a sci-fi corridor environment.
 
 ### Summary
-[PENDING EXTRACTION]
+Part 1/2 of Adobe's Create Trim Sheets series. **Transcription note:** this video's Whisper-generated transcript came back mis-detected as Dutch (a known Whisper language-ID failure mode on this audio) — the raw transcript in this file is largely garbled phonetic-Dutch text; the Structured Notes below were reconstructed by cross-referencing the surviving English technical terms (fill layer, black mask, anchor point, Tile Generator, PBR Metallic Roughness, Alpha Test, Opacity, Levels, Transform, symmetry, Unreal Engine 5) against the captured frames, which independently confirm the described UI and layer names. Treat step wording as a faithful reconstruction, not a verbatim quote. The tutorial starts with a plane that has already been manually subdivided into grid segments in an external 3D app (visible via Painter's Polygon Fill tool) so that each segment can be assigned to a different trim-sheet material zone. It builds a Color ID map first — one colored fill layer per material zone (base metal, construction lines, floor vents, gears, random-decal areas, text/decal area, console area, wall panel, floor panel — wall and floor both planned for 3D symmetry so only half needs authoring), painted per-polygon with the Polygon Fill tool set to face selection. Every mask in the Color ID folder then gets an individual Anchor Point (named consistently with its layer, since anchor references are name-based) so downstream detail layers can reference exactly which zone they belong to. It then builds two parallel normal-map detail techniques on top: (1) height-based normal detail — a Height-only fill layer hand-painted or Transform-filter-offset into perfectly straight construction lines, extended into a rivet/bolt pattern using the Tile Generator's Capsule pattern type constrained to a Color-ID-anchor-referenced area via a Levels filter in Multiply mode; and (2) genuine normal-map detail — projecting pre-made normal-map alphas from Painter's built-in Shelf/Library onto specific panels using the Projection tool (S+R to scale/rotate), also feeding the same alpha into the Opacity channel so a Levels adjustment (effect channel = Opacity, white point pulled left) can auto-generate a cutout mask for every placed detail — enabling these decal-like details to later be dropped onto a background-transparent plane and used as real decal geometry in Unreal Engine. Closes with wall-panel and floor-panel detail passes (paint layers used to fix blend-mode conflicts, height-map inversion for pattern variation, hand-painting where a generator result can't be erased and must be repainted directly in the Height channel). Part 2 covers base color and the Unreal Engine 5 pipeline.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Start with a plane already subdivided into a segmented grid in an external 3D app (confirmed via Painter's Polygon Fill tool view) — segmentation is what lets each grid cell become an independently assignable trim-sheet material zone.
+2. Gather visual references first to plan which detail zones the trim sheet needs (metal panels, small paneling details, cables, floor details, etc.) before blocking anything out.
+3. Create a **Color_ID** folder to hold the ID-map layers.
+4. Build the Color ID map: create one simple fill layer per material zone, disable all channels except Color, assign a distinct flat color, and name each layer for what it represents (e.g. "Base_Metal" in red). Use the **Polygon Fill Tool** set to **face selection** to click-select which mesh polygon(s) each color occupies. Size the "Base Metal" zone larger than others since it's the dominant material.
+5. Add a **construction line** zone: duplicate the base-metal layer, add a black mask (reset to black), give it a distinct visualization color, and keep it narrow (roughly 2 texture tiles wide) — these thin construction lines read as panel seams later and are a good early habit to build into every trim sheet.
+6. Continue subdividing the Color ID map into more zones via a timelapse pass: floor vents, gears, a "random details" zone (random decals/normal-map details/net details), a "random text/decals" zone, a console zone, plus dedicated wall and floor zones (both built for 3D symmetry — only half the geometry needs unique texture, mirrored at render time).
+7. Once the Color ID map is complete, add an individual **Anchor Point** to every mask in the Color_ID folder (via the anchor-point option per mask) — this lets every downstream detail layer reference exactly which ID zone it belongs to, and updates automatically if the ID map masks are edited later. Layer naming matters here since anchor points are referenced by their source layer's name.
+8. Collapse the Color_ID folder; create a new **Normal_Details** folder to hold all normal-map detail work.
+9. **Technique 1 — height-based normal detail:** create a fill layer (e.g. named "Line" for the construction-line detail), disable every channel except Height. A positive Height value pushes normal detail outward/embossed; negative pushes it inward/recessed. Add a black mask; paint the construction line by hand in the 2D view (Shift-click-drag from one edge of the square canvas to the other for a straight, non-anti-aliased line), or — for a cleaner, editable, repeatable result — attach a **Transform** filter to the mask instead: set Scaling (e.g. 105%) and Offset (e.g. -0.015) so the line duplicates perfectly and symmetrically across the tile, and can be nudged non-destructively.
+10. **Rivet/bolt pattern:** switch Shader Settings from plain PBR Metallic Roughness to **PBR Metallic Roughness with Alpha Test** (adds a cutout channel); in Texture Set Settings, add an **Opacity** channel. Duplicate the normal-line layer, add a Transform + new black mask, and drive the rivet shapes with the **Tile Generator**: apply it via a fill layer carrying a grayscale map (the generator can't be dropped directly onto a mask), set Pattern Type to **Capsule**. Key Tile Generator settings tuned in the video: Angle Random ≈ 90° (adds per-instance rotation jitter), Pattern Transform Balance ≈ 38/33, Scale ≈ 1.5-1.6, pattern Offset ≈ 0.5 (produces a floor-grate-like arrangement), Vertical Amount lowered to fit ~3 capsules within the target space, Global Offset ≈ 0.01 to center the pattern perfectly within the zone.
+11. Constrain the rivet pattern to only the intended Color-ID zone: add a **Levels** filter above the pattern layer, set its Effect Channel to reference the relevant Color-ID Anchor Point mask, blend mode **Multiply** (keeps the pattern only where the anchor-referenced mask is white, removes it everywhere else). Reveal the final embossed result by raising the base layer's Opacity slider.
+12. **Technique 2 — true normal-map detail:** create a Normal-channel-only fill layer; browse Painter's built-in Shelf/Library normal-map alphas (any grayscale/normal alpha shown there is usable). Use the **Projection** tool: enable Normal (and Opacity) as the affected channels, drag the chosen alpha in, press **S** then **R** to scale/rotate the projection freely, position it over the target panel, and paint it in.
+13. Feed the same alpha into the Opacity channel so a mask can be auto-generated later: add a **Levels** adjustment above the material, set its Effect Channel to **Opacity**, then drag the white input slider left — this automatically generates a matching cutout mask for every placed normal-map detail, without manual mask painting per decal.
+14. Because these detail alphas cut out their background, the same panel details can later be placed on a flat plane and reused as genuine decal geometry inside a real-time engine (Unreal Engine noted specifically).
+15. Timelapse pass: places a variety of Shelf normal-map details (vents, handles, small clutter) across different trim-sheet panels using the projection+auto-mask workflow above.
+16. Ridge/stripe detail: uses the Tile Generator again (line/ridge-style pattern) for a base ridge layer, then blends a Height-map base with a Normal-map detail layer via a **Blur** filter on the blend; when a blend mode doesn't combine correctly, switches the offending layer to a **paint layer** and experiments with its blend mode instead (a general troubleshooting tip for stubborn blend conflicts).
+17. Cable detail: duplicates the ridge layer, adds Blur, restyles it as a rubber cable strip.
+18. **Floor panel:** built from a height-map shape generator, using the generator's **Invert** option to produce an alternate pattern variant; notes that generator-driven detail can't be erased with a normal eraser — edits at that point must be hand-painted directly in the Height channel/mode. Adds a smaller secondary detail layer on top with an appropriate blend mode (again a **paint layer** used where blending needed manual control).
+19. **Wall panels:** also planned around 3D symmetry (author only half, mirror the rest at the mesh level); kept intentionally simpler for tutorial pacing.
+20. Closing note: Part 2 of this series covers building the trim sheet's base color pass and demonstrates using the finished trim sheet inside Unreal Engine 5.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Polygon Fill Tool** (face selection mode) — used throughout the Color ID pass to assign flat colors per mesh polygon segment.
+- **Color_ID folder**: one fill layer per material zone (Base_Metal, construction line, floor vents, gears, random-details, random-text/decals, console, wall, floor), each Color-channel-only with a distinct flat color.
+- **Anchor Point**: added individually to every Color_ID mask, name-referenced by downstream layers.
+- **Normal_Details folder**: Height-only fill layers (hand-painted or Transform-filter-offset construction lines), **Tile Generator** (Pattern Type = Capsule, Angle Random, Pattern Transform Balance, Scale, Offset, Vertical Amount, Global Offset parameters) for rivet/bolt arrays, **Levels** filter (Effect Channel = an Anchor Point reference or Opacity, Multiply blend mode for masking-by-reference or white-point-drag for auto-mask-from-opacity).
+- **Shader Settings**: PBR Metallic Roughness → PBR Metallic Roughness **with Alpha Test** (adds cutout support).
+- **Texture Set Settings**: custom **Opacity** channel added.
+- **Projection tool**: S (scale) + R (rotate) hotkeys to freely place Shelf/Library normal-map alphas onto specific panels.
+- **Transform filter**: Scaling / Offset Mode / Offset X-Y / Rotation parameters, applied to masks for perfectly repeatable, non-destructive line/pattern placement.
+- **Blur filter**: used to soften blends and cable/ridge details.
+- **Paint layer**: used as a manual-blend-mode fallback when a generator/fill-layer blend doesn't combine correctly.
+- 3D **symmetry** planned for wall and floor zones (author half, mirror rest).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced (multi-technique procedural trim-sheet construction: Color ID + anchor points + Tile Generator + Levels-driven masking + projection workflow).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number is stated on screen; the feature set shown (custom Opacity channel via Texture Set Settings, PBR Metallic Roughness + Alpha Test shader preset, Tile Generator with Capsule pattern, per-mask Anchor Points, Transform filter on masks) is consistent with a modern Painter release but not precisely pinnable to a single point version from this video alone.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers`, `fill-layer`, `paint-layer`, `masks`, `generator`, `anchor-point`, `blend-mode`, `texture-set`, `pbr`, `metal-rough`, `basecolor`, `height`, `normal-map`, `opacity`, `alpha`, `procedural`, `game-engine`, `unreal-export`, `intermediate`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Create Trim Sheets in Substance 3D Painter - Part 2** (`tutorials/create-trim-sheets-in-substance-3d-painter---part-2-adobe-substance-3d.md`) — direct continuation: base color pass for this same trim sheet, plus using the finished result inside Unreal Engine 5.
+- **Creating Trim Sheet UVs for Substance 3D Painter** (`tutorials/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d.md`) — same broader Adobe trim-sheet series; that video covers the DCC-side (3ds Max) UV-unwrap consuming a finished trim sheet like the one built across this Part 1/Part 2 pair.
