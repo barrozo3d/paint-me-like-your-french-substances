@@ -71,6 +71,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md
 
+
+### How to make SKIN TEXTURES in Substance Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=s0DhvFML7oM
+- **Author:** J Hill
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-make-skin-textures-in-substance-painter.md
+
 ---
 
 ## Tag Reference
