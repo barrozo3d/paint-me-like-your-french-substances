@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=cRKK4YOXLtQ
 author: Abe Leal 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "11.0.0+ (confirmed by feature combination: experimental Auto-Cage baking, Auto-update for modified/linked assets, and the Bevel Smooth filter — all introduced in 11.0.0 per release-notes-painter-11.0.md; likely 11.0.x-11.1.x)"
+tags: [layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, baking, mesh-maps, ambient-occlusion, curvature, thickness, world-space-normal, position-map, high-to-low-poly, cage, udim, texture-set, procedural, tri-planar, alpha, height, roughness, metallic, basecolor, MatFX, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/complex-wooden-medieval-door-tutorial-in-substance-3d-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Complex Wooden Medieval Door Tutorial in Substance 3D Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py complex-wooden-medieval-door-tutorial-in-substance-3d-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -355,30 +351,75 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:52] tutorials/frames/complex-wooden-medieval-door-tutorial-in-substance-3d-painter/frame_000.jpg
+- [3:00] tutorials/frames/complex-wooden-medieval-door-tutorial-in-substance-3d-painter/frame_001.jpg
+- [4:00] tutorials/frames/complex-wooden-medieval-door-tutorial-in-substance-3d-painter/frame_002.jpg
+- [7:16] tutorials/frames/complex-wooden-medieval-door-tutorial-in-substance-3d-painter/frame_003.jpg
+- [8:36] tutorials/frames/complex-wooden-medieval-door-tutorial-in-substance-3d-painter/frame_004.jpg
+- [10:21] tutorials/frames/complex-wooden-medieval-door-tutorial-in-substance-3d-painter/frame_005.jpg
+- [13:20] tutorials/frames/complex-wooden-medieval-door-tutorial-in-substance-3d-painter/frame_006.jpg
+- [19:20] tutorials/frames/complex-wooden-medieval-door-tutorial-in-substance-3d-painter/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Adobe-sponsored showcase of a fully non-destructive, height-map-driven "carving" workflow: instead of sculpting ornate medieval door carvings on the high-poly mesh, the pattern is authored as a black-and-white mask in Photoshop (planned directly against the door's UV layout), imported as a height-driving fill layer, and sculpted procedurally with filters (Blur, Bevel Smooth, Blur Slope) — kept live-linked so edits in Photoshop auto-update inside Painter.
 
 ### Summary
-[PENDING EXTRACTION]
+A multi-UDIM (4 UDIM tiles) medieval door asset, textured with zero high-poly sculpting for its carved ornamentation. Baking uses Painter's Auto-Cage feature (each beam/section split into its own high/low-poly pair, cage auto-expanded per element, matched by mesh name, 16x anti-aliasing) to bake Normal, World Space Normal, Ambient Occlusion, Curvature, Position, and Thickness. A base wood material is pulled live from the in-app Substance 3D Assets library (no credits needed with an active subscription), rotated 90 degrees to align UV-driven wood grain along the beams, tiling and height-intensity tuned down, then darkened with a Multiply-blend reddish-orange fill layer. The video's signature technique is height carving: a white Fill Layer with Height pushed to maximum, grouped into a dedicated "Height Layers" folder, masked with a black-and-white pattern authored in Photoshop against the door's UV layout and imported as a mask-driving fill layer — with the project's Assets-panel auto-update toggle on, saving the PSD instantly re-applies changes inside Painter with no re-import step. The raw imported pattern is refined with a light Blur (softens compression/quality artifacts), then the Bevel Smooth filter (bevels and smooths every black/white edge simultaneously, distance/smoothing tuned down) to read as an actual carved bevel rather than a flat cutout, and finished with a Blur Slope filter set to Max blending (chips/breaks up only the outer edges of the carved shapes) for a convincing worn-chip-damage look. A folder-level Anchor Point (generated from the whole Height Layers folder, not just one layer, referencing its Hide channel) is then wired into downstream Ambient Occlusion-driven dirt and Metal Edge Wear-driven edge-wear generators' Micro Normal / Micro Height / Micro Detail slots so those generators correctly read into the carved crevices instead of ignoring them — each broken up further with a Clouds-filtered fill layer in Multiply. A moss/ground-dirt layer uses the Position generator (position + world-space-normal-derived height gradient, Global Invert) for bottom-to-top placement, refined with a Metal Edge Where-generator pass and finished with manual paint-layer touch-ups for artistic control over exactly where growth should or shouldn't appear. A warm top-down Light generator layer (Linear Dodge, kept subtle at 5-10%) simulates directional highlight; an AO-generator-driven Overlay darkening pass and a hand-painted corner drip-stain layer (Blur Directional filter for a downward streak look) add further grime. Roughness gets a glossy pass on the height-carving fill layer for crevice highlights. Metal bolts are hand-painted with a hard round brush on a metallic material, their own mask pushed into the Hide channel and refined with the same Bevel Smooth filter. Finishes with the video's signature "secret" trick: a bright-yellow fill layer masked by the inverted, contrast-pushed baked Thickness map in Linear Dodge blend, brightening only the thinnest/sharpest wood edges for a subtle simulated subsurface-scattering glow.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Bake with Auto-Cage:** split the high-poly into per-element (per-beam) high/low-poly pairs so each generates and auto-expands its own cage to the size it individually needs; set `Match` to `By mesh name` and `Anti-aliasing` to `16x`; bake `Normal`, `World Space Normal`, `Ambient Occlusion`, `Curvature`, `Position`, and `Thickness`.
+2. **Pull a base wood material live from the in-app Substance 3D Assets library** (no credits consumed with an active subscription) and drag-drop directly onto the element; rotate the material 90 degrees to align its baked-in grain direction with the door beams' UV layout (the asset was purpose-built with straight UVs so this works cleanly); tune `Tiling` up (more fiber detail on a large door) and `Height` intensity down (~10%).
+3. **Darken the base with a Multiply color pass:** new Fill Layer, reddish-orange color, Base Color blend mode `Multiply`, opacity lowered — establishes the "start dark, build up to highlights" value-building philosophy stated explicitly.
+4. **Height-carving setup:** new Fill Layer filled white, `Height` pushed to maximum, grouped (Ctrl+G) into a dedicated `Height Layers` folder so every carving-related layer lives in one place; add a black mask to the group.
+5. **Author the carving pattern in Photoshop against the door's own UV layout**, planning exact carving placement/shape as a black-and-white mask file rather than sculpting — explicitly framed as the smart alternative to re-sculpting/re-baking every time a client requests a design change.
+6. **Import the Photoshop pattern as a mask-driving fill layer** (right-click the mask -> add Fill Layer -> drag in the imported PSD) so the pattern directly drives the Height Layers group's height output.
+7. **Enable Assets-panel auto-update for the linked PSD resource:** toggle on automatic updates in the Assets panel for that specific texture resource — from this point, saving further edits in Photoshop instantly re-applies inside Painter with no manual re-import.
+8. **Color the carving as "burned" wood:** darker color on the carving layer, blend mode `Overlay`.
+9. **Clean up compression artifacts with a light `Blur` filter** on the mask — softens jagged/low-quality edges from the source pattern file (used sparingly; too much blur was explicitly rejected as looking wrong).
+10. **Apply the `Bevel Smooth` filter for a true carved-edge look:** bevels and smooths every black/white shape edge simultaneously; `Distance` and `Smoothing` brought down from default; described as transforming a flat cutout pattern into something that reads as an actual carved bevel — flagged as "a really, really powerful tool" for procedural carving without touching the high-poly.
+11. **Add a `Blur Slope` filter for chip/wear damage on carving edges:** `Intensity Divider` raised (e.g. to 10) to shrink the damage scale; blend mode changed from the default `Blur` to `Max` so only the outer edges of each shape are affected (vs. `Min`, which would erode inward) — produces a convincing chipped-edge-of-a-carving look, applied uniformly and procedurally across every carved element at once.
+12. **Generate an Anchor Point from the whole Height Layers folder (not a single layer)** — new to some viewers per the creator's callout: folders, not just individual layers, can be the anchor-point source, so any future layer added inside that folder automatically feeds the same anchor reference.
+13. **Wire the folder anchor point into downstream generators via Micro Normal / Micro Height / Micro Detail:** on both a dirt layer's `Dirt` generator and an edge layer's `Metal Edge Wear` generator, set Micro Normal -> Anchor Points -> the Height Layers anchor -> reference channel `Hide`; repeat for Micro Height with the same anchor and `Hide` channel; enable `Micro Detail` — without this step, generators ignore the carved crevices entirely and only affect the flat surrounding surface.
+14. **Break up generator uniformity with a Clouds-filtered fill layer:** new fill layer with a `Clouds` filter, Alt-click the mask to preview, tune `Balance`/`Contrast`/`Scale`, blend `Multiply` against the generator layer below — standard technique repeated on both the dirt pass and the (tri-planar-projected) metal-edge-wear pass to avoid the generator's default too-uniform coverage.
+15. **Moss/ground-growth layer via the Position generator:** reuse the same dirt material with a desaturated dark-green "moss" color tint; mask built from a `Position` generator (uses baked Position + World Space Normal to infer proximity to the ground) with `Global Invert` toggled to flip growth direction bottom-to-top; broken up further with a `Metal Edge Wear` generator (inverted, `Multiply`) so moss favors protected crevices over open faces, matching real-world moss growth patterns.
+16. **Manually art-direct the moss/dirt with a paint layer:** explicitly recommended as a mandatory finishing step, not optional — hand-remove or add dirt/moss/damage based on in-world logic (a frequently-touched door surface gets less grime; a recently-broken-off wood piece shouldn't show old weathering) — called out as one of the most commonly skipped steps that separates procedural-only results from art-directed ones.
+17. **Add a warm directional Light generator pass:** new layer, orange/warm tint, `Light` generator with sliders for light direction/angle, `Highlight Glossiness` lowered for a soft top-to-bottom gradient, blend mode `Linear Dodge` kept very subtle (5-10% opacity) to simulate light grazing the top of the object.
+18. **Add general grime via an inverted Ambient Occlusion generator:** new dark desaturated-brown layer, `Ambient Occlusion` generator inverted (explicitly not using cavity information — intended as a broad shadow pass, not crevice detail), blend mode `Overlay`.
+19. **Hand-paint corner drip/rust stains with a `Blur Directional` filter:** paint a dark color onto select corners only (not all), then apply `Blur Directional` on the mask to streak the paint downward at a controllable angle/intensity, blend `Multiply` — simulates dirt/rust runoff.
+20. **Add a Roughness pass on the height-carving fill layer:** enable and raise Roughness slightly on the carving layer so light catches a subtle glossy glint inside the carved crevices specifically.
+21. **Hand-paint metal bolts:** dark metallic material (Metallic enabled/maxed), black mask, hard round brush, painted freehand at bolt locations; push the same mask into the `Hide` channel and apply `Bevel Smooth` again for a beveled bolt-head shape; mask can be resized per-bolt at any time since the whole approach stays procedural.
+22. **Finishing "secret" trick — thickness-driven simulated subsurface glow:** new bright-yellow fill layer, masked by the baked `Thickness` map run through `Levels` with Invert checked (so thin geometry reads bright), levels pushed further to restrict the effect to only the sharpest/thinnest edges, blend mode `Linear Dodge` at very low opacity — adds a subtle warm edge-glow evocative of light passing through thin wood, without any shader-side subsurface scattering setup.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Bake maps:** `Normal`, `World Space Normal`, `Ambient Occlusion`, `Curvature`, `Position`, `Thickness`; `Auto-Cage` (per-element cage generation, `Match: By mesh name`, `Anti-aliasing: 16x`)
+- **Asset source:** in-app `Substance 3D Assets` library (Aged Pine Wood base material, Loose Dirt Scramble dirt material — reused for both dirt and moss passes with recolor)
+- **Height-carving filter chain (on the imported Photoshop mask):** `Blur` (light, artifact cleanup) -> `Bevel Smooth` (Distance/Smoothing reduced) -> `Blur Slope` (Intensity Divider raised, blend `Max` for outer-edge-only chip damage)
+- **Anchor point mechanic:** folder-level Anchor Point (generated from the whole `Height Layers` group, referencing its `Hide` channel) wired into other layers' generator `Micro Normal` / `Micro Height` / `Micro Detail` settings so generators read into procedurally-carved crevices
+- **Generators used:** `Dirt`, `Metal Edge Wear` (used twice: edge-wear pass and moss-crevice-favoring pass, inverted), `Position` (with `Global Invert` for bottom-to-top moss placement), `Light` (direction/angle sliders, `Highlight Glossiness`), `Ambient Occlusion` (inverted, broad shadow pass)
+- **Breakup technique (repeated across multiple layers):** `Clouds` filter fill layer, Alt-click mask preview, `Balance`/`Contrast`/`Scale` tuning, `Multiply` against the generator layer it's breaking up
+- **Blend modes used throughout:** `Multiply` (darkening, breakup layers, drip stains), `Overlay` (carving burn color, AO grime), `Linear Dodge` (light generator, thickness-glow finish)
+- **Filters:** `Blur`, `Bevel Smooth`, `Blur Slope` (Max/Min modes affect outer vs. inner edges), `Blur Directional` (angle-controllable streak/drip effect), `Levels` (Invert, used on Thickness map)
+- **External tool:** Photoshop, used to author the carving pattern directly against the door's UV layout, live-linked via Painter's Assets-panel auto-update toggle
+- **Finishing "secret" trick:** bright-yellow Fill Layer + baked `Thickness` map (Levels-inverted, pushed to isolate thinnest edges) + `Linear Dodge` at low opacity — simulated subsurface-scattering edge glow with no shader work
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — assumes comfort with generators, anchor points (including the less-common folder-level anchor point), multi-filter mask chains, and a Photoshop-to-Painter live-linked asset workflow; the payoff (fully non-destructive, art-director-friendly ornamental carving) is a genuinely advanced production technique, not a beginner topic, despite each individual filter being simple to apply.
 
 ### App & Version
-[PENDING EXTRACTION]
+Version pinned via feature combination, all confirmed on-screen: the `Auto-Cage` baking option (labeled "experimental" in-UI), the Assets-panel automatic-update toggle for linked/modified resources, and the `Bevel Smooth` filter are all first introduced in **Painter 11.0.0** per this skill's own release-notes backfill (`references/release-notes-painter-11.0.md`) — same version floor independently confirmed by the "How to TEXTURE EVERYTHING in Substance Painter" tutorial's Bevel Smooth usage. Likely 11.0.x-11.1.x given no 11.1.0-specific features (e.g. the Ribbon tool) appear on screen.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, baking, mesh-maps, ambient-occlusion, curvature, thickness, world-space-normal, position-map, high-to-low-poly, cage, udim, texture-set, procedural, tri-planar, alpha, height, roughness, metallic, basecolor, MatFX, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to TEXTURE EVERYTHING in Substance Painter](how-to-texture-everything-in-substance-painter.md) — different creator (J Hill); shares the same Bevel Smooth-filter version floor (11.0.0+) and a similar anchor-point-as-single-control-mask philosophy (one anchor referenced by multiple downstream effect layers), applied there to paint chips/leather cracks/decals rather than procedural height carving.
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); shares the core masking-primitive toolkit (generators, anchor points, tri-planar procedural breakup) applied to a creature mask rather than hard-surface wood carving.
+- Cross-link to other Abe Leal 3D tutorials in this knowledge base (`Substance Painter Tutorial: Texturing the Coin`, `Zbrush to Substance Painter Bridge`, `Optimizing Textures - How to Pack Masks Like a Pro`) once ingested — same creator, shared procedural/anchor-point/generator vocabulary expected.
