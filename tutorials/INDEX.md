@@ -171,6 +171,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### Substance 3D Painter & ACES - 02 - OCIO & ACEScg in Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=WrFqBNI6Tx4
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-3d-painter-aces---02---ocio-acescg-in-painter.md
+
 ---
 
 ## Tag Reference
