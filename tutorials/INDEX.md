@@ -263,10 +263,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=8biEy1D30Bc
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 11.0.0+ (AutoCage feature usage confirms this floor per release-notes-painter-11.0.md)
+- **Tags:** `generator` `masks` `anchor-point` `blend-mode` `ambient-occlusion` `thickness` `position-map` `high-to-low-poly` `cage` `basecolor` `procedural` `alpha` `advanced`
+- **Summary:** Full value-first hand-painted pipeline on a zombie shark character: AutoCage-assisted baking, a black-and-white value map built purely from generators (AO/Light/Position), grouping the values and creating an anchor point from the group, converting that anchor point to full color via the Gradient filter, per-part local color values, the new Stylization filters as an optional inspiration pass, and finally freehand painting on top (square alpha, pen-pressure-on-opacity brush setup).
 - **File:** tutorials/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d.md
 
 ### Complex Wooden Medieval Door Tutorial in Substance 3D Painter
@@ -289,6 +289,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d.md
+
+
+### Paint On Baked Maps To Fix Issues | Substance Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=oRkgEuGKPtw
+- **Author:** Stu Lloyd (CG Stu)
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/paint-on-baked-maps-to-fix-issues-substance-painter.md
 
 ---
 
