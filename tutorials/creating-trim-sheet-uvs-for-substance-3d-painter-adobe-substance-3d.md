@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=Dp2ZpGIaumA
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (trim-sheet texture consumed downstream); UV work shown in 3ds Max"
+version: "not specified — no Painter UI shown in this video, DCC-side UV prep only"
+tags: [uv, texel-density, game-engine, unreal-export, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 6
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Creating Trim Sheet UVs for Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -234,30 +230,52 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:26] tutorials/frames/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [3:03] tutorials/frames/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [4:52] tutorials/frames/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [9:53] tutorials/frames/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [12:57] tutorials/frames/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [14:44] tutorials/frames/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+UV-unwrapping a large sci-fi window/hull asset so it maps efficiently onto a single shared "trim sheet" texture, trading strict texel-density consistency for massive texture reuse and memory savings — the DCC-side prep step that feeds a Substance 3D Painter (or engine-material) trim-sheet workflow.
 
 ### Summary
-[PENDING EXTRACTION]
+Continuation of Adobe's trim-sheet series, done in 3ds Max's UVW Unwrap editor against a pre-built trim sheet texture (tileable horizontal-axis metal strips, tileable vertical-axis square details, edge-damage sections, floor panels, and one small unique-texture area for crates). The video walks through unwrapping a window asset piece by piece: snapping UV shells to a pixel grid so tileable sections repeat seamlessly, deliberately stretching/compensating UVs where trim proportions don't perfectly fit, mapping long structural sections onto a single tileable metal strip repeated end-to-end, and finishing with two "extra techniques" — deforming mesh geometry to match pre-placed trim details (rather than deforming UVs to match geometry) and adding thin "construction line" details plus decal planes and a grunge overlay for wear variation. No Substance Painter UI appears in this video at all; it is the modeling/UV-prep half of a trim-sheet pipeline whose paint/material side happens in Painter.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Build/inspect the trim sheet texture first: identify which regions are horizontally tileable (flat metal strips), vertically tileable (square details), edge-damage/specific-edge sections, floor panels, and the one non-tileable "unique" area (reserved for crates, not reused here).
+2. Apply the trim sheet texture to the low-poly asset in the viewport before unwrapping, so UV placement can be checked against a live preview.
+3. Mirror the asset and delete half before unwrapping to cut unwrap time in half; mirror back after.
+4. Open the UVW Unwrap window; load the trim sheet texture as the unwrap background.
+5. For evenly-sized (512x512) square details: enable grid display, turn on Snap Toggle, switch snap mode to Vertices, then snap each UV shell's corners to the texture's grid lines so tiling is pixel-perfect.
+6. For irregular end-cap shells that don't fit the trim cleanly: still snap to the grid where possible, then accept and minimize UV stretching by taking "creative liberty" — nudge the shell placement and, if stretching is still too strong, edit the underlying mesh geometry (move edge loops) rather than fight the UVs further.
+7. For long structural sections (the window's metal frame): split the mesh into long thin segments, unwrap each individually, relax (Iron), then map each onto the same small tileable metal texture region, nudging each into the corner of its UV cell to maximize resolution before uniform-scaling (Ctrl+scale) it to size.
+8. Enable the 3D viewport's texture-tiling preview to check seam visibility between repeated shell instances live; judge acceptable seam visibility based on how close to camera the asset will be (looser tolerance for far/background geometry).
+9. Deform-mesh-to-trim technique: when a pre-placed trim detail (e.g. a raised panel graphic) should read as real 3D form, UV-map the plane to that detail first, then add edge loops at the detail's boundaries in the mesh and push/pull faces (plus a small bevel for weighted normals) so the geometry itself reads as an extruded panel.
+10. "Construction lines": map very thin UV strips to matching thin line details in the trim sheet, scattered across the mesh, to fake paneled/riveted real-world metal construction without any unique texture cost.
+11. Decal planes: create a simple plane positioned flush against the mesh surface, UV-unwrap it onto a trim sheet region that has an alpha-cutout mask, and use it to scatter stickers/text/details anywhere on the model.
+12. Optional grunge pass: layer one extra grunge/dirt texture over the trim details (Unreal-material-side, not Painter) to push the look from clean to worn without meaningfully increasing memory cost.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+Tools shown are entirely 3ds Max: UVW Unwrap modifier, Snap Toggle (Vertices mode), Iron / Relax UV, uniform scale via Ctrl+drag, Edit Geometry (edge-loop insertion, face push/pull, bevel for weighted normals). No Substance Painter layer/mask/generator names appear on screen — the trim sheet texture itself (built in an earlier video in the series) is what gets loaded into Painter downstream as a single shared material/smart material. Final preview shown in Unreal Engine's viewport (visible seam lines noted as a 3ds Max/editor-only display bug, confirmed not present in-engine).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate (UV-layout technique; no Painter-specific steps).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter is referenced only as the eventual destination for the trim sheet material — no Painter UI, version indicator, or on-screen version string appears anywhere in this video. UV work is demonstrated in 3ds Max 2023 (visible in the viewport title bar). Not usable for Painter-version cross-referencing.
 
 ### Tags
-[PENDING EXTRACTION]
+`uv`, `texel-density`, `game-engine`, `unreal-export`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Create Trim Sheets in Substance 3D Painter - Part 1** (`tutorials/create-trim-sheets-in-substance-3d-painter-part-1.md`) and **- Part2** (`tutorials/create-trim-sheets-in-substance-3d-painter-part-2.md`) — same broader trim-sheet topic from the same Adobe Substance3D channel; those two cover building/painting the trim sheet material itself inside Painter, while this video covers the DCC-side UV unwrap that consumes it. Ingest together as one trim-sheet workflow trio.

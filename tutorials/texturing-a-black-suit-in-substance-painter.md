@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=X24_IYUXOzU
 author: 3DRedBox
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; narrator explicitly says the UV-set-to-UV-set fill projection source used to fix stripe-direction mismatch is 'a new feature for the Substance Painter in a 10th version' — places this at 10.0.0+ (2024-05-16, per version-tracker.md); UI (Export dialog, Texture Set list, no Skew/OpenPBR) is consistent with the pre-12.1 era"
+tags: [layers, fill-layer, paint-layer, masks, smart-material, generator, curvature, anchor-point, blend-mode, baking, mesh-maps, ambient-occlusion, udim, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, export, export-preset, channel-packing, game-engine, unreal-export, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-a-black-suit-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 9
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing a Black Suit in Substance Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-a-black-suit-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -530,30 +526,71 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:34] tutorials/frames/texturing-a-black-suit-in-substance-painter/frame_000.jpg
+- [1:51] tutorials/frames/texturing-a-black-suit-in-substance-painter/frame_001.jpg
+- [4:44] tutorials/frames/texturing-a-black-suit-in-substance-painter/frame_002.jpg
+- [5:04] tutorials/frames/texturing-a-black-suit-in-substance-painter/frame_003.jpg
+- [9:18] tutorials/frames/texturing-a-black-suit-in-substance-painter/frame_004.jpg
+- [11:34] tutorials/frames/texturing-a-black-suit-in-substance-painter/frame_005.jpg
+- [17:44] tutorials/frames/texturing-a-black-suit-in-substance-painter/frame_006.jpg
+- [20:19] tutorials/frames/texturing-a-black-suit-in-substance-painter/frame_007.jpg
+- [22:02] tutorials/frames/texturing-a-black-suit-in-substance-painter/frame_008.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+UDIM/UV-Tile garment texturing of a full suit (jacket, tie, dress shirt/vest, plastic/metal accessories) built from layered smart materials and fill layers, using Painter's UV-set-to-UV-set projection source to fix pattern-direction mismatches across UV islands, then exported and lit/rendered in Marmoset Toolbag 5.
 
 ### Summary
-[PENDING EXTRACTION]
+A full pipeline video: load a 3-UV-Tile suit model, bake mesh maps (with Bent Normal), build the jacket's pinstripe fabric from a free Substance Community smart material plus a hand-built metallic "Lines Pattern" stripe layer, solve a fabric-direction mismatch between UV islands with a secondary guide UV channel authored in 3ds Max and Painter's UV-set-projection source, layer in curvature- and generator-driven color variation, then repeat a similar base+pattern+variation recipe for the tie (with an anchor-point-driven secondary weave layer), the dress shirt/vest (nested Base/Second Layer folders sharing one mask), and the accessories (buttons, selected via Polygon Fill on a UV island, built from the `Plastic Soft Dirty` smart material). Finishes with a Pass-Through "final touch" paint layer stacking Sharpen/Contrast/AO filters, exports an Unreal-style PBR Metallic-Roughness template at high resolution, then imports into Marmoset Toolbag 5 for UDIM-aware channel-packed material setup, a 3-point light rig plus HDRI backdrop, and final composited hero renders.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Import the model using a UV-Tile (UDIM) workflow** — 3 UV tiles confirmed in the Texture Set list: one for the suit body, one for the tie/shirt, one for accessories (buttons/buttonholes) — chosen specifically to preserve high texture detail rather than a single shared UV set.
+2. **Bake mesh maps** with `Bent Normal` enabled, output size set to 4K, anti-aliasing set to 64x, then `Bake selected textures`.
+3. **Build the jacket base from a free Substance Community smart material**: drag-and-drop import, scale to 6, switch the material's built-in pattern type to `Wave` (vs. Checkerboard/Mesh options), raise pattern tiling to ~4, lower "lines intensity" to avoid a visible line artifact, raise line tiling, pick a dark grey top / darker bottom color split, and tune the `Luminance Variation` parameter down from its default (too strong) value.
+4. **Add an extra channel via Texture Set Settings** before proceeding (transcript: "add the inclusion channel") — done specifically to support a channel the stripe/metallic work below needs; exact channel name uncertain from audio alone.
+5. **Build a dedicated `Lines Pattern` fill layer** for the pinstripes: enable only Color/Roughness/Metallic, push Metallic to ~0.8 (metallic thread look), tune roughness, pick a darker grey; add a black mask + Fill with a `Strip` pattern alpha, tiling ~5, Strip count 12, reduced width, Shift 0.
+6. **Fix stripe-direction mismatch across UV islands with the UV-set projection source** (called out explicitly as new in Painter 10.x): in the Fill layer's `Projection` settings, set `Source` to `UV set 1` (a second, guide-only UV channel) instead of the default UV set, then set `Rotation` to 90 — corrects the pinstripe direction without re-masking or duplicating layers, which the narrator calls out as replacing the older workaround (mask + duplicate + manually rotate).
+7. **Author the guide UV set in the DCC app (demoed in 3ds Max, works the same in Blender/Maya):** apply `Unwrap UVW`, copy the existing UV layout into a second UV channel, select the same island selection, rotate it 90° in that second channel only (no repacking needed since it's a projection guide, not a real UV layout), convert to Editable Poly, re-export/re-import into Painter.
+8. **Organize and finish the jacket base**: group Suit base + Lines Pattern into a `Suit Base` folder with a black mask (paint-selected area); add a second paint mask on the Lines Pattern layer set to `Subtract` blend to hand-remove the stripe in selected regions for variation.
+9. **Layer procedural color variation on top**: a `Color Variation #1` fill (white value, `Soft Light` blend, black mask + `2D Linear` generator, then invert + balance tuning); a second color-variation fill using a numbered alpha + increased tiling + `Blur` filter + a `Grunge` fill (`Subtract` blend) + `Histogram Scan` filter to place small white surface spots, feeding a small amount into Color+Height.
+10. **Add a `Curvature` fill layer**: white value, `Soft Light` blend, black mask + `Curvature` generator — pushes extra value onto edges and the top/highest surfaces (visibly picks out jacket wrinkles), opacity brought down after.
+11. **Build the tie in its own folder**: base fill (Color/Height/Roughness/Metallic only) in a red picked specifically for contrast, roughness ~0.6; `Stripe Pattern` fill using a `Strip` alpha (tiling 10, Rotation 90, then tuned to ~8), duplicated with tiling halved (~5) and blended `Linear Dodge` for a denser secondary stripe pass, plus a `Blur` filter at 0.11.
+12. **Drive a second weave layer off an Anchor Point**: place an Anchor Point on the Stripe Pattern layer, then build a new fill (`Nano Texture`) whose black mask references that anchor point via a `Levels` filter (inverted) — loads the `Cotton Jersey` material in Material mode, height-only (Color/Roughness/Metallic/Normal unchecked), tiling 5, `Height Range` reduced to ~0.05, then blended `Soft Light` back onto the Stripe Pattern layer for woven-fabric depth.
+13. **Build the dress shirt/vest in nested folders**: a `Base` fill using the `Denim` material (tiling ~5-6, white/dark-grey split, Height Range reduced, tiling raised to ~12) plus a `Fabric` (normal) pattern fill projected through `UV set 1` (same guide-UV trick as Step 6) with its blend mode set to `Normal` for all channels via right-click → `Apply to all channels`; group Base + pattern into a `Base` folder with a paint mask, then a `Second Layer` folder reusing that same mask (copy-mask reference) but recoloring (color picked from the tie) and adding its own `Fabric Pattern` fill (`Fabric Star Block` alpha, tiling 10/4, small Metallic + Roughness + Height) plus a repeated Color Variation pass moved above the Fabric Pattern layer.
+14. **Build the accessory (buttons/buttonholes) material** on its own UV tile: switch to `Polygon Fill` mode and click the relevant UV island directly in the 3D/UV view to generate the mask (no manual painting needed since the island is already isolated on its own tile); apply the built-in `Plastic Soft Dirty` smart material as the base, raise roughness contrast for shine; add a grunge-driven Color Variation fill (`Soft Light` blend, black mask + Fill + `Blur` filter).
+15. **Add a top-of-stack "final touch" `Paint Layer`** set to `Pass Through` blend, applied to all channels, holding three filters: `Sharpen` (recommended range 0–0.8, used ~0.2), a `Contrast` filter isolated to the Color channel only (all other channels disabled), and an AO-style filter with `Use World Unit` off, Intensity ~2, reduced radius.
+16. **Export** via the Export Textures dialog using an Unreal-Engine-oriented `PBR Metallic Roughness`-style output template, PNG file type, output size set to 4K (dialog defaults shown mid-setup before the resolution/preset were finalized).
+17. **Marmoset Toolbag 5 finishing pass**: drag-and-drop import the mesh, switch the UV mode to UDIMs to match Painter's UV-Tile export, wire the channel-packed texture manually (paste-and-recopy the same texture into Roughness=G, Metallic=B, AO=R channel slots), flip the Normal map's Y/green channel, disable backface culling; set up a 75mm-focal-length camera, switch the render engine from Raster to Ray Tracing; build lighting from an HDRI backdrop (`Interior` library → `Train Station`) plus a custom 3-point rig — a rectangular `Back light` (directional, brightness ~7), a `Top light` (duplicated + rotated, shape switched Rectangle→Spot with widened spot angle), a spherical `Key light`, and a `Fill light` (duplicated key, lower brightness); tune tonemapping (Marmoset 5's newer non-ACES tonemap method, since plain ACES over-darkened the result), post effects (clarity, contrast, highlights, exposure, bloom, sharpen); duplicate the camera per hero shot and enable Depth of Field for final composed stills.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Smart materials used:** free Substance-Community fabric smart material (jacket base, Wave pattern mode), `Plastic Soft Dirty` (accessories base)
+- **Materials loaded in Material mode:** `Cotton Jersey` (tie's anchor-point-driven weave layer, height only), `Denim` (dress-shirt base pattern)
+- **Alphas/patterns used:** `Strip` (jacket pinstripes, tie stripes), `Fabric Star Block` (second-layer vest pattern), unnamed numbered fabric alpha + `Grunge` (color-variation breakup), `Fabric normal theme` alpha (dress-shirt weave normal)
+- **Generators used:** `2D Linear` (color variation mask), `Curvature` (edge/highlight value pass)
+- **Filters used:** `Blur`, `Histogram Scan`, `Levels` (on the anchor-point-referencing mask, inverted), `Sharpen` (~0.2), `Contrast` (Color-channel isolated), an AO/HBAO-style filter (World Unit off, Intensity ~2)
+- **Blend modes used:** `Soft Light` (color variation, curvature, weave-over-stripe), `Subtract` (stripe removal paint, grunge breakup), `Linear Dodge` (secondary tie stripe density), `Normal` applied to all channels (dress-shirt pattern normal), `Pass Through` (final-touch composite paint layer)
+- **Projection/UV technique:** Fill layer `Projection` set to `UV set to UV set projection`, `Source: UV set 1` — a second, projection-guide-only UV channel authored in the DCC app specifically to control pattern rotation per-island without remasking; called out as a Painter 10.x feature
+- **Anchor Point usage:** one anchor point placed on the tie's Stripe Pattern layer, referenced (inverted, via a Levels filter) by a separate Cotton Jersey weave-detail layer's mask
+- **Texture Set Settings:** an extra channel added before stripe work began (audio: "inclusion channel", exact name uncertain)
+- **Baking settings:** `Bent Normal` mesh map enabled, 4K output, 64x anti-aliasing
+- **Export:** `Export Textures` dialog, Unreal-oriented PBR Metallic-Roughness template, PNG, 4K
+- **External render app:** Marmoset Toolbag 5 — UDIM-mode texture import, manual channel-packing (R=AO/G=Roughness/B=Metallic into one packed map), Normal-Y flip, backface culling off, Ray Tracing render engine, HDRI Interior/Train-Station backdrop, 3-point custom light rig (Back/Top/Key/Fill), non-ACES Marmoset-5 tonemap, Depth of Field
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced — the layer-building recipe itself (fill layers, generators, grunge breakup) is approachable, but the UV-set-to-UV-set projection trick requires understanding a second guide UV channel authored in an external DCC app, and the pipeline spans three applications (DCC for UVs, Painter for texturing, Marmoset for lighting/render/channel-packing).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not stated on screen. The narrator explicitly frames the UV-set-to-UV-set fill projection source (used to fix the stripe direction mismatch, Key Step 6) as "a new feature for the Substance Painter in a 10th version," which places this tutorial at Painter 10.0.0 or later (2024-05-16 per `references/version-tracker.md`). No OpenPBR shader or Skew baking UI (both 12.1.0+) is visible, consistent with a pre-12.1 version. Render/finishing pass uses Marmoset Toolbag 5 (external, not a Painter version signal).
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, smart-material, generator, curvature, anchor-point, blend-mode, baking, mesh-maps, ambient-occlusion, udim, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, export, export-preset, channel-packing, game-engine, unreal-export, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- This is the first 3DRedBox tutorial ingested into this knowledge base — cross-links to the rest of the creator's garment/prop texturing series (slipper, wooden stool, lace shorts, poison bottles, UDIM workflow deep-dive, shawl, tactical boots, UV-set/stencil video, NavyCap) will be added as those are ingested; see `tutorials/INDEX.md` for the current full list.
