@@ -247,6 +247,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-.md
 
+
+### Texturing a Worn Wooden Stool in Substance Painter 🪑
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=sa_5vS4s_M0
+- **Author:** 3DRedBox
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/texturing-a-worn-wooden-stool-in-substance-painter.md
+
 ---
 
 ## Tag Reference
