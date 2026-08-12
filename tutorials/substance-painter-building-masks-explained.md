@@ -322,4 +322,5 @@ masks, layers, paint-layer, fill-layer, generator, smart-mask, curvature, ambien
 ---
 
 ## Related Tutorials
-- Cross-linked from other Jared Chavez tutorials in this knowledge base that build on the same masking primitives shown here (hand-painted texture videos reference this video's generator/blend-mode/anchor-point stack; the anchor-point-focused videos reference this video's anchor-point-as-mask-source technique introduced at [20:44]). See `tutorials/INDEX.md` for the full current list — this section is updated as those sibling tutorials are ingested.
+- [REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER](realistic-creatures-hand-painted-textures-in-sustance-painter.md) — same creator; that video's edge-detect peeling-skin mask (step 13) and repurposed-material rash detail (step 10) apply this video's generator/blend-mode masking toolset in a production context.
+- Additional cross-links to other Jared Chavez tutorials in this knowledge base that build on the same masking primitives shown here (hand-painted texture videos reference this video's generator/blend-mode/anchor-point stack; the anchor-point-focused videos reference this video's anchor-point-as-mask-source technique introduced at [20:44]) will be added as those sibling tutorials are ingested. See `tutorials/INDEX.md` for the full current list.

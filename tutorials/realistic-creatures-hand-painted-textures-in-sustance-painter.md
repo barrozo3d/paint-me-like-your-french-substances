@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=ygKmaqpl2gk
 author: Jared Chavez
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified (UI consistent with pre-12.1 era, approximate)"
+tags: [masks, layers, paint-layer, fill-layer, procedural, alpha, curvature, mesh-maps, basecolor, color-management, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 11
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py realistic-creatures-hand-painted-textures-in-sustance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -333,30 +329,67 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:55] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_000.jpg
+- [2:35] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_001.jpg
+- [4:40] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_002.jpg
+- [6:24] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_003.jpg
+- [7:10] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_004.jpg
+- [9:55] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_005.jpg
+- [10:10] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_006.jpg
+- [11:05] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_007.jpg
+- [11:46] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_008.jpg
+- [12:20] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_009.jpg
+- [16:44] tutorials/frames/realistic-creatures-hand-painted-textures-in-sustance-painter/frame_010.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Hand-painted, layered color-blocking workflow for a decayed/diseased creature skin: build up base color zones by hue family, reinforce with detail passes at a large-medium-small shape hierarchy, then repurpose unrelated tileable materials (rust, stone grunge) as skin-damage/rash detail, and finish with edge-detect masks for peeling skin.
 
 ### Summary
-[PENDING EXTRACTION]
+Part 2 of a "Winnie the Pooh as a horror creature" personal project breakdown (part 1 covered modeling/sculpting, referenced but not shown here). Jared Chavez narrates his texturing process at a workflow/philosophy level rather than a click-by-click UI tutorial: establishing quick wins (shirt, shoe) before the skin, blocking initial color zones by anatomical logic (yellow for fat/bone areas, blue for cavities/recesses, purple laid over both to unify), painting the base color pass deliberately light/thin so the blocked-in colors show through, then a detail pass following a large-to-small shape hierarchy using tileable alphas and curvature-map-driven pulls, deliberately repurposing "wrong" materials (e.g. a granite/rock grunge material) as skin rash/fungal detail because of their interesting noise, finishing with an edge-detect mask for dried/peeling skin localized to specific areas, then simple eye texturing (veins, cataract-like fogged lens). Closes with a post-mortem: the piece sat unfinished for 6-8 months because the skin shader (built in Marmoset Toolbag, not Painter) initially read as "plasticky" from insufficient subsurface scattering, fixed later along with an added redness pass to break up an overly yellow-dominant Albedo.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Sequence easy wins first:** texture the shirt and shoe (simpler, faster to finalize) before tackling the more complex skin — builds visual-quality momentum and establishes the palette/approach that then gets reapplied to the harder surface.
+2. **Push interest with intentional color gradients, not flat color:** on the shirt, values shift toward the head, plus subtle hue/saturation drift (dark red at the bottom sliding to orange, then yellow, toward the top) — described as a general personal rule: "don't leave all your colors in the same hue space," deliberately overlaying yellows, purples, greens on top of a base to make the final texture "pop."
+3. **Get into the render engine early:** load the in-progress model into the look-dev/render engine (Marmoset Toolbag, per later commentary) as soon as reasonably possible so texture and shading decisions are made informed by final lighting — explicitly flagged later as a mistake he didn't follow closely enough on the skin, which cost him months of rework.
+4. **Add fine physical detail (fabric weave/ribbing) directly into the color texture** rather than at the shader level, when UDIMs give enough resolution headroom — used for shirt ribbing and small tufts of fuzz/fur to sell material believability.
+5. **Block initial color zones on skin by anatomical/material logic, not randomly:** yellow into areas with fat deposits/bone showing through, blue into cavities/recessed pits/underneath-neck/pinch areas/eyes/armpits, purple layered on top of both to push cavity information and tie the palette together. Result is an intentionally garish, "crazy colored" base pass — not the final look, just a foundation.
+6. **Base color pass painted deliberately light/low-opacity** on top of the blocked zones so the underlying color information partially shows through — creates variety/richness at the base level rather than a single flat tone, feeding the "dead and decrepit" read.
+7. **Reinforce/refine color zones in a second pass:** add red back into mouth, eye corners/bags, and "irritated"-feeling splash areas; reinforce purples in cavities and bright yellows in fatty/bony zones (cheeks, forehead); block in blues per the reference concept (around eyes, nose, inner ears) with an extra darker-hue + brighter-value split within the blues themselves for internal variety.
+8. **Detail pass follows a big -> medium -> small shape hierarchy:** large shapes read at a distance, medium shapes at mid-range, small/sharp details only read up close — deliberately planned this way for multi-distance readability in the final renders.
+9. **Detail alphas/tiles chosen for irregular, organic-reading shapes:** splashes, dots, drips — described as reading like sunspots/skin damage; applied broadly first (fast coverage "for free"), then selectively painted back out where too strong/uniform.
+10. **Deliberately repurpose "wrong" materials for texture noise:** a scaly/rash/fungal-buildup look on the arm was achieved using rust-style and granite/stone-grunge materials — not their intended use, but valued for the visual noise and breakup they carry. Framed as general advice: "explore all your options — you never know what might deliver the best result."
+11. **Small high-frequency detail added last:** fine veins added at the smallest scale, becoming noticeable only up close.
+12. **Vary contrast/value by viewing distance:** high-frequency detail (e.g. small purple spots) is pushed more contrasty than the surrounding texture specifically so it reads only up close without adding overall visual noise at a distance — an explicit value-based technique for controlling perceived detail density across viewing distances.
+13. **Peeling/flaky skin via edge-detect masks:** generate an edge-detect-style mask, then manually remove most of it and localize what remains to a few specific areas — kept subtle deliberately so it doesn't flatten the color work underneath or read as distracting from a distance.
+14. **Eye texturing kept simple by design:** since the eyes were intended to read as fogged/cataract-covered, iris detail investment was minimized; red veins were still added over the sclera/lens area to keep some visual interest and reinforce the "creepy" character read.
+15. **Post-mortem fixes after stepping away for 6-8 months:** (a) skin shader initially read "plasticky" from insufficient subsurface scattering, worsened by displacement adding fine detail that emphasized the lack of SSS — fixed once returned to it with fresh eyes; (b) texture read as too uniformly yellow, drowning out other Albedo information — fixed with an added redness pass across the skin to restore color variety and "bring things together."
+16. **Workflow philosophy stated directly:** plan multi-path, non-linear ("A to D, maybe back to C, then E") rather than assuming a strict linear order; view work at both the full-character distance and extreme close-up throughout, not just one or the other; if a piece isn't working, it's legitimate to step away for an extended period rather than force a resolution — but come back and finish it rather than abandoning it.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Layer-stack elements visible across frames:** `Base Color` fill layers, multiple stacked `Paint` layers per color pass, named material/grunge layers used unconventionally (e.g. a `Black Pearl Granite`-style material layer used as skin damage/rash, a `Broken Yellow Small` layer), a `Levels` adjustment layer feeding an edge/curvature-driven mask, layers named descriptively per pass (`DarkSkin`, `ScannedSkin`, `Freckles`, `Cuts`, `ColorVariation`, `Wear`, `Pores`, `Scales`, `YellowSkinFolds`)
+- **Fill layer material properties:** `UV transformations` (Scale/Tiling/Offset) visible on a base-color polygon fill, `Material` mode dropdown (`No Resource Selected` seen), Base Color / Roughness channel value fields
+- **Paint tool properties:** `Brush` size, `Flow`, `Minimum Flow (%)`, `Stroke spacing` — adjusted per detail pass for control over opacity buildup
+- **Masking:** `Levels` adjustment on a mask (histogram-based contrast/range control) used to tune an edge-detect-derived mask before localizing the peeling-skin detail
+- **Non-Painter tool referenced:** final lighting/rendering pass shown in one captured frame (16:44) is **Marmoset Toolbag**, not Substance Painter — split-view render camera, HDRI Studio light presets, spot-light Type/Brightness/Temperature/Cone-Angle/Spot-Sharpness controls, Detail Offset/Detail Normal material sliders. Flagged explicitly so this isn't mistaken for a Painter panel.
+- **Color picker:** HSV/RGB picker used directly on a fill layer while texturing the eyeball geometry (plain UV-sphere eye mesh, `Fill layer 1`)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced — no exact click-by-click UI instruction is given for most of the video (it's a narrated process breakdown, not a live step-through), so a viewer needs existing familiarity with Substance Painter's layer/mask/fill-layer mechanics to translate the described workflow into concrete actions. The *ideas* (color-zone blocking by anatomy, shape hierarchy, repurposing "wrong" materials, edge-detect peeling masks, distance-based contrast control) are broadly applicable art-direction principles valuable at any skill level.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated explicitly. UI in the Painter frames matches a modern dark-theme layer stack with a `TEXTURE SET SETTINGS` panel and per-layer property panels consistent with the same UI era as the "Building Masks Explained" video from this creator (pre-12.1, exact version not confirmed). The lighting/render frame is a separate application (Marmoset Toolbag), not Substance Painter, and its version is likewise not stated.
 
 ### Tags
-[PENDING EXTRACTION]
+masks, layers, paint-layer, fill-layer, procedural, alpha, curvature, mesh-maps, basecolor, color-management, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — same creator; that video's edge-detect-generator and blend-mode-stacking techniques are the same masking toolset applied here to the peeling/flaky skin detail (step 13) and the repurposed-material rash detail (step 10).
+- Additional cross-links to other Jared Chavez hand-painted-texture tutorials in this knowledge base will be added here as those videos are ingested — see `tutorials/INDEX.md` for the current full list.
