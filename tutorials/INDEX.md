@@ -49,6 +49,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Process breakdown of texturing an original xenomorph-style creature (translucent-skin reference from deep-sea fish, no fixed concept to follow): sub-dermal color blocking, a documented mid-project "everything looks wrong" struggle resolved by exporting to Unreal Engine to diagnose color under real lighting, a granite-material happy accident reused as skin discoloration, a hand-painted symmetrical head pattern, and a parallel Unreal subsurface-scattering shader pass.
 - **File:** tutorials/how-to-texture-in-substance-painter-creature-texturing.md
 
+
+### TEXTURING METAL from Scratch in SUBSTANCE PAINTER
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=-X5gKTjMGes
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/texturing-metal-from-scratch-in-substance-painter.md
+
 ---
 
 ## Tag Reference
