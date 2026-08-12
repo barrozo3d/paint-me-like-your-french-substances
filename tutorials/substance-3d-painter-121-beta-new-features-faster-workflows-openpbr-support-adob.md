@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=z-xbXtyPykI
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "12.1.0-beta"
+tags: [baking, mesh-maps, high-to-low-poly, painter-12, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance 3D Painter 12.1 Beta: New Features, Faster Workflows, OpenPBR Support | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -182,30 +178,61 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:38] tutorials/frames/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob/frame_000.jpg
+- [1:44] tutorials/frames/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob/frame_001.jpg
+- [2:31] tutorials/frames/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob/frame_002.jpg
+- [3:19] tutorials/frames/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob/frame_003.jpg
+- [4:17] tutorials/frames/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob/frame_004.jpg
+- [5:14] tutorials/frames/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob/frame_005.jpg
+- [5:58] tutorials/frames/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob/frame_006.jpg
+- [6:42] tutorials/frames/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+How to install the Substance 3D Painter 12.1 Beta, and a deep, performance-focused walkthrough of its headline **Skew Correction painting** and **Auto Rebake** features (same feature covered in the shipped-12.1.0 video "Skew Baking & Auto Rebake in Painter 12.1", but from the beta build with extra speed-tuning tips).
 
 ### Summary
-[PENDING EXTRACTION]
+Despite the title namechecking OpenPBR and the new hard-surface unwrap mode, the video explicitly narrows scope to only Skew Baking and Auto Rebake ("This video was specifically focused on the SKU [skew] baking and the auto rebake" — OpenPBR/unwrap are not demonstrated here). Covers two install paths for the beta (Creative Cloud Desktop "Beta" tab vs. Steam beta branch — Steam replaces your current install, CCD can run both side by side) plus an explicit warning not to use the beta for production (project files saved in it aren't openable in older versions). The bulk of the video repeats and extends the Skew Correction / Auto Rebake workflow: color-coded skew-direction wires (red = old average normal direction, green = corrected direction after a fixed stroke), practical speed tips (switch Brush Projection from Tangent Wrap to UV for near-instant rebakes; sub-sampling raises quality but slows rebakes), the Eraser and Polygon Fill as faster alternatives to manual painting, Edge Protection to stop Polygon Fill from bluntly painting over UV seams, and the quick per-map "view mesh map" / "single rebake" buttons next to Auto Rebake.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Install the beta via Creative Cloud Desktop → Apps → Beta tab → find "Substance 3D Painter (Beta)" → Install (keeps old + beta side by side), **or** via Steam → Library → Substance 3D Painter → Properties → Betas tab → select the `12.1 beta` branch (replaces the current install; cannot run both from Steam).
+2. Do not use the beta for production work — project files saved in it are not backward-compatible with older stable versions, and instability is expected.
+3. In Baking Mode, load a High Poly mesh (required before Skew Correction becomes available).
+4. Disable all mesh maps except Normal (skew is most visible there) and bake once to see the problem — a low-poly mesh produces visibly distorted, skewed bakes from how rays are traced.
+5. Open Skew Correction (scroll down in Common Settings, or use the dedicated top tab to jump straight to it) and click **Paint Skew Correction** to enter paint mode.
+6. Paint directly over a skewed area; the stroke automatically triggers a rebake on release. The overlay wires update live: **red** = old average normal (ray) direction, **green** = the corrected direction after painting.
+7. Auto Rebake is one of three new icons added to Common Settings in this beta (icons are explicitly noted as placeholder/WIP, subject to change before final release); it auto-enables the moment you enter Skew Painting mode, and rebakes only the changed region for speed — turning it off means you must manually click Bake to see corrections.
+8. Performance tip: on a MacBook M3 at 2K output, single-map incremental rebakes are fast by default; raising sub-sampling (e.g. to 4x) slows them down noticeably.
+9. Speed trick: switch **Brush Projection** from `Tangent Wrap` to `UV` for near-instant rebake response while painting skew corrections.
+10. Faster-than-manual-painting alternatives: the **Eraser** removes painted (blue) correction areas; **Polygon Fill** fills entire polygons white in one click for a quick, blunt correction pass (same tool as regular Painting mode; color picker shows the fill color).
+11. Polygon Fill can introduce new seam artifacts because it doesn't respect edges — enable **Edge Protection** to auto-mask UV borders/hard edges, and tune `Edge distance` (how far the protection reaches) smaller for tighter protection.
+12. Additional per-map quick-action buttons next to Auto Rebake: one instantly previews a given mesh map (only one active at a time, doesn't trigger a real bake), the other does a single quick rebake of just the currently visible/selected map — useful when you change one setting (e.g. switch an ID map source to sub-mesh) without wanting to re-bake or re-toggle every checked map.
+13. Skew Vectors display settings (under "Skew vectors") let you adjust vector length, density, and opacity — set opacity to 0 to hide the overlay entirely.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Skew Correction (`Paint Skew Correction` / `Stop painting`), Skew Vectors (length, density, opacity)
+- Auto Rebake toggle (per-map, one active at a time) + quick "view mesh map" button + single quick-rebake button
+- Edge Protection (`Edge distance`, `Edge contrast`)
+- Eraser, Polygon Fill (color picker)
+- Brush Projection (`Tangent Wrap` vs `UV` — UV is faster for skew painting)
+- Mesh Map Bakers checklist (Normal, World Space Normal, AO, Curvature, Position, Thickness, Height, Bent Normals, Opacity)
+- High Poly mesh assignment (Cage settings)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — same audience as the shipped-12.1.0 skew video; adds beta-installation logistics and performance tuning on top.
 
 ### App & Version
-[PENDING EXTRACTION]
+**Substance 3D Painter 12.1.0-beta** — confirmed directly from the application window title bar visible in every captured frame ("Adobe Substance 3D Painter Beta 12.1.0-beta..."). Cross-referenced against `references/release-notes-painter-12.1-beta.md`: the feature set demonstrated here (Skew Painting/baking, Edge Protection, Auto Rebake) matches that file's documented beta scope. Note: the beta's own release-notes file flags its date as "~2026-04-07 (unverified — secondary source)"; this video doesn't provide a clean enough on-screen date to independently confirm that estimate, but the beta-branch identity itself is a firm, direct confirmation that this feature set really did ship as a Beta release ahead of 12.1.0 stable.
 
 ### Tags
-[PENDING EXTRACTION]
+`baking` `mesh-maps` `high-to-low-poly` `painter-12` `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"Skew Baking & Auto Rebake in Painter 12.1"** (`tutorials/skew-baking-auto-rebake-in-painter-121-adobe-substance-3d.md`, video `WwyElRpiQgY`) — same feature, same demo mesh (the low-poly radio), shipped-stable 12.1.0 companion video. This beta video adds performance-tuning details (Tangent Wrap→UV brush projection trick, sub-sampling cost) and beta-install logistics not covered in the stable-release video; the stable video covers the reorganized Mesh Map Bakers checklist and Common/Cage tabs in more general detail. Read together for the fullest picture of this feature.
