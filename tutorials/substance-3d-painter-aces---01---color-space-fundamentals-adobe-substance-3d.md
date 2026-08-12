@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=hDiYqODGoHg
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (context-setting; no Painter UI shown in this part)"
+version: "not specified — theory-only slide deck, no on-screen Painter version"
+tags: [color-management, pbr, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 5
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance 3D Painter & ACES - 01 - Color Space Fundamentals | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -155,30 +151,50 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:16] tutorials/frames/substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d/frame_000.jpg
+- [2:59] tutorials/frames/substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d/frame_001.jpg
+- [3:19] tutorials/frames/substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d/frame_002.jpg
+- [4:50] tutorials/frames/substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d/frame_003.jpg
+- [5:26] tutorials/frames/substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d/frame_004.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Theory-only foundation for color-managed texturing: what a color space is, why sRGB is non-linear, and why ACEScg (linear, wide-gamut) is the color space Substance Painter needs to match for a correct ACES pipeline — no Painter UI is touched in this part.
 
 ### Summary
-[PENDING EXTRACTION]
+Part 1 of a 3-part ACES series presented by Michael Wilde (senior texture artist, ILM London). Pure slide-deck explainer: defines a color space as a plottable, definable range of colors on the CIE chromaticity diagram; explains RGB color model vs. color gamut (the triangle of primaries); introduces sRGB as the common non-linear (gamma 2.2) color space used for most online images and monitors, and shows why a "50% brightness" pixel is only ~20% pixel value under a gamma curve; introduces ACES as an Academy-created, camera-agnostic color management system for film/TV, and ACEScg specifically as the wide-gamut, linear color space used for VFX texturing/rendering; explains why linear math (50%+50%=100%) only produces mathematically correct results in a linear space, which is why 3D renderers need linear data internally; and closes by framing the whole point for Substance Painter users — making the Substance Viewport match what other render/DCC programs produce, covered in Parts 2 and 3.
 
 ### Key Steps
-[PENDING EXTRACTION]
+This is a concept video, not a click-through workflow. Concepts covered in order:
+1. Color space = a definable range of colors, plotted on the CIE chromaticity diagram (the visible-spectrum horseshoe graph).
+2. Color model (e.g. RGB for screens, vs. CMYK for print) vs. color gamut — the triangle drawn between a color space's primaries, enclosing every representable color.
+3. sRGB defined: the gamut of most web images/monitors; distinct from the RGB color model despite the similar name.
+4. Gamma curve / transfer function: human vision perceives more variation in dark values than bright ones; sRGB's gamma-2.2 curve allocates more data to darker values to match this, making it non-linear (a 50% brightness value maps to roughly a 20% pixel value).
+5. ACES defined: an Academy-developed color management system (not itself a color space) built to unify footage from many different digital cameras into one consistent pipeline, and to archive footage reliably.
+6. ACEScg defined: the specific linear, wide-gamut color space within the ACES system that VFX studios use for texturing and rendering 3D assets — the only ACES color space this series concerns itself with.
+7. Why ACEScg's wide gamut matters: a single asset may combine compressed internet JPEGs, on-set raw high-bit-depth photography, and black-and-white Substance procedurals — a wide, linear space lets all of them combine correctly.
+8. Why linearity matters mathematically: only a linear transfer function gives the mathematically correct result when combining pixel values (50%+50%=100%); non-linear (gamma-curve) math produces visibly wrong results, which is why 3D renderers must compute in linear space internally.
+9. Recap: color space = definable range of colors with a gamut (range) and transfer function (perceptual brightness mapping); sRGB = non-linear, gamma-2.2, used for web images; ACES = the film/TV color management system; ACEScg = its linear VFX-texturing color space.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+None — no Substance Painter UI, layers, or settings appear in this part. Purely conceptual slides (CIE chromaticity diagram, sRGB gamma-2.2 curve graph, ACEScg gamut overlay on the CIE diagram, linear-vs-gamma comparison graph).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate (color theory prerequisite knowledge, no hands-on Painter steps yet).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter is named as the eventual subject of the series but no Painter UI, dialog, or version indicator appears in this part — pure slide-deck theory. Not usable for Painter-version cross-referencing. Presenter: Michael Wilde, senior texture artist at ILM London.
 
 ### Tags
-[PENDING EXTRACTION]
+`color-management`, `pbr`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Substance 3D Painter & ACES - 02 - OCIO & ACEScg in Painter** (`tutorials/substance-3d-painter-aces---02---ocio-and-acescg-in-painter-adobe-substance-3d.md`) — Part 2/3 of this same series, where the OCIO/ACEScg settings actually get applied inside Substance Painter.
+- **Substance 3D Painter & ACES - 03 - Textures in Maya and Blender** (`tutorials/substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d.md`) — Part 3/3, carrying ACEScg-authored textures out of Painter into Maya/Blender. Ingest and reference as one continuous color-management sequence: 01 (theory) → 02 (Painter setup) → 03 (DCC round-trip).
