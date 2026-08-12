@@ -241,10 +241,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=us4NAWtaRic
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter (texturing) + Substance 3D Stager (rendering/presentation)
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `blend-mode` `baking` `texture-set` `udim` `uv` `pbr` `metal-rough` `basecolor` `roughness` `height` `normal-map` `opacity` `mesh-maps` `ambient-occlusion` `curvature` `position-map` `high-to-low-poly` `procedural` `alpha` `export` `export-preset` `channel-packing` `intermediate` `advanced`
+- **Summary:** Chapter 6/6 (only Painter-relevant chapter; 1-5 are Designer/Sampler and out of scope) of Adobe's Hero Assets for Fashion series. Fully parametric (non-sculpted) dress fabric detailing: large/medium/small creases via fill layers + UV Border Distance generators + procedural noises + imported sculpt-displacement maps, French-seam flattening (Replace blend mode), Inflate/Shrink Wrap filter, Adobe-Stock crease overlay, and fully procedural stitching (two subtracted UV Border Distance generators + breakup texture) vs. Painter's built-in Stitching brush tool for manual precision work. Second half hands off to Substance 3D Stager for 3-point lighting, backdrop, camera setup, per-UV-tile map tweaks, and final PSD render.
 - **File:** tutorials/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-.md
 
 
@@ -268,6 +268,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md
+
+
+### Hand Painted Workflow in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=8biEy1D30Bc
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d.md
 
 ---
 
