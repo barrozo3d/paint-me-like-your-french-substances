@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=SAI-lrWrtKg
 author: Dolinskyi
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified (modern dark-theme UI, no version-pinning element visible)"
+tags: [layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, ambient-occlusion, curvature, procedural, alpha, stencil, tri-planar, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, color-management, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/realistic-painted-metal-in-substance-painter-m24-grenade-texturing/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Realistic Painted Metal in Substance Painter | M24 Grenade Texturing
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py realistic-painted-metal-in-substance-painter-m24-grenade-texturing <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -342,30 +338,70 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:00] tutorials/frames/realistic-painted-metal-in-substance-painter-m24-grenade-texturing/frame_000.jpg
+- [2:20] tutorials/frames/realistic-painted-metal-in-substance-painter-m24-grenade-texturing/frame_001.jpg
+- [4:35] tutorials/frames/realistic-painted-metal-in-substance-painter-m24-grenade-texturing/frame_002.jpg
+- [8:52] tutorials/frames/realistic-painted-metal-in-substance-painter-m24-grenade-texturing/frame_003.jpg
+- [9:45] tutorials/frames/realistic-painted-metal-in-substance-painter-m24-grenade-texturing/frame_004.jpg
+- [10:46] tutorials/frames/realistic-painted-metal-in-substance-painter-m24-grenade-texturing/frame_005.jpg
+- [13:40] tutorials/frames/realistic-painted-metal-in-substance-painter-m24-grenade-texturing/frame_006.jpg
+- [15:16] tutorials/frames/realistic-painted-metal-in-substance-painter-m24-grenade-texturing/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Full layer-by-layer walkthrough of an aged, WWII-era painted-metal grenade head — built as six sequential folders (Paint, Paint Damage, Oxidized Metal, Peeling Paint, Decal, Dust & Dirt, finished with a Sharpen pass), each demonstrating a distinct sub-technique: stacked procedural color/roughness/height paint variations, stencil-driven hand-painted battle damage, PBR-correct oxidized-metal-under-paint, anchor-point-driven peeling paint, a fully-built decal from Photoshop alpha to weathered final mask, and layered dirt/dust generators.
 
 ### Summary
-[PENDING EXTRACTION]
+Part 2 of a personal "M24 Steel Hand Grenade Texturing Series" (project files, stencils, and textures shared on the creator's ArtStation as a reference key). Explicitly framed as more complex than part 1, requiring solid PBR understanding. The video is essentially an audit of a finished, already-built layer stack, walked top-to-bottom folder by folder: a base paint fill duplicated repeatedly into 7+ numbered "paint variation" layers (each varying color, roughness, AND height — height called out as especially important for a battle-worn 80-year-old object), separation layers using an empty pass-through layer with an HSL filter to color-differentiate the grenade's three separate mesh parts, a metal cap sub-folder (color/dust/curvature-driven variation), and a glossy-scratches layer that inverts the surface's dominant finish (matte base -> glossy scratch variation, explicitly noting the rule would flip on a glossy base). Paint Damage adds hand-stencil-painted battle damage following a large/medium/small compositional principle, with histogram-scan contrast pushes to keep masks readable at distance. Oxidized Metal builds a PBR-correct rusted-steel-under-paint material from a real photo (converted to normal+roughness via Bitmap to Material), deliberately keeping Metallic below 1.0 and the metalness mask non-pure-black/white to represent oxidized rather than clean metal. Peeling Paint uses a compact 4-layer anchor-point recipe (anchor from mask -> grunge multiply -> blur -> inverted-anchor subtract) confined to a hand-painted folder mask. Decal builds a full weathered decal stack from a Photoshop-authored text alpha through warp/blur/anchor-point/contrast/dirt/scuff passes. Dust & Dirt layers grunge, a dirt generator cleaned up with curvature (removing dirt from sharp edges) and manual paint, fingerprints via stencil, and a second dirt variant (generator + subtract-mode grunge + linear-dodge-mode grunge, manually painted over). Finishes with two Sharpen filters (one for Roughness, one for Base Color).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Paint folder — establish one base fill, then clone-and-vary:** create a single base paint fill layer (dark green, `Roughness` 42, `Metallic` 0 — not metal), then build every subsequent "paint variation" as a duplicate of it with a new procedural-texture-driven mask and tweaked Base Color, Roughness, and Height — height variation flagged as critical for an old, battle-worn object ("it's not worth leaving such a simple surface, it will look unrealistic").
+2. **Variation 1 — paint-application stripe marks:** mask built from `Crystal 2` procedural texture -> `Blur` -> `Warp` filter (adds organic irregularity to the lines) -> `Histogram Scan` to push contrast/readability at viewing distance; uniformity broken further with a grunge map in `Subtract` blend mode, then manually cleaned up with paint and an `Ambient Occlusion` generator.
+3. **Variations 2-7 — build non-uniformity deliberately:** each subsequent variation intentionally differs in blur amount, line width, and sharpness from its neighbors ("in nature, when something is painted or worn down, it cannot be uniform... this non-uniformity is exactly what gives the effect of authenticity"); later variations use masks pulled from Substance Painter's built-in procedural-texture library used as stencils, combined via `Subtract` and `Texture Overlay` blend modes for a gradient-like falloff that reads well from a distance.
+4. **Paint variation 07 and "white dirt":** paint variation 07 simulates hand-brushed touch-up paint on the lower section (matched to reference photos); a separate white-matte "dirt" layer follows.
+5. **Light edges via edge-wear generator + custom grunge:** simulates paint wearing away or fading at contact/high-touch points, built from a metal-edge-wear generator with an added custom grunge texture; followed by a glossiness-only variation layer simulating fingerprints.
+6. **Micro Surface sub-folder — height-only detail:** standalone procedural-texture height variation for paint unevenness; a hair strand (sourced from textures.com) stuck under the paint for a "pretty cool in renders" imperfection; hand-drawn scratches projected from a scratch mask.
+7. **Separation layers — differentiate the grenade's 3 mesh parts:** on an empty layer set to `Pass Through` blend mode, add an `HSL` filter, isolate each mesh detail with a mask, and shift its color independently — necessary because the head is built from three separate details that "cannot just be filled with a single paint."
+8. **Metal Cap sub-folder (back part):** color shift toward a bluish tint, its own separation/isolation layer, a dust layer (grunge dust-white map, matte roughness, gray base color with a slight blue tint, no height), a curvature-driven color-shift layer (grayer tone), a dirt/color-variation layer (dark brown, differing roughness), a directional-noise dirt layer for cylinder-appropriate streak direction (cleaned with a brush) plus bolt-adjacent dirt spots, and a final generator-driven gray color-variation layer.
+9. **Glossy scratches — invert the dominant finish for scratch variation:** since the base surface reads matte, scratch variation is made *glossy* to stand out (explicitly noted this logic reverses on a glossy base surface — matte scratches would be used instead).
+10. **Extra Details sub-folder:** additional height+color irregularities using the `Rusty Leaks` procedural texture ("irregularities that break through the paint"), plus an edges pass (subtle glossy effect + Ambient Occlusion) to add volume and separate the part from its neighbor.
+11. **Paint Damage folder — stencil-driven battle damage:** start with a heavily-hand-edited wear generator restricted to only one detail of the mesh; layer in the main damage pass hand-painted using a real damaged-paint reference photo as a `Stencil` (included in the creator's shared asset pack); apply the large/medium/small compositional principle (one large damage spot, one medium, several tiny) so the mask "reads well from a distance"; finish with `Blur` + `Histogram Scan` to maximize mask contrast/sharpness.
+12. **Oxidized Metal folder — PBR-correct rust-under-paint:** base layer set as grey-yellowish metal, `Roughness` 58, **`Metallic` 0.9 (not 1.0)** — explicitly called out as a core PBR principle: oxidized/dirty metal should never be pure white on the Metallic map, so both the metalness slider and its mask are kept slightly non-maximal/non-pure-black-white.
+13. **Build the oxidized-metal texture from a real photo:** sourced a metal photo from Texture.com, tiled it, ran it through `Bitmap to Material` to generate a Normal map, also generated Roughness, then fed the result into Base Color, Roughness, and Normal simultaneously.
+14. **Rust — built from the library base + custom edits:** starts from Substance Painter's built-in rust material, modified with an empty pass-through layer holding an `HSL` filter for localized desaturation, a yellowish edge-following variation layer (adds rust color variety along damage-mask edges), and a dark oxide layer (grunge-paint-scratched mask, matte dark metal-oxide color) topped with a spottier contrast-boosting layer.
+15. **Rust folder (paint-breakthrough corrosion, separate from the Oxidized Metal folder):** represents corrosion that ate through paint from the inside rather than damage that exposed metal directly — built from Substance Painter's built-in procedural `Rust` map with contrast pushed up; followed by re-injecting the same photo-derived height map from step 13 to add more surface irregularity appropriate to an aged object.
+16. **Peeling Paint — 4-layer anchor-point recipe:** (1) an `Anchor Point` referencing the damage mask, (2) a grunge layer in `Multiply` blend mode, (3) a `Blur` filter to soften the peel edges, (4) an inverted version of the same anchor mask applied via `Subtract` blend mode — the combination produces the peeling-paint-edge look. The whole effect folder is masked by a hand-painted mask so it's confined to only where the peeling should appear.
+17. **Decal — full build from Photoshop alpha to final weathered mask:** start with a text alpha authored in Photoshop; apply a `Warp` filter for ragged edges, a `Blur` filter, an `Anchor Point`, a procedural texture, and `Histogram Scan` contrast; re-insert the anchor's data on top to strip interior dots and keep only edge detail; add dirt via `Multiply` + another `Histogram Scan` contrast pass; subtract the peeling-paint mask (step 16) to integrate the decal with existing paint wear; layer two more grunge passes (paint scuff/wear) with an `Anchor Point` carried forward between them for the final composited decal mask.
+18. **Dust & Dirt folder:** grunge from the built-in procedural library; a `Dirt` generator manually mask-edited, then cleaned along edges using `Curvature` (removes dirt buildup from sharp edges where it wouldn't realistically collect); a fingerprints layer built from high-contrast `Stencil` spots; a second dirt variant built from a generator + grunge in `Subtract` mode + grunge in `Linear Dodge` mode, finished with manual paint touch-ups.
+19. **Sharpen — always the final layer:** two `Sharpen` filters placed at the very top of the stack, one applied to Roughness and one to Base Color, described as a standing habit ("as always, sharpen on top").
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Base paint layer:** dark green Fill, `Roughness` 42, `Metallic` 0
+- **Procedural masks used as stencils:** `Crystal 2`, `Rusty Leaks`, built-in procedural-texture library entries, custom grunge maps, `Rust` (built-in procedural)
+- **Filters:** `Blur`, `Warp`, `Histogram Scan` (repeated heavily for mask contrast/readability-at-distance), `HSL` (on empty Pass Through layers for part-separation color shifts and rust desaturation), `Sharpen` (Roughness + Base Color, final layer)
+- **Generators:** metal edge-wear generator, `Ambient Occlusion` generator, `Dirt` generator, `Curvature`-driven generator (edge dirt removal), directional-noise generator
+- **Masking primitives:** `Anchor Point` (peeling paint 4-layer recipe; decal build; damage-mask reuse), `Stencil` (hand-painted battle damage from a real photo reference; fingerprint spots), hand-painted masks (confining effect folders to specific areas)
+- **Blend modes used:** `Subtract`, `Multiply`, `Texture Overlay`, `Linear Dodge`, `Pass Through`
+- **PBR correctness rule (Oxidized Metal):** `Metallic` kept at 0.9 (not 1.0) with a non-pure-black-white metalness mask — "if you have metal that is not clean but oxidized, it shouldn't be clean metal on the metalness map"
+- **External tools referenced:** Photoshop (decal text alpha authoring), `Bitmap to Material` (photo -> Normal + Roughness generation for the oxidized-metal texture), Texture.com (source photo) and textures.com (hair alpha)
+- **Asset pack:** project file, stencils (including the damaged-paint stencil), and source textures shared publicly by the creator on ArtStation
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — assumes fluency with Painter's full toolset (anchor points, generators, stencils, multi-layer masking, PBR channel theory) and moves through dozens of layers rapidly with terse narration; best used as a structured reference/checklist (folder by folder) rather than a first-time step-along tutorial.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated explicitly on screen. Modern dark-theme layer-stack UI with `TEXTURE SET SETTINGS` panel and standard per-layer Properties panel, consistent with the post-8.3 Baking Mode era generally seen across this skill's other ingested tutorials — nothing in-frame pins an exact version.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, ambient-occlusion, curvature, procedural, alpha, stencil, tri-planar, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, color-management, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Tempering Colors in Substance Painter | Steel Heat Effects](tempering-colors-in-substance-painter-steel-heat-effects.md) — same creator (Dolinskyi); part of the same multi-video M24 Grenade weapon-texturing project. That video's anchor-point-driven paintable-mask technique is a simpler version of the anchor-point recipes used repeatedly here (Peeling Paint, Decal).
+- See `tutorials/INDEX.md` for a possible sibling-ingested "Realistic Wood in Substance Painter | M24 Grenade Texturing" entry — this video explicitly calls itself "part 2" of that series and references techniques from "part 1"; cross-link there once/if present.

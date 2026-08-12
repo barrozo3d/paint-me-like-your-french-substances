@@ -83,17 +83,6 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **File:** tutorials/how-to-make-skin-textures-in-substance-painter.md
 
 
-### Tempering Colors in Substance Painter | Steel Heat Effects
-- **Source:** YouTube
-- **URL:** https://www.youtube.com/watch?v=Y3plK51emsA
-- **Author:** Dolinskyi
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/tempering-colors-in-substance-painter-steel-heat-effects.md
-
-
 ### Skew Baking & Auto Rebake in Painter 12.1 | Adobe Substance 3D
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=WwyElRpiQgY
@@ -132,10 +121,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=SAI-lrWrtKg
 - **Author:** Dolinskyi
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not specified (modern UI, post-8.3 baking-mode era)
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `anchor-point` `blend-mode` `ambient-occlusion` `curvature` `procedural` `alpha` `stencil` `tri-planar` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `color-management` `advanced`
+- **Summary:** Part 2 of a personal M24 grenade texturing series — dense folder-by-folder audit of a finished painted-metal layer stack: cloned paint-variation layers (color+roughness+height together), stencil-driven hand-painted battle damage with large/medium/small compositional logic, a PBR-correct oxidized-metal-under-paint material (Metallic kept at 0.9, non-pure metalness mask), a compact 4-layer anchor-point peeling-paint recipe, a full decal build from Photoshop alpha to weathered final mask, and layered dirt/dust/curvature-cleaned generators, finished with Sharpen filters on Roughness and Base Color.
 - **File:** tutorials/realistic-painted-metal-in-substance-painter-m24-grenade-texturing.md
 
 ### Texturing a Black Suit in Substance Painter
