@@ -213,6 +213,7 @@ paint-me-like-your-french-substances/
 ├── SKILL.md               ← main skill instructions Claude reads
 ├── SETUP.md               ← this file
 ├── README.md               ← human-facing overview
+├── CODE_OF_CONDUCT.md      ← purpose/ethics statement
 ├── setup.ps1              ← Windows automated installer (ingest pipeline only)
 ├── ingest.py               ← Step 1: transcript/metadata collection (no video/frames)
 ├── select_frames.py        ← Step 2: content-aware frame capture (Claude picks timestamps)
