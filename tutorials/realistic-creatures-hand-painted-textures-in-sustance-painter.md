@@ -392,4 +392,5 @@ masks, layers, paint-layer, fill-layer, procedural, alpha, curvature, mesh-maps,
 
 ## Related Tutorials
 - [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — same creator; that video's edge-detect-generator and blend-mode-stacking techniques are the same masking toolset applied here to the peeling/flaky skin detail (step 13) and the repurposed-material rash detail (step 10).
+- [How to TEXTURE in SUBSTANCE PAINTER | Creature TEXTURING](how-to-texture-in-substance-painter-creature-texturing.md) — same creator, same hand-painted color-zone-blocking method (yellow=bone/fat, blue/purple=cavities/blood-pooling) and same "repurpose an unrelated grunge/stone material for skin damage" happy-accident technique (here: granite-style grunge for a rash; there: literal `Black Pearl Granite` material for skin discoloration).
 - Additional cross-links to other Jared Chavez hand-painted-texture tutorials in this knowledge base will be added here as those videos are ingested — see `tutorials/INDEX.md` for the current full list.

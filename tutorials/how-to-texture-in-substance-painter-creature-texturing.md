@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=Lwep-faQVI0
 author: Jared Chavez
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified (UI consistent with pre-12.1 era, approximate)"
+tags: [masks, layers, paint-layer, fill-layer, procedural, alpha, basecolor, roughness, color-management, game-engine, unreal-export, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 11
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to TEXTURE in SUBSTANCE PAINTER | Creature TEXTURING
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-texture-in-substance-painter-creature-texturing <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -259,30 +255,68 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:53] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_000.jpg
+- [2:56] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_001.jpg
+- [5:53] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_002.jpg
+- [6:38] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_003.jpg
+- [7:44] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_004.jpg
+- [9:05] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_005.jpg
+- [10:11] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_006.jpg
+- [11:16] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_007.jpg
+- [11:59] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_008.jpg
+- [12:21] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_009.jpg
+- [13:15] tutorials/frames/how-to-texture-in-substance-painter-creature-texturing/frame_010.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Iterative, reference-driven hand-painted skin texturing for an original xenomorph-style creature with translucent/thin-skin appearance, combined with a tight Substance Painter <-> Unreal Engine round-trip to diagnose color problems that only read correctly under final lighting/shading (subsurface scattering).
 
 ### Summary
-[PENDING EXTRACTION]
+Jared Chavez textures an original alien creature (inspired by deep-sea-fish translucency, no existing concept to match — self-directed art direction). He builds up sub-dermal color information (bone-adjacent yellows, blood-pooling blues/purples in recessed areas) painted with a light brush so it partially shows through a broad main skin-tone pass, deliberately mimicking his human-skin workflow. He documents a real mid-project struggle (colors reading "hyper-exaggerated," "feverish" red, yellow too prominent) that he only diagnosed correctly by exporting textures into Unreal Engine and viewing them under actual lighting — a repeated, explicit workflow habit. He then layers high-frequency detail (veins/plasma tileables), stumbles into a "happy accident" using a granite material for skin discoloration, hand-paints a symmetrical Rorschach-like vertical-stripe pattern on the head dome as a unique identifying mark, adds irregular red/purple discoloration patches, flaked/blood-spot skin damage, and directional gradients pulling focus toward the head, finishing with sharp high-frequency procedural detail. In parallel he iterates the Unreal shader toward a translucent subsurface-scattering look and a deliberately wet/reflective surface for dramatic dark-lit renders.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Gather visual reference before opening Painter:** for an original creature with no fixed concept, build a PureRef board (deep-sea fish here) and identify the one key physical property to chase (semi-translucency) before texturing starts.
+2. **Establish sub-dermal base colors first:** paint yellow into areas where bone sits close to the surface (heavier at bony landmarks, lighter as a broad splash elsewhere for fat/coloration variety), and blues/purples into recessed areas standing in for blood pooling/blood flow — done knowing this layer will partially show through the skin because the creature's skin is meant to read as thin.
+3. **Paint the main skin tone as a light, broad pass on top,** intentionally under-opacity so the sub-dermal color layer beneath keeps contributing — same method he uses for human skin, applied here to validate it also works for a translucent-skinned creature.
+4. **Expect and work through an unresolved "ugly" middle stage:** documented struggle where every added color became "prominent and invisible," overwhelming layers below; response was to keep layering color variation and trust the process rather than abandon the base and restart.
+5. **Diagnose color problems by exporting to the actual target engine, not just Painter's viewport:** export textures and load into Unreal Engine specifically to see problem areas under real lighting — this is how the excessive yellow prominence and overly "feverish" red were actually identified (not visible/obvious purely inside Painter).
+6. **Correct identified color problems back in Painter, then re-check in Unreal again** — an explicit iterative Painter <-> engine loop, not a one-way export.
+7. **Add high-frequency "underneath the skin" detail with veins and plasma tileables** once the base color felt resolved — described as the point where the texture started to feel "alive" and cohesive rather than flat hand-painted color blends.
+8. **Embrace happy accidents from mismatched materials:** dropping a `Black Pearl Granite` material (a stone/rock material, not a skin material) onto the character produced unexpected large-shape variation that read as skin damage/discoloration — kept and reinforced rather than discarded because it produced a result better than anything intentionally planned.
+9. **Push the shader in parallel, not only at the end:** iterate Unreal subsurface-scattering shader settings throughout the texturing process (not deferred to a final pass) — pushed the translucent look further than expected and let shader-only results (independent of new texture work) validate the creative direction.
+10. **Deliberately keep the surface "wet"-reading:** intentional design choice (referencing the original Xenomorph) specifically to give dark, moody lighting setups something reflective to play off of later in rendering.
+11. **Refine specific material call-outs with targeted hand painting:** once the granite-material happy accident was identified as valuable, painted more of that same "marble"-like texture deliberately into crevices/cracks, grading it from less-exposed to more-exposed skin to suggest a deterioration gradient.
+12. **Treat the head/dome as its own point of interest, distinct from the body:** rather than the classic smooth black dome, hand-painted procedural vertical stripes across it (a `StripeGuide` layer), iteratively adding/subtracting until the pattern read as a symmetrical, Rorschach-like, flesh-adjacent unique "trademark" pattern per-individual.
+13. **Add big irregular discoloration patches as separate layers:** multiple red/purple layers added across the body, then selectively hand-painted back out wherever a shape didn't read as convincing — not a single generator pass, an iterative add/subtract layer process.
+14. **Layer flaked-skin/blood-spot damage on top,** tied to sculpt-level pulled-back-flesh areas already modeled, reinforced with `BloodSpots`/`Plasma`-type layers plus the irregular discoloration shapes from the previous step.
+15. **Add directional gradient masks to draw the eye:** a second attempt (first attempt during initial passes hadn't worked) at dark gradients running from the hands up toward the arms/head, built and tuned via multiple gradient masks, specifically to pull visual focus toward the head.
+16. **Finish with sharp, high-frequency procedural detail over everything** as a final unifying pass across the whole stack of reds/purples/yellows/blues, reinforcing the "thin skin" read.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Confirmed layer names from captured frames:** `Base color` (fill layer), `Epidermal Layer`, `SkinBase`, `SubDermal`, `Black Pearl Granite` (fill layer using a stone/granite material, with a `Channel mapping` parameter block: `Seed`, `Scale`, `Color Override Chooser`, `Color Top`, `Color Mixed Identical`, `Color Saturated Spot`, `Roughness Level`, `Roughness Crystal`, `Surface Damage Roughness`), `StripeGuide`, `Blur`, `Levels`, `Paint`, `ColorBreakup`, `Darken`/`Lighten`/`SkinTone`, `BloodSpots`, `Plasma`, `Curve`, `DarkeningSpots`, and layer-group folders `CrownDetail`, `Gradients`, `SkinDetails`
+- **Base color picker:** used directly on fill layers (HSV/RGB picker) to dial in the sub-dermal yellow and skin-tone purple/lavender values
+- **Paint tool properties:** `Size`, `Flow`, `Minimum Flow (%)`, `Stroke opacity` — kept low for the light, translucent-revealing base passes
+- **Bake maps referenced in the shelf:** Ambient Occlusion, Curvature, Position, Thickness, World Space Normal (visible as green-swatch bake-map thumbnails in the asset shelf) available to drive any generator-based work
+- **Cross-application round-trip:** Substance Painter texture export -> Unreal Engine material/shader (`Neomorph_SSProfile`) for lighting-accurate color diagnosis
+- **Unreal Engine Subsurface Profile parameters shown (for context, not a Painter panel):** `Surface Albedo`, `Mean Free Path Color`, `Mean Free Path Distance`, `World Unit Scale`, `Tint`, `Boundary Color Bleed`, `Transmission Scale`, `Extinction Scale`, `Normal Scale`, `Scattering Distribution`, `IOR`, `Roughness` — this is the actual SSS shading model used to sell the "translucent thin skin" look; the Painter-side texturing is only half of the final result.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — like the companion "Realistic Creatures" video from this creator, this is a narrated process/philosophy breakdown rather than a click-by-click tutorial, and it explicitly documents a non-linear, trial-and-error creative process (including a stretch of visibly unresolved, "hyper exaggerated" results) rather than a clean recipe. Most valuable to viewers who already know Painter's layer/mask mechanics and want art-direction judgment for original-creature (non-reference-bound) texturing, plus the Painter->engine diagnostic habit.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated explicitly. Substance Painter UI matches the same dark-theme layer-stack/fill-layer layout seen in this creator's other videos (pre-12.1 era, not confirmed). The engine shown for shader/lighting work is **Unreal Engine** (not Substance Painter) — flagged explicitly since the Subsurface Profile parameters listed above belong to Unreal's shading model, not a Painter panel.
 
 ### Tags
-[PENDING EXTRACTION]
+masks, layers, paint-layer, fill-layer, procedural, alpha, basecolor, roughness, color-management, game-engine, unreal-export, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER](realistic-creatures-hand-painted-textures-in-sustance-painter.md) — same creator, same hand-painted color-zone-blocking method (yellow=bone/fat, blue/purple=cavities/blood-pooling) and same "repurpose an unrelated grunge/stone material for skin damage" happy-accident technique (there: granite-style grunge for a rash; here: literal `Black Pearl Granite` material for skin discoloration).
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — same creator; the gradient-mask and blend-mode-stacking fundamentals covered there underlie the gradient-mask hand/arm work and layered discoloration patches described in Key Steps 13 and 15 here.
+- Additional cross-links to other Jared Chavez tutorials will be added as more of his videos are ingested — see `tutorials/INDEX.md` for the current full list.
