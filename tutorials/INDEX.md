@@ -301,6 +301,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/paint-on-baked-maps-to-fix-issues-substance-painter.md
 
+
+### Texturing Gothic Architecture in Substance 3D Painter: Part 1 | Adobe
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=UQkmXEWJr80
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe.md
+
 ---
 
 ## Tag Reference
