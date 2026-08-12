@@ -1,6 +1,6 @@
 # Paint Me Like Your French Substances
 
-A Claude Code skill: an expert consultant for **Adobe Substance 3D Painter** that also builds its own knowledge base by ingesting tutorials, and can optionally drive a real, running Painter session over MCP.
+An expert consultant for **Adobe Substance 3D Painter** that also builds its own knowledge base by ingesting tutorials, and can optionally drive a real, running Painter session over MCP.
 
 The name is a nod to Substance Painter's French origins (Allegorithmic, the studio Adobe acquired to make it) and to the [Rembrandts' theme song](https://en.wikipedia.org/wiki/I%27ll_Be_There_for_You_(The_Rembrandts_song)) — no relation to Adobe, and not an official Adobe product.
 
