@@ -170,6 +170,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/substance-3d-painter-121-beta-new-features-faster-workflows-openpbr-support-adob.md
 
+
+### Substance 3D Painter & ACES - 01 - Color Space Fundamentals | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=hDiYqODGoHg
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
