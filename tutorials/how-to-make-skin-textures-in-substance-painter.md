@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=s0DhvFML7oM
 author: J Hill
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Adobe Substance 3D Painter"
+version: "not stated on screen; baking dialog UI matches the pre-8.3.0 inline 'Bake Mesh Maps' dialog (replaced by dedicated Baking Mode in 8.3.0, 2023-01-10) — likely predates 8.3.0, tentative"
+tags: [layers, fill-layer, paint-layer, masks, generator, curvature, ambient-occlusion, thickness, tri-planar, procedural, blend-mode, pbr, basecolor, roughness, specular-glossiness, normal-map, height, alpha, color-management, texture-set, export, export-preset, channel-packing, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-make-skin-textures-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 14
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to make SKIN TEXTURES in Substance Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-make-skin-textures-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -1236,30 +1232,137 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:42] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_000.jpg
+- [8:37] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_001.jpg
+- [13:50] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_002.jpg
+- [16:34] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_003.jpg
+- [23:07] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_004.jpg
+- [24:47] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_005.jpg
+- [29:53] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_006.jpg
+- [39:04] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_007.jpg
+- [45:18] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_008.jpg
+- [47:13] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_009.jpg
+- [50:01] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_010.jpg
+- [55:53] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_011.jpg
+- [60:07] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_012.jpg
+- [61:31] tutorials/frames/how-to-make-skin-textures-in-substance-painter/frame_013.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A fully hand-authored, reference-driven PBR skin texturing workflow (BaseColor built from layered procedural-noise masks + freehand painting simulating sub-dermal blood/tissue layers, plus custom Specular Level and Roughness channels for oiliness variation) validated through a tight iterate-export-render loop against Marmoset Toolbag rather than judged inside Painter's own viewport.
 
 ### Summary
-[PENDING EXTRACTION]
+Companion/sequel to J Hill's earlier skin-sculpting video — starts from an already-sculpted ZBrush head (HD geometry, 8K normal map exported directly, no high-to-low bake needed) and focuses purely on the BaseColor/Specular/Roughness maps. Two reference categories anchor the whole approach: **RBX (cross-spectrum) imaging**, which visually separates sub-surface blood/pigment detail from surface detail into distinct "channels" the artist can see with the naked eye, and **cross-polarized photography** (e.g. Texture XYZ packs), which shows a real BaseColor with reflections removed. The core method is literally "airbrushing layers of skin" bottom-to-top inside Painter's layer stack, organized into a `Sub-Dermis` folder (blood/vein/warmth layers) and a `Dermis` folder (visible skin color, freckles, blackheads) — exactly mirroring real skin anatomy. Nearly every mask is built by layering 2-3 different-scale procedural noises together with varied blend modes (Screen to add, Multiply to subtract) before ever touching a brush, and a paint layer is then added *on top* to hand-edit/refine the procedural result rather than painting from scratch — the recurring principle stated outright is "simple input, complex output." The video ends with the same lesson repeated three times: export to Marmoset Toolbag, render, look critically, go back and adjust — the workflow assumes the artist cannot correctly judge skin color/roughness while looking only at Painter's own viewport.
 
 ### Key Steps
-[PENDING EXTRACTION]
+
+**1. Reference (0:00–5:02)**
+1. Two reference categories called out as specifically valuable for BaseColor authoring: **RBX imaging** (a cross-spectrum photography technique tipped off by character artist Magdalena/Intervain) visually separates sub-dermal blood/pigment detail from surface detail into distinct color "channels" you can literally see side-by-side (frame_000 — reference board comparing a plain photo, an RBX-red/pink sub-surface pass, and an RBX-brown pigment/freckle pass of the same face); **cross-polarized photography** (e.g. Texture XYZ packs) removes reflected light, giving a "real" spec-free BaseColor reference.
+2. Explicit rationale for hand-painting skin in Painter instead of photogrammetry/Mari-style texture projection: full creative control, a curated/stylized (not 1:1 photographic) result, and — as a training exercise — it builds the organic-painting skill needed for creatures/aliens that have no photo reference at all.
+
+**2. Scene & map setup (5:02–10:27)**
+3. New project: `PBR Metal Rough` starter template, mesh = the ZBrush export (HD subdivision level, FBX), texture set resolution 4K. **Normal Map Format must be set to OpenGL vs. DirectX at project creation** — described as commonly flipped/wrong depending on the DCC's export settings (green channel up-vs-down); easy to fix later if missed.
+4. Import the externally-baked 8K ZBrush normal map as a project resource (Add Resources → Texture → "This Project" scope), drag onto the Normal channel slot.
+5. **Because there's no high-to-low bake in this workflow** (the normal map came straight from ZBrush), auxiliary mesh maps (Curvature, Ambient Occlusion) are instead **derived from the already-imported normal map** rather than from mesh geometry: in the Curvature baker's settings, switch **Method from "Generate from Mesh" to "Generate from Normal Map"**, Details ≈0.5, uncheck "Normal" as an input since it's what's driving the bake (frame_001 — Baking dialog: Method dropdown, Secondary Rays 32, Sampling Radius 0.001, Relative to Bounding Box, Self Intersection: Always, Auto Tonemapping; Mesh Maps checklist showing Normal/World Space Normal/ID/Ambient Occlusion/Curvature/Position/Thickness). Ambient Occlusion likewise generates from the normal map. A Thickness map is also baked and called out as specifically useful for skin work later. Bakes done at 4K.
+
+**3. Base Color — Sub-Dermis (10:27–16:01)**
+6. Delete the default layer. New `Base Color` fill layer, warm/bloody base color (Alt-click the color swatch to pick a raw color), a touch of Roughness set on the base too.
+7. Organizing principle stated explicitly: layer skin **bottom-to-top mirroring real anatomy** — deepest/bloodiest layers first, then dermis/visible-skin-color layers, then surface detail — and jump between finished layers constantly rather than working linearly.
+8. Complex sub-dermal color-variation mask built from **layered noise, not a single texture**: first fill layer's mask gets a big/blobby noise (from the built-in noise library) for large interesting shapes; a second fill layer with smaller/finer noise is added and its **blend mode set to Screen** so it lightens/adds onto the first, building visual complexity from two simple inputs (frame_002 — Fill layer Properties on a grayscale "Cell 1" noise generator, layer stack showing a "Redness" folder with "Cells 1" / "small shapes 2" / "big Perlin noise 2" sub-layers).
+9. On top of the procedural noise mask, **add a Paint layer and hand-paint** targeted detail the noise can't produce — specifically veins on eyelids and around the nostril wings, using pen-pressure-varied stroke width and deliberately asymmetric placement for organic believability (frame_003 — Paint brush active over an all-red sub-dermal preview, mirrored brush cursor dots visible near the cheek).
+10. A second, purpler fill layer is added the same way (noise mask + hand-painted veins) for under-eye/mouth-corner discoloration, introducing color *variety* (not just value variety) as a deliberate anti-flatness measure.
+11. Folder organization introduced at this point: `Sub-Dermis` folder holds everything below the visible skin; a separate `Dermis` folder (added next) holds the visible skin-color layer and everything above it — folders are noted as making the scene heavier/slower, with the tradeoff accepted for organization.
+
+**4. Adding Skin Color (16:01–21:50)**
+12. New `Skin Color` fill layer, fleshy base color, black mask, **Paint layer added on the mask and hand-painted entirely from scratch** using a noisy/textured brush (author uses a "Dirt 3" brush specifically), varying size/pressure while spraying — the stated goal is subtle overlapping complexity from *variety*, not precision. **Symmetry toggled on for the first painting pass to halve the work, then off for a second pass** so the mirrored pattern isn't visually obvious.
+13. To reveal warmth/redness from the sub-dermal layers below, **paint black directly into the Skin Color mask** (removing skin-color coverage) rather than adding a new red layer — e.g. on the nose and around the eyes — optionally split into a second paint layer within the same mask to keep edits organized/reversible.
+
+**5. Sun Damage / Discoloration (part of Dermis, ~18:49–21:50)**
+14. New fill layer, dark burnt-orange, built the same layered-noise way: first noise fill (gentle/nice), a second fill using **Clouds** set to **Multiply** to remove/break up the first pattern, then a third, smaller-scale fill set to **Triplanar projection** (keeps the pattern uniform, ignoring UV distortion) at **Screen** blend to reintroduce fine detail, then a fourth even-larger-scale fill (also Screen) for big "sunspot" blotches — rotation/offset/scale on any of these fill layers can be nudged if a shape lands awkwardly.
+15. Final control layer on this mask: a **Paint layer set to Multiply**, used exclusively to *subtract* — painting black removes unwanted procedural shapes, painting white restores them — described as "editing the mask we've built, not painting from scratch." A separate paint layer on top is used for fully custom additions (e.g. one exact mole/spot placed by hand).
+
+**6. Freckles (21:50–24:05)**
+16. New fill layer, paint layer on its mask, a dots-shaped brush (Kyle's brushes referenced) sprayed on with varied pressure/opacity for organic scatter — described honestly as looking too much like "perfect circles" at this stage.
+17. Two filters fix the "too perfect" look: **`Blur`** first (softens hard edges, sells the idea that freckles sit at a different depth beneath the skin), then **`Warp`** (breaks up the now-uniform dot pattern) — the key tuning tip: **use the Blur parameter inside the Warp filter's own Source settings**, not just Warp's Intensity, so the warp distortion itself isn't jittery/chattery (frame_004 — Filter panel with a filter-picker popup open over a heavily-freckled nose close-up, small icon grid including Blur/Warp-type filters).
+18. Filters stay live while painting, so additional dots can be added/removed with the warp/blur already applied and visible in real time (author notes this can get slow on heavier scenes/more filters).
+
+**7. Cavity Textures / Blackheads (24:05–26:49)**
+19. New `Blackheads` fill layer, black mask, then (first time in the video) a **Generator instead of a fill** is added to the mask: **Curvature** generator set to use **Cavities** as its input mode, unfiltered/unprocessed straight off the baked cavity data (frame_005 — Curvature generator Parameters panel: Global Blur/Balance False/0, Curvature Invert/Mode=Cavities, Sharp/Fine/Medium/Big/Vague/Coverage/Brightness sliders, Use Texture False, Image Inputs = Curvature/World Space Normals/World Space Normals(2)/Position Gradient; layer stack shows a "Cavities" folder containing "Blackheads").
+20. **Trick to selectively reveal only some of the generator's output**: fill the whole mask black first (Paint layer, blend mode Multiply, then use the **Fill tool with Selection Type = Mesh** to flood-fill the entire mask black in one click) — this hides the cavity-generator output everywhere. Then hand-paint white in that same paint layer only where blackheads/visible pores should appear, letting the underlying curvature-cavity detail show through exactly there. Framed as "simple input, complex output": one brushstroke reveals a procedurally-complex pore pattern rather than hand-drawing pore shapes.
+21. Called out explicitly: because this is a **fill layer with a mask** (not a flat paint), the same mask can simultaneously drive Roughness and Specular/Spec-level channels too, breaking up light in all of them from one authored mask — "that's the power of Substance Painter."
+22. Working philosophy stated here generally: keep bouncing between already-built elements (redness, sub-dermal shapes, blackheads, eye darkness) rather than working strictly linearly, to keep the whole scene's element count small and manageable.
+
+**8. Lips (26:49–34:51)**
+23. New `Lips` folder with its own mask, hand-painted heavy-handed in the middle and feathered at the edges — the imprecision of hand-painting even a "basic" shape is treated as a feature (adds organic variation) not a flaw.
+24. `Base Lips` fill layer inside — check the lip color's Value and Saturation *against* the skin (usually darker, more saturated).
+25. **Thickness-map-driven edge discoloration**: new fill layer, mask = the previously-baked **Thickness map** dragged directly onto the mask channel, then a **`Levels`** node to push contrast — the model's own geometric thin-ness data (thin skin around the lip edge reads differently in the thickness bake) becomes a ready-made complex mask shape with zero painting, which can then be hand-edited on top if desired.
+26. A second pass repeats the same idea with the **Curvature** generator (Unprocessed mode explored, then switched to more filtered settings) blended with **Lighten**, global contrast/blur tuned, then hand-erased with a Multiply paint layer in specific areas (mostly kept centered, removed from edges) to lighten the lip pads specifically.
+27. Finish: darken and boost saturation on the base lips layer overall via rebalancing the fill's own color/value, then a final paint layer lightens just the inner lower lip based on reference.
+
+**9. Base Color final pass (34:51 area, folded into Lips section)**
+28. Extra hand-painted contrast added directly into the Skin Color mask: brighter/yellower tone around the **orbital bone** (less blood, more bone/muscle showing through) extending along the eyebrows and optionally the chin/skull; more saturated red/pink right at the eyelid margin where the lids meet, plus a distinct color at the tear duct — all framed as breaking up an otherwise-too-even base color to read as different underlying tissue types.
+
+**10. Exporting Textures (34:51–35:52) & Checking Renders (35:52–39:46)**
+29. `Ctrl/Cmd+Shift+E` → Export Textures. Confirm output directory, select/edit the output template (`PBR Metal Roughness` here — mesh-name token removed from the naming convention), then in Settings uncheck every map except BaseColor for this first pass, confirm the resolution matches the project's texture-set size (4K), Export.
+30. **Render-driven iteration loop (repeated 3 times across the video) is the video's central working method**: load the exported PNG into **Marmoset Toolbag** as the head material's Albedo, set the environment/base color swatch to white (a gray swatch was darkening the preview), dial in **Scatter Depth** (subsurface-scattering color-bleed parameter — set to a peachy tone since skin bleeds more than pure red) for a first "does this even read as skin" check (frame_012 — Marmoset Toolbag UI, material channel slots visible: Normal Map, Detail Normal Map, Albedo Map, Scatter Map). Explicit stated habit: **always keep the export directory pointed at the same location as the render engine's texture folder** so re-exporting from Painter just overwrites in place — "exporting a few dozen times a day" on real projects.
+31. First-pass render critique (verbatim decisions, useful as a worked example of self-critique): freckles too dense/not organic, keep the moles, blackheads too strong/should be sparser, overall skin reads too shiny/even because there's no Specular or Roughness map yet.
+
+**11. Specular (44:03–46:56)**
+32. PBR Metal/Rough templates don't ship a Specular Level channel and most assets don't need one (real-world materials mostly reflect similarly, ~0.4–0.45 default) — but a textured spec map is used here deliberately to add extra organic complexity that doesn't line up 1:1 with the BaseColor or normal-map detail (layering mismatched detail scales/sources is called out as a way to avoid a "flat" combined look).
+33. **Add the channel**: Texture Set Settings → add **Specular Level** channel (default 0.5, dialed toward ~0.4) (frame_008 — Texture Set Settings General Properties/Channels list: BaseColor/Height/Roughness/Metallic/Normal already present, About to add Specular Level).
+34. **Make a custom export preset so the new channel actually exports**: duplicate the closest stock template, rename (e.g. "PBR Metal Rough JH"), remove unneeded outputs (Emissive), add a new grayscale (8-bit) output map sourced from the Specular Level channel, select this new preset as the active output template, Save Settings.
+35. Author the spec detail itself the same layered-noise way as everything else: one noise fill for fine breakup, a second noise fill on Screen to add complexity — "just something generic and noise-like" is enough to make the spec feel organically uneven rather than flat.
+
+**12. Nostrils (46:56–48:48)**
+36. Game-character-specific practical hack, explicitly framed as *not* physically accurate: **paint the interior of the nostrils fully black across BaseColor, Roughness (full), and Specular Level (fully dark)** by hand, because real-time shadow map resolution usually can't resolve believable self-shadowing in a cavity that small — "we're programmed to map faces and the nostrils being black is crucial to that" (frame_009 — a near-black, low-exposure viewport preview mid-edit). Notes the *correct*, non-hacky alternative where the target renderer supports it: **author a real cavity/AO map so the renderer itself knows not to light that area** (the sewer-grate analogy: black out the holes so nothing can ever show through). A cavities-mode Curvature generator (Sharp) is also layered in on the same mask for extra breakup.
+
+**13. Roughness (48:48–51:22)**
+37. New `Roughness` folder (folder-level mask again, for the same one-mask-many-uses reason as before). `Base Roughness` fill ≈0.8 as a starting point (roughness numbers are engine-dependent — expect to dial in per-renderer).
+38. **Visualization trick**: build the oiliness/gloss variation mask *in a Color fill layer first* (easier to see/reason about than raw grayscale roughness values), hand-paint the glossy zones — lips (especially where they touch/seal, read as "wet"), the T-zone (nose bridge/nostril wings/forehead), eyes (tear ducts, eyelid margins), and the inner bowl of the ear (frame_010 — Paint brush stroke visible at the lip corner on a skin-toned preview, layer stack showing "Base color"/"Roughness"/"Spec"/"Paint" entries) — then **switch the fill layer's channel target from Color to Roughness** once the shapes read correctly. Explicitly low-precision/fast work — "it doesn't have to be very detailed... it really makes a big impact on the look."
+
+**14. Custom Export Presets / second render pass (51:22–54:50, Skillshare sponsor segment skipped)**
+39. Re-open Export Textures, check Roughness and Specular in the list of exports (previously only BaseColor was checked), re-confirm texture-set resolution wasn't accidentally left at a lower size from earlier testing (author had dropped to 2K to test, had to reselect 4K). Re-export, reload in Marmoset (load Roughness map, point Clear Coat Roughness at the same map for now, load the Specular map with its intensity slider droppable). Second render comparison: spec+roughness make the single biggest visible improvement toward "reads as skin"; freckles/blackheads still read as too dense/noisy.
+
+**15. Adjustment Layers (54:50–57:01)**
+40. Introduces Photoshop-style non-destructive global color grading inside Painter, explicitly noting most Painter users don't realize this is possible: add a **plain (empty) Paint layer** (not a fill layer) named e.g. "Color Correction" at the top of BaseColor, set its blend mode to **Pass Through** (critical — without Pass Through it doesn't composite the layers below, it just sits inert), then **add filters directly to this empty layer**: **Hue/Saturation/Levels** (raise saturation, push levels for more redness) and **Sharpen**, each affecting everything below simultaneously (frame_011 — Filter panel on an "HSL Parametric" filter: Mode=Parametric, Hue/Saturation/Lightness sliders; layer stack shows "Roughness"/"Skin"/"HSL Parametric"/"Sub Dermis" entries). This single global-adjustment layer becomes the fast dial for "crunch up" late-stage color/contrast tweaks without hunting through individual material layers.
+
+**16. Final Updates (57:01–61:04)**
+41. Reused/recycled an existing cellular-noise fill layer (originally built for the sub-dermal layer) at a much smaller scale as a final unifying micro-detail/chatter pass across the whole face — noted as visually "unifying" disparate gradients when zoomed in, barely visible zoomed out.
+42. Blackheads layer judged as having gotten out of hand — most of it removed, leaving just a couple of hand-placed dots (nose, chin) rather than a dense procedural field.
+43. Roughness raised globally via a second **adjustment-layer Levels** node (pushing values brighter/toward white = rougher) specifically because it's *easier to add glossiness back in the renderer* (Marmoset's roughness slider can be dragged down) than to fix an over-glossy bake — bias the authored map rough, fine-tune per-engine at render time.
+44. Freckles redone again: original warp/blur filters temporarily disabled to work on raw dot placement without lag, a second brush pass used specifically because the previous brush's dot spacing read as "dirty" rather than freckled; **custom scatter-brush trick**: select the basic round brush, max out Spacing, link Pressure to Size, raise Size Jitter and Position Jitter — turns a plain round alpha into an ad-hoc scatter/freckle brush without needing a custom alpha (could be duplicated/saved as a reusable brush preset; a real custom alpha would be the next step up, e.g. for vein-shaped scatter).
+45. Lip-seam bug fix demonstrating a general debugging technique: noticed a color leak where the lips meet — switched to the **flat UV view (F3)** with brush **Alignment set to UV** (paints purely in 2D UV space, no 3D distortion) specifically to guarantee full, gap-free mask coverage in tight geometry seams like the closed lip line.
+46. Final base-color pass adds more nose/cheek/forehead redness by hand and further tunes the color-correction adjustment layer; third and final render comparison in Marmoset shows the cumulative before/after (frame_013 — high-resolution final render, raised mole/freckle detail visibly catching specular highlight on the cheek).
+47. **Height-driven raised detail (mentioned in Outro, not shown step-by-step)**: some moles were additionally given actual raised **Height** channel detail (not just BaseColor), which Painter merges with the imported ZBrush normal map on export — "even though the normal map came from ZBrush, we add the height channels in Substance" — exported together at 4K so the final normal map reflects both the sculpted detail and the newly hand-painted height bumps.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+**Folders (bottom to top):** `Sub-Dermis` (blood/vein/warmth noise+paint layers) → `Dermis` (containing `Skin Color`, sun-damage, `Freckles`, `Blackheads`/Cavities, `Lips` folder) → `Roughness` folder → top-level `Color Correction` / roughness adjustment paint layers.
+**Recurring mask-building pattern:** 2-3 fill layers of different-scale procedural noise, mixed via **Screen** (add) and **Multiply** (subtract) blend modes, topped with a **Paint layer** used either to hand-add unique detail or (set to Multiply) to *edit/subtract* from the procedural result rather than paint from scratch — the video's single most-repeated technique, applied to sub-dermal color, sun damage, freckles, and spec/roughness alike.
+**Generators used:** `Curvature` — Cavities mode (unprocessed/unfiltered, driven by the Curvature mesh map baked from the imported normal map) for blackheads/pores; also explored Unprocessed and filtered Sharp/Fine settings on the lips.
+**Baking (no high-to-low bake in this project):** Curvature baker Method = **Generate from Normal Map** (not Generate from Mesh) since the normal map was authored externally in ZBrush; Ambient Occlusion likewise generated from the normal map; Thickness map also baked and used later to drive the lip-edge discoloration mask.
+**Selection/fill tools:** Fill tool with **Selection Type = Mesh** to flood an entire mask black in one click (used as the reset step before hand-revealing blackhead pores).
+**Filters:** `Blur` (softens freckle-dot edges to sell sub-surface depth), `Warp` (breaks up repetitive dot/noise patterns — tune via the Warp's own **Source Blur**, not just Intensity, to avoid a jittery result), `Levels` (contrast push on thickness-map and curvature-driven masks, and on the final roughness adjustment layer), `HSL`/Hue-Saturation-Levels + `Sharpen` (global color-correction adjustment layer).
+**Adjustment-layer pattern:** empty **Paint layer** (not Fill), blend mode **Pass Through**, filters added directly to the empty layer so they affect everything beneath it as a single global control point — used for both a BaseColor "Color Correction" layer and a separate Roughness-boosting Levels layer.
+**Channels:** Texture Set Settings used to add a **Specular Level** channel (not present in the default PBR Metal Rough template) — requires also building a custom **export preset** (duplicate the stock template, remove unneeded channels like Emissive, add a new 8-bit grayscale output sourced from Specular Level) before the channel will actually export.
+**Brush tricks:** custom "ghetto freckle" scatter brush built from the stock round brush by maxing Spacing, linking Pressure→Size, and raising Size/Position Jitter; **flat UV view (F3) + brush Alignment = UV** for guaranteed full-coverage painting in tight seams (e.g. the closed lip line) without 3D-projection distortion.
+**Export:** `Ctrl/Cmd+Shift+E`; custom `PBR Metal Rough JH` output template; iterative small-checklist exports (BaseColor only, then + Roughness + Specular) rather than one final export; always re-verify texture-set resolution before exporting after testing at a lower size.
+**External render-check loop:** Marmoset Toolbag used as the actual judgment tool throughout — Albedo/Roughness/Specular/Normal map slots, Scatter Depth (subsurface color-bleed) parameter tuned for a believable skin-tone read, environment/base-color swatch reset to white so it doesn't tint the imported texture.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate. The individual techniques (fill layers, masks, generators, blend-mode stacking, adjustment layers) are each explained from a fairly accessible starting point, but successfully executing the video's actual craft — organic hand-painting judgment, reading/critiquing your own renders, building believable anatomical color variation — takes real practice; this is as much an art-direction/observation lesson as a button-by-button tutorial.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen or in narration, and unlike the companion "TEXTURE EVERYTHING" video, no filter/tool here pins a version lower bound directly. However, frame_001 (the baking step) shows a small **floating modal dialog titled "Baking"** with Cancel / Save Settings / "Bake Git_Demo" / "Bake selected textures" buttons and an inline Mesh Maps checklist — this matches this skill's version-history research (`references/release-notes-painter-8.3.md`) describing the **old inline "Bake Mesh Maps" dialog that Painter 8.3.0 (2023-01-10) replaced** with a dedicated full-workspace Baking Mode (F8, Start/Cancel buttons, breadcrumb navigation, no floating modal window). That UI match suggests this video **predates Painter 8.3.0** — i.e. it was very likely made several years before the companion "TEXTURE EVERYTHING" video (which uses the `Bevel Smooth` filter, pinning it to 11.0.0+). This is inferred from one screenshot rather than an on-screen version string, so treat it as a reasonable estimate, not a confirmed fact — but it is a useful example of exactly the kind of UI-generation-gap this skill's version-tracker exists to flag: **any viewer following this video's baking steps in a current Painter install (8.3.0+) will not find the dialog described/shown here — they need Baking Mode (F8) instead**, though the underlying baker parameters (Method: Generate from Mesh/Normal Map, Secondary Rays, Sampling Radius, etc.) are unchanged.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, curvature, ambient-occlusion, thickness, tri-planar, procedural, blend-mode, pbr, basecolor, roughness, specular-glossiness, normal-map, height, alpha, color-management, texture-set, export, export-preset, channel-packing, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+None yet cross-linked — [How to TEXTURE EVERYTHING in Substance Painter](how-to-texture-everything-in-substance-painter.md) (same creator, same skill/library) is the natural companion: that video explicitly opens by referencing this one as its prequel ("four years ago I made this video about texturing skin... this is the sequel"), and shares this video's core layered-noise-mask + hand-paint-on-top pattern, folder-per-material organization, and per-channel blend-mode/opacity discipline, extended there with anchor points and the Bevel Smooth filter. Future ingests covering skin/creature texturing (Jared Chavez's "REALISTIC CREATURES: HAND PAINTED TEXTURES," "How to TEXTURE in SUBSTANCE PAINTER | Creature TEXTURING") or Marmoset Toolbag render-check pipelines should cross-link back here.
