@@ -16,6 +16,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Full walkthrough of every masking primitive (manual paint mask, ID color-select, generators driven by baked mesh maps, tileable/procedural grunge+scratch textures with tri-planar seam fixing, blend-mode stacking, filters, anchor points) and how to combine all of them to build complex production masks (demoed on a reptilian creature head "flaked skin" mask).
 - **File:** tutorials/substance-painter-building-masks-explained.md
 
+
+### REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=ygKmaqpl2gk
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/realistic-creatures-hand-painted-textures-in-sustance-painter.md
+
 ---
 
 ## Tag Reference
