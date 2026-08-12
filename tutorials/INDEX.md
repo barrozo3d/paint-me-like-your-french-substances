@@ -312,6 +312,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe.md
 
+
+### 🎨 Texturing Women's Shorts with Lace Trim in Substance Painter 🎨
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=6eRY49oxJNI
+- **Author:** 3DRedBox
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/texturing-womens-shorts-with-lace-trim-in-substance-painter.md
+
 ---
 
 ## Tag Reference
