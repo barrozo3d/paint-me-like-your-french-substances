@@ -27,6 +27,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Process-level breakdown (part 2 of a personal creature project) of hand-painted skin texturing: anatomy-driven color-zone blocking (yellow=fat/bone, blue=cavities, purple=unify), large-to-small detail hierarchy, repurposing unrelated grunge materials as skin damage, edge-detect masks for peeling skin, and a post-mortem on fixing a "plasticky" skin shader and over-yellow Albedo after stepping away from the piece for months.
 - **File:** tutorials/realistic-creatures-hand-painted-textures-in-sustance-painter.md
 
+
+### How to TEXTURE EVERYTHING in Substance Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=GvjfkhCW3aM
+- **Author:** J Hill
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-texture-everything-in-substance-painter.md
+
 ---
 
 ## Tag Reference
