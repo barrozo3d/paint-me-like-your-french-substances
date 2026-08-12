@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=Lksg6Fum3gw
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (export side) + Maya + Blender (import/render side)"
+version: "Maya 2023 and Maya 2019 both demonstrated (built-in ACES vs. downloaded OCIO config); Blender version not stated on screen; Substance Painter build not shown (continuation of Part 2's project)"
+tags: [color-management, export, export-preset, udim, basecolor, roughness]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 6
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance 3D Painter & ACES - 03 - Textures in Maya and Blender | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -179,30 +175,60 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:58] tutorials/frames/substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d/frame_000.jpg
+- [3:25] tutorials/frames/substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d/frame_001.jpg
+- [4:37] tutorials/frames/substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d/frame_002.jpg
+- [5:40] tutorials/frames/substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d/frame_003.jpg
+- [7:13] tutorials/frames/substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d/frame_004.jpg
+- [7:56] tutorials/frames/substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d/frame_005.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Closing out the ACES/OCIO series by carrying Substance Painter's ACEScg-authored textures into Maya and Blender and getting each renderer's viewport to match the Substance Painter viewport — the pay-off of the color-managed pipeline set up in Parts 1-2.
 
 ### Summary
-[PENDING EXTRACTION]
+Part 3/3 of Michael Wilde's (ILM London) ACES series. Exports textures from Painter using a normal export preset (8/16-bit TIFFs, VFX-style naming — export mechanics not covered here, just color space). Sets up Maya's OCIO: Maya 2023 ships ACES built in (Color Management enabled, ACEScg render space, sRGB display, ACES view by default); Maya 2019 needs the ACES 1.2 OCIO config file downloaded manually and pointed to in Preferences → Color Management, which produces slightly different default role names. Builds an Arnold Standard Surface shader in Hypershade, wires a File node to Base Color, and sets that file's Color Space to Utility sRGB Texture (matching Painter's export role) — or "Display sRGB" if using Maya's inbuilt streamlined ACES setup — plus sets the file node's UV tiling method to UDIMs. Repeats for Spec Roughness but with Color Space set to Utility Raw (no conversion — scalar data must stay pure numeric). Sets up an Arnold Skydome light using the same HDRI as Painter's environment, with the HDRI file's Color Space set to Utility Linear sRGB (or "scene-linear Rec.709/sRGB" on the inbuilt setup) since it's a linear EXR. Confirms parity by comparing the Arnold render to the Substance viewport, and further isolates variables with an Arnold AOV that shows only the raw Base Color pass (bypassing shader/render-engine differences like Arnold's shadows) — confirms exact color match. Repeats the same setup in Blender: since Blender has no config-file import UI, points an OS-level `OCIO` environment variable at the ACES config (which will also override any other OCIO-reading program open at the same time, including Maya and Substance, and must be deleted to stop cross-contamination); once set, Blender's Output Properties → Color Management shows the same ACES options as Maya. Wires up a Principled BSDF with Utility sRGB Texture for color-data maps and Utility Raw for scalar maps (warns that Blender's OCIO preset dropdown is so long you must zoom the UI out to find "Utility sRGB Texture" near the bottom of the list), sets the HDRI to Utility Linear sRGB, renders, and again confirms with an AOV that the base color matches — noting a slightly brighter specular highlight is just Blender's spec-shading-model difference, not a color-space setup error, once base color is isolated and confirmed correct.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Export textures from Substance Painter using a normal export preset (color-space handling was already configured in Part 2's project settings; export mechanics themselves aren't re-covered).
+2. In Maya 2023+: Preferences → Color Management is ACES-enabled by default (ACEScg rendering space, sRGB display, ACES view) — no extra setup needed.
+3. In older Maya (e.g. 2019): download the free ACES OCIO config (~2GB) from the official ACES site, then in Preferences → Color Management set the Config Path to the downloaded ACES 1.2 config file; this produces a display=ACES + separate sRGB view-transform-on-top default instead of Maya 2023's more direct default.
+4. Set up color management at the very start of a project — changing it mid-project means re-telling Maya how to interpret every already-imported file.
+5. Build a shader: open Hypershade, create an Arnold Standard Surface (aiStandardSurface), add a File node, connect it to Base Color.
+6. On the Base Color File node, set Color Space to **Utility sRGB Texture** (matches how Painter exported it) — or **Display sRGB** if using Maya 2023's inbuilt streamlined ACES config (fewer, renamed options).
+7. Set the File node's UV tiling mode to **UDIM** so multi-tile texture files resolve correctly.
+8. Add a second File node for Spec Roughness; set its Color Space to **Utility Raw** — no color conversion, because scalar data (Roughness) must be read as pure numeric values, not color.
+9. Add an Arnold Skydome light, connect the same HDRI/environment used in Painter to its Color input via a File node; set that file's Color Space to **Utility Linear sRGB** (or "scene-linear Rec.709/sRGB" under Maya's inbuilt setup) because the HDRI is a linear EXR, not an sRGB-gamma texture.
+10. Rotate the HDRI to match Painter's environment angle, render, and visually compare the Arnold render view to the Substance Painter viewport.
+11. For a rigorous check that bypasses shader/render-engine differences (e.g. Arnold's shadow calculation), add an Arnold AOV that isolates just the raw Base Color pass and compare that directly against Painter's Base Color channel view.
+12. In Blender: since there's no in-app OCIO config-file picker, create an OS-level environment variable named `OCIO` pointing at the ACES config file path; Blender picks it up automatically on next launch. Note this env var globally overrides any other OCIO-reading program (Maya, Substance) opened afterward if they use their own inbuilt setup — delete the variable before opening those to avoid conflicts.
+13. In Blender, check Output Properties → Color Management — it now shows ACES settings matching Maya's.
+14. Build a Principled BSDF shader, wire up textures; set Color Space to **Utility sRGB Texture** for color-data maps (Base Color) and **Utility Raw** for scalar maps (Roughness) — same role names as Maya's downloaded-config path.
+15. Blender-specific gotcha: the ACES config's color-space dropdown list is too long to fit on screen at default UI scale — zoom the interface out to find options like "Utility sRGB Texture" near the bottom of the list.
+16. Set the HDRI's Color Space to **Utility Linear sRGB** (same reasoning as Maya), render, and verify with another AOV isolating Base Color that the result matches both Maya's and Painter's.
+17. If specular brightness looks slightly different from other renderers once base color is confirmed identical, that's a shading-model/spec-calculation difference between engines, not a color-space misconfiguration — don't chase it as a bug.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+**Maya:** Preferences → Color Management (Rendering Space = ACEScg, Display = sRGB, View = ACES); Hypershade Arnold Standard Surface shader; File node Color Space dropdown (`Utility sRGB Texture` for color data / `Utility Raw` for scalar data / `Utility Linear sRGB` for linear EXR HDRIs; renamed to `Display sRGB` / `scene-linear Rec.709/sRGB` under Maya 2023's inbuilt condensed ACES config); File node UV Tiling Mode = UDIM; Arnold Skydome light; Arnold AOV for isolated Base Color comparison.
+**Blender:** OS-level `OCIO` environment variable pointing at the ACES config; Output Properties → Color Management panel; Principled BSDF shader; per-texture-node Color Space dropdown (same `Utility sRGB Texture` / `Utility Raw` / `Utility Linear sRGB` roles as Maya's downloaded-config path); AOV for isolated Base Color comparison.
+**Substance Painter side:** standard export preset (8/16-bit TIFF, VFX-style naming) — color-space correctness inherited from Part 2's project Color Management settings, not reconfigured here.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate/Advanced (requires comfort with Maya Hypershade and Blender's Shader Editor in addition to Painter's export settings).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter (export side, build not shown — continuation of Part 2's project). Maya 2023 (inbuilt ACES) and Maya 2019 (manual ACES 1.2 OCIO config) both demonstrated side by side. Blender version not stated on screen. Renderer: Arnold (Maya side).
 
 ### Tags
-[PENDING EXTRACTION]
+`color-management`, `export`, `export-preset`, `udim`, `basecolor`, `roughness`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Substance 3D Painter & ACES - 01 - Color Space Fundamentals** (`tutorials/substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d.md`) — Part 1/3, the color-theory foundation (color space, gamut, gamma/transfer function, ACES/ACEScg) this video assumes.
+- **Substance 3D Painter & ACES - 02 - OCIO & ACEScg in Painter** (`tutorials/substance-3d-painter-aces---02---ocio-acescg-in-painter.md`) — Part 2/3, where the Painter-side project Color Management, OCIO roles (Utility sRGB Texture / Utility Linear sRGB / Utility Raw), and Color-vs-Scalar Data distinction used throughout this video are originally set up and explained.
