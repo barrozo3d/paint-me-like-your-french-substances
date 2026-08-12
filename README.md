@@ -27,7 +27,7 @@ Then just ask Claude Code a Substance Painter question — it reads `SKILL.md` a
 
 ## The Ingest Pipeline, in full detail
 
-This is the part of the skill you'd actually touch to extend it — point it at a new source, tune its quality checks, or teach it a new safeguard. It's three scripts, run in a fixed order, each doing one job well rather than one script doing everything.
+This is the part of the skill you'd actually touch to extend it: give it a video, an article, or any source of technical knowledge and the skill will trigger the steps to extract, read, organize, cross-reference and push it.
 
 ```
 ingest.py  ──►  select_frames.py  ──►  Claude Code (extraction)  ──►  validate.py
