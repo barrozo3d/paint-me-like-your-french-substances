@@ -208,7 +208,7 @@ python-scripting, plugin, python-api, ui-plugin,
 export, export-preset, channel-packing, game-engine, unreal-export, unity-export, godot-export,
 color-management, texel-density,
 beginner, intermediate, advanced, expert,
-painter-12
+painter-12, path-tool
 ```
 
 ---

@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=3zgD-wwANCs
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "11.1.0 (feature origin, stated on-screen); filmed on a later build (~12.0.0, tentative from viewport watermark)"
+tags: [path-tool, alpha, opacity, roughness, metallic, height, basecolor, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # New Ribbon Paths in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -167,30 +163,66 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:38] tutorials/frames/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [2:13] tutorials/frames/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [2:46] tutorials/frames/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [3:15] tutorials/frames/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [3:38] tutorials/frames/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [4:03] tutorials/frames/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+- [4:53] tutorials/frames/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
+- [6:29] tutorials/frames/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+**Ribbon Paths** — a new path-tool mode (introduced Substance 3D Painter 11.1.0) that continuously transforms and repeats a texture along a path shape instead of stamping a brush along it, with dedicated presets for gradients, text, apparel, hard-surface trims, and a from-scratch **Custom Ribbon** workflow for building complex modular trims without needing Substance 3D Designer.
 
 ### Summary
-[PENDING EXTRACTION]
+Official Adobe overview explaining why Ribbon exists (regular Paint along Path repeats/overlaps brush stamps around curves — bad for continuous shapes like gradients or text; Ribbon transforms the texture itself along the path instead) and touring its features: an important underlying change where per-vertex Pressure is now split into separate Vertex Stroke Width and Vertex Opacity controls, a new Path Presets bar (Favorites/Gradients/Text/Apparel/Hard Surface categories) usable in either an empty paintable layer (full material) or a mask (grayscale), and a from-scratch custom-ribbon builder covering path type switching, projection depth, image orientation, sharp-corner modes (Miter/Round/Bevel/Cut), and Stretching & Tiling behavior. The video closes on the two most powerful presets — Custom Ribbon Grayscale/Material — which expose start/middle/end/corner image assignment (previously only possible via hand-authored `.sbs` files in Substance 3D Designer), demoed by recreating an Adobe Illustrator pattern-brush trim using AI file Artboards directly as ribbon source images.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Understand the difference: Paint along Path repeats a single brush stamp along a path (stamps overlap on tight curves) — Ribbon instead transforms/repeats the *texture* continuously along the path shape, with explicit control over start/end and sharp corners.
+2. Note the underlying change to **all** path tools (not just Ribbon): the old single per-vertex Pressure value is now split into two independent controls — **Vertex Stroke Width** and **Vertex Opacity**.
+3. Ribbon (like Paint along Path) works in two contexts: an empty paintable layer (full material data — BaseColor/Roughness/Metallic/Height etc.) or a mask (grayscale values only).
+4. Select the Path tool on an empty layer/mask to reveal the new **Path Presets** bar at the top of Path properties, organized into categories: Favorites (empty by default — right-click any preset/asset → Add to Favorites), Gradients, Text, Apparel, Hard Surface, plus Basic/Custom. Preset icons visually distinguish Ribbon presets from Paint-along-Path presets.
+5. **Gradients** category: repeating grayscale gradients up to tricolor full-material gradients — for full-material gradients, confirm the Alpha channel is set up correctly before tuning material settings; Width and Projection Depth still apply as with other paths; add enough path points for the ribbon to conform well to curved surfaces.
+6. **Text Along Paths**: presets mainly preset text alignment/repetition — pick the closest preset then adjust; text must fit within the ribbon's stroke width, and the Advanced section of the text parameters resolves alignment issues.
+7. **Apparel** presets: rebuilt stitches/seams/zippers that support much sharper corners than before, and terminate with realistic start/end shapes instead of simply fading in/out.
+8. **Hard Surface** presets: grip patterns, shut lines, tape, welding seams. Workflow trick shown: enable **Snap to Mesh Wireframe**, click a vertex to place a point on it, **Shift+click** to force that point to a Sharp Corner, then add Smooth Tangents afterward to avoid odd bends the path tool can otherwise produce at sharp corners.
+9. To build a ribbon from scratch: start from the **Basic Hard Ribbon** preset. Key settings top to bottom: **Path Type** (switchable at any time between Paint / Ribbon / Filled / Erase / Smudge), **Projection Depth** (tune per case; adding more points usually helps), **Ribbon Width** and **Opacity**.
+10. Under **Stroke**, **Image Orientation** re-aligns the alpha image to better follow the path direction.
+11. Setting a vertex to Sharp Corner exposes **Corner Mode**: Miter, Round, Bevel, Cut. Cut mode scales the whole stamp image to avoid ever cutting it off, fitting the best possible stamp count along the path — this behavior is governed by the Stretching & Tiling parameters.
+12. Stretching & Tiling combinations: `Scale=Stretch` + `Tiling=Auto` together minimize visible stretching. Turning on `Stretch between offsets only` + `Tiling=Custom` leaves the first 25% and last 25% of a stroke unstretched, stretching only the middle. `Tiling=None` starts a fresh stroke only between sharp corners.
+13. The two most important presets for advanced work: **Custom Ribbon Grayscale** and **Custom Ribbon Material** — grayscale is for simple alpha stamps painting solid-color material; Material supports full-color BaseColor images plus uniform Roughness/Metallic/Height values.
+14. Both custom-ribbon presets expose separate **Start**, **Middle**, and **End** image slots; enabling **Custom Corners** adds two more image slots for left/right sharp corners, which automatically warp to match the exact angle of the corner drawn — this is what lets you build complex modular trim ribbons that previously required hand-authored Substance Designer `.sbs` graphs.
+15. Demonstrated recreating an Adobe Illustrator pattern-brush-style trim by feeding AI file **Artboards** directly in as the ribbon's source images, including choosing which artboard from the source AI file applies to which slot (start/middle/end/corner).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Path tool → **Path Type**: Paint / Ribbon / Filled / Erase / Smudge
+- Path Presets bar: Favorites, Gradients, Text, Apparel, Hard Surface, Basic, Custom
+- Vertex Stroke Width, Vertex Opacity (replaces old single Pressure value, all path tools)
+- Projection Depth, Ribbon Width, Opacity
+- Stroke → Image Orientation
+- Corner Mode: Miter / Round / Bevel / Cut (on vertices set to Sharp Corner)
+- Stretching & Tiling: Scale mode (Stretch), Tiling mode (Auto / Custom / None), Stretch between offsets only
+- Snap to Mesh Wireframe, Shift+click (force Sharp Corner), Smooth Tangents
+- Custom Ribbon Grayscale / Custom Ribbon Material presets — Start / Middle / End image slots, Custom Corners (left/right)
+- Adobe Illustrator Artboard import as ribbon source image
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate for using the built-in presets; Advanced for the from-scratch Custom Ribbon / Stretching & Tiling / Custom Corners workflow.
 
 ### App & Version
-[PENDING EXTRACTION]
+**Substance 3D Painter — Ribbon Paths shipped in 11.1.0**, stated explicitly on-screen at 0:00 ("Substance Painter 11.1 now has ribbon paths"), which matches `references/release-notes-painter-11.1.md`'s headline **Ribbon tool** entry exactly — direct, unambiguous confirmation. Note: the on-screen version watermark in the captured viewport frames appears to read a later version (approximately "12.0.0"), which is expected/consistent — this is a feature-tour video made after the feature's original 11.1.0 launch, running on whatever later build was current when filmed, not the 11.1.0 launch version itself. Treat the exact captured build number as tentative (small on-screen text); the 11.1.0 origin claim is the reliable, spoken-on-camera fact.
 
 ### Tags
-[PENDING EXTRACTION]
+`path-tool` `alpha` `opacity` `roughness` `metallic` `height` `basecolor` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+No other tutorial in the library currently covers the Path/Ribbon tool — this is the knowledge base's first path-tool-focused entry, and introduces the new `path-tool` tag (added to the approved tag pool in `SKILL.md`) for this whole feature family. Several more Path/Ribbon-tool videos are planned later in this same ingest batch (`exE0-1ftNeE` "New Path Tool Features & Improvements", `rhraMw3YVpo` "3D Path Tool Updates", `Ro5dADu3vpM` "Creating 3D Paths") — cross-link those reciprocally once ingested, since they'll likely build directly on the Ribbon fundamentals covered here.

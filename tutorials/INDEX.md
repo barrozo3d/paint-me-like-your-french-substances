@@ -165,10 +165,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=3zgD-wwANCs
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** Ribbon tool shipped in 11.1.0 (stated on-screen); filmed on a later build (~12.0.0, tentative)
+- **Tags:** `path-tool` `alpha` `opacity` `roughness` `metallic` `height` `basecolor` `intermediate` `advanced`
+- **Summary:** Tour of Ribbon Paths (11.1.0): continuous texture-along-path transforms vs. the older stamp-repeating Paint along Path, new Path Presets (Gradients/Text/Apparel/Hard Surface), split Vertex Stroke Width/Opacity controls, Corner Modes (Miter/Round/Bevel/Cut), Stretching & Tiling, and the Custom Ribbon Grayscale/Material presets for building complex trims (start/middle/end/corner images, even importing Adobe Illustrator Artboards) without Substance 3D Designer. Introduces the new `path-tool` tag.
 - **File:** tutorials/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d.md
 
 
@@ -220,5 +220,5 @@ particle-brush, alpha, tri-planar, procedural, MatFX, stencil,
 python-scripting, plugin, python-api, ui-plugin,
 export, export-preset, channel-packing, game-engine, unreal-export, unity-export, godot-export,
 color-management, texel-density,
-beginner, intermediate, advanced, expert
+beginner, intermediate, advanced, expert, painter-12, path-tool
 ```
