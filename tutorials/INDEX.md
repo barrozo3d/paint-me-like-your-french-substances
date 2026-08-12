@@ -6,7 +6,15 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 **To add a documentation page or article:** paste the content and say "ingest this article/doc".
 **To search:** look for tags matching the technique you need.
 
-*(Empty — add your first entry by saying "ingest this: [URL]")*
+### SUBSTANCE PAINTER: Building Masks Explained
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=um3YRzqwYU4
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-painter-building-masks-explained.md
 
 ---
 
