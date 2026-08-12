@@ -60,6 +60,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Live layer-by-layer rebuild of a finished metal-armor texture from bare mesh to final result, organized around a big-medium-small detail pyramid: Steel smart-material base, parallel color+roughness breakup passes, complementary-color layering (blue/orange), generator-then-manual-breakup edge wear, secondary-form grunge buildup, deliberately sparse/localized rust as the tertiary focal detail, and a final anchor-point-driven flake/peel mask.
 - **File:** tutorials/texturing-metal-from-scratch-in-substance-painter.md
 
+
+### How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=l2W67e5MQuk
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md
+
 ---
 
 ## Tag Reference
