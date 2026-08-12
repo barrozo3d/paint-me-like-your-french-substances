@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=8biEy1D30Bc
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "11.0.0+ (AutoCage feature usage confirms this floor per release-notes-painter-11.0.md; exact build not shown on screen)"
+tags: [generator, masks, anchor-point, blend-mode, ambient-occlusion, thickness, position-map, high-to-low-poly, cage, basecolor, procedural, alpha, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Hand Painted Workflow in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -414,30 +410,90 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:32] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [1:36] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [2:31] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [4:13] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [6:59] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [11:06] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+- [11:53] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
+- [17:38] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_007.jpg
+- [19:54] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_008.jpg
+- [22:36] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_009.jpg
+- [23:43] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_010.jpg
+- [25:00] tutorials/frames/hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A full procedural-to-hand-painted pipeline for stylized characters: build a black-and-white **value map** first (using bakes + generators, never colors), convert that value construction into a base color palette with the **Gradient filter** sampling an **anchor point**, optionally push it further with the new **Stylization filters**, then finish with manual hand-painting on top — demonstrated end-to-end on a zombie/undead great white shark character with harpoons.
 
 ### Summary
-[PENDING EXTRACTION]
+Official Adobe (presenter "Dave") walkthrough built around one core thesis: values, not colors, are what make a hand-painted texture read as three-dimensional — colors can be desaturated from any classical painting and the volumes still read clearly. The video shows the full pipeline in order: an AutoCage-assisted bake on a segmented (per-part high/low poly) low-poly mesh, building a grayscale value map purely from generators driven by baked mesh maps (AO, Light generator, Position), grouping those value layers and creating an **anchor point** from the group so the whole value construction can be resampled procedurally, converting that anchor point's grayscale output into a full color palette using the **Gradient filter** (remaps black→white to a chosen n-color gradient), repeating gradients per-element (body vs. teeth vs. eyes) for local color variation, layering local-color-value passes (dirt, metal edgewear, thickness-driven glow) with varied blend modes, demonstrating the new **Stylization filters** (presets like "hand painted style", brush-stroke count/scale controls, blend/replace modes) as an optional inspiration pass, and finally showing real freehand painting on top with a specific brush setup (square alpha, pen pressure on stroke opacity, low spacing) — closing with progress shots at 1 hour and 2 hours of manual painting.
 
 ### Key Steps
-[PENDING EXTRACTION]
+**Baking:**
+1. Model was pre-segmented per-part into matching `_low`/`_high` poly pairs (teeth, harpoons, main body, etc.) so Substance can restrict each bake to its own island pair.
+2. In Baking Mode: bake at 4K, set **Match = By Mesh Name** (verify every object has its high/low pair), **Anti-aliasing = 16x**, and use the new **AutoCage** feature (on by default; can be switched to "Automatic Experimental") to auto-generate a tight per-element cage without manual cage painting.
+3. Bake Normal, Ambient Occlusion, Curvature, and Thickness maps. On a low-poly mesh (~7K triangles here), AO can show contamination at mesh-intersection borders — fix via the AO baker's **Self Occlusion → Only Same Mesh Name** setting.
+
+**Value construction (Base Color channel, no hue yet):**
+4. New fill layer named "Main Value" in a mid-dark neutral gray — this becomes the base all subsequent value layers build on top of; avoid pure black/white (an "impressionism"-style value range, not pushed to extremes, reads better and matches current pastel-leaning stylized trends).
+5. Add a black-masked layer, mask generator = **Ambient Occlusion** (the baked AO map), Levels-adjusted for more contrast, blend mode **Multiply** — darkens crevices without affecting highlights.
+6. Add a black-masked layer using the **Light generator**, angled downward (to represent shadow), tuning Highlight Glossiness/Highlight Level, blend mode Multiply at reduced opacity — builds a shadow pass.
+7. Add a second Light generator layer angled upward for a highlight pass; watch for overexposure (it flattens the high-poly detail baked into AO/curvature); use **Light Attenuation** to stop the light reaching unwanted areas (e.g. the belly).
+8. Duplicate a light-generator layer, temporarily recolor it bright (a visualization trick to see exactly where it's affecting the mesh) while tuning Highlight Glossiness for a tight specular-like hot-spot, then set the color back to white once positioned.
+9. Group all value layers (Ctrl+G), name the group (e.g. "My Values"), then right-click the group → **Create Anchor Point** — anchor points can target entire groups, not just single layers, letting the whole value construction be resampled elsewhere in the stack.
+
+**Color construction (Gradient filter on the anchor point):**
+10. New fill layer → Base Color → set the fill source to **Anchor Points** → sample the values anchor point (this procedurally merges/reads all the grouped value layers as one grayscale input).
+11. Right-click that layer → add a **filter**, scoped to Color only → **Gradient filter**. Set the number of color stops (e.g. 4) and assign a color to each stop — black remaps to the darkest stop's color, white to the lightest, values in between interpolate. Avoid extremes; shift hue slightly between stops (e.g. green → teal/blue) for a livelier, less monotone palette. Values can be re-tuned any time non-destructively since the whole chain stays procedural.
+12. Repeat steps 10–11 per distinct element needing a different local palette (e.g. a separate gradient fill layer masked to just the teeth) — this is how per-part **local color values** are built without hand-painting each part separately.
+
+**Local color value & detail layers:**
+13. "Local color value" concept: neighboring surfaces with the same lighting still read as different tones in life (skin vs. shirt) — recreate this with a darker desaturated layer masked to specific mesh parts (via mesh-item/polygon selection, e.g. selecting the harpoon/rope submesh directly since it's a separate mesh island), blend mode Multiply at reduced opacity for a subtle local-tone shift; **Linear Dodge** works better than Multiply for pushing a part *brighter* instead (e.g. teeth).
+14. Add a Dirt generator layer (Grunge Amount zeroed out, Dirt pushed up) topped with a **Blur Slope filter** (lower Intensity Divided, e.g. to 10, for smaller splotches) set to Multiply at low opacity — adds organic value breakup without literal grunge texture.
+15. Add a **Metal Edgewear** generator layer (Highlight Level pushed, Grunge Amount zeroed) masked additionally by a **Position generator** set to Multiply so the edgewear concentrates only on the mesh's upper areas — then set that combined layer to Linear Dodge at ~20-25% so it reads as a subtle silhouette-breaking guide rather than a literal metal material.
+16. A "position layer" trick used later: a Position-generator mask that progressively desaturates lower parts of the mesh, drawing the eye toward the upper/character-defining areas.
+17. A **Thickness**-map-driven fill layer (Levels-inverted to isolate thin areas), blend mode tried at Linear Dodge then settled on **Color**, to make thin membrane-like areas (fins, gills) glow/read differently — placed below the "blood"/dirt-generator red layer in the stack.
+18. Symmetry-assisted manual masking: paint a black mask by hand (with Symmetry enabled and the symmetry axis nudged to the model's actual center) to isolate the upper-body region for a separate color pass (e.g. a darker shark "countershading" tone), tested through several blend modes (Color, Value, settling on **Overlay** at reduced opacity to preserve existing value work).
+19. "Giraffe principle" for organic pattern breakup: patterns in nature fade gradually rather than cutting off abruptly (large spots centered, shrinking toward extremities) — replicate with a dot-pattern generator, varying dot size/density across the transition zone rather than a hard mask edge.
+20. Final detail layers: a warm brownish light-generator pass on the belly (bounce-light feel, breaks up over-uniform color), the desaturating Position-mask layer (#16), one more Light-generator highlight pass for final punch, and a top-level noise texture layer to break up remaining color uniformity across the whole surface.
+
+**Stylization filters (optional inspiration pass):**
+21. Right-click the values/color group → add a **Stylization filter**, scoped to Color only. It replaces (by default) the group's rendered result with an AI/procedural artistic reinterpretation. Presets (e.g. "Hand Painted Style") change brushstroke character/direction; **Blend Mode** can switch the filter from Replace to Linear Dodge/Overlay/etc. to mix stylization back with the original colors; a **Stylization amount/opacity** slider recovers more of the original gradient-based color as it's lowered. Brush Stroke section exposes **Strokes Amount** and **Strokes Scale** (smaller scale = finer strokes); a "Colorful Strokes" variant adds extra hue variation but can be extreme — best mixed in at partial opacity via a non-Replace blend mode as inspiration rather than a final result.
+
+**Hand-painting on top:**
+22. Manual painting setup: basic round/hard brush, **Alpha = Square** (for a more organic/textured stroke edge), Size Pen Pressure removed, Pen Pressure enabled on **Stroke Opacity** instead, Spacing set very low, base Stroke Opacity kept relatively low (Painter's opacity response is described as "heavy" by comparison to some other paint apps).
+23. Workflow: hit `P` to sample a color directly from the existing procedural base, paint in small value pushes to build up volume by hand on top of the procedural foundation — described as the most time-consuming but most enjoyable part of the process. Iterative: ~1 hour of painting = broad value pushes on upper/lit areas + extra teeth saturation; ~2 hours = full polish pass. The presenter organizes these into separate folders per painting stage so any stage remains independently tweakable later.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Baking Mode: Match by Mesh Name, Anti-aliasing 16x, **AutoCage** (Automatic / Automatic Experimental), AO baker Self Occlusion (Only Same Mesh Name)
+- Generators: Ambient Occlusion, Light generator (Highlight Glossiness, Highlight Level, Light Attenuation, direction knobs), Position generator, Dirt generator, Metal Edgewear generator, dot-pattern generator, Thickness (as a fill-layer mask source)
+- Blend modes used throughout: Multiply, Linear Dodge, Color, Overlay, Value
+- Anchor Points (creatable on groups, not just single layers) — sampled as a fill-layer color source
+- Gradient filter (color-stop count, per-stop color assignment) — Color-channel-scoped filter
+- Blur Slope filter (Intensity Divided)
+- Stylization filter (Presets incl. "Hand Painted Style", Blend Mode, Stylization amount, Strokes Amount, Strokes Scale, "Colorful Strokes")
+- Symmetry (with adjustable center offset)
+- Brush setup for hand-painting: Square alpha, Pen Pressure on Stroke Opacity (not Size), low Spacing, low base Stroke Opacity
+- Levels adjustment (used repeatedly to retune AO/thickness/gradient masks)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — combines baking setup, deep generator/anchor-point/gradient-filter chaining, and freehand painting technique in one continuous pipeline.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not confirmed from an on-screen version watermark in the captured frames. However, the **AutoCage** feature used at the very start of the bake ("a new feature... which is on by default, but you can also change this to automatic experimental") is a direct, confirmable match to `references/release-notes-painter-11.0.md`, which lists **"experimental Auto-cage generation"** as a headline addition in **11.0.0** (2025-03-11) — this places the video at Painter 11.0.0 or later. No later version-specific feature (e.g. Skew Correction, OpenPBR) appears on screen, consistent with an 11.0.x/11.1.x-era recording, though that upper bound isn't independently confirmed.
 
 ### Tags
-[PENDING EXTRACTION]
+`generator` `masks` `anchor-point` `blend-mode` `ambient-occlusion` `thickness` `position-map` `high-to-low-poly` `cage` `basecolor` `procedural` `alpha` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"How to make SKIN TEXTURES in Substance Painter"** (`tutorials/how-to-make-skin-textures-in-substance-painter.md`, J Hill) and **"How to TEXTURE EVERYTHING in Substance Painter"** (`tutorials/how-to-texture-everything-in-substance-painter.md`, J Hill) — both share the anchor-point-driven, generator-heavy, big-to-small detail-hierarchy philosophy this video also teaches, though on realistic rather than stylized/hand-painted targets. Cross-referenced by shared tags: `anchor-point`, `generator`, `masks`, `ambient-occlusion`.
+- **"REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER"** (`tutorials/realistic-creatures-hand-painted-textures-in-sustance-painter.md`, Jared Chavez) — closest thematic match in the library: also a hand-painted creature workflow with anatomy-driven color-zone blocking, though built more manually from the start rather than through this video's procedural value→gradient pipeline. Worth reading together for two different routes to the same "hand-painted creature" destination.
