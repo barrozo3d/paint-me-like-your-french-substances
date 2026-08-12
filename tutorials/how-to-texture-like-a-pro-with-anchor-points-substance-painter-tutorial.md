@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=l2W67e5MQuk
 author: Jared Chavez
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified (UI consistent with pre-12.1 era, approximate)"
+tags: [anchor-point, masks, layers, fill-layer, paint-layer, blend-mode, roughness, basecolor, height, emissive, procedural, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -278,30 +274,68 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:07] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_000.jpg
+- [1:32] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_001.jpg
+- [2:28] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_002.jpg
+- [3:55] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_003.jpg
+- [7:28] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_004.jpg
+- [8:20] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_005.jpg
+- [9:20] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_006.jpg
+- [9:52] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_007.jpg
+- [10:20] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_008.jpg
+- [11:50] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_009.jpg
+- [13:10] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_010.jpg
+- [13:55] tutorials/frames/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Three distinct production uses of anchor points as reusable mask references (not just the single "flake mask" use case shown briefly in this creator's other videos): (1) referencing a finished mask later to drive new color/roughness variations, (2) forward-planning utility-map masks (e.g. per-part roughness control) so future adjustments don't require repainting, and (3) building fully modular, reusable "anchor point library" materials (flaked paint, emissive burn/char) that combine multiple anchor-referenced masks with blend modes.
 
 ### Summary
-[PENDING EXTRACTION]
+A dedicated, focused breakdown of anchor points as a texturing tool, demonstrated live on an Allosaurus character texture. Defines an anchor point simply as a named reference point: right-click any mask -> `Add Anchor Point`, which lets that exact mask (unaltered by whatever paint/blur effects sit above it in the stack) be pulled into any later layer via a fill layer's Grayscale `Anchor Points` tab. Shows three concrete use cases in increasing complexity: (1) reusing a painted/blurred pattern mask to quickly generate several different color/roughness variations of the same pattern without repainting; (2) forward-thinking utility-map work — anchoring a body-part mask (horns) while building base color so that later roughness/SSS-map adjustments for just that part take seconds instead of a fresh paint pass, plus stacking multiple anchor-referenced layers with blend modes (`Overlay`, `Multiply`) to combine or localize inherited detail; (3) building genuinely complex, reusable "anchor point library" materials — a flaked-paint-over-metal material where painting reveals procedurally-driven flake detail, and a burn/char material combining charring, cracking, and emissive glow, both built from stacked anchor-referenced sub-layers and further customizable by dragging in different grunge tiles.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Anchor points are just named references to a specific mask's exact output,** independent of any effects layered on top of that mask afterward — right-click a mask -> `Add Anchor Point` to create one; name it descriptively (the video's example is named `Top Pattern`) since that name is how it's found later.
+2. **Use case 1 — reuse a finished mask to drive new variations:** to pull an anchor-referenced mask into a new effect, create a new `Fill Layer`, add a mask to it, `Add Fill` inside that mask, then in the fill's `Grayscale` source dropdown open the `Anchor Points` tab and select the named anchor — hovering each entry in the list highlights where that anchor lives in the model/stack, useful for finding the right one in a large project.
+3. **The anchor reference brings in the mask's raw painted/generated result only** — not any blur, paint, or other effect layers stacked on top of the original mask — described explicitly as "taking it as essentially a referenced mask... unaltered."
+4. **Once referenced, the new layer's mask can be edited completely independently of the original** — add a `Levels` adjustment (or any other mask effect) on the referenced copy without touching the source layer at all, so the original stays intact while spinning off a new variant.
+5. **Chain anchor points to quickly generate many pattern variants:** repeat the reference-and-recolor process (new fill layer -> reference the same or a different anchor -> new color/roughness value -> optional `Levels` to reshape the referenced mask) to build up several distinct-but-related pattern colors (e.g. blue, red, yellow variants of the same base pattern) in a few minutes rather than repainting each one from scratch.
+6. **Use case 2 — forward-plan utility-map masks while still working on base color:** if you anticipate needing to isolate a specific body part later (here: the horns) for a utility map like roughness or subsurface scattering, add an anchor point on that part's mask *now*, during the color pass, rather than waiting and having to hand-paint a fresh isolation mask later — described as "a little bit more forward thinking with my workflow."
+7. **Applying an anchored utility mask:** on the target channel (e.g. Roughness), add a new layer, add a mask, `Add Fill`, reference the saved anchor (e.g. `Horns Mask`) from the Anchor Points tab — the channel effect (drier/duller or wetter/glossier roughness) now applies only to that anchored region instead of the whole model.
+8. **Layer multiple anchor-referenced masks with blend modes to inherit and recombine detail down the stack:** demonstrated with a crack-detail mask that was originally anchored elsewhere in the stack — referencing it raw applies the cracks everywhere (undesirable), but adding it as a second fill layer set to `Multiply` against the already-localized horn mask confines the inherited crack detail to just the horn area. `Overlay` is used elsewhere in the same workflow to blend an anchored roughness value into existing values rather than replacing them outright.
+9. **Anchor points scale to per-part detail control across an entire model** without needing a fresh paint-and-isolate cycle each time — once the anchor exists, any future channel (roughness, height, emissive, SSS) can pull the same isolation mask.
+10. **Use case 3 — build fully modular "anchor point library" materials:** complex reusable materials are constructed by stacking a `Paint Layer` (the artist paints directly where the effect should appear) together with multiple layers/sub-effects that read from shared anchor points — demonstrated with a flaked-paint-over-metal material where painting reveals a procedurally-controlled flake pattern (tunable via `Levels` and a `Slope`/edge-break filter on the flake mask) rather than a single flat paint stroke.
+11. **Layer stacked anchor-driven sub-effects to build a single "smart" material with multiple visual components:** the burn/char material combines a charred-edge shape, cracking detail, and an `Emissive`-channel glow (enable Emissive, then paint the "burn shape") into one paintable material — painting once drives color, height/crack, and emissive simultaneously because each component is wired to the same underlying anchor-referenced control mask.
+12. **These library materials stay procedurally editable after being applied:** drag a different grunge/tile texture into the material's stack (it may need to be dragged to a different position in the stack to take visible effect) to change the pattern driving the effect across the whole model, without rebuilding the material from scratch.
+13. **General workflow principle stated directly:** anchor points are described as "one of the most underrated and undervalued things in a texturing workflow" — their real value compounds over a project as more of the mask library gets built up and referenced, turning what would be repeated manual paint/isolation work into fast reuse.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Core mechanic:** right-click a mask -> `Add Anchor Point` (named reference); reference it later via a Fill Layer's Grayscale source -> `Anchor Points` tab (sits alongside a `Resources` tab in the same picker)
+- **Confirmed anchor point names visible in the library dropdown (from a captured frame):** `BlackDotHeight mask`, `Wood mask`, `CavityMask mask`, `Drying Blood`, `SixCurl mask`, `PawHeight`, plus `Top Pattern` and `Horns Mask` named directly in the transcript — illustrates a real production-scale anchor library, not just one or two anchors
+- **Mask-stacking tools:** `Fill Layer`, `Add Fill` inside a mask, `Levels` (independent mask reshaping post-reference), `Paint Layer` (for library materials), `Slope` filter (edge break-up on a flake mask)
+- **Blend modes used to combine/localize anchor-referenced masks:** `Overlay` (blend a new value into existing), `Multiply` (confine inherited detail to an already-localized area)
+- **Channels demonstrated being driven by anchor-referenced masks:** Base Color, Roughness, Height, Emissive
+- **Library materials shown:** a flaked-paint-over-metal material (paintable flake exposure), a burn/char material (charring + cracking + Emissive glow, paintable "burn shape")
+- **Grunge/tile swap:** dragging a different grunge texture into a library material's stack changes the driving pattern across the whole model; may require repositioning within the stack to take effect
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — anchor points themselves are a simple mechanic (name a mask, reference it elsewhere), but recognizing *when* to plan for one (use case 2's forward-thinking utility-map setup) and *how* to compose several anchor-referenced layers with blend modes into a single reusable material (use case 3) requires prior comfort with Painter's layer stack and blend-mode behavior.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated explicitly. UI matches the same dark-theme layer-stack/fill-layer layout used throughout this creator's other videos (pre-12.1 era, not confirmed) — Grayscale source picker with separate `Resources` / `Anchor Points` tabs is the key UI element confirmed in a captured frame.
 
 ### Tags
-[PENDING EXTRACTION]
+anchor-point, masks, layers, fill-layer, paint-layer, blend-mode, roughness, basecolor, height, emissive, procedural, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — same creator; that video introduces anchor points as one masking tool among many (used there to drive a height/displacement effect from a finished flaked-skin mask); this video is the dedicated deep-dive on anchor points specifically, with two additional use cases (utility-map forward-planning, full library materials) not covered there.
+- [TEXTURING METAL from Scratch in SUBSTANCE PAINTER](texturing-metal-from-scratch-in-substance-painter.md) — same creator; that video's final rust-edge flake/peel pass is a direct production application of this video's anchor-point-driven technique, confirmed there via a captured `ANCHOR POINT` properties panel.
+- [How to TEXTURE EVERYTHING in Substance Painter](how-to-texture-everything-in-substance-painter.md) — different creator (J Hill); a much longer full-project demonstration built around the same anchor-point-as-mask-source principle, using one paintable control anchor to simultaneously drive several downstream effect layers (paint chips, leather cracks, decal grime) across an entire helmet — the same "one anchor, many derived channels" idea as this video's Use Case 3 burn/flake materials, at full-project scale.
+- Additional cross-links to other Jared Chavez tutorials will be added as more of his videos are ingested — see `tutorials/INDEX.md` for the current full list.
