@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=WrFqBNI6Tx4
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "OCIO feature introduced in Painter 7.4.0 (per transcript, likely a Whisper mis-transcription of '2021' as '2001'); demo project shown is a later post-7.4 build with ACES 1.2 preinstalled, exact version not stated on screen"
+tags: [color-management, texture-set, basecolor, roughness, normal-map, export, export-preset]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-3d-painter-aces---02---ocio-acescg-in-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 5
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance 3D Painter & ACES - 02 - OCIO & ACEScg in Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-3d-painter-aces---02---ocio-acescg-in-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Part 2 [0:00]
@@ -201,30 +197,58 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:14] tutorials/frames/substance-3d-painter-aces---02---ocio-acescg-in-painter/frame_000.jpg
+- [4:07] tutorials/frames/substance-3d-painter-aces---02---ocio-acescg-in-painter/frame_001.jpg
+- [5:57] tutorials/frames/substance-3d-painter-aces---02---ocio-acescg-in-painter/frame_002.jpg
+- [7:39] tutorials/frames/substance-3d-painter-aces---02---ocio-acescg-in-painter/frame_003.jpg
+- [8:25] tutorials/frames/substance-3d-painter-aces---02---ocio-acescg-in-painter/frame_004.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Configuring and understanding Substance Painter's actual OCIO/ACEScg Color Management project settings — the hands-on, in-app follow-up to Part 1's theory — covering project setup, the viewport display transform, colour-vs-scalar channel data, and how resource/HDRI import and texture export are each affected.
 
 ### Summary
-[PENDING EXTRACTION]
+Part 2/3 of Michael Wilde's (ILM London) ACES series. Demonstrates Substance Painter's Color Management section in the New Project dialog: choosing OpenColorIO as the color management system, picking a config (Substance's bundled ACES 1.0.3, ACES 1.2, or a Custom OCIO config file), and how selecting a config auto-sets the working color space to ACEScg. Explains OCIO "roles" (shorthand color-space transforms defined by the config file) via a Google-Translate analogy — the two that matter for texturing are Utility sRGB Texture (for 8/16-bit sRGB JPEGs/TIFFs, 2.2 gamma) and Utility Linear sRGB (for floating-point EXRs/HDRIs, treated as linear despite being in the sRGB gamut). Shows the new viewport color-management toggle buttons that apply a display transform (working ACEScg → monitor's sRGB, or Rec.709, etc.), demonstrated on Adobe's sample Dragon project, and shows this transform auto-disabling when viewing a non-basecolor channel. Introduces the fundamental Color Data vs. Scalar Data distinction (color data = seen directly, e.g. Base Color; scalar data = calculated only, e.g. Roughness/Height/Normal) and how to check which a channel is via Texture Set Settings (three small spheres icon = color data). Explains why the display transform is disabled for scalar channels (sRGB gamma would incorrectly scrunch pure value data). Shows per-resource color-space override on a fill layer's imported texture (a dropdown at the point of use, not global), and the same override for imported HDRIs/environments (Substance's term for HDRIs) — useful when handed an HDRI already converted to ACEScg. Closes by noting export settings mirror import settings except floating-point exports (e.g. height/displacement) get encoded in linear ACEScg by default, which is correct since that data is scalar anyway.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. In the New Project dialog, open the Color Management section (new in ACES-enabled versions of Painter).
+2. Set Color Management to OpenColorIO; a dropdown appears offering Substance's bundled ACES 1.0.3, ACES 1.2, or Custom (point to your own `.ocio` config file).
+3. Selecting an ACES config auto-populates default settings and sets the project's working color space to ACEScg — leave the rest as default for a standard ACES pipeline.
+4. Understand OCIO "roles" — config-defined shorthand transforms Painter needs so it knows how to interpret incoming/outgoing data: **Utility sRGB Texture** role for standard 8/16-bit sRGB images (2.2 gamma curve) and **Utility Linear sRGB** role for floating-point images (EXRs, HDRIs) that are sRGB-gamut but linear-encoded.
+5. In the viewport, use the new color-management toggle buttons to apply/remove the display transform (ACEScg working space → sRGB monitor space by default; other options like Rec.709 available for different displays).
+6. Note that switching the viewport from the full material view to a single non-basecolor channel (e.g. Spec/Roughness) automatically disables and locks out the display transform button.
+7. Check whether a given texture channel is Color Data or Scalar Data via **Texture Set Settings**: a channel with a three-sphere icon is color data (seen directly, e.g. Base Color); without it, it's scalar (calculated only, e.g. Roughness, Height, Normal, Metallic). Default channels can't be changed; custom channels can via a dedicated button.
+8. Understand the display-transform-disable rule: scalar channels never get an sRGB gamma transform because that would incorrectly bias pure numeric/value data — they're always shown/handled linearly.
+9. When texturing day-to-day, expect the viewport to look slightly darker/more contrasted under ACEScg vs. sRGB — this is expected and correct, not a bug. The color picker applies a color space to color-data channels but not to scalar-data channels (e.g. no color transform on the Normal map picker).
+10. Per-resource color-space override: on any imported texture used in a layer (demoed on a fill layer), click the resource's colour-space dropdown to override the interpretation for that one use only (not globally for every future use of that resource).
+11. Same override mechanism applies to imported HDRIs/Environments (Substance's term for HDRIs): click the environment's color-space option box to change interpretation — needed when an HDRI has already been converted to ACEScg rather than the default linear sRGB assumption.
+12. Export settings mirror import settings by default, with one difference: floating-point channel exports (e.g. Height as a displacement map) get encoded in the linear ACEScg color space per the OCIO config's defaults — acceptable since that data is scalar, not color, anyway.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **New Project → Color Management** section: Color Management System = OpenColorIO; Config dropdown = Substance / ACES 1.0.3 / ACES 1.2 / Custom; auto-sets Working Color Space = ACEScg.
+- **Viewport toolbar**: new color-management display-transform toggle buttons (monitor icon) — enable/disable and select target display space (sRGB, Rec.709, etc.); auto-disabled on scalar-channel-only views.
+- **Texture Set Settings** panel: per-channel color-data (three-sphere icon) vs. scalar-data indicator; custom channel color-space assignment button.
+- **Fill layer resource dropdown**: per-instance color-space override for an imported texture.
+- **Environment (HDRI) import**: color-space option box/dropdown, same override pattern as textures; demoed importing a custom linear HDRI from HDRI Haven.
+- **Export settings**: mirrors import color-space settings; floating-point exports default to linear ACEScg encoding.
+- OCIO roles referenced: Utility sRGB Texture (2.2 gamma, 8/16-bit), Utility Linear sRGB (floating-point, linear).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. The transcript states OCIO was added in Painter "V7.4" (Whisper mis-transcribed the year as "2001" — this skill's `references/version-tracker.md` confirms OCIO was actually introduced in **7.4.0, November 24, 2021**, so treat the video's stated "2001" as a transcription error, not a factual claim). The demo project itself (Adobe's sample Dragon asset) runs a later build with ACES 1.2 preinstalled as a selectable config; exact Painter build number is not shown on screen.
 
 ### Tags
-[PENDING EXTRACTION]
+`color-management`, `texture-set`, `basecolor`, `roughness`, `normal-map`, `export`, `export-preset`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Substance 3D Painter & ACES - 01 - Color Space Fundamentals** (`tutorials/substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d.md`) — Part 1/3, the color-theory prerequisite (color space, gamut, gamma/transfer function, ACES/ACEScg definitions) this video builds directly on.
+- **Substance 3D Painter & ACES - 03 - Textures in Maya and Blender** (`tutorials/substance-3d-painter-aces---03---textures-in-maya-and-blender-adobe-substance-3d.md`) — Part 3/3, carrying the ACEScg-configured textures set up in this video out to Maya and Blender for a matching render. Same continuous color-management sequence.
