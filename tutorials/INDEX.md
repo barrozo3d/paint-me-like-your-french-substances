@@ -131,11 +131,22 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=Dp2ZpGIaumA
 - **Author:** Adobe Substance 3D
+- **App:** Substance 3D Painter (destination only — UV prep shown in 3ds Max)
+- **Version:** not specified — no Painter UI shown, DCC-side UV work only
+- **Tags:** `uv` `texel-density` `game-engine` `unreal-export` `intermediate`
+- **Summary:** DCC-side (3ds Max) UV-unwrap prep for a shared trim-sheet texture: grid-snapping tileable UV shells, deliberately-stretched end caps, mapping long structural sections onto one repeated tileable strip, plus deform-mesh-to-trim, thin "construction line" details, decal planes, and a grunge overlay. No Substance Painter UI appears — the trim sheet itself is the artifact that later gets painted/applied in Painter. Cross-linked with the "Create Trim Sheets in Substance 3D Painter" Part 1/2 pair.
+- **File:** tutorials/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d.md
+
+
+### Realistic Painted Metal in Substance Painter | M24 Grenade Texturing
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=SAI-lrWrtKg
+- **Author:** Dolinskyi
 - **App:** [PENDING]
 - **Version:** [PENDING]
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d.md
+- **File:** tutorials/realistic-painted-metal-in-substance-painter-m24-grenade-texturing.md
 
 ---
 
