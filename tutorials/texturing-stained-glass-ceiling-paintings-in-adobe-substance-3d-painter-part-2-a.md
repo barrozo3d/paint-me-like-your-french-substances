@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=NCkQ1eq8a-o
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not confirmed on-screen; published ~August 2025, likely 11.x/12.0.x era (approximate)"
+tags: [generator, masks, anchor-point, opacity, roughness, metallic, height, normal-map, path-tool, procedural, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing Stained Glass & Ceiling Paintings in Adobe Substance 3D Painter: Part 2 | Adobe
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -119,30 +115,73 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:24] tutorials/frames/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a/frame_000.jpg
+- [0:50] tutorials/frames/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a/frame_001.jpg
+- [1:11] tutorials/frames/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a/frame_002.jpg
+- [1:42] tutorials/frames/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a/frame_003.jpg
+- [2:33] tutorials/frames/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a/frame_004.jpg
+- [2:56] tutorials/frames/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a/frame_005.jpg
+- [3:33] tutorials/frames/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a/frame_006.jpg
+- [4:05] tutorials/frames/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Building Gothic stained-glass windows entirely in texture (Path-tool curves, exported masks driving multi-color glass panes, a Tile-generator wireframe lattice) and a peeling, moss-flecked fresco ceiling painting (imported Stock artwork + Peeling Paint filter + Ambient Occlusion filter for depth).
 
 ### Summary
-[PENDING EXTRACTION]
+Part 2 of Adobe's official two-part Gothic Architecture series (Part 1: "Texturing Gothic Architecture in Substance 3D Painter" `UQkmXEWJr80`, also in this skill's library). Covers two independent builds on the same cathedral asset: (1) stained-glass windows — window-frame detail drawn purely with the Path tool and Symmetry, Bevel-generated anchor points used to localize dirt, a glass base layer whose Opacity is driven entirely by an *exported mask* from the frame-curves layer, a Tile-generator "wireframe" lattice built from a Polygon-generator anchor point used as the tile's Custom Image Input, and multiple duplicated glass-color layers (red/blue/green) each masked by an exported luminance mask with different Levels so the colors don't overlap; and (2) a fresco ceiling painting — an Adobe Stock image UV-projected onto the ceiling mesh, aged with the Peeling Paint filter (tuned conservatively so the artwork stays legible) plus an Ambient Occlusion filter to fake depth at the peeled edges, finished with subtle mold/fade grunge passes.
 
 ### Key Steps
-[PENDING EXTRACTION]
+**Stained-glass windows:**
+1. Finish window-frame detail purely in height (no added geometry): new fill layer, draw curves directly on the mesh with the Path tool; move vertices freely (precision isn't critical up front); enable Symmetry and correct its center offset so curves mirror properly; add more curves toward the window's center/lower section. Apply a Metal Sandblasted texture to this layer.
+2. Apply a Bevel filter to smooth the curve edges — this simultaneously generates Anchor Points reused later.
+3. New dark-gray fill layer with a Dirt generator; enable Micro Height and Micro Normal, and reference the anchor points from step 2 so dirt only collects around the curve grooves.
+4. Build the glass base layer: enable the Opacity channel, set Roughness very low, color dark gray.
+5. Right-click the frame-curves layer → **Export mask**, then apply that exported mask to the glass layer's Opacity — this makes everything transparent except the curved frame details; fine-tune opacity so the glass still reads as reflective, not fully see-through.
+6. With the Path tool again, draw decorative medieval crosses (a classic Gothic motif) onto a new layer filled with a Polygon grayscale generator; add another anchor point from this.
+7. New layer filled with a Tile generator, Pattern Type set to **Custom Image Input**, feeding in the polygon anchor points so every tile cell is filled with a polygon shape — this builds a wireframe-lattice look. Tune tiling size (for both the tile grid and the polygon texture) and Offset X/Y, and increase the polygon's **Explode** value to thicken the vertical/horizontal lines.
+8. In the Tile generator's Color tab, set **Luminance Random** to maximum, then export this mask the same way as step 5, for reuse as a color-variation driver.
+9. Return to the wireframe layer: drag in the Metal Sandblasted texture again to match the frame, add height information to both this layer and the crosses layer, and increase Polygon Tiling further to thin the wireframe lines.
+10. Duplicate the glass layer, set its base color dark red, add a black mask filled with the exported luminance mask from step 8, and adjust Levels to control color intensity/spread. Duplicate again for blue, then green — each with slightly different Levels so the three colors don't overlap.
+11. Add one more gray fill layer on top with Roughness and Metallic channels enabled, unifying the glass panes' surface response.
+12. Apply a grunge-style grayscale texture layer for realistic glass streaks; repeat with a green-tinted, different grunge variant for a mossy/moldy look — this completes the windows.
+
+**Fresco ceiling painting:**
+13. Recap of the Part-1 ceiling base: a main Concrete Cast texture, a Scratches generator, two Dirt variants (large + small), and two Moss variants concentrated near the edges — moss toned down and brightened so it isn't overpowering indoors.
+14. Import a ceiling-painting image (sourced from Adobe Stock), drag it onto the mesh, move the layer just above the base texture in the stack, switch its **Projection to UV**, adjust size/position in both 2D and 3D views, and set **UV Wrap to Repeat**.
+15. Add a **Peeling Paint filter**: first adjust its Technical Parameters (recolor, lower the Height Range), then in the main settings tune **Peeling Level** and **Flaking**, keeping values moderate so the underlying painting stays readable.
+16. Add an **Ambient Occlusion filter** above the painting layer to fake a subtle shadow/gap between the peeled paint and the concrete underneath.
+17. Add a greenish grunge-map layer above (scaled down, low opacity) for subtle simulated mold, plus a separate white layer using an "undergrunge" map to fade select areas without adding more peeling.
+18. Finish by darkening the base concrete-cast texture underneath so it reads more clearly through the peeled-paint gaps.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Path tool (curves, freely-editable vertices), Symmetry
+- Bevel filter → Anchor Points
+- Dirt generator (Micro Height, Micro Normal), anchor-point-driven masking
+- Opacity channel, exported layer masks (right-click → Export mask)
+- Polygon grayscale generator, Tile generator (Pattern Type: Custom Image Input, tiling size, Offset X/Y, Explode)
+- Luminance Random (Color tab), Levels adjustment
+- Roughness, Metallic channels
+- Concrete Cast texture, Scratches generator, Moss generator
+- UV projection, UV Wrap: Repeat
+- Peeling Paint filter (Technical Parameters: Height Range; main: Peeling Level, Flaking)
+- Ambient Occlusion filter, grunge/"undergrunge" maps
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — heavy chaining of generators, anchor points, and exported/re-imported masks across many dependent layers.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not confirmed from an on-screen version watermark in the captured frames (this video's UI theme doesn't show the small corner build-string other Adobe Substance3D videos in this batch display). Per external metadata this is Part 2 of Adobe's official Gothic Architecture series, published on the Adobe Substance 3D YouTube channel in August 2025 — consistent with the Painter 11.x/12.0.x era, but not independently verified against `references/version-tracker.md` from in-video evidence. Treat the version as approximate.
 
 ### Tags
-[PENDING EXTRACTION]
+`generator` `masks` `anchor-point` `opacity` `roughness` `metallic` `height` `normal-map` `path-tool` `procedural` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"Texturing Gothic Architecture in Substance 3D Painter: Part 1"** (video `UQkmXEWJr80`, planned later in this same ingest batch, same "Julia"/Adobe series, same cathedral asset) — Part 1 builds the base stonework (aged stone, brick patterns, moss, grime, decorative details) that this Part 2 video explicitly recaps and builds on top of for the ceiling fresco. Cross-link reciprocally once Part 1 is ingested.
