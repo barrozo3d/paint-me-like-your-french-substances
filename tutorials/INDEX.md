@@ -531,6 +531,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/realistic-texturing-tips-in-substance-painter.md
 
+
+### Creating Sole Patterns for Footwear with Anchor Points in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=AoGXdldOWQA
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a.md
+
 ---
 
 ## Tag Reference
