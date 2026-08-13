@@ -317,11 +317,32 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=6eRY49oxJNI
 - **Author:** 3DRedBox
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; UI consistent with the pre-12.1-era seen across this creator's other videos
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `anchor-point` `blend-mode` `alpha` `procedural` `basecolor` `roughness` `height` `normal-map` `opacity` `metallic` `smart-material` `texture-set` `iray-render` `viewport` `intermediate` `advanced`
+- **Summary:** Garment texturing (floral AI-generated pattern + crochet lace trim) starting from viewport/shader calibration (ACES tone mapping, Bent Normal, Alpha Blending), Marvelous-Designer-baked wrinkle alphas applied as Height data and routed through a Pass-Through Height-to-Normal effect layer via a channel-specific (not layer-wide) blend-mode trick, an AI-generated tiling pattern masked by an anchor-point-referenced UV-island selection, and an opacity-channel-driven lace decal system (two variants combined via Linear Dodge, sharpened with a Levels-on-Opacity filter) duplicated across every strap via anchor points instead of layer copies.
+- **File:** tutorials/texturing-womens-shorts-with-lace-trim-in-substance-painter.md
+
+### Paint On Baked Maps To Fix Issues | Substance Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=oRkgEuGKPtw
+- **Author:** Stu Lloyd (CG Stu)
+- **App:** Substance 3D Painter (Steam Edition)
+- **Version:** not specified beyond "Steam Edition" (confirmed in title bar)
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `baking` `mesh-maps` `ambient-occlusion` `normal-map` `uv` `texture-set` `blend-mode` `alpha` `color-management` `intermediate`
+- **Summary:** Focused problem-solving tutorial on hand-repairing baked-map artifacts (AO and Normal) directly in the layer stack without re-baking: expose AO/Normal as Replace-mode channels, rebuild a base fill from the real baked map, then use a Fill-layer-holding-the-baked-map + Pass-Through paint layer trick so Clone Stamp/Blur/Smudge brushes sample and repair the actual baked data instead of a transparent layer. Demonstrated fixing dodgy eye-socket AO blotches and warped normal-map edges.
+- **File:** tutorials/paint-on-baked-maps-to-fix-issues-substance-painter.md
+
+
+### Create Trim Sheets in Substance 3D Painter - Part2 | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=QoVWM-IKmFw
+- **Author:** Adobe Substance 3D
 - **App:** [PENDING]
 - **Version:** [PENDING]
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/texturing-womens-shorts-with-lace-trim-in-substance-painter.md
+- **File:** tutorials/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d.md
 
 ---
 
