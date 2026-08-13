@@ -729,6 +729,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa.md
 
+
+### How to Texture NavyCap In Substance Painter in English
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=dGmVGU7aHb4
+- **Author:** 3DRedBox
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-texture-navycap-in-substance-painter-in-english.md
+
 ---
 
 ## Tag Reference
