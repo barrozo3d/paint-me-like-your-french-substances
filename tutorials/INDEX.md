@@ -883,6 +883,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance.md
 
+
+### Substance Painter  - Creating Profesional Textures
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=eVRWXPJPjyE
+- **Author:** TriGon
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-painter---creating-profesional-textures.md
+
 ---
 
 ## Tag Reference
