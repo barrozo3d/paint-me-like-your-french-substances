@@ -817,6 +817,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/baking-in-substance-3d-painter-83-adobe-substance-3d.md
 
+
+### Substance Painter Beginner To Pro - Course
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=UCKwN3QA_FM
+- **Author:** TriGon
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-painter-beginner-to-pro---course.md
+
 ---
 
 ## Tag Reference
