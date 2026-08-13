@@ -1059,6 +1059,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** "Paris" (demonic Parasect) — the origin project later referenced/reused in Chavez's Dragonite video. Foundation-then-freehand workflow: base color + gradient, AO used for hue-shifted (not just darkened) shadow color, brushstroke-grain procedurals for happy accidents, then a single freehand Paint layer using a modified Palette Knife brush with a "never undo strokes" discipline. Continuous Marmoset Toolbag round-tripping from the start of hand-painting. Secondary asset (hand) built by copying the body's base layers then HSL-cooling for warm/cool contrast. Cross-linked with Dragonite, Smart Materials Demonstration, Hand Painted Skin Textures, Master Texturing.
 - **File:** tutorials/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial.md
 
+
+### HOW to Make UDIMS for UNREAL ENGINE
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=fonCA0jiEF8
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-make-udims-for-unreal-engine.md
+
 ---
 
 ## Tag Reference
