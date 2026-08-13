@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=FIvOFo-zbms
 author: 3DRedBox
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen"
+tags: [layers, fill-layer, paint-layer, masks, generator, procedural, alpha, stencil, uv, texel-density, tri-planar, roughness, height, basecolor, blend-mode, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 11
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Using UV set and Stencils In Substance Painter -- English version
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py using-uv-set-and-stencils-in-substance-painter----english-version <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -343,30 +339,67 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:47] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_000.jpg
+- [5:07] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_001.jpg
+- [6:05] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_002.jpg
+- [8:50] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_003.jpg
+- [9:56] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_004.jpg
+- [13:12] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_005.jpg
+- [15:45] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_006.jpg
+- [17:07] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_007.jpg
+- [19:56] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_008.jpg
+- [21:06] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_009.jpg
+- [23:19] tutorials/frames/using-uv-set-and-stencils-in-substance-painter----english-version/frame_010.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Two-part technique video: (1) using a Fill layer's **UV set to UV set projection** source to independently fix a tiled pattern's scale and rotation per UV island without re-baking or hand-rotating each island, and (2) using imported real-photo **Stencils** (live on-surface projected masks, S+mouse navigation) instead of generic procedural generators to hand-place natural, non-repetitive wood-imperfection detail.
 
 ### Summary
-[PENDING EXTRACTION]
+Part 1 demonstrates the problem on a test cube: when a UV layout is packed tightly (rotated islands to save space), a tiled Fill-layer pattern reads at mismatched scale/rotation per island under normal UV projection, and Tri-Planar projection only half-fixes it (breaks on complex shapes, can't target individual faces). The fix is baking a second UV channel (UV set 1) authored purely to have correct scale/rotation per island (accepting its own UV overlaps/cuts), then setting the Fill layer's Projection to **UV set to UV set projection** with Source = that second UV set — the visible texture still renders through UV set 0's layout but reads scale/rotation from UV set 1. Demonstrated live on a real wood-cabinet project fixing a Directional Noise generator's inconsistent scratch direction across drawer faces. Part 2 covers importing wood-imperfection **Stencils** (single images or Photoshop-built stencil sheets) via the Paint tool's Stencil field, live-transforming them on the 3D surface (hold **S** + right-mouse-drag to scale, **S** + left-mouse-drag to rotate, middle-mouse-drag to pan — requires English Windows locale or the shortcut breaks), then painting/erasing through them layer by layer to build up an edge-wear and surface-imperfection pass. Ends with a full layer-stack breakdown: base Metal Edge Wear + Dirt generator layer with a Subtract paint layer removing unwanted areas, several stencil-driven paint layers adding wear detail, then two Grunge (Scratched/Dripped) low-opacity paint passes with a Levels cleanup, and a final edge-focused stencil pass plus a Subtract layer removing wear from the model's actual edges to avoid double detail.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. On the test cube, add a Fill layer with a tiled pattern (base UV projection) — observe scale AND rotation mismatch between packed UV islands.
+2. Try **Tri-Planar** projection — fixes rotation/scale globally but can't be constrained per-face and breaks down on complex (non-cube) geometry.
+3. In the DCC/UV tool, author a second UV channel (UV set 1) laid out purely for correct per-island scale/rotation (ignore seams/overlaps — it's never used for baking real texture data).
+4. Back in Painter, set the Fill layer's **Projection → UV set to UV set projection**, **Source → UV set 1** (vs. UV set 0 = no effect / original layout) — texture now renders through UV set 0's islands but inherits scale+rotation from UV set 1.
+5. Applied on the real cabinet project: a Directional Noise generator (edge-wear direction) read inconsistently per drawer face under plain UV projection; switching its projection Source to the second authored UV set fixed direction and scale simultaneously, without manually duplicating/rotating the generator per face.
+6. Import wood-imperfection **Stencils** (Assets panel, single images or a Photoshop-built stencil sheet saved/imported as a stencil resource).
+7. On a Paint layer, load a stencil image into the Paint tool's Stencil slot — it appears as a live semi-transparent overlay on the 3D mesh.
+8. Navigate the stencil with the keyboard held down: **S + right-mouse-drag** = scale, **S + left-mouse-drag** = rotate, **middle-mouse-drag** = pan/reposition. (Note: breaks if the OS language isn't English.)
+9. Paint through the positioned stencil to stamp the real-photo detail onto the surface; use the eraser/black paint afterward to remove any transferred areas that don't read naturally.
+10. Repeat with additional stencil images on separate paint layers (keep each stencil pass on its own layer for independent control) — layer 1-2 use one image, layer 3 another, etc.
+11. Final breakdown: base layer = Metal Edge Wear generator + Dirt generator with a Subtract-blend paint layer removing generic-looking areas; multiple stencil paint layers stack the hand-placed detail; two low-opacity Grunge (Scratched, Dripped) passes add secondary noise, cleaned up with a Levels filter to avoid a noisy mask; a final stencil pass increases edge intensity; a closing Subtract layer removes wear specifically from the model's real geometric edges (so the Metal Edge Wear generator isn't fighting the hand-placed edge detail).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `Fill layer → Projection` = `UV set to UV set projection`, `Source` = target UV set (0 = no effect / base layout, 1/2 = authored fix channels)
+- `Fill layer → Projection` = `Tri-Planar` (partial fix, global only, breaks on complex shapes)
+- `Directional Noise` generator (edge-wear direction), re-sourced from UV set 0 to a custom UV set
+- Paint tool → `Stencil` field (single image or Photoshop-built stencil sheet resource)
+- Stencil navigation: `S` + RMB drag = scale, `S` + LMB drag = rotate, MMB drag = pan
+- `Metal Edge Wear` generator + `Dirt` generator (base mask layer)
+- `Subtract` blend-mode paint layers (removing generic/edge detail)
+- `Grunge Paint Scratched`, `Grunge Paint Dripped` (low-opacity secondary noise passes)
+- `Levels` filter (mask cleanup after grunge passes)
+- Channels affected: mask/Height (visible in captured frames as Roughness-channel mask stack)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced (UV-set projection trick is a lesser-known feature; stencil workflow is straightforward once the keyboard-modifier navigation is understood)
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen; no version-gated UI markers visible in the captured frames — consistent with the pre-12.1-era UI seen across this creator's other ingested videos.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `paint-layer` `masks` `generator` `procedural` `alpha` `stencil` `uv` `texel-density` `tri-planar` `roughness` `height` `basecolor` `blend-mode` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **How to use UDIMs properly!** (`tutorials/how-to-use-udims-properly.md`) — same creator, same underlying theme of UV-layout choices controlling in-Painter texture fidelity (texel density there, per-island scale/rotation here).
+- **Texturing a Worn Wooden Stool in Substance Painter** (`tutorials/texturing-a-worn-wooden-stool-in-substance-painter.md`) — same creator, another case of fixing per-UV-island tiling/rotation mismatches on a real prop.
+- **Speed Up Your Substance Painter Workflow with This Easy Trick!** (`tutorials/speed-up-your-substance-painter-workflow-with-this-easy-trick.md`) — same creator, same "practical workflow trick" video format.

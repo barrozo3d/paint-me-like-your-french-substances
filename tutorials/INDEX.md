@@ -690,10 +690,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=qkRJjA5rTcY
 - **Author:** FlippedNormals
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated numerically; Scattering channel added via Texture Set Settings > Channels > "support by shader", consistent with a modern shader-driven channel model, tentative
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `smart-mask` `blend-mode` `basecolor` `roughness` `height` `alpha` `texture-set` `pbr` `intermediate`
+- **Summary:** Reusable character-region Smart Mask library workflow: hand-paint a saturated single-channel mask per recurring facial/character region (eye soft, eyelids, eye sharp, mouth, nose, ears, horns), save each as a Smart Mask (not Smart Material) under a consistent naming prefix, then drag independent (non-live) copies into new Fill layers across Color, Roughness, and Scattering/Subsurface channels for near-instant block-in on a new character. Closes with a local-grading trick: a Pass-Through Levels paint layer masked by a reused smart mask to confine a correction to one region only.
 - **File:** tutorials/speeding-up-character-texturing-with-smart-masks---substance-painter.md
 
 
@@ -712,10 +712,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=FIvOFo-zbms
 - **Author:** 3DRedBox
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; no version-gated UI markers, consistent with this creator's other pre-12.1-era videos
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `procedural` `alpha` `stencil` `uv` `texel-density` `tri-planar` `roughness` `height` `basecolor` `blend-mode` `intermediate` `advanced`
+- **Summary:** Two-part technique video: fixing per-UV-island tiling scale/rotation mismatches with a Fill layer's `UV set to UV set projection` source referencing a second, purpose-built UV channel (no re-baking or per-island manual rotation needed), demoed on a test cube then a real wood-cabinet project's Directional Noise edge-wear generator; then a real-photo Stencil workflow (S+RMB scale, S+LMB rotate, MMB pan) for hand-placing natural, non-repetitive wood-imperfection detail, finished with a full layer-stack breakdown (Metal Edge Wear + Dirt generator base, stencil paint layers, low-opacity Grunge passes, edge-focused cleanup).
 - **File:** tutorials/using-uv-set-and-stencils-in-substance-painter----english-version.md
 
 
