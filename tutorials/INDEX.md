@@ -470,10 +470,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=PvZYHYQ3_uc
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; SpaceMouse support introduced in Painter 8.0.0
+- **Tags:** `viewport` `beginner`
+- **Summary:** Short hardware tip: configuring a 3Dconnexion SpaceMouse (all models natively supported) via the separate 3Dconnexion Settings app — Navigation Mode (Object/Camera/Helicopter + Lock Horizon), Rotation Center pivot behavior, and Buttons (radial menus on Compact, direct Painter keyboard-shortcut binding on Enterprise/Pro). Notes Painter can't navigate via SpaceMouse and paint with mouse/tablet simultaneously.
 - **File:** tutorials/3dconnexion-spacemouse-in-substance-3d-painter-adobe-substance-3d.md
 
 

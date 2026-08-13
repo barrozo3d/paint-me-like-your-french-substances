@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=PvZYHYQ3_uc
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; SpaceMouse 3D navigation support was introduced in Painter 8.0.0 (2022-03-08, per this skill's version-tracker), this video demonstrates it as an established native feature so postdates 8.0.0"
+tags: [viewport, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/3dconnexion-spacemouse-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 3
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # 3Dconnexion SpaceMouse in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py 3dconnexion-spacemouse-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -106,30 +102,45 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:44] tutorials/frames/3dconnexion-spacemouse-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [1:35] tutorials/frames/3dconnexion-spacemouse-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [2:49] tutorials/frames/3dconnexion-spacemouse-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Configuring a 3Dconnexion SpaceMouse (Enterprise/Pro/Compact, natively supported) for 3D navigation in Substance Painter via the separate 3Dconnexion Settings program.
 
 ### Summary
-[PENDING EXTRACTION]
+Short hardware-peripheral tip. All SpaceMouse models work out of the box with a default control scheme once connected; customization happens in the external **3Dconnexion Settings** app (opened via the Compact device's left-button Properties menu, or by right-clicking the 3Dconnexion taskbar icon). The Settings app is context-sensitive to the last-active window — confirm "Substance 3D Painter" is named top-left before changing anything, and pick the correct device from the top dropdown. Covers the Speed slider (global sensitivity) and Advanced Settings' two key sections: **Navigation Mode** (Object Mode — default, knob acts as the 3D object itself; Camera Mode — free camera always aimed at a target point; Helicopter Mode — hovering-helicopter-style control; plus a Lock Horizon checkbox, since Painter already locks horizon for regular mouse/keyboard but this needs setting separately for the SpaceMouse) and **Rotation Center** (Auto lets the driver move the pivot/camera target automatically; turning it off pins it to the mesh origin; three more options control when the pivot indicator is shown, including Hide). The **Buttons** window configures physical button behavior — Compact models default to 4-option radial menus per button (Properties on the left button and Fit on the right are called out as particularly useful defaults); Enterprise/Pro models can have buttons assigned directly to Painter-specific keyboard shortcuts (e.g. Flow, Brush Size, Channel Toggling). Explicitly states there are no universally "right" settings — experiment until it feels natural. Hard limitation: Painter does not support simultaneous SpaceMouse navigation and mouse/tablet painting — alternate between the two rather than using them at once.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Connect any SpaceMouse model (Enterprise, Pro, or Compact) — Painter uses a default control scheme automatically with recent drivers.
+2. Open **3Dconnexion Settings**: on a Compact device, press the left button and choose Properties; otherwise right-click the 3Dconnexion taskbar icon → Open 3Dconnexion Settings.
+3. Confirm the settings panel is targeting Painter (check the program name top-left; switch to the Painter window first if it isn't, then reopen Settings) and select the correct device from the top dropdown.
+4. Adjust the **Speed** slider for overall sensitivity across all axes/directions.
+5. Open **Advanced Settings** to configure **Navigation Mode** (Object / Camera / Helicopter) and **Lock Horizon**.
+6. Configure **Rotation Center** behavior (Auto pivot movement vs. fixed to mesh origin; pivot-indicator visibility, including Hide).
+7. Open the **Buttons** window to configure physical button behavior: Compact models get 4-option radial menus per button by default (Properties/Fit called out as useful); Enterprise/Pro models can bind buttons to Painter keyboard shortcuts directly (Flow, Brush Size, Channel Toggling suggested).
+8. Remember Painter cannot navigate with the SpaceMouse and paint with mouse/tablet simultaneously — alternate between the two input methods.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+External **3Dconnexion Settings** application (not part of Painter itself): Speed slider; Advanced Settings → Navigation Mode (Object/Camera/Helicopter) + Lock Horizon; Rotation Center tab (Auto / fixed-to-origin, pivot visibility including Hide); Buttons window (radial menus on Compact, direct keyboard-shortcut binding on Enterprise/Pro).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner (hardware/peripheral configuration, no texturing content).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter, version not stated on screen. This skill's `references/version-tracker.md` notes SpaceMouse 3D navigation support was introduced in Painter **8.0.0** (2022-03-08); this video demonstrates it as a mature, already-native feature, so it postdates 8.0.0 but the exact build isn't shown.
 
 ### Tags
-[PENDING EXTRACTION]
+`viewport`, `beginner`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+None found sharing 2+ tags — this is the only hardware/peripheral-focused entry in the knowledge base so far.
