@@ -696,6 +696,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/speeding-up-character-texturing-with-smart-masks---substance-painter.md
 
+
+### Anchor Point Magic 01 - Double Layer Setup in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=Ix4eknncFU0
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan.md
+
 ---
 
 ## Tag Reference
