@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=KzoJkdqyn7E
 author: Abe Leal 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (receiving end) + ZBrush 2026.2 (sending end, via the ZBrush-to-Substance Bridge plugin)"
+version: "ZBrush 2026.2 confirmed on screen; Painter version not stated (both apps must be updated to their latest version for the Bridge to work)"
+tags: [baking, mesh-maps, high-to-low-poly, cage, id-map, udim, texture-set, uv, masks, ambient-occlusion, world-space-normal, curvature, thickness, height, normal-map, opacity, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Zbrush to Substance Painter Bridge! NEW TOOL!
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py zbrush-to-substance-painter-bridge-new-tool <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -244,30 +240,62 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:00] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_000.jpg
+- [1:55] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_001.jpg
+- [3:05] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_002.jpg
+- [5:55] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_003.jpg
+- [7:00] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_004.jpg
+- [8:40] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_005.jpg
+- [9:05] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_006.jpg
+- [10:10] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_007.jpg
+- [11:20] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_008.jpg
+- [13:20] tutorials/frames/zbrush-to-substance-painter-bridge-new-tool/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Demo of the (then-new) **ZBrush-to-Substance Painter Bridge** plugin — a one-click send that replaces the traditional manual export/import-and-manually-configure-baking pipeline: ZBrush automatically detects a sub-tool's lowest subdivision level as the low-poly and highest as the high-poly, sends both into a freshly configured Painter project, and (optionally) triggers the mesh-map bake automatically, with no manual Baking dialog setup required on the Painter side.
 
 ### Summary
-[PENDING EXTRACTION]
+Required ZBrush-side setup: a single sub-tool containing every mesh piece (all planks/elements of the demo birdhouse asset live in one sub-tool, not separate ones), UVs present on the **lowest subdivision level** (authored here in RizomUV, though ZBrush's own UV Master works too), and sculpted detail built up through subdivision levels (up to 11.73M polygons on the highest level in this demo). The **Substance Bridge** panel (Tool → Substance Bridge, dockable) exposes: **Subdivision Levels** (Low & High — auto-detects lowest/highest sub-tool subdivision as low-poly/high-poly respectively, no manual renaming needed), **Texture Sets** (Per SubTool = one texture set for everything vs. Per PolyGroup = a separate texture set per poly group — the latter warned against by default since it wastes UV space when groups share the same UV layout), **Send PolyPaint**, **Smooth Normals**, **Auto-Bake Maps** (bakes mesh maps automatically on arrival in Painter, no manual Baking-dialog trip needed), **Force UV Auto-Unwrap**, and the **Send to Painter** button itself. On arrival, Painter auto-configures using a ZBrush-specific project template, sets bake resolution to 2K by default (adjustable, e.g. up to 4K), uses the **Automatic Cage** feature, saves the high-poly mesh to a temporary folder (meaning **Match by mesh name** cannot be used for this kind of single-combined-sub-tool send — bakes rely on the whole low mesh vs. whole high mesh, not per-part name matching), and mesh maps can be freely re-baked from within Painter afterward at a different resolution if needed. **UDIM support**: confirmed working (though possibly not an officially-designed feature) — replacing the low-poly's UV layout with a 4-UDIM-tile version and resending produces a Painter project with genuine multi-UV-Tile texture sets; the only hard rule when swapping UVs is that **no vertex may move, scale, or change** between sends — only UV coordinates — otherwise Painter's OBJ-vs-OBJ matching breaks and it will demand to reproject all sculpted detail (a visible warning at import time is the tell that something besides UVs changed). **Force UV Auto-Unwrap**: an option for skipping UV authoring entirely for quick tests/renders (not recommended for production) — Painter's own auto-unwrap generates a workable but visually rough UV layout (visible cuts/seams in the 2D UV view) that reads acceptably in the 3D viewport for a blocky asset like this; Adobe has stated further auto-unwrap improvements, particularly for hard-surface content, are coming in a Painter beta. **Send PolyPaint**: bakes ZBrush PolyPaint color data (demoed here from **Polygroups from PolyGroups**, giving each mesh element a distinct flat color) directly into Painter as a new Paint layer holding a baked texture resource (named `<object>_SingleUV_BaseColor` or similar) — the resulting texture can then be **dragged from the Assets panel directly into the Texture Set Settings' ID map slot**, after which a normal `Add Mask with Color Selection` mask (right-click a layer's mask → Color Selection, pick a polygroup's color) works exactly like a baked ZBrush-PolyPaint-to-ID-map workflow, letting you mask individual mesh parts (e.g. isolating just the roof planks for a bark/pine material) without a separate dedicated ID-map bake pass. **Subdivision Level = Current** (instead of Low & High): for sub-tools that only have one subdivision level (e.g. after using ZBrush's **Decimation Master** with Keep UVs enabled to convert a high-poly-only asset into a UV-preserving decimated low-poly, useful for quick renders/tests, not recommended for production unless targeting something like Nanite) — sends the mesh as-is with its own inherited UVs; since there's no separate high-poly reference, Auto-Bake does not fire automatically, but a manual bake ("use low poly mesh as high poly mesh") is still strongly recommended even without true high-to-low detail transfer, since baking still produces AO/world-position/world-normal data that Painter's generators depend on. **Per-PolyGroup texture sets**: isolating parts into distinct poly groups (e.g. roof separated from walls/base) before sending with Texture Sets = Per PolyGroup produces multiple independent UV sets/texture sets in Painter sharing the same underlying UV space — useful for toggling/isolating specific parts' work independently, but wastes UV space if the parts share UV real estate; the creator's general recommendation is to properly UV-pack everything (or group elements together in the DCC app) rather than rely on this split for production.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. ZBrush-side prerequisites: keep every mesh piece inside **one sub-tool**; author UVs on the **lowest subdivision level** (RizomUV, UV Master, or any UV tool); build detail up through higher subdivision levels normally.
+2. Open the **Substance Bridge** panel (Texture tab in ZBrush), set **Subdivision Levels = Low & High** (auto-detects lowest/highest sub-tool subdivision — no manual renaming of anything required, since everything lives in one sub-tool).
+3. Set **Texture Sets = Per SubTool** for one combined texture set (recommended default; Per PolyGroup fragments into many texture sets sharing the same UV space, which is wasteful).
+4. Click **Send to Painter** — Substance/Painter needs a moment to import the low-poly, import the high-poly, and (if **Auto-Bake Maps** is enabled) run the mesh-map bake automatically with no manual Baking-dialog setup.
+5. In Painter, adjust bake resolution afterward if needed (default 2K, bump to 4K etc.) and re-bake — note the high-poly was saved to a temporary folder by the Bridge, so **Match by mesh name** isn't applicable here (it's a whole-low-vs-whole-high match, not per-part).
+6. For UDIMs: replace the low-poly subdivision level's UVs with a multi-tile UV layout (Import a new OBJ at that subdivision level) — the only permitted change is UV coordinates; **no vertex may move, scale, or shift**, or Painter's OBJ matching breaks and it will prompt to reproject all detail (a clean re-send shows no such warning).
+7. For quick/non-production texturing with no UVs at all: delete the sub-tool's UVs, enable **Force UV Auto-Unwrap** in the Bridge panel, and send — Painter auto-generates a workable (if visually rough, seam-heavy) UV layout suitable for blocky/simple assets.
+8. For an ID-map-style masking workflow without a dedicated ID bake: in ZBrush, generate **Polygroups from PolyGroups** (or paint PolyPaint directly for hand-painted base work), enable **Send PolyPaint** in the Bridge panel, and send — Painter receives the PolyPaint data as a baked texture inside a new Paint layer.
+9. Drag that baked PolyPaint texture from the Assets panel directly into **Texture Set Settings' ID map slot**, then use standard `Add Mask with Color Selection` (right-click a mask → Color Selection, pick a polygroup color) to mask individual parts — equivalent to a full ZBrush-PolyPaint-to-ID-map export/bake pipeline, done inline.
+10. For a high-poly-only asset with no true low-poly: use ZBrush's **Decimation Master** (with **Keep UVs** enabled) to generate a UV-preserving decimated version, set the Bridge's **Subdivision Level = Current** (not Low & High, since there's only one level now), and send — inherits UVs from the original mesh.
+11. Even without a true high-to-low-poly relationship, still run a manual bake ("use low poly mesh as high poly mesh") in Painter — worthwhile for the AO/world-position/world-normal data Painter's generators depend on, even without real detail transfer.
+12. For independently-toggleable per-part texture sets sharing one UV layout: isolate mesh parts into separate ZBrush poly groups before sending with **Texture Sets = Per PolyGroup** — produces multiple UV sets/texture sets in Painter; generally recommended only for quick iteration, not production (properly UV-pack or DCC-side-group elements instead, to avoid wasted UV space).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- ZBrush **Substance Bridge** panel: Subdivision Levels (Low & High / Current), Texture Sets (Per SubTool / Per PolyGroup), Send PolyPaint, Smooth Normals, Auto-Bake Maps, Force UV Auto-Unwrap, Send to Painter
+- Painter Baking: **Automatic Cage**, ZBrush-specific project template, resolution (2K default, adjustable), `Match by mesh name` not applicable to Bridge-sent single-combined-mesh sends
+- `UV Tiles` (UDIM) support confirmed working via the Bridge
+- `Add Mask with Color Selection` fed by a Bridge-sent **PolyPaint** texture dragged into the **ID map** slot in Texture Set Settings
+- ZBrush **Decimation Master** (Keep UVs) for a UV-preserving high-to-low conversion when no true low-poly exists
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — mostly plugin/UI operation, but requires understanding of the underlying low/high-poly-baking and UDIM/UV concepts to use correctly (matching-vertex rule when swapping UVs, why Match-by-mesh-name doesn't apply here, why baking still matters without a true high-poly).
 
 ### App & Version
-[PENDING EXTRACTION]
+ZBrush 2026.2 confirmed on screen; Substance 3D Painter version not stated (both apps explicitly required to be updated to their latest version for the Bridge to function).
 
 ### Tags
-[PENDING EXTRACTION]
+`baking` `mesh-maps` `high-to-low-poly` `cage` `id-map` `udim` `texture-set` `uv` `masks` `ambient-occlusion` `world-space-normal` `curvature` `thickness` `height` `normal-map` `opacity` `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Preparing Models for Substance 3D Painter in Blender](preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d.md) / [...in Maya](preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d.md) / [...in 3DS Max](preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d.md) — same underlying concepts (Texture Sets, ID Maps, geometry-to-Painter handoff) explained for other DCC apps' manual export/import pipelines, which this ZBrush Bridge plugin automates end-to-end.
+- [Substance Painter Tutorial: Texturing the Coin](substance-painter-tutorial-texturing-the-coin.md) — different creator (Abe Leal 3D); a small-prop baking-and-masking pipeline sharing this video's creator, useful for comparing manual vs. Bridge-automated baking setup.
+- [Complex Wooden Medieval Door Tutorial in Substance 3D Painter](complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md) — same creator (Abe Leal 3D); a multi-UDIM production project using the traditional manual Auto-Cage baking pipeline this Bridge plugin is designed to streamline.

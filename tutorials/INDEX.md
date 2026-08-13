@@ -954,10 +954,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=KzoJkdqyn7E
 - **Author:** Abe Leal 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter (receiving end) + ZBrush 2026.2 (sending end, via the ZBrush-to-Substance Bridge plugin)
+- **Version:** ZBrush 2026.2 confirmed on screen; Painter version not stated
+- **Tags:** `baking` `mesh-maps` `high-to-low-poly` `cage` `id-map` `udim` `texture-set` `uv` `masks` `ambient-occlusion` `world-space-normal` `curvature` `thickness` `height` `normal-map` `opacity` `intermediate`
+- **Summary:** Demo of the ZBrush-to-Substance Painter Bridge plugin: one-click send auto-detects a sub-tool's lowest/highest subdivision as low/high-poly, auto-configures the Painter project (Automatic Cage, ZBrush template) and optionally auto-bakes mesh maps with zero manual Baking-dialog setup. Confirms working (if unofficial) UDIM support via UV-only edits between sends, a Force UV Auto-Unwrap option for UV-free quick tests, a Send PolyPaint feature that bakes ZBrush polygroup/paint color directly into a Painter texture draggable into the ID map slot for instant Color-Selection masking, a Decimation-Master-based path for high-poly-only assets (Subdivision Level = Current), and Per-PolyGroup multi-texture-set export.
 - **File:** tutorials/zbrush-to-substance-painter-bridge-new-tool.md
 
 ---
