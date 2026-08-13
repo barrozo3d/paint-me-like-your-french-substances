@@ -718,6 +718,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/using-uv-set-and-stencils-in-substance-painter----english-version.md
 
+
+### Tips & Tricks in Substance 3D Painter to Make Semi-Realistic Textures | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=ng-Wb7RaYHU
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa.md
+
 ---
 
 ## Tag Reference
