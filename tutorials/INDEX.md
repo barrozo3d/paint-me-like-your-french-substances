@@ -1015,6 +1015,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Product-demo tour of a commercial 12-material anchor-point-driven Smart Material pack, doubling as an architecture lesson: every material is a folder with one base "Paint Here" layer that drives all secondary anchor-referenced effects (HSL variation, Lifted Edge, cracks, bubbling, dents) automatically. Covers Paint Peeled (starts blank by design), Bullet Hole (Opacity punch-through), Dent Chipped Paint (pressure drives dent depth + paint erosion together), Bubble (scaled-up Dirt 3 generator), Damaged/Black Leather (material-chaining: drag one Smart Material underneath another's active layer), mask-preset integration (reposition + `Linear Dodge` blend to make a dropped-in mask read with existing paint layers), Rust Streak, Burnt Streak, Burnt Emissive (pressure-driven live Emissive-channel glow), Burnt Fabric Holes (Opacity burn-through), Fabric Tear/Torn Cloth, and Tape (Sticker Shape brush-driven outline). Cross-linked with Building Masks Explained, Peeled Paint Anchor video, Texturing Metal from Scratch, Master Texturing, and Substance3D's Stylized Crab Smart Material creation video.
 - **File:** tutorials/substance-painter-smart-materials-demonstration.md
 
+
+### How to TEXTURE in SUBSTANCE PAINTER | ORC TEXTURES
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=lbMaYHlflp0
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-texture-in-substance-painter-orc-textures.md
+
 ---
 
 ## Tag Reference
