@@ -828,6 +828,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/substance-painter-beginner-to-pro---course.md
 
+
+### Creating 3D Paths in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=Ro5dADu3vpM
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
