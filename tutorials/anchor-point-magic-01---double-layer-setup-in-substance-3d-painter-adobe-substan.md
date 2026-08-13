@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=Ix4eknncFU0
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; window title reads 'License: 171 days remaining - Anchor_Video_01_Texture_Begin'"
+tags: [anchor-point, masks, layers, fill-layer, paint-layer, generator, blend-mode, basecolor, roughness, metal-rough, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Anchor Point Magic 01 - Double Layer Setup in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -168,30 +164,65 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:17] tutorials/frames/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan/frame_000.jpg
+- [2:04] tutorials/frames/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan/frame_001.jpg
+- [3:03] tutorials/frames/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan/frame_002.jpg
+- [4:10] tutorials/frames/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan/frame_003.jpg
+- [5:03] tutorials/frames/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan/frame_004.jpg
+- [6:28] tutorials/frames/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan/frame_005.jpg
+- [7:24] tutorials/frames/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan/frame_006.jpg
+- [8:22] tutorials/frames/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+The foundational Anchor Point technique: two duplicate paint layers (White_Paint and Blue_Paint) share one wear mask by having the second layer's mask reference the first's Anchor Point — a single Levels adjustment on the referenced copy then controls both layers' wear transition simultaneously, and any live edit (including new hand-painting) to the layers below the anchor updates every reference automatically.
 
 ### Summary
-[PENDING EXTRACTION]
+First video in Adobe's "Anchor Point Magic" series (the foundational entry the whole later series builds on), demonstrated on a bronze valve/pipe-fitting model. **Note on this file's transcript:** the raw Whisper transcript came back mostly in Dutch (a language-ID artifact, not genuine Dutch narration) — surviving English technical terms and the captured frames (which show exact on-screen layer names) were used to reconstruct these notes faithfully. Builds a **White_Paint** fill layer (Roughness increased for shine, Base Color darkened) over a base bronze material, duplicates it to make **Blue_Paint** (Base Color changed to a blue tint), then works on White_Paint first (Blue_Paint temporarily hidden): adds a black mask, adds a **Metal Edge Wear** generator (dirt/rust-dripping generators mentioned as alternatives not used here), inverts it so most of the model is picked up and only edges are worn away, and tunes Wear Level and Contrast. Adds an **Anchor Point** to this White_Paint mask via the small magic-wand-style icon (confirmed in-frame as "Anchor Point" panel showing "Anchor path name: White_Paint mask") — the anchor automatically inherits its parent layer's name, no separate naming needed. Turns Blue_Paint back on, adds a black mask to it too, adds a fill inside that mask, and on the fill's grayscale image field switches to the second **Anchor Points** tab (alongside the normal Resources/textures tab) to select the White_Paint anchor — the Blue_Paint mask now exactly mirrors White_Paint's mask, live. Adds a **Levels** adjustment on top of this referenced fill so the shared wear transition's midpoint/range can be retuned independently for the blue layer — pushing the midpoint reveals a thin rim of white paint peeking out from under the blue paint at the wear edges. Demonstrates a non-anchor-specific bonus: stacking a second generator (**Surface Worn**) onto the White_Paint mask and setting the Blue_Paint mask's own generator to **Multiply** blend mode so it combines with (rather than replaces) the anchor-referenced value. States and then demonstrates the single most important rule of anchor points: **an anchor can only be referenced by something positioned above it in the layer stack** — moving Blue_Paint above White_Paint visibly breaks the reference link (the anchor reference indicator disappears/errors) because Painter resolves anchors bottom-to-top, not top-to-bottom. Final demonstration of anchors being fully dynamic and live: adds a brand-new paint layer positioned **below** White_Paint (so it composites into the stack before the anchor point captures it) using a "Charcoal Full Frame" brush/alpha and hand-painting directly onto the model (press **X** to flip brush color) — the fresh paint strokes immediately show up correctly filtered through both the White_Paint anchor's wear mask and the Blue_Paint layer that references it, confirming the anchor always reflects the live composited result of everything beneath it, not a frozen snapshot.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Start from a base material (bronze) already applied to the model.
+2. Create a fill layer named **White_Paint** (double-click to rename); adjust Roughness (increased, for shine) and Base Color (darkened) to taste.
+3. Right-click White_Paint → **Duplicate**; rename the copy **Blue_Paint**; change its Base Color to a blue tint.
+4. Hide Blue_Paint temporarily and work on White_Paint first.
+5. Add a black mask to White_Paint (starts fully hidden, as expected for a black mask).
+6. Add a **generator** to the mask — specifically **Metal Edge Wear** (other options like dirt/rust-dripping generators mentioned as alternatives).
+7. Enable the generator's **Invert** option so most of the model is covered by the effect and only edges get worn away; tune **Wear Level** and **Contrast** to control the transition's softness/sharpness.
+8. Add an **Anchor Point** to White_Paint's mask via the magic-wand icon in the mask's toolbar — the anchor automatically takes the parent layer's name (no separate naming step needed).
+9. Re-enable Blue_Paint's visibility; add a black mask to it as well.
+10. Inside Blue_Paint's mask, add a **fill**; click its grayscale/image field, then switch from the default Resources tab to the second **Anchor Points** tab, and select the White_Paint anchor — Blue_Paint's mask now exactly mirrors White_Paint's mask via live reference (a "fill" layer type is required to hold an anchor-point reference — this is the standard mechanism used throughout the series).
+11. Add a **Levels** adjustment on top of that anchor-referencing fill, inside Blue_Paint's mask, to independently retune the shared wear transition for the blue layer (e.g. push the midpoint to reveal a thin rim of white paint under the blue paint's worn edges).
+12. Optional bonus (not anchor-specific): add a second generator (**Surface Worn**) onto the White_Paint mask for extra detail; set the Blue_Paint mask's own generator to **Multiply** blend mode so both effects combine additively rather than one replacing the other.
+13. **Critical rule, demonstrated directly:** an Anchor Point can only be referenced by a layer positioned above it in the stack — moving Blue_Paint above White_Paint in the layer order visibly breaks the anchor reference (Painter resolves anchor references bottom-to-top, treating the stack almost like sequential code rather than a simple top-controls-bottom hierarchy).
+14. Demonstrate live dynamism: add a new paint layer positioned **below** White_Paint (so the anchor point captures it as part of the composited result beneath it); pick a grunge-style brush/alpha (e.g. "Charcoal Full Frame"), press **X** to flip the brush foreground color, and hand-paint directly onto the model — the new strokes are immediately, correctly reflected through both the anchor-driven White_Paint wear mask and the Blue_Paint layer referencing it, with no manual re-linking needed.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **White_Paint** fill layer (Roughness + Base Color only, tuned) — carries the series' first Anchor Point on its mask.
+- Mask generator: **Metal Edge Wear** (Invert, Wear Level, Contrast); bonus second generator **Surface Worn**.
+- **Anchor Point** (added via the mask's magic-wand icon; auto-named after the parent layer).
+- **Blue_Paint** fill layer (duplicate of White_Paint, Base Color changed) — its mask holds a fill referencing the White_Paint anchor via the fill's **Anchor Points** tab (second tab next to the normal Resources tab in the grayscale/image picker), plus a **Levels** adjustment for independent retuning.
+- Blend mode **Multiply** used to combine a second mask generator with the anchor-referenced value (bonus technique).
+- A plain **paint layer** positioned below the anchor's own layer, hand-painted with a grunge alpha brush (e.g. Charcoal Full Frame; **X** to flip brush color) to demonstrate live anchor propagation.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate (introductory anchor-point mechanics, approachable once the bottom-to-top referencing rule is understood).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number stated on screen; window title bar reads "License: 171 days remaining - Anchor_Video_01_Texture_Begin" (subscription license countdown plus project filename, not a version indicator).
 
 ### Tags
-[PENDING EXTRACTION]
+`anchor-point`, `masks`, `layers`, `fill-layer`, `paint-layer`, `generator`, `blend-mode`, `basecolor`, `roughness`, `metal-rough`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Anchor Point Magic 02 - Micro Normals & Micro Height in Substance 3D Painter** (`tutorials/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe.md`) — series 2/4, direct continuation.
+- **Anchor Point Magic 03 - Paint Peel Effect in Substance 3D Painter** (`tutorials/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc.md`) — series 3/4.
+- **Anchor Point Magic 04 - Rust Fade Effect in Substance 3D Painter** (`tutorials/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substanc.md`) — series 4/4.
+- **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's independent anchor-point deep-dive; complementary treatment of the same core reuse mechanism this video introduces from first principles.
+- **Creating Fabric stitches / Sole Patterns / Leather Material for Footwear with Anchor Points** (footwear anchor-points trilogy) — all three explicitly reference "the basic anchor point series on this channel," which is this exact series.
