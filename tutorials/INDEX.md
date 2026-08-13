@@ -762,6 +762,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/how-to-fix-the-substance-painter-viewport-to-match-unreals.md
 
+
+### Native Illustrator File Support in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=_lMpyz0Vhx8
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
