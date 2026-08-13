@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=386o64sxSpw
 author: 3DRedBox
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; the Pass tool's panel is confirmed 'PAINT ALONG PATH' in a captured frame (same as this creator's slipper video) — per references/version-tracker.md this pins the tutorial to the Painter 9.x-10.x window, before the 11.0.0 rename to Filled Path"
+tags: [layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, alpha, procedural, MatFX, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, opacity, ambient-occlusion, mesh-maps, export, export-preset, channel-packing, iray-render, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to Create a Realistic Poison Bottles Material Using Substance Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-create-a-realistic-poison-bottles-material-using-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -434,30 +430,72 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [2:12] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_000.jpg
+- [3:00] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_001.jpg
+- [5:49] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_002.jpg
+- [9:09] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_003.jpg
+- [12:57] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_004.jpg
+- [13:34] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_005.jpg
+- [16:45] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_006.jpg
+- [19:02] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_007.jpg
+- [20:53] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_008.jpg
+- [26:01] tutorials/frames/how-to-create-a-realistic-poison-bottles-material-using-substance-painter/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Glass-bottle texturing built around a Painter-side Translucency/Absorption-channel glass shader, a Marmoset Toolbag glass-material handoff, ornate ornament detail built from alphas and a custom Pass-tool brush with radial symmetry, and anchor-point-driven mask reuse across folders (metal generators referencing height data collected from the ornament layers, and the glass folder subtracting all four ornament masks so glass and metal read as one continuous carved surface).
 
 ### Summary
-[PENDING EXTRACTION]
+Starts by establishing the base glass/metal split before any detail work: switch the shader to `PBR Metal Roughness`, enable `Translucency` and `Absorption`, add the `Absorption Color`, `Translucency`, and `Ambient Occlusion` channels via Texture Set Settings, then build two single-fill-layer base materials (a Translucency-enabled `Glass` fill for the body, a `Bronze Armor`-based `Metal` folder for the neck/base) masked by paint selection. Exports a first pass (Document Channels + Normal + AO, PNG, 4K) purely to prototype the glass shader in Marmoset Toolbag: wiring Base Color→Albedo, Roughness→Roughness, Metallic→Metalness/Reflectivity, Translucency→Transmission mask, Normal (Y-flipped for DirectX), and AO→Ambient Occlusion, with Ray Tracing enabled for the glass to render correctly. Returns to Painter to build the actual ornamental detail: four numbered "ornament" fill/paint layers, each Height-only, masked by pre-made alphas positioned in the 2D/3D view and isolated to specific UV islands via a Paint layer using `Subtract` blend and manual island deselection; the third ornament switches its Fill projection to `Cylindrical` for a seamless wrap across a UV seam. A Pass-Through `Filter` layer stacks `Height to Normal` (World Units off, Normal Intensity ~5), `MatFX HBAO` (AO-only, generates ambient occlusion directly from the height/normal detail just painted), and a final `Sharpen` filter (Color/Roughness/Metal, ~0.5). A fourth ornament layer is hand-painted using the creator's own downloadable Pass-tool brush preset (`3D Red Box Path Alpha Roll`, loading `3D Red Box Dynamic` into the grayscale slot) with Radial Symmetry (Mirror Y, angle-span/count tuned to match the existing ornament, count 7). Overlap/intersection between ornament layers is cleaned up by anchor-pointing each ornament's mask and cross-referencing it as a Subtract layer in the others. The glass folder — which shows none of this ornament detail by default since it's a separate folder — gets four Subtract-blended Fill sublayers, each loading one ornament's anchor point, so the etched pattern reads through the glass too. Glass material finishing: dark-grey base with Absorption Color removed (color handled directly instead), a `3D Linear`-generator-masked color-variation layer (a gradient invisible in Painter's own viewport but visible once rendered in Marmoset), a fingerprint-alpha-driven roughness-variation layer, and a scratches layer (small negative height, ~0.5 roughness). The metal material is built from an imported smart material, whose mask is expanded to cover the full metal folder area (so ornament color reads on the metal too), then wired to a new Pass-Through `Ornament Plus` paint layer (anchor-pointed) that collects all the ornament height data — every relevant generator inside the metal smart material (oxidation dirt, edge wear, etc.) has its Image Input reference switched to load the `Ornament Plus` anchor point on the Height reference channel, so the metal's procedural wear responds directly to the carved ornament geometry. Finishes with a second Marmoset pass, including a troubleshooting note: if glass renders dark/opaque instead of clear, set its Base Color near-white in Painter and increase Transmission Depth in Marmoset.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Set up the glass shader in Painter first, before any detail work:** switch shader preset to `PBR Metal Roughness` (ASM), scroll down and enable `Translucency` (and optionally `Absorption` if color should be set in Painter rather than the render engine); add `Absorption Color`, `Translucency`, and `Ambient Occlusion` channels via Texture Set Settings.
+2. **Build minimal base materials in two folders:** a single `Glass` fill layer (Translucency on, Roughness lowered) masked to the body by paint selection; a `Bronze Armor`-style `Metal` folder for the neck/base caps.
+3. **Export a prototyping pass and build the glass shader in Marmoset Toolbag:** Export Textures with output template `Document Channels + Normal + AO`, PNG, 4K; in Marmoset enable Ray Tracing (required for correct glass), create a Glass material, and wire Base Color→Albedo, Roughness→Roughness, Metallic→Metalness/Reflectivity, Translucency mask→Transmission, Normal (Y-flip for DirectX format), Mixed AO→Ambient Occlusion, with Absorption Color optionally routed to the Depth map or skipped in favor of `Use Albedo`.
+4. **Build ornament detail as a series of numbered Height-only fill/paint layers**, each masked by a pre-made alpha positioned via the 2D/3D view; isolate each ornament to the correct UV island using a `Paint` sublayer with `Subtract` blend (select all UV islands with Polygon Fill, then deselect/re-select the target island).
+5. **Use `Cylindrical` projection instead of the default UV projection** on the third ornament layer specifically to get a seamless wrap across a UV seam that the default projection couldn't hide.
+6. **Boost and consolidate the detail with a Pass-Through `Filter` layer** (applied to all channels): `Height to Normal` (Use World Units off, Normal Intensity tuned to ~5 for a stronger read than the raw height data alone), `MatFX HBAO` (AO channel only, height depth tuned) to generate believable ambient occlusion directly from the just-added height/normal detail rather than relying only on baked mesh-map AO, and a `Sharpen` filter applied to Color/Roughness/Metal (~0.5).
+7. **Hand-paint the final ornament with a custom Pass-tool brush and radial symmetry:** import the creator's downloadable brush preset (`3D Red Box Path Alpha Roll` for the Pass tool, `3D Red Box Dynamic` loaded into the grayscale slot as the base), pick an alpha, tune brush size down from 50→40→30 and pressure falloff, switch Symmetry to `Radial Symmetry` with `Mirror Y`, and tune Angle Span/Count (7) to match the existing ornament's repeat rhythm.
+8. **Clean up overlapping ornament intersections with anchor-point cross-referencing:** add an Anchor Point to an earlier ornament's mask (e.g. ornament #2), then in a later ornament (#4) add a new Fill sublayer loading that anchor point, raise its slider, and set the sublayer's blend mode to `Subtract` — removes the unwanted overlap without repainting either mask by hand.
+9. **Propagate the ornament pattern into the glass folder via anchor points:** since the Glass folder is a separate mask/folder and shows none of the ornament detail by default, add four `Subtract`-blended Fill sublayers to the glass folder's mask, one per ornament, each loading that ornament's anchor point and its slider raised — makes the etched ornament pattern read through the glass material too, not just the metal.
+10. **Finish the glass material:** pick a dark grey base color, remove/disable the Absorption Color channel on this layer (color handled via Base Color directly instead); add a `Color Variation` fill (Color + Roughness only, roughness ~0.05, dark color, black mask + `3D Linear` generator, inverted) — explicitly noted as invisible in Painter's own viewport but visible once rendered in Marmoset; add a `Roughness Variation` fill (Roughness only) masked by a fingerprint alpha (tiling raised) plus a grunge fill for extra breakup; add a `Scratches` layer (small negative Height, Roughness ~0.5) masked by a scratches alpha (tiling raised, balance lowered).
+11. **Finish the metal material starting from an imported smart material:** first expand the metal folder's mask to cover the full intended area (needed so ornament coloring reads correctly on the metal, not just the smart material's own default mask); add a Pass-Through `Ornament Plus` paint layer (applied to all channels, anchor-pointed) purely to collect the combined height data from all the ornament layers already built.
+12. **Rewire every relevant generator inside the imported metal smart material to read from the ornament geometry:** for each generator (oxidation/dirt, metal edge wear, etc.), open its Micro Details / Image Inputs section and load the `Ornament Plus` anchor point, setting its Reference Channel to `Height` — makes the smart material's built-in wear/dirt patterns respond to the actual carved detail instead of only the base mesh curvature/AO.
+13. **Re-export and verify in Marmoset**, with a specific glass troubleshooting fix: if the glass renders dark/opaque rather than clear, set its Base Color to near-white back in Painter, then increase the Transmission Depth setting in Marmoset.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Shader:** `PBR Metal Roughness` (ASM Metal Rough) with `Translucency` and `Absorption` enabled
+- **Channels added via Texture Set Settings:** `Absorption Color`, `Translucency`, `Ambient Occlusion`
+- **Smart material used:** an imported metal smart material (name not stated; generators rewired to reference the `Ornament Plus` anchor point), base metal starts from `Bronze Armor`
+- **External brush/tool assets used:** `3D Red Box Path Alpha Roll` (Pass-tool brush preset), `3D Red Box Dynamic` (grayscale base material for that brush), plus several pre-made ornament alphas
+- **Filters used:** `Height to Normal` (World Units off, Intensity ~5), `MatFX HBAO` (AO-only), `Sharpen` (Color/Roughness/Metal, ~0.5)
+- **Generator used:** `3D Linear` (glass color-variation mask, inverted)
+- **Fills/alphas used:** fingerprint alpha (roughness variation), grunge (roughness breakup), scratches alpha (glass imperfections)
+- **Projection technique:** one ornament layer's Fill `Projection` switched to `Cylindrical` specifically to hide a UV seam
+- **Blend modes used:** `Subtract` (UV-island isolation, ornament-intersection cleanup, glass-folder ornament propagation), `Linear Dodge` (mentioned as an alternative combine option), `Pass Through` (Filter layer, Ornament Plus collector layer)
+- **Anchor Point usage (this video's throughline):** one per ornament layer's mask (referenced for intersection cleanup between ornaments and for propagating the pattern into the separate Glass folder), plus one `Ornament Plus` anchor point on a dedicated Pass-Through collector layer, referenced by every generator inside the metal smart material via their Image Inputs / Reference Channel = Height
+- **Pass tool (Paint Along Path):** Radial Symmetry mode, Mirror Y, tuned Angle Span and Count (7) to match existing ornament rhythm
+- **Export settings:** output template `Document Channels + Normal + AO`, PNG (16-bit optional), 4K
+- **Marmoset Toolbag wiring:** Albedo=Base Color, Roughness=Roughness, Metalness/Reflectivity=Metallic, Transmission mask=Translucency, Normal (Y-flip for DirectX), Ambient Occlusion=Mixed AO, Ray Tracing enabled for glass; troubleshooting: near-white Base Color + increased Transmission Depth fixes dark/opaque glass
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — the core layer-building (ornament alphas, filters) is approachable, but the anchor-point cross-referencing across separate folders (Glass folder subtracting all four Metal-side ornament masks) and rewiring a smart material's internal generators to reference an external anchor point via Reference Channel = Height are genuinely advanced, non-obvious techniques; the glass shader also requires a two-application (Painter + Marmoset) mental model, not just Painter-side knowledge.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not stated on screen. The Pass tool's properties panel is confirmed titled `PAINT ALONG PATH` in a captured frame, matching this same creator's slipper video. Per `references/version-tracker.md`, this tool name was only used from Painter 9.0.0 until its 11.0.0 rename to Filled Path — pinning this tutorial to the same Painter 9.x-10.x window as the creator's other videos using this tool.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, alpha, procedural, MatFX, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, opacity, ambient-occlusion, mesh-maps, export, export-preset, channel-packing, iray-render, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to texture a realistic slipper model](how-to-texture-a-realistic-slipper-model.md) — same creator (3DRedBox); both confirmed via the "PAINT ALONG PATH" panel to date from the same Painter 9.x-10.x window, and both use anchor-point-referenced placeholder/collector layers as reusable mask sources.
+- [Texturing a Black Suit in Substance Painter](texturing-a-black-suit-in-substance-painter.md) — same creator; shares the Painter-to-Marmoset-Toolbag export/render handoff pattern and channel-packed texture wiring.
+- [Texturing a Worn Wooden Stool in Substance Painter](texturing-a-worn-wooden-stool-in-substance-painter.md) — same creator; shares the Pass-Through "collector" layer pattern (Ornament Plus here, Edge Plus there) used to feed height/AO data into downstream generators via anchor points.
+- [Texturing Women's Shorts with Lace Trim in Substance Painter](texturing-womens-shorts-with-lace-trim-in-substance-painter.md) — same creator; shares the Pass-Through Height-to-Normal effect-layer pattern for boosting normal intensity beyond what raw height data alone produces.
