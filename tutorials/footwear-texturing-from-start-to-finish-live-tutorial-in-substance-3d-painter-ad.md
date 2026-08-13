@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=s59xbaF4Q14
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen"
+tags: [layers, fill-layer, masks, blend-mode, texture-set, pbr, roughness, height, normal-map, emissive, stencil, alpha, uv, viewport, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Footwear Texturing from Start to Finish – Live Tutorial in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -382,30 +378,68 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:12] tutorials/frames/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad/frame_000.jpg
+- [2:23] tutorials/frames/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad/frame_001.jpg
+- [3:08] tutorials/frames/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad/frame_002.jpg
+- [7:18] tutorials/frames/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad/frame_003.jpg
+- [9:12] tutorials/frames/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad/frame_004.jpg
+- [10:18] tutorials/frames/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad/frame_005.jpg
+- [13:30] tutorials/frames/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad/frame_006.jpg
+- [16:15] tutorials/frames/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad/frame_007.jpg
+
+---
+
 ## Structured Notes
 
+**Note on transcript quality:** Whisper auto-detected large stretches of this creator's narration as Arabic (roughly [0:00]-[1:03] and [12:26]-[16:00]), producing garbled/untranslated Arabic text instead of the actual (apparently mixed Arabic/English) speech. Structured Notes below for those stretches are reconstructed from the surviving clear English fragments cross-checked against the captured frames, following the same approach used for the "Create Trim Sheets Part 1" tutorial's Dutch mis-transcription.
+
 ### Core Technique
-[PENDING EXTRACTION]
+Rapid material-assignment workflow for a fully-designed footwear model: drag-and-drop base materials from the Shelf onto UV shells, retune color/roughness/maps per-part, then reuse the exact same tuned material across many small parts via **copy layer → paste layer as instance** (linked instances) rather than re-tuning from scratch — followed by a finishing pass adding emissive "backlit" details, layered subtle multiply/screen blend-mode surface effects, a height-based logo emboss/deboss, and a hexagon-pattern stencil overlay detail.
 
 ### Summary
-[PENDING EXTRACTION]
+Adobe collaboration project-breakdown for a performance-sports-car-inspired sneaker. The bulk of the video is a live "trial and error" material pass: for each shoe part (leather panels, fabric/technical-fabric panels, knit lining, plastic/smoked-plastic pieces, laces, chrome lace wires, vinyl side panels, carbon-fiber heel counter, rubber outsole) the creator drags a Shelf material onto the mesh, retunes its color and roughness while checking how it reacts to scene lighting, and — critically — once a material/UV combo looks right, **copies that layer and pastes it as an instance** onto other same-material parts so edits propagate automatically and the whole shoe stays visually consistent from a small palette (black, gray, orange). Two vinyl panels get an **Emissive channel** added (Texture Set Settings → Channels → Emissive) so they "glow" when rendered, including one paired with a translucent glass piece so the emissive shows through it. The heel piece layers a carbon-fiber/paint-grunge base with a **Multiply**-blended spotted-concrete detail and a **Screen**-blended raw-concrete detail at 2% opacity for a barely-visible "surprise" fleck effect under light. The outsole reuses the vinyl material but keeps its **Height** map (rather than disabling it, as elsewhere) and boosts height intensity for a pseudo-displaced tread-detail look. Finishing touches: a logo layer's **Height** slider pushed to +1/-1 for an emboss/deboss effect (doubled by duplicating the layer), and a hexagon-pattern **stencil** used in bottom view to constrain hand-painting to a boundary on the outsole, then the stencil removed and the resulting paint layer set to **Overlay** blend mode at 50% opacity for a subtle secondary tread detail. Finished maps were exported and the final render's post-production was done in Photoshop.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Drag a material (e.g. leather) from the Shelf onto a UV shell; open its Properties, set a base color, and adjust Roughness while orbiting/checking how scene light reacts to it — used throughout as the "does this look right" test.
+2. For repeat/preview browsing: dragging-and-dropping a material resets UV scale, but **clicking** a Shelf material onto an already-scaled layer preserves the UV adjustments already made.
+3. To quickly reference a layer buried in the stack: drag any material onto the part to create a throwaway layer, use it to jump to that spot in the Layers panel, then delete the throwaway layer.
+4. **Isolate a layer for inspection:** hold **Alt** and click the small eye/visibility icon next to a layer's name — hides every other layer so only that one is visible.
+5. Once a material+UV+color combo is finalized on one part, **copy the layer**, select the target part's layer, and **Paste Layer as Instance** — creates a linked instance so any future edit to the source material propagates to every instance automatically (used repeatedly across small parts: pull tabs, triangles, eyelets, lace wires).
+6. Keep the material palette small and consistent on purpose — reuse the same handful of materials (leather, fabric, technical fabric, smoked plastic, knit, vinyl, carbon fiber, chrome) across the whole shoe with only color/UV variation, rather than introducing many different materials.
+7. Vinyl side panel: change base color, adjust UV scale/rotation to redirect the pattern, then in the material's texture maps **disable Roughness and Height** for a smooth, glossy look.
+8. Add glow: in **Texture Set Settings → Channels**, add an **Emissive** channel; an Emissive tab appears in the layer's material properties — enable/assign it so the part emits light when rendered (used on a vinyl side panel and, paired with an opaque/see-through glass material on adjacent small parts, so the emissive glow reads through the glass).
+9. Carbon-fiber heel counter: drag Carbon Fiber, disable its Roughness map to reduce shine, keep its normal-mapped weave detail, then blend a second **Smoked Plastic** material on top (adjust color/roughness) to combine both looks.
+10. Heel piece multi-material blend: base Paint Roll (grunge) material darkened to gray, layered with Smoked Plastic (black, normal map removed), then a **Spotted Concrete** layer set to **Multiply** blend (duplicated a few times to increase visibility), then a **Raw Gray Concrete** layer set to **Screen** blend at ~2% opacity — produces subtle light-reactive flecks nearly hidden in the material ("surprise element").
+11. Outsole: reuse the vinyl material, but this time **keep the Height map** (temporarily hide Base Color to inspect it alone) and **increase Height intensity** for a pseudo-displaced geometric tread look; restore color afterward and push Roughness up slightly for a real-rubber feel.
+12. Small bottom-of-shoe parts: same emissive-vinyl treatment as step 8, glossy variant, to keep light glowing through small details.
+13. Logo emboss/deboss: on the logo layer, the **Height** slider defaults near 0 (flush); pushing it to **1** or **-1** gives the logo a subtle raised (emboss) or recessed (deboss) effect; **duplicating the layer** doubles the apparent depth.
+14. Hexagon stencil detail on the outsole: switch to bottom view, position a hexagon-pattern **stencil** so the pattern fills the target area within its boundary, hand-paint over it, then **remove the stencil** to reveal the painted result; set that paint layer's blend mode to **Overlay** and reduce **Opacity to 50%** for a subtle secondary surface detail.
+15. Export texture maps for use in an external renderer/DCC app; this project's final beauty render's post-production was finished in Adobe Photoshop.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Shelf materials: Leather, Fabric, Technical Fabric, Knit, Smoked Plastic, Vinyl (glossy), Carbon Fiber, Paint Roll, Spotted Concrete, Raw Gray Concrete, Chrome-finish metal, Glass (opaque/translucent)
+- Alt + layer-visibility-eye (isolate layer)
+- Copy layer → **Paste Layer as Instance** (linked material reuse across parts)
+- Texture Set Settings → Channels → **Emissive** (add/enable channel for glow)
+- Material Texture Maps panel: enable/disable individual maps per layer (Roughness, Height, Normal, Color) — used to strip or keep specific maps per part
+- Blend modes: **Multiply** (spotted concrete detail), **Screen** at low opacity (raw concrete "surprise" fleck), **Overlay** at 50% (hexagon stencil paint detail)
+- Height slider on a flat-color fill layer (logo emboss/deboss, ±1 range; duplicate layer to double depth)
+- **Stencil** (hexagon pattern, bottom-view alignment, paint-then-remove-stencil workflow)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — no complex procedural generator/anchor-point stacking; the core skill is disciplined material reuse (paste-as-instance) and per-channel map management, plus a couple of simple blend-mode/height finishing tricks.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version **not stated on screen**; no version-gated filter/feature names appear in the (partially garbled) transcript or captured frames, so no version floor could be pinned from this video.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `masks` `blend-mode` `texture-set` `pbr` `roughness` `height` `normal-map` `emissive` `stencil` `alpha` `uv` `viewport` `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"Create Trim Sheets in Substance 3D Painter - Part 1"** (`tutorials/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d.md`, video `dE4LWGMwypc`) — shares the same transcript-quality caveat (Whisper mis-detected the language for large stretches); Structured Notes for both were reconstructed the same way, from surviving clear terms cross-checked against frames.
+- **"Texturing a Cyberpunk Building in Substance 3D Painter – Project Breakdown"** (`tutorials/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s.md`, video `gv9R6a6VPYQ`) — same Adobe-official project-breakdown format and Emissive-channel neon/glow technique (Texture Set Settings → Channels → Emissive), applied there to architectural signage instead of footwear accents.
+- **"Creating & Reusing Smart Materials in Substance 3D Painter | Stylized Crab"** (`tutorials/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub.md`, video `ZiWAe_iZ_CI`) — complementary material-reuse philosophy: that video formalizes a tuned layer stack into a portable Smart Material asset, while this video achieves similar consistency more informally via repeated copy → Paste Layer as Instance.
