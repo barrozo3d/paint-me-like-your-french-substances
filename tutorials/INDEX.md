@@ -476,6 +476,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/3dconnexion-spacemouse-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### How to create a paint peeling effect in Substance Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=JnWvMys9xNk
+- **Author:** Wes McDermott
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-create-a-paint-peeling-effect-in-substance-painter.md
+
 ---
 
 ## Tag Reference
