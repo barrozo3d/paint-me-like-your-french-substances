@@ -657,10 +657,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=yebv44cOYW4
 - **Author:** FlippedNormals
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated numerically; new-bake-types (Height/Bent Normals/Opacity) cross-references to Painter 8.1.0 (2022-06-07), tentative
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `alpha` `udim` `texture-set` `uv` `baking` `mesh-maps` `height` `opacity` `export` `export-preset` `viewport` `blend-mode` `intermediate`
+- **Summary:** Feature-tour hub video: camera-linked environment lighting, Warp Projection (manual vertex-editing + surface-snap, for tattoos/decals and Height-channel detail alphas alike), native UDIM/UV Tiles support, SBSAR export, an overhauled click-to-pick Eyedropper, asset-browser Favorites, one-click blend-mode/opacity propagation across all channels, quick mesh reimport, 3 new bake types, and Temporal Anti-Aliasing.
 - **File:** tutorials/10-new-features-in-substance-painter-you-didnt-know-about.md
 
 ---

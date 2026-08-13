@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=yebv44cOYW4
 author: FlippedNormals
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated numerically; strongest anchor is the baking dialog listing Height/Bent Normals/Opacity as bake outputs, which release-notes-painter-8.1.md confirms were added natively in 8.1.0 (2022-06-07) — creator frames these as recently added, so this video was likely recorded around/shortly after the 8.1.x line; the Warp Projection shown here is the older manual-vertex-editing version (predates the automatic Warp-to-Geometry feature added in 12.0.0), consistent with an 8.x-era recording. Not independently confirmed beyond this cross-reference."
+tags: [layers, fill-layer, paint-layer, masks, alpha, udim, texture-set, uv, baking, mesh-maps, height, opacity, export, export-preset, viewport, blend-mode, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 11
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # 10 New Features in Substance Painter You Didn't Know About
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py 10-new-features-in-substance-painter-you-didnt-know-about <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -266,30 +262,69 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:17] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_000.jpg
+- [2:12] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_001.jpg
+- [3:18] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_002.jpg
+- [6:04] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_003.jpg
+- [7:44] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_004.jpg
+- [8:31] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_005.jpg
+- [9:23] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_006.jpg
+- [10:13] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_007.jpg
+- [11:04] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_008.jpg
+- [11:43] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_009.jpg
+- [12:14] tutorials/frames/10-new-features-in-substance-painter-you-didnt-know-about/frame_010.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A rapid-fire tour of ten discrete Painter feature/workflow additions, demonstrated on a horned character bust: camera-linked environment lighting, Warp Projection for wrapping flat images/alphas onto curved surfaces (used for both a facial tattoo decal and pore-detail height data), native UDIM/UV Tiles project support, SBSAR export, an overhauled click-to-pick Eyedropper, right-click favorites for any asset-browser item, one-click "apply blend mode/opacity to all channels," quick mesh reimport, three new native bake types (Height, Bent Normals, Opacity), and Temporal Anti-Aliasing (TAA) for the viewport.
 
 ### Summary
-[PENDING EXTRACTION]
+Good hub video for this creator's other Substance Painter tutorials — each feature gets a short, self-contained demo rather than deep technique-building, making it a fast reference for "how do I do X" workflow questions. **1. Camera-linked environment:** Display Settings > Environment Alignment switched from `World` (the old Shift+Right-drag lighting method, which left top/bottom surfaces permanently unlit from most angles) to `Camera`, so the HDRI lighting always follows the current view; rotation is still adjustable, and Shadows respond correctly to the now-camera-relative light. **2. Warp Projection:** on a new Fill layer with a dragged-in image (Alt-click a channel icon to isolate just that channel, e.g. Base Color), change Projection from `UV Projection` to `Warp Projection` at the bottom of the projection list — this behaves like a Plane Projection but lets each point of the projected plane be individually manipulated (`W`/`E`/`R` gizmo, same as any 3D software) and, critically, snapped directly onto the model surface via a per-vertex snap toggle in the projection's Edit Vertices mode; for surfaces too complex for the projection depth alone to handle, the plane itself can be subdivided (Split Crosswise / Split Horizontal / Split Vertical) to add more control points before snapping. Demonstrated twice: once for a Base-Color facial tattoo decal (blend mode `Multiply`), and once — using the exact same technique — for wrapping a purchased "face kit" pore/detail alpha directly into the Height channel; flagged as ideal for logos, tattoos, or any flat reference texture (including full-color XYZ scan textures) that needs to conform to curved geometry. **3. UDIM / UV Tiles support:** press `F3` for the UV viewport to see per-tile numbering (e.g. `1001`); a UDIM-unwrapped FBX/OBJ imports automatically with its UV-Tiles checkbox pre-enabled in File > New, with no extra setup required, and the `$udim` export-template token embeds the tile number into exported filenames — called out as the creator's most-requested feature for the extra resolution headroom it unlocks. **4. SBSAR export:** in the Export dialog's Global Settings, change File Type from a raster format (PNG etc.) to `SBSAR` (Substance Archive) for plug-and-play delivery into any Substance-Archive-compatible pipeline tool. **5. Improved Eyedropper:** open a channel's color swatch, then either click the eyedropper icon (no longer needs to be held down) or press `I` to sample a color directly from the canvas while painting — flagged as a long-overdue fix that specifically unblocks practical hand-painting workflows in Painter. **6. Favorites for any asset-browser item** (materials, brushes, alphas, etc.): right-click > Add to Favorites pins it to the top of its browser tab; right-click > Remove from Favorites reverses it — removes the repeated-search friction of hand-painting-heavy workflows. **7. Apply blend mode/opacity to all channels:** after setting a blend mode (or opacity) on one channel of a layer, right-click that channel's control and choose "Apply to all channels" to propagate the same setting across every other enabled channel on that layer in one action. **8. Quick mesh reimport:** Edit > Reimport Mesh (or `Ctrl+Shift+R`) re-imports the same source mesh file in place — useful when a modeler on the same project keeps re-exporting an updated FBX/OBJ under the same filename, letting the texture artist refresh geometry without re-running Project Configuration. **9. Three new bake types:** Texture Set Settings > Mesh Maps > Bake Mesh Maps now lists `Height`, `Bent Normals`, and `Opacity` as bakeable outputs alongside the established maps (not explained in depth in this video). **10. Temporal Anti-Aliasing:** Display Settings > "Activate Temporal Anti-Aliasing" smooths jagged viewport edges with negligible performance cost (may take a moment to converge on heavier scenes) — recommended to leave on by default.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Link environment lighting to the camera** (not the world) via Display Settings > Environment Alignment > `Camera`, so every surface stays lit as you orbit, instead of relying on manual Shift+Right-drag repositioning that leaves top/bottom areas permanently dark from most viewing angles.
+2. **Use Warp Projection to wrap a flat image onto curved geometry:** new Fill layer, drag the source image into the desired channel slot (Alt-click that channel's icon to isolate it from other channels), change Projection to `Warp Projection`, position/rotate/scale it roughly with the standard `W`/`E`/`R` gizmo, then enter Edit Vertices mode (third icon in the projection's settings) and drag individual points with surface-snap enabled to conform the plane precisely to the model.
+3. **Add resolution to the warp plane when the geometry is too complex for projection depth alone:** from the same Edit Vertices area, use Split Crosswise / Split Horizontal / Split Vertical to subdivide the plane and add more manipulable points before snapping each new point to the surface.
+4. **Reuse the identical Warp Projection technique for non-color data** (demonstrated with a Height-channel pore/skin-detail alpha) — the same manual-plane-warp-and-snap workflow applies regardless of which channel the projected image targets, and grayscale sources can be swapped for full-color equivalents (e.g. XYZ scan textures) without changing the technique.
+5. **Set up a UDIM/UV-Tiles project:** import an FBX/OBJ that was UV-unwrapped using the UDIM convention via File > New — the UV Tiles checkbox is enabled by default, requiring no manual configuration; verify tile numbering (e.g. `1001`) in the UV viewport (`F3`).
+6. **Ensure exported filenames carry the UDIM tile number** by confirming the export template includes the `$udim` token (visible/editable under Ctrl+Shift+E's template settings).
+7. **Export as SBSAR** for pipeline-friendly delivery by switching Export dialog > Global Settings > File Type to `SBSAR` instead of a raster image format.
+8. **Sample colors while painting using the improved Eyedropper**: click the eyedropper icon (click, not hold) or press `I`, then click any point on the canvas to pick up that color for the active brush.
+9. **Pin frequently-used assets (brushes, materials, alphas, etc.) to Favorites** via right-click > Add to Favorites in any asset-browser panel; remove the same way when no longer needed.
+10. **Propagate a blend mode or opacity value across all channels of a layer in one action** via right-click > "Apply to all channels" on that channel's blend-mode or opacity control.
+11. **Quickly refresh geometry mid-project** with Edit > Reimport Mesh (`Ctrl+Shift+R`) whenever a collaborator re-exports an updated mesh under the same source filename.
+12. **Bake Height, Bent Normals, and/or Opacity as native mesh maps** by enabling them directly in Texture Set Settings > Mesh Maps > Bake Mesh Maps, alongside the standard Normal/AO/Curvature set.
+13. **Enable Temporal Anti-Aliasing** in Display Settings for a smoother viewport with minimal performance cost — recommended as a default-on setting.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Environment lighting:** Display Settings > Environment Alignment: `World` -> `Camera`
+- **Warp Projection:** Fill layer > Projection: `UV Projection` -> `Warp Projection`; Edit Vertices mode (`W`/`E`/`R` gizmo, surface-snap toggle); plane subdivision via Split Crosswise/Horizontal/Vertical; Alt-click to isolate a single channel
+- **UDIM/UV Tiles:** File > New (auto-detected from a UDIM-unwrapped mesh), `F3` UV viewport, `$udim` export-template token
+- **Export:** Export dialog > Global Settings > File Type: `SBSAR`
+- **Eyedropper:** click (not hold) the eyedropper icon, or press `I`
+- **Favorites:** right-click any asset-browser item > Add to Favorites / Remove from Favorites
+- **Channel blend-mode/opacity propagation:** right-click a channel's blend mode or opacity control > Apply to all channels
+- **Mesh reimport:** Edit > Reimport Mesh / `Ctrl+Shift+R`
+- **New bake types:** Texture Set Settings > Mesh Maps > Bake Mesh Maps: `Height`, `Bent Normals`, `Opacity`
+- **Viewport smoothing:** Display Settings > Activate Temporal Anti-Aliasing (TAA)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — each feature is simple in isolation and clearly demoed, but several (Warp Projection's vertex-snap workflow, UDIM project setup, the blend-mode-propagation trick) assume the viewer already understands Painter's projection/channel model well enough to know when reaching for these shortcuts actually matters.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated numerically on screen. The clearest anchor is the Baking dialog explicitly listing `Height`, `Bent Normals`, and `Opacity` as bakeable mesh maps (visible in a captured frame) — `references/release-notes-painter-8.1.md` confirms these three bakers were added natively in **Painter 8.1.0 (2022-06-07)**, and the creator frames them as a recent addition here, suggesting this video was recorded around/shortly after that release. The Warp Projection shown is the older **manual vertex-editing** version (drag + snap-to-surface + plane subdivision) rather than the automatic "Warp-to-Geometry" feature `references/version-tracker.md` dates to **12.0.0 (2026-03-09)** — i.e. this video predates that automation by a wide margin, consistent with an 8.x-era recording. Neither UDIM support's introduction date nor the improved Eyedropper's are independently confirmed in this skill's current reference files.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, alpha, udim, texture-set, uv, baking, mesh-maps, height, opacity, export, export-preset, viewport, blend-mode, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Texturing a Clicker - FULL Substance 3D Painter Workflow](texturing-a-clicker---full-substance-3d-painter-workflow.md) — same creator (FlippedNormals); that video's baking step and texture-set/UDIM organization are a direct real-world application of features 3 (UDIM support) and 9 (new bake types) shown here.
+- [Shading & Lighting a Character - Blender and Substance 3D Painter Workflow](shading-lighting-a-character---blender-and-substance-3d-painter-workflow.md) — same creator (FlippedNormals); the same project's UV Tiles/UDIM texture sets are visible there too, confirming this creator's consistent adoption of the UDIM workflow covered here.
+- [Advanced Peeling Paint Effect in Substance 3D Painter](advanced-peeling-paint-effect-in-substance-3d-painter.md) — different creator (Javad Rajabzade); also works with a UDIM tile projection setup, a direct real-world use case for feature 3 (UDIM/UV Tiles support) covered here.

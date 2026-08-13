@@ -593,3 +593,4 @@ texture-set, uv, udim, basecolor, roughness, color-management, export, export-pr
 
 ## Related Tutorials
 - [Texturing a Clicker - FULL Substance 3D Painter Workflow](texturing-a-clicker---full-substance-3d-painter-workflow.md) — same creator (FlippedNormals), same character/project, direct prequel — that video covers the full Painter-side texturing build (channel-separated groups, procedural+hand-painted hybrid materials, AO-hand-correction-then-Curvature-then-Levels mask chain) that this video's Base-Color+Roughness export is the output of; the "reproduce color corrections back in the source software" principle here directly extends that video's live Fill-layer color-editing workflow.
+- [10 New Features in Substance Painter You Didn't Know About](10-new-features-in-substance-painter-you-didnt-know-about.md) — same creator (FlippedNormals); same UV Tiles/UDIM project setup visible here as in that feature-tour video's UDIM-support demo.
