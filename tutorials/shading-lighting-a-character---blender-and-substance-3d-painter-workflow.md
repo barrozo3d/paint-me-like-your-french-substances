@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=2lHAio4DoWw
 author: FlippedNormals
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (paired with Blender)"
+version: "not stated numerically; UDIM/UV Tiles workflow visible (same project as the companion texturing video); Blender-side uses AgX color management (a then-newer alternative to Filmic) and Cycles"
+tags: [texture-set, uv, udim, basecolor, roughness, color-management, export, export-preset, pbr, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/shading-lighting-a-character---blender-and-substance-3d-painter-workflow/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 2
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Shading & Lighting a Character - Blender and Substance 3D Painter Workflow
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py shading-lighting-a-character---blender-and-substance-3d-painter-workflow <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -556,30 +552,44 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:35] tutorials/frames/shading-lighting-a-character---blender-and-substance-3d-painter-workflow/frame_000.jpg
+- [1:05] tutorials/frames/shading-lighting-a-character---blender-and-substance-3d-painter-workflow/frame_001.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Note: this is a cross-platform (Blender + Substance 3D Painter) shading/lighting/rendering video, the direct sequel to this creator's "Texturing a Clicker" video. The vast majority of runtime (Cycles shader-node setup, three-point lighting, depth-of-field, render settings) is Blender-side and outside this skill's stated scope; per this ingest's instructions, Painter-side content is kept primary below and the Blender portion is summarized only briefly for pipeline context. **The one Painter-specific principle worth extracting in depth is the "texture maps as final / texturing software as master" workflow rule:** any color/roughness correction discovered while look-developing in the shading/rendering software must be reproduced back in Painter on the actual Fill-layer/map data and re-exported, never left as a permanent non-destructive adjustment inside the shading network — keeping the render setup simple and keeping one single, portable source of truth for the character's look.
 
 ### Summary
-[PENDING EXTRACTION]
+Picks up exactly where the companion texturing video left off: the finished Painter project exports down to just **two texture maps per texture set — Base Color and Roughness** — deliberately minimal because high-frequency surface detail (pores, fine wrinkles) was already baked in from a well-developed ZBrush sculpt rather than painted as height/normal detail, and because the render uses an even-higher-decimation mesh brought directly into Blender rather than relying on Painter-side normal maps for extra detail. UV Tiles/UDIMs are used (multiple tiles per texture set, visible in the Texture Set List), reflecting the same multi-part organization (head, mushrooms, teeth, tongue) from the companion texturing video. Once in Blender, the core Painter-relevant discipline is: bring the exported Base Color and Roughness maps in as Image Texture nodes (Roughness map's color space explicitly changed to **Generic Data**, i.e. non-color, appropriate for AgX color management — the setting differs depending on whether the project uses Filmic, AgX, or no LUT at all), wire Base Color into both the shader's Base Color and (via a Mix RGB node used purely as a color-picker convenience, Fac=0) the Subsurface Radius input, and treat any further Roughness remapping through a **Map Range** node rather than editing the source map. Critically, whenever a color-correction need is discovered during Blender look-dev (the video's own example: pushing edge colors from red toward a "cooler"/orange shift after seeing a Photoshop-graded test render), that correction is **reproduced directly on the Fill-layer colors back in Substance Painter**, the maps re-exported, and any temporary Blender-side color-correction nodes deleted — explicitly to avoid the "which one do I edit now" ambiguity of having color decisions split across two pieces of software. The video closes reiterating the same iterative-feedback loop theme as the companion texturing video: texture and shading/lighting decisions are "highly interconnected" (subsurface intensity changes what the correct light intensity looks like, and vice versa) and must be developed by constantly cycling between the texturing software and the shading/rendering software rather than finishing one in isolation before starting the other.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Keep the final Painter export minimal and purposeful:** for a well-sculpted character, export only what's actually needed downstream — here just Base Color and Roughness per texture set — rather than exporting every possible channel by default; fine surface detail sourced from sculpt/decimation quality doesn't need a redundant normal/height map if the render mesh itself already carries that resolution.
+2. **Treat the texturing software as the single master for any color/value data.** When a shading-software look-dev session (Blender, Arnold, or any renderer) reveals that a color needs to shift, do NOT leave that as a permanent hue/saturation or color-correction node in the shader graph — reproduce the exact same adjustment on the actual Fill-layer colors back in Painter, re-export the maps, and delete the temporary shader-side correction nodes. This keeps exactly one place to look for "what color is this material" and avoids the shader network becoming an undocumented second source of truth.
+3. **Set scalar/data maps (Roughness, and similarly any mask/utility map) to a non-color/"Generic Data" color-space setting** in the shading software when importing Painter's exported maps — required when using AgX (or any view-transform LUT) so the renderer doesn't apply display gamma/LUT transforms to numeric data that isn't meant to be viewed as a color.
+4. **For subsurface scattering setups, prefer feeding the shader's Base Color output into the Subsurface Radius input through a Mix RGB node (Fac locked to 0) used purely as a manual color/value picker**, rather than tuning per-channel RGB subsurface radius numbers directly — makes the subsurface hue and intensity adjustable by eye instead of by math, with the Mix node's color controlling hue and its value/brightness controlling the overall SSS strength.
+5. **Iterate constantly between texturing and shading/lighting software rather than finishing one before starting the other** — SSS intensity, roughness values, and light intensity are described as "highly interconnected": a change in one invalidates assumptions baked into the other, so texture-then-shade-then-light as strictly sequential phases will fly blind.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Layers / Tools / Settings (Painter-relevant only)
+- **Final export:** Base Color + Roughness only, per texture set, UV Tiles/UDIMs
+- **Cross-software color discipline:** any color correction discovered downstream gets reproduced on Painter's actual Fill-layer color values and re-exported — never left as a permanent shader-graph adjustment
+- **Color space on import (Blender side, for context):** Roughness/scalar maps set to Generic Data (non-color) when using AgX or Filmic view transforms
+- *(Out of this skill's scope, summarized only: Blender Cycles shader-node SSS setup via Mix RGB + Random Walk Fixed Radius, three-point lighting with a light-blocker card, camera-locking, depth-of-field via an Empty + F-stop, and Cycles render/denoise settings.)*
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — the Painter-relevant portion is conceptually simple (a discipline/workflow rule, not a specific tool sequence), but assumes the reader already has a finished, well-organized Painter project (per the companion texturing video) and is comfortable working across a texturing-to-rendering pipeline rather than treating Painter as a standalone destination.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated numerically on screen for Painter. UV Tiles/UDIMs visible in the Texture Set List (same project as the companion texturing video). Blender-side uses the AgX color-management LUT (described as then-newer than Filmic) and Cycles — useful pipeline context but not a Painter version marker.
 
 ### Tags
-[PENDING EXTRACTION]
+texture-set, uv, udim, basecolor, roughness, color-management, export, export-preset, pbr, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Texturing a Clicker - FULL Substance 3D Painter Workflow](texturing-a-clicker---full-substance-3d-painter-workflow.md) — same creator (FlippedNormals), same character/project, direct prequel — that video covers the full Painter-side texturing build (channel-separated groups, procedural+hand-painted hybrid materials, AO-hand-correction-then-Curvature-then-Levels mask chain) that this video's Base-Color+Roughness export is the output of; the "reproduce color corrections back in the source software" principle here directly extends that video's live Fill-layer color-editing workflow.

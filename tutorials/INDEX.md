@@ -613,11 +613,22 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=2lHAio4DoWw
 - **Author:** FlippedNormals
+- **App:** Substance 3D Painter (paired with Blender)
+- **Version:** not stated numerically; UDIM workflow, AgX color management on the Blender side
+- **Tags:** `texture-set` `uv` `udim` `basecolor` `roughness` `color-management` `export` `export-preset` `pbr` `advanced`
+- **Summary:** Cross-platform sequel to "Texturing a Clicker" — mostly Blender-side shading/lighting/rendering (out of this skill's scope, summarized briefly), but the Painter-relevant core is a "texturing software as master" discipline: the finished project exports down to just Base Color + Roughness per texture set, and any color correction discovered during Blender look-dev must be reproduced back on the actual Painter Fill-layer colors and re-exported rather than left as a permanent shader-graph adjustment.
+- **File:** tutorials/shading-lighting-a-character---blender-and-substance-3d-painter-workflow.md
+
+
+### Texturing Tactical Boots In Substance Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=--CvtUlcVMs
+- **Author:** 3DRedBox
 - **App:** [PENDING]
 - **Version:** [PENDING]
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/shading-lighting-a-character---blender-and-substance-3d-painter-workflow.md
+- **File:** tutorials/texturing-tactical-boots-in-substance-painter.md
 
 ---
 
