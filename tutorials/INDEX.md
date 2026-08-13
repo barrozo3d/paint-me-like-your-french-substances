@@ -569,10 +569,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=urA-oaoqfpM
 - **Author:** 3DRedBox
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; UI consistent with the pre-12.1-era seen across this creator's other videos
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `curvature` `anchor-point` `blend-mode` `texture-set` `ambient-occlusion` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `alpha` `procedural` `intermediate` `advanced`
+- **Summary:** Dense garment build (embroidered shawl, two fabrics) organized around a single reusable "Edge Border" anchor-point mask that nearly every subsequent layer — library fabric patterns, three stitch types (Top Stitching/Golden/Middle, all Material-mode not Pass-tool), an imported Midjourney design, a pop-up emboss + beadwork accent, and two closing curvature-driven highlight/sheen passes — references via Subtract or direct-load; by the end, roughly 8-9 anchor points are simultaneously active across the stack.
 - **File:** tutorials/texturing-a-shawl-in-substance-painter.md
 
 
@@ -580,10 +580,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=WYbp7SY-wEo
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 11.0.0
+- **Tags:** `layers` `masks` `generator` `ambient-occlusion` `curvature` `procedural` `basecolor` `roughness` `metallic` `normal-map` `iray-render` `viewport` `intermediate` `advanced`
+- **Summary:** Dedicated deep-dive on every Stylization filter sub-menu: Brush Strokes (splattered shapes, follow-surface orientation), Brush Stroke Effects (per-channel color/normal overrides), Smoothness (per-channel anisotropic Kuwahara smoothing), Colorize (uniform tint + grunge), Gradient (1/2-color blends), Baked Lighting (fake diffuse/specular response), and Edges and Cavities (curvature-driven contouring). Companion deep-dive to "6 Powerful New Filters" — same demo scene and B-roll credit confirm the pairing. Version 11.0.0.
 - **File:** tutorials/achieve-stunning-stylized-textures-in-substance-3d-painter-adobe-substance-3d.md
 
 
