@@ -971,6 +971,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Advanced channel-packing beyond the standard Unreal Engine 4 Packed export: deletes the standalone Normal map entirely, repacking Normal X/Y into a custom texture's R/G channels (Roughness in B, Metallic in Alpha) since Unreal's DeriveNormalZ node can mathematically reconstruct the missing Blue/Z channel at render time (via Append+Subtract0.5+Multiply2, or a single Constant Bias Scale node). The freed BaseColor-Alpha slot carries a custom Painter User Channel ("blood") built from generators/grunges as a from-scratch procedural mask, reconstructed in Unreal via Lerp/Min nodes to drive both color and glossiness, and finally exposed as a live Material Instance scalar parameter for real-time on/off blood damage — down to just two 4K textures per asset. Cross-linked with this creator's Bridge and Texturing the Coin videos.
 - **File:** tutorials/optimizing-textures---how-to-pack-masks-like-a-pro.md
 
+
+### HOW TO MASTER TEXTURing in SUBSTANCE PAINTER
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=nM0FTa2p9yo
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-master-texturing-in-substance-painter.md
+
 ---
 
 ## Tag Reference
