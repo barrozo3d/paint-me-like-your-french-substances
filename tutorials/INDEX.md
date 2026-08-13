@@ -844,10 +844,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=HL5mZdzzgIg
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `anchor-point` `masks` `layers` `fill-layer` `generator` `smart-mask` `curvature` `ambient-occlusion` `height` `normal-map` `procedural` `intermediate` `advanced`
+- **Summary:** 2/4 of Adobe's foundational Anchor Point Magic series (bronze valve, embossed "MADE IN SP" stamp plate). Teaches referencing an Anchor Point through a Dirt generator's **Micro Height** and **Micro Normal** fields (under Micro Details) so the generator's grime placement reacts to a separate layer's height or normal detail without hand-painting — including the Levels+Invert fix for dirt gathering on the wrong side of the detail, and the critical "anchor goes on the layer, not a mask" + mandatory Reference Channel = Normal steps for the Micro Normal variant. Note: Whisper transcript came back mostly Dutch (language-ID artifact); notes reconstructed from surviving English terms + frame verification.
 - **File:** tutorials/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe.md
 
 

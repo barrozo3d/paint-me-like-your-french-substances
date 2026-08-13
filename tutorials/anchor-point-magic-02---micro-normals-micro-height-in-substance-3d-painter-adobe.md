@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=HL5mZdzzgIg
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; window title reads 'License: 171 days remaining - Anchor_Video_02_Texture_Begin' (same project/license-countdown pattern as series entry 01)"
+tags: [anchor-point, masks, layers, fill-layer, generator, smart-mask, curvature, ambient-occlusion, height, normal-map, procedural, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Anchor Point Magic 02 - Micro Normals & Micro Height in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -132,30 +128,65 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:11] tutorials/frames/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe/frame_000.jpg
+- [1:35] tutorials/frames/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe/frame_001.jpg
+- [2:29] tutorials/frames/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe/frame_002.jpg
+- [3:18] tutorials/frames/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe/frame_003.jpg
+- [3:56] tutorials/frames/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe/frame_004.jpg
+- [4:19] tutorials/frames/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe/frame_005.jpg
+- [5:40] tutorials/frames/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe/frame_006.jpg
+- [7:20] tutorials/frames/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Referencing an Anchor Point through a smart-mask generator's **Micro Height** and **Micro Normal** fields (found under the generator's "Micro Details" section) so a dirt/grime generator reacts to fine height or normal detail from a completely separate layer — without ever needing to hand-paint the dirt placement.
 
 ### Summary
-[PENDING EXTRACTION]
+Second video in Adobe's "Anchor Point Magic" series (same bronze valve model as series entry 01, this time featuring an embossed "MADE IN SP / 17 A" metal stamp plate). **Note on this file's transcript:** the raw Whisper transcript came back almost entirely in Dutch (a language-ID artifact, not genuine Dutch narration) — these notes were reconstructed from the surviving recognizable technical terms plus direct verification against the captured frames, which show exact on-screen layer/parameter names. **Project setup recap:** a simple bronze base material; above it a fill layer active on the **Height channel only**, masked with a hand-built "text" mask (the embossed stamp-plate detail); above that a simple **dirt fill layer** (Base Color = black, Roughness controls the dirt's roughness contribution, Metallic = black) with a black mask driven by a **Dirt generator** (a smart mask, swappable for other smart-mask types from the shelf). **Micro Height technique:** the goal is to make the dirt generator gather extra grime around the embossed text/plate detail without hand-painting — achieved by adding an **Anchor Point** to the text/height fill layer's mask (renamed for clarity), making sure that layer sits **below** the dirt layer in the stack (anchors resolve bottom-to-top, same rule as series entry 01). On the dirt layer's generator, scroll down to the **Micro Details** section and enable **Micro Height**; click its field, switch to the **Anchor Points** tab, and select the text-layer anchor — the generator now reads that height data as fine surface detail and immediately redistributes dirt around the plate's embossed edges. Tune the result with **Curvature Intensity**, **Height Details Intensity**, and **AO Radius/Depth** sliders in the same Micro Details section. A common adjustment: if the dirt collects on the wrong side of the detail (e.g. sitting on top of raised areas when you want it pooling into the recesses between them instead), open the Micro Height field's **Levels** and **Invert** — this flips which side of the height data the generator treats as "recessed," relocating the dirt accordingly (AO Radius is called out as the single most impactful slider for this look). **Micro Normal technique (second half):** demonstrated with a deliberately quick/rough normal-detail layer for showcase purposes (not polished) — create a new paint layer, restrict it to the **Normal channel only** (double-click/select Normal under the Material channel tabs), drag a normal-detail alpha (the video uses **"Capsules Horizontal"**, though any alpha works) into the Normal slot, then click with a brush directly on the model to stamp the normal detail — pressing **X** flips/resets the brush's foreground/background swap so repeated clicks build up the effect. **Critical difference from Micro Height:** a Normal-channel layer is not a black/white mask, so the Anchor Point is added **directly to the layer itself** (not to a mask) — same magic-wand icon, just applied at the layer level. Back on the dirt generator's Micro Details, enable **Micro Normal**, click its field, go to Anchor Points, and select the new normal-layer anchor — but critically, you must also explicitly set the **Reference Channel to Normal** in that same field, or the generator will not read the correct channel data from the referenced anchor. Once set, the dirt generator immediately incorporates the hand-stamped normal detail (e.g. dirt catching in a knurled/ridged pattern), completing the demonstration of both Micro Height- and Micro Normal-driven anchor referencing.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Start from a base material (bronze) with, above it, a Height-only fill layer masked with a hand-built detail (here: an embossed "MADE IN SP" stamp plate).
+2. Add a simple **dirt fill layer** above that: Base Color (black) + Roughness (controls dirt roughness) + Metallic (black), with a black mask driven by a **Dirt generator** (smart mask).
+3. Ensure the detail layer (the one you want dirt to react to) sits **below** the dirt layer in the stack — anchors can only be referenced by layers positioned above them.
+4. Add an **Anchor Point** to the detail layer's mask (rename it for clarity, e.g. "Text mask").
+5. Select the dirt layer's generator, scroll to its **Micro Details** section, and enable **Micro Height**.
+6. Click the Micro Height field, switch to the **Anchor Points** tab, and select the detail layer's anchor — the generator immediately redistributes dirt/grime around the referenced height detail.
+7. Tune the reaction with **Curvature Intensity**, **Height Details Intensity**, and **AO Radius**/**AO Depth** sliders (AO Radius called out as the most impactful for the overall look).
+8. If the dirt gathers on the wrong side of the detail (e.g. on raised areas instead of pooling into the recesses between them), open the Micro Height field's **Levels** and toggle **Invert** to flip which side reads as recessed.
+9. For a normal-map-driven variant: create a new paint layer, restrict its active channel to **Normal only**.
+10. Drag a normal-detail alpha (e.g. "Capsules Horizontal") into the layer's Normal slot, then click with a brush on the model to stamp the detail; press **X** to flip the brush's foreground/background color for building up repeated clicks.
+11. **Add an Anchor Point directly to this Normal layer itself** (not to a mask, since Normal-channel layers aren't black/white data) via the same magic-wand icon.
+12. On the dirt generator's Micro Details, enable **Micro Normal**, click its field, go to Anchor Points, and select the new normal-layer anchor.
+13. **Critical step:** explicitly set the Micro Normal field's **Reference Channel to Normal** — without this, the generator will not correctly read the referenced anchor's normal data.
+14. Confirm the dirt generator now reacts to the hand-stamped normal detail (e.g. grime catching in a knurled/ridged pattern) exactly as it did for Micro Height.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Detail (Height) layer:** Height-channel-only fill layer, black mask with hand-built detail (e.g. embossed text/stamp plate), carries an **Anchor Point** on its mask
+- **Dirt fill layer:** Base Color (black) + Roughness + Metallic (black), black mask driven by a **Dirt generator** (smart mask)
+- **Generator Micro Details section:** **Micro Height** toggle + Anchor Points reference, **Micro Normal** toggle + Anchor Points reference + **Reference Channel** dropdown (must be set to Normal for normal-driven referencing), **Curvature Type**, **Curvature Intensity**, **Height Details Intensity**, **AO Radius**, **AO Depth**
+- **Levels filter + Invert** — flips which side of referenced height data reads as "recessed" vs. "raised" for the generator's reaction
+- **Normal-detail paint layer:** Normal-channel-only, alpha-stamped (e.g. "Capsules Horizontal"), Anchor Point added directly to the **layer** (not a mask)
+- Brush shortcut: **X** to flip foreground/background brush color while stamping repeated normal-alpha clicks
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced (builds directly on series entry 01's anchor fundamentals; Micro Height is approachable, Micro Normal's "anchor on the layer not the mask" distinction plus the mandatory Reference Channel setting are the trickier, easy-to-miss parts).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number stated on screen; window title bar reads "License: 171 days remaining - Anchor_Video_02_Texture_Begin" (subscription license countdown plus project filename, matching the pattern seen in series entry 01 — not a version indicator).
 
 ### Tags
-[PENDING EXTRACTION]
+`anchor-point`, `masks`, `layers`, `fill-layer`, `generator`, `smart-mask`, `curvature`, `ambient-occlusion`, `height`, `normal-map`, `procedural`, `intermediate`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Anchor Point Magic 01 - Double Layer Setup in Substance 3D Painter** (`tutorials/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan.md`) — series 1/4, direct prequel; introduces the anchor-point fundamentals (bottom-to-top referencing rule, fill-layer-with-Anchor-Points-tab mechanism) this video builds on.
+- **Anchor Point Magic 03 - Paint Peel Effect in Substance 3D Painter** (`tutorials/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc.md`) — series 3/4.
+- **Anchor Point Magic 04 - Rust Fade Effect in Substance 3D Painter** (`tutorials/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substanc.md`) — series 4/4.
+- **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's independent anchor-point deep-dive; complementary treatment of the same core reuse mechanism.
+- **Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain.md`) — uses the exact same generator Micro Height anchor-referencing technique this video teaches (its folds/creases anchor drives Folds Color via a generator's Micro Height field with Invert), a direct production application.
