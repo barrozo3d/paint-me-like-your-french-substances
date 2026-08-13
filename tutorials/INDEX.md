@@ -641,6 +641,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance.md
 
+
+### New Path Tool Features & Improvements in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=exE0-1ftNeE
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
