@@ -888,10 +888,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=eVRWXPJPjyE
 - **Author:** TriGon
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `smart-mask` `generator` `id-map` `blend-mode` `curvature` `ambient-occlusion` `world-space-normal` `texture-set` `pbr` `basecolor` `roughness` `height` `alpha` `tri-planar` `procedural` `export` `intermediate` `advanced`
+- **Summary:** Silent, unnarrated 168-minute speed-texturing follow-along on the same wooden barrel as the companion "Beginner To Advanced" video — the creator explicitly skips narration since he "already explained it in the previous video." No usable audio (Whisper hallucinated song lyrics over background music for the whole runtime); Structured Notes reconstructed entirely from 16 frames spread across the full video. Shows a more advanced pass: ID-map-masked wood/metal materials, rust hoops, layered dust/grunge weathering, a composite Curvature+AO+World-Space-Normal Mask Builder (Legacy) generator for edge damage, extensive hand-painting, and a closing HSL Perception + Color Correct grade before export. Cross-linked with the companion narrated video (read that one first for technique explanations) and the Beginner To Pro course.
 - **File:** tutorials/substance-painter---creating-profesional-textures.md
 
 ---

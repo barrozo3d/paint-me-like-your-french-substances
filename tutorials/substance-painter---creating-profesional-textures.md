@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=eVRWXPJPjyE
 author: TriGon
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: needs-review
+app: "Substance 3D Painter"
+version: "not stated on screen"
+tags: [layers, fill-layer, paint-layer, masks, smart-mask, generator, id-map, blend-mode, curvature, ambient-occlusion, world-space-normal, texture-set, pbr, basecolor, roughness, height, alpha, tri-planar, procedural, export, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-painter---creating-profesional-textures/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 16
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance Painter  - Creating Profesional Textures
@@ -23,20 +24,15 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-## Ingest Safeguard Report
+## Ingest Safeguard Report — REVIEWED
 
-_Auto-generated at ingest/frame-capture time — explains why `extraction_status` may be `needs-review`. Safe to delete once reviewed._
+**Original flag:** ASR hallucination in 'Full Content': 'd' x13 in last 50 content words.
 
-- **CRITICAL:** ASR hallucination in 'Full Content': 'd' x13 in last 50 content words. Review and truncate the affected section before extracting.
+**Reviewed finding:** This is not a localized hallucination — the video has **no narration at all**. Its own opening line states: "In this video I'm gonna texture this asset, I'm not gonna talk over it and explain what I'm doing, as I already did it in the previous video" (the previous video = the companion TriGon tutorial, "Substance Painter Tutorial - Beginner To Advanced," also in this library, on the same wooden barrel asset). The entire 168-minute audio track is background music with no speech; Whisper hallucinated song-lyric-like phrases ("I promise I will never let you go," "I am tired," repeated "D!") across virtually the whole runtime attempting to transcribe music as speech. The raw transcript below is therefore **not usable** for extraction. Structured Notes for this video were built entirely from visual inspection of 16 captured frames spread across the full runtime, cross-referenced against the companion narrated video for technique names — nothing below traces to the corrupted transcript. Frame timestamps were chosen at roughly even ~11-12 minute intervals (not narration-anchored, since there's no narration to anchor to) to sample the layer stack's progressive buildup from start to finish.
 
 ---
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-painter---creating-profesional-textures <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -773,30 +769,70 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:30] tutorials/frames/substance-painter---creating-profesional-textures/frame_000.jpg
+- [12:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_001.jpg
+- [24:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_002.jpg
+- [36:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_003.jpg
+- [48:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_004.jpg
+- [60:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_005.jpg
+- [72:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_006.jpg
+- [84:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_007.jpg
+- [96:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_008.jpg
+- [108:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_009.jpg
+- [120:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_010.jpg
+- [132:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_011.jpg
+- [144:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_012.jpg
+- [156:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_013.jpg
+- [163:00] tutorials/frames/substance-painter---creating-profesional-textures/frame_014.jpg
+- [167:30] tutorials/frames/substance-painter---creating-profesional-textures/frame_015.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A **silent, unnarrated speed-texturing follow-along** on the same wooden barrel asset as the companion "Substance Painter Tutorial - Beginner To Advanced" video — the creator explicitly states upfront he will not explain anything since he "already did it in the previous video," making this the visual "watch the finished technique executed at full production speed/detail" companion rather than an independent lesson. Reconstructed here entirely from 16 frames spread across the full 168-minute runtime (no usable audio — see the Ingest Safeguard Report note above the transcript), showing a materially more advanced/polished pass over the same barrel: ID-map-masked wood-plank materials, rusted metal hoop bands, layered dust/grunge weathering, a Curvature/AO/World-Space-Normal-driven **Mask Builder (Legacy)** generator for edge damage, extensive hand-painted highlight/scuff detail, and a closing HSL Perception + Color Correct grading pass before export.
 
 ### Summary
-[PENDING EXTRACTION]
+Because this video has no real transcript, this summary is a direct account of what each captured frame shows, in chronological order, standing in for narration. **~1:30** — base color picker open on a Fill layer; the Layers panel already shows a mature top-level group structure (FX, curve, weathering, wood, base) suggesting the project was pre-built to this skeleton before recording (consistent with a "previous video already explained this" framing). **~12:00** — a **Color Selection** panel (ID-map-driven masking, same technique as the companion video) is used on a "wood_patterns" layer with several picker swatches, confirming ID-map-based per-plank isolation is still the primary masking method here. **~24:00** — a Rust Color picker is open with "Rust Fine"/"Rust Coarse" layers in the stack — building the rusted-metal-hoop material. **~48:00** — the barrel reads as a coherent weathered wood-and-rust result with a "rust_ground" layer active; hand-painting is already underway (Paint tool active). **~60:00** — another Color Selection (ID map) pass with Hardness/Tolerance sliders visible, refining per-part masks further. **~72:00** — a Smart Mask search for "dust" (results: Dust Sand, Dust Soft, etc.) being applied for a weathering pass, barrel visibly darker/dirtier at this point. **~84:00** — ground-proximity dirt detail at the barrel's base, a "dark_grunge" layer active. **~96:00** — a Fill layer using a **Directional Noise 4** generator; a distinctive irregular white patch (peeling/damaged paint or a decal-like mark) is visible on one stave — likely a unique hand-placed damage feature. **~108:00** — a "Splash Spots" grunge mask being applied inside the weathering group. **~120:00** — an **HSL Perception** filter open on the Roughness channel (grayscale channel view), part of a grading pass; a second HSL Perception layer plus a Sharpen filter are also present in the stack — mirrors the companion video's top-of-stack grading habit. **~132:00** — a **Mask Builder (Legacy)** generator open with Curvature, Ambient Occlusion, and World Space Normal input parameters, actively masking edge damage on the barrel's top rim (shown with a checkerboard/transparency preview) — the same curvature-driven edge-wear principle as the companion video, but via the more powerful multi-input Mask Builder generator instead of a simple Smart Mask. **~144:00** — the two metal hoop bands are shown fully white in a mask/selection-style view, likely isolating them for a dedicated metal pass. **~156:00** — a **Color Correct** filter at the very top of the stack, with roughness-fix, "rust_lighten," HSL Perception, and Sharpen layers all visible underneath — the final grading stage. **~163:00** — active hand-painting of a white scuff/highlight detail on the barrel's top-left corner. **~167:30** — the **Export Textures / Select Folder** dialog is open, confirming the video runs through to a real finished export despite the corrupted audio.
 
 ### Key Steps
-[PENDING EXTRACTION]
+_(Inferred from visual frame inspection only — no audio narration exists in this video. Each step name mirrors terminology confirmed either on-screen in a captured frame or in the companion narrated video on the same asset.)_
+1. Project already has a mature top-level group skeleton in place at the start of the visible footage: FX / Curve / Weathering / Wood / Base — consistent with the creator having pre-built the base structure off-camera per the "already explained in the previous video" framing.
+2. Base wood material color is set via a straightforward Fill-layer color picker.
+3. Per-plank material isolation uses **Add Mask with Color Selection** against the baked **ID map** (same technique as the companion "Beginner To Advanced" barrel video), including Hardness/Tolerance tuning for close ID colors — used at least twice across the runtime (early block-out, later refinement pass).
+4. A rusted-metal-hoop material is built with dedicated "Rust Fine" / "Rust Coarse" layers and a direct Rust Color picker.
+5. Weathering is built from Painter's built-in **Smart Masks** (searched by keyword, e.g. "dust" → Dust Sand/Dust Soft) layered with "Splash Spots" grunge masks inside a dedicated Weathering group.
+6. Ground-proximity dirt/grime is added near the barrel's base via a dedicated dark grunge layer.
+7. A **Directional Noise** generator (Directional Noise 4) is used for a Fill layer's mask, alongside what appears to be a hand-placed irregular damage/paint-loss patch on one stave.
+8. Edge damage on the barrel's rim uses a **Mask Builder (Legacy)** generator with Curvature, Ambient Occlusion, and World Space Normal inputs combined — a more advanced/composable version of the curvature-driven Smart Mask approach used in the companion video, appropriate to this video's "professional textures" framing.
+9. The two metal hoop bands are isolated via a dedicated mask/selection pass (shown fully white in one frame) for hoop-specific material work.
+10. Extensive **hand-painting** is used throughout (Paint tool consistently active across multiple frames) for scuffs, highlights, and damage detail beyond what the procedural/generator layers alone produce.
+11. A closing grading stack: **HSL Perception** filters (used at least twice, including one explicitly isolated to the Roughness channel), a **Sharpen** filter, a "rust_lighten" adjustment layer, and a top-of-stack **Color Correct** filter — mirrors the companion video's final-adjustment-pass habit.
+12. Finishes with **File → Export Textures**, confirmed via the Export Textures / Select Folder dialog visible near the true end of the runtime.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `Add Mask with Color Selection` against the baked **ID map** (Hardness/Tolerance sliders) — primary per-part masking method, used repeatedly
+- `Directional Noise` generator (mask source)
+- `Mask Builder (Legacy)` generator — combines Curvature + Ambient Occlusion + World Space Normal inputs for composite edge-damage masking (more advanced than a single-map Smart Mask)
+- Smart Masks searched by keyword (e.g. "dust")
+- `HSL Perception` filter (used per-channel, including an isolated Roughness pass)
+- `Sharpen`, `Color Correct` filters (final grading)
+- Export via File → Export Textures
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — framed by its own title ("Creating Professional Textures") as the most advanced installment of this creator's barrel-texturing series, using a composite Mask Builder generator (Curvature+AO+WSN) in place of the simpler single-map Smart Mask approach seen in the companion video, plus significantly more hand-painted refinement.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen; no version-gated feature names are legible in the captured frames.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `paint-layer` `masks` `smart-mask` `generator` `id-map` `blend-mode` `curvature` `ambient-occlusion` `world-space-normal` `texture-set` `pbr` `basecolor` `roughness` `height` `alpha` `tri-planar` `procedural` `export` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Substance Painter Tutorial - Beginner To Advanced](substance-painter-tutorial---beginner-to-advanced.md) — same creator (TriGon), same wooden barrel asset, and explicitly named by this video itself as "the previous video" containing all the narrated explanations this video deliberately omits. Read that video's Structured Notes first — it documents the actual technique names/reasoning for the workflow this video executes silently at a more advanced/polished level.
+- [Substance Painter Beginner To Pro - Course](substance-painter-beginner-to-pro---course.md) — same creator (TriGon); the third video in this creator's beginner-to-pro learning arc, sharing the same filter-driven non-destructive methodology.

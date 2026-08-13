@@ -1480,5 +1480,5 @@ Not stated on screen; no version-gated feature names appear in transcript or cap
 
 ## Related Tutorials
 - [Substance Painter Beginner To Pro - Course](substance-painter-beginner-to-pro---course.md) — same creator (TriGon); companion course in the same beginner-to-pro learning arc, sharing the primary/secondary/tertiary breakup principle and non-destructive filter-first methodology. Cross-linked both ways.
-- [Substance Painter - Creating Professional Textures](substance-painter---creating-professional-textures.md) — same creator (TriGon); the most advanced of the three-part series. Cross-link both ways once ingested.
+- [Substance Painter - Creating Profesional Textures](substance-painter---creating-profesional-textures.md) — same creator (TriGon), same barrel asset; a silent, unnarrated follow-along that explicitly names this video as its own required prerequisite ("already explained it in the previous video") — read this video first.
 - [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); a deeper dive into the same masking primitives (generators, tri-planar, curvature) this video applies at a practical, opinionated-workflow level.
