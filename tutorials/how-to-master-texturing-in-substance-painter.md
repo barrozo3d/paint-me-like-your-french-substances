@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=nM0FTa2p9yo
 author: Jared Chavez
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified"
+tags: [layers, masks, ambient-occlusion, roughness, basecolor, beginner, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-master-texturing-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # HOW TO MASTER TEXTURing in SUBSTANCE PAINTER
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-master-texturing-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -277,30 +273,55 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:20] tutorials/frames/how-to-master-texturing-in-substance-painter/frame_000.jpg
+- [2:15] tutorials/frames/how-to-master-texturing-in-substance-painter/frame_001.jpg
+- [4:15] tutorials/frames/how-to-master-texturing-in-substance-painter/frame_002.jpg
+- [7:00] tutorials/frames/how-to-master-texturing-in-substance-painter/frame_003.jpg
+- [9:05] tutorials/frames/how-to-master-texturing-in-substance-painter/frame_004.jpg
+- [11:30] tutorials/frames/how-to-master-texturing-in-substance-painter/frame_005.jpg
+- [13:30] tutorials/frames/how-to-master-texturing-in-substance-painter/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A conceptual, methodology-first breakdown of Jared Chavez's repeatable 3-phase texturing process — mapping the sculpting principle of primary/secondary/tertiary forms onto texturing (Blockout → Color & Roughness Breakup → Detail), applicable to any character material.
 
 ### Summary
-[PENDING EXTRACTION]
+This is a talking-head/slide-deck video, not a screen-capture step-by-step — no live Painter layer building is shown, but Painter viewports and layer stacks (frame_006: a reptilian creature head with the Layers panel visible) appear as worked examples validating the method. Chavez explains the workflow philosophy he applies to every character he textures: three sequential phases that mirror primary/secondary/tertiary sculptural forms. Phase 1 (Blockout) establishes color blocking and material definition with "fresh off the factory floor" materials — no wear, just clean readable material identity and value hierarchy that guides the viewer's eye (keeping the brightest/most saturated values on the focal point, usually the face). Phase 2 (Color & Roughness Breakup, ~80-90% of final quality) adds age/wear storytelling through subtle value variation (edge wear brightening, grime darkening in AO areas), hue/saturation shifts per material (e.g. blues/purples/pinks in metal from oil buildup — "embellishing reality"), and roughness map variation, all kept subtle (secondary forms are never the sharpest details, but have the most overall visual impact). Phase 3 (Detail) adds the least amount of work but the most graphically readable elements: heroic details like scratches, dents, tears, stains, blood — sharp, high-contrast, and sparse. Dirt/grime is deliberately saved for last and painted across the whole model (not per-material) because grime accumulates character-wide, not per-surface. He distinguishes "tertiary forms" (broad small shapes) from "tertiary details" (fine surface noise/scratches) as separate mental buckets.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Phase 1 — Blockout: Color Blocking.** Create separation between elements readable at different viewing distances (far to close); use value to guide the viewer's eye toward the focal point (usually the face/head) — keep secondary elements (e.g. red shoes) from having the highest saturation/value in the piece unless intentionally a focal feature.
+2. **Phase 1 — Blockout: Material Definition.** Go through every element on the character and assign a baseline material identity (metal vs. leather vs. suede, etc.) with distinct roughness separation values so each material reads correctly. Not every instance of the same material type is identical — vary properties per element (e.g. one metal shinier, another more matte).
+3. Keep Phase 1 materials completely clean — "fresh off the factory floor," no imperfections — this mirrors sculpting blockout discipline of ignoring detail until the big forms read correctly.
+4. **Phase 2 — Color Variation & Roughness Breakup.** Add age and wear storytelling on top of the clean base: brighten edges (edge wear), darken/discolor ambient-occluded crevices (grime buildup). Keep this subtle — it should read as texture, not as individual visible marks.
+5. **Phase 2 — Hue/Saturation shifts.** Push materials beyond flat real-world color — e.g. steel isn't just silver, add subtle blue/purple/pink shifts to suggest oil buildup; lean shifts toward complementary colors of what's underneath to make the material "pop." Treat this as artistic embellishment, dial back for strict photorealism.
+6. **Phase 2 — Roughness map variation.** Vary roughness within each material's base value — an under-varied roughness map is the single most common reason a material reads as "incomplete" or fake.
+7. **Phase 3 — Detail pass: graphic/readable shapes.** Add sharp, high-contrast "heroic" details — scratches, dents, cuts, tears, stains, blood. These should read clearly at a full-character viewing distance, not just in extreme close-up, and should visually separate from the subtler Phase 2 breakup underneath.
+8. **Phase 3 — Dirt/grime last, applied globally.** Add dust/grease/grime after all other detail work, painted across the whole character as a unifying pass rather than material-by-material, because real-world grime accumulates across a whole object, not within isolated materials.
+9. Mental model: separate "tertiary forms" (larger graphic shapes/details, sparse but high-impact) from "tertiary details" (fine surface noise/micro-scratches) — treat them as two different passes even though both are "small."
+10. Rule of thumb on effort-to-result: Phases 1+2 alone typically get a texture to ~80-90% shippable quality; Phase 3 is the smallest phase in terms of time/effort but yields the character-defining polish.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+No live layer-stack construction shown (talking-head/slide format). Painter is only visible as B-roll validation footage: a Layers panel with generator/paint-layer entries stacked over a reptilian creature head (visible in frame_006), consistent with the layered blockout→breakup→detail approach described. No specific generator names, blend modes, or parameter values are legible/stated on screen — this video is intentionally about the workflow philosophy, not tool mechanics. Chavez explicitly defers the parallel "skin follows the same 3-step process, just looks different" breakdown to a separate future video.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner-to-Intermediate (conceptual framework, no software mechanics) — but the value hierarchy / material-definition discipline it teaches is useful reference material at any skill level.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not specified (no UI version indicator visible or stated; B-roll footage only, not a live walkthrough).
 
 ### Tags
-[PENDING EXTRACTION]
+layers, masks, ambient-occlusion, roughness, basecolor, beginner, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- `substance-painter-building-masks-explained.md` (Jared Chavez) — his own detailed mask-construction video; this video is the philosophy underpinning why those masks are built in that order.
+- `realistic-creatures-hand-painted-textures-in-sustance-painter.md` (Jared Chavez) — direct hands-on application of this exact primary/secondary/tertiary phase breakdown to a creature texture.
+- `how-to-texture-in-substance-painter-creature-texturing.md` (Jared Chavez) — companion creature-texturing walkthrough, same underlying method.
+- `texturing-metal-from-scratch-in-substance-painter.md` (Jared Chavez) — Phase 1 material-definition and Phase 2 roughness-breakup principles applied concretely to a metal material.
+- `izakayas-paradigm-chapter-3-substance-3d-painter.md` (Substance3D/artist interview) — another workflow-philosophy piece (stated working principles rather than step-by-step), same "concept over mechanics" format.
