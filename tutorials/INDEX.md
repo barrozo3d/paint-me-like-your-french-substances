@@ -635,10 +635,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=raGhfzhzVdU
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter (export handoff only) + Substance 3D Stager (primary focus)
+- **Version:** not stated on screen
+- **Tags:** `export` `viewport` `intermediate`
+- **Summary:** Stager-primary video; the entire Painter-side content is one step — File → Send to → Send to Substance 3D Stager on a finished robot character, which auto-wires every exported map into matching Stager materials. Documented at survey depth per this skill's Painter-only scope: Stager environment/terrain setup, HDRI lighting + rotation (same Shift+right-drag gesture as Painter), displacement tessellation, physical Area Light face-normal snapping, and PSD render export (material/object/depth passes) for a Photoshop post-pass (sky composite, fog and Lens-Blur depth of field driven by the depth pass). Cross-linked with the ornate-sword and Hero Assets for Fashion videos, which both use the same Send-to-Stager handoff.
 - **File:** tutorials/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance.md
 
 

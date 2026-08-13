@@ -337,5 +337,5 @@ Substance 3D Designer (base material authoring) → Substance 3D Painter (textur
 ---
 
 ## Related Tutorials
-- **Substance 3D Stager - Rendering assets from Substance 3D Painter** (`tutorials/substance-3d-stager---rendering-assets-from-substance-3d-painter.md`, if ingested) — the natural follow-on video referenced at the end of this tutorial ("I'll see you in the next video... best light possible"), covering the Stager side of this exact Send-to-Stager handoff.
+- **Substance 3D Stager - Rendering assets from Substance 3D Painter** (`tutorials/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance.md`) — the natural follow-on video referenced at the end of this tutorial ("I'll see you in the next video... best light possible"), covering the Stager side of this exact Send-to-Stager handoff.
 - **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's dedicated anchor-point deep-dive; this video's iris-relief and facial-crack techniques both directly apply the anchor-point-plus-blend-mode-subtract pattern taught there.

@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=raGhfzhzVdU
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (export handoff only) + Substance 3D Stager (primary focus of this video)"
+version: "not stated on screen"
+tags: [export, viewport, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 5
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance 3D Stager - Rendering assets from Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -402,30 +398,57 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:26] tutorials/frames/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance/frame_000.jpg
+- [0:40] tutorials/frames/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance/frame_001.jpg
+- [6:14] tutorials/frames/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance/frame_002.jpg
+- [11:13] tutorials/frames/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance/frame_003.jpg
+- [12:18] tutorials/frames/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance/frame_004.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+The entire Painter-side contribution to this video is a single action — **File → Send to → Send to Substance 3D Stager** on a fully-textured model — after which Stager auto-imports the mesh with every exported map already wired into matching Stager materials, no manual texture export/reimport required. Everything past that point (environment building, lighting, rendering, Photoshop post-effects) is Stager/DCC-side and outside this skill's core Painter scope; documented here only at survey depth per this skill's own scope boundary, since the video itself is Stager-primary.
 
 ### Summary
-[PENDING EXTRACTION]
+Demonstrates the Painter-to-Stager pipeline on a finished robot character (modeled in Medium, textured in Painter). The only Painter-side step is the export: **File → Send to Substance 3D Stager**, which pushes the mesh and every painted map straight into a new Stager scene with materials already hooked up and ready to light/render — this is the one technique from this video that's directly this skill's concern, and it matches the same "Send to Stager" handoff used in other Adobe Painter tutorials in this knowledge base (e.g. the ornate-sword and Hero-Assets-for-Fashion videos). The remainder of the video (documented briefly, Stager being out of this skill's scope) covers: importing a separate ground/terrain OBJ and positioning the robot on it (drag-to-snap along the surface normal), applying a downloaded Substance material to the terrain (resolution 2048, 6x6 UV repeat), camera creation (50mm, custom output resolution), enabling ray-traced (GPU) preview, swapping the default HDRI environment for a bundled "Corsica Beach" HDRI and rotating it interactively (Shift + right-mouse-drag, same gesture as Painter's own HDRI rotation), enabling mesh displacement on the terrain (tessellation face-budget mode, Height Scale pushed to 6, later increased to a 7-million-face budget before final render), adding a 2D sky-image background plate on the camera, adding a physical Area Light that can snap-align to a specific face normal for rim lighting (adjusting exposure, intensity, and color temperature), toggling Depth of Field (disabled here because the flat 2D background plate doesn't support it), and finally rendering via the Render tab as a 16-bit **PSD** (chosen specifically because Stager bakes in extra Photoshop layers: material-selection mask, object-selection mask, and a depth pass) at the shot camera's resolution. The video closes with a Photoshop post-pass using those extra layers: compositing a proper sky in place of the flat background, Camera Raw grading (exposure, contrast/clarity, vignette), rebuilding a broken depth pass (filling missing background depth data with white before merging), using the depth pass as a layer-mask source to add distance fog (color-sampled from the sky, masked by copy-pasted depth data, refined with Levels) and post-render Depth of Field (Lens Blur filter driven by the same depth-derived layer mask, focal point set on the robot).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **(Painter)** With texturing complete, go to **File → Send to → Send to Substance 3D Stager** — this is the entire Painter-side action covered in this video.
+2. **(Stager)** Stager opens and auto-imports the mesh with every exported Painter texture already wired into matching Stager materials — no manual export/reimport step.
+3. Import a separate ground/environment mesh (drag-and-drop an OBJ into the viewport); rename it clearly in the Scene panel; disable the built-in "ground plane" shadow-catcher property if a real terrain mesh is being used instead.
+4. Position the character by dragging its pivot point directly on the ground mesh — it snaps along the target surface's normal.
+5. Apply a downloaded Substance material to the terrain via drag-and-drop; adjust its exposed parameters (Resolution, UV repeat tiling) in the object's Material tab.
+6. Create a camera (toolbar Create Camera button); set output resolution and focal length (50mm used here) to taste.
+7. Enable ray tracing (GPU-accelerated in this demo) for a real-time-shaded preview.
+8. Adjust environment/HDRI lighting: pick a bundled Starter Assets HDRI (or import a custom one), rotate it interactively with **Shift + right-mouse-drag** (same gesture Painter itself uses for HDRI rotation), and control global intensity from the Environment entry under the Lights category in the Scene hierarchy.
+9. Enable mesh Displacement on the terrain object; choose a tessellation mode (per-triangle-fixed vs. total face budget — face-budget mode used here, starting at 10,000 and later raised to ~7,000,000 for final render); in the object's Material tab, raise the Height channel's Height Scale (pushed to 6 in the demo) to make the displacement visible.
+10. Add a 2D background plate to the camera (drag an image, e.g. a sky PNG, onto the camera's Background input) — note this flat plate won't correctly interact with Depth of Field later.
+11. Add physical lights from Starter Assets (spotlight, directional, area light, etc.); an Area Light can be dragged directly onto a mesh face to auto-align to that face's normal — useful for quick rim/accent lighting; adjust Exposure, Intensity, and Color (temperature slider) to taste.
+12. Optionally enable camera Depth of Field with a focus point on the subject — disable it if a flat 2D background plate is in use, since DoF can't correctly affect non-3D background imagery.
+13. Before final render, increase the terrain's tessellation face budget for higher-quality displacement detail.
+14. Render via the **Render** tab: select the target camera, set resolution, choose **PSD** as the export format specifically to get Stager's extra baked-in Photoshop layers (material-selection mask, object-selection mask, depth pass), choose bit depth (16-bit used here), click Render.
+15. **(Photoshop, optional post-pass)** Open the rendered PSD; use the denoised main render layer; composite a real sky in place of the flat background plate (drag in the same sky image used in Stager, transform/scale to taste, merge down); apply Camera Raw adjustments (exposure, contrast/clarity, vignette) directly or via a Smart Object for non-destructive editing; repair the depth pass if the background reads as solid black (fill a new white layer beneath it, then select-and-delete the black area with the Magic Wand-style select tool, merge down); use the repaired depth layer as a **layer mask source** (copy the depth layer, paste into a new fog layer's mask) to drive a color-sampled atmospheric fog effect, refined with Levels on the mask; duplicate the render layer, paste the same depth data into its mask (then disable the mask so it's used only as the **Lens Blur** filter's depth-map source), apply Filter → Blur → Lens Blur with the focal point set on the subject to add physically-plausible post-render Depth of Field; fine-tune fog/DoF strength via layer opacity.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Painter:** File → Send to → Send to Substance 3D Stager (the sole Painter-side step).
+- **Stager:** Scene hierarchy/Environment (Lights category — HDRI selection, intensity, Shift+right-drag rotation); Object → Displacement (tessellation mode: per-triangle-fixed vs. total face budget); Material tab → Height → Height Scale; Camera (focal length, output resolution, Background image input, Depth of Field/focus point); Starter Assets → Lights (physical Area/Spot/Directional lights, face-normal snap-alignment, Exposure/Intensity/Color temperature); Render tab (camera selection, resolution, format = PSD with 16/32-bit option, additional baked layers: material selection mask, object selection mask, depth pass; built-in denoising).
+- **Photoshop (post, optional):** Camera Raw filter (exposure/contrast/clarity/vignette); layer masks driven by copy-pasted depth-pass data; Lens Blur filter (depth-map-driven post DoF); Levels for fog-mask tuning.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate (Stager scene-building and Photoshop compositing knowledge; the Painter-side step itself is trivial — a single menu command).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter (export handoff only) and Substance 3D Stager (primary subject of this video); no version number stated on screen for either app. Photoshop used for the optional post-effects pass, version not stated.
 
 ### Tags
-[PENDING EXTRACTION]
+`export`, `viewport`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Texturing an ornate sword in Substance 3D Painter** (`tutorials/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d.md`) — uses the same File → Send to → Send to Stager handoff at the end of its Painter workflow, and explicitly references "the next video" (this one) for the Stager-side follow-through.
+- **Hero Assets for Fashion - 06 - Asset Texturing and Presentation** (`tutorials/hero-assets-for-fashion---06---asset-texturing-and-presentation-adobe-substance-.md`) — also demonstrates the Painter-to-Stager Send-to handoff, followed by its own (more detailed, fashion-specific) Stager lighting/rendering pass.

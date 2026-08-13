@@ -325,4 +325,4 @@ Substance 3D Painter (texturing) handed off to Substance 3D Stager (rendering). 
 
 ## Related Tutorials
 - **Note on series scope:** this is chapter 6 of a longer "Hero Assets for Fashion" series; chapters 1-5 build the Silk Gazar base material in Substance 3D Designer/Sampler and are intentionally out of scope for this Painter-focused skill — this entry only covers the Painter-texturing/Stager-presentation chapter and assumes the base fabric material as a given input.
-- **Substance 3D Stager - Rendering assets from Substance 3D Painter** (`tutorials/substance-3d-stager---rendering-assets-from-substance-3d-painter.md`, if ingested) — dedicated deep-dive on the same Painter-to-Stager export/render handoff demonstrated in the second half of this video.
+- **Substance 3D Stager - Rendering assets from Substance 3D Painter** (`tutorials/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance.md`) — dedicated deep-dive on the same Painter-to-Stager export/render handoff demonstrated in the second half of this video.
