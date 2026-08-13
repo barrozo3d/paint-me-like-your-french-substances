@@ -498,6 +498,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad.md
 
+
+### Creating Fabric stitches for Footwear with Anchor Points in Substance 3D Painter | Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=dIO6cJiE7JM
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter.md
+
 ---
 
 ## Tag Reference
