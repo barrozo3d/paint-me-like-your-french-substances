@@ -949,6 +949,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Advanced technique for authoring real tileable environment geometry (not just texturing a prop): Tri-Planar + Physical-Size projection for auto-correct material tiling, real Shader-Settings displacement/tessellation, Clone-tool multi-channel tiling fixes, Horizon-Based AO and Height-to-Normal filters, blending two ground materials via a live, Levels-reactive Compare Mask (Add Mask with Height Combination), an Anchor-Point-fed Dirt generator Micro Normal input to work around a mesh with no baked mesh maps, Stager ray-traced displacement validation, Smudge-tool fixes for jagged displacement edges, and exporting the actual displaced/tessellated mesh (Recompute Vertex Normals disabled) as a Nanite mesh for Unreal Engine 5.
 - **File:** tutorials/creating-environment-materials-and-meshes-in-substance-3d-painter.md
 
+
+### Zbrush to Substance Painter Bridge! NEW TOOL!
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=KzoJkdqyn7E
+- **Author:** Abe Leal 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/zbrush-to-substance-painter-bridge-new-tool.md
+
 ---
 
 ## Tag Reference
