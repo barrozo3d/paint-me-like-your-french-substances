@@ -514,10 +514,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=yf9CPHE5BYg
 - **Author:** 3DRedBox
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter (Painter-side portion only; most of the video is RizomUV)
+- **Version:** not stated on screen; no version-specific UI markers in the Painter-side portion
+- **Tags:** `udim` `texture-set` `uv` `texel-density` `generator` `layers` `paint-layer` `basecolor`
+- **Summary:** Mostly a RizomUV UV-packing tutorial (via 3ds Max bridge) on keeping texel density consistent across every UV island in a UDIM/UV-Tile layout — Map Res + Texel-Density-Target-derived packing, Initial Scale set to Texel Density with Scale Optimization off — closing with a Substance-Painter-side verification step using the built-in `UV Texel Density` generator (red/green/blue quality heatmap) to confirm the imported UVs actually support the intended export resolution.
 - **File:** tutorials/how-to-use-udims-properly.md
 
 

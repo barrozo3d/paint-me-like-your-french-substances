@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=yf9CPHE5BYg
 author: 3DRedBox
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (Painter-side portion only; most of the video is RizomUV, a third-party UV-packing tool)"
+version: "not stated on screen; the Painter-side portion (UV Texel Density generator check) shows no version-specific UI markers"
+tags: [udim, texture-set, uv, texel-density, generator, layers, paint-layer, basecolor]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-use-udims-properly/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to use UDIMs properly!
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-use-udims-properly <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -166,30 +162,58 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [3:56] tutorials/frames/how-to-use-udims-properly/frame_000.jpg
+- [5:28] tutorials/frames/how-to-use-udims-properly/frame_001.jpg
+- [8:55] tutorials/frames/how-to-use-udims-properly/frame_002.jpg
+- [10:57] tutorials/frames/how-to-use-udims-properly/frame_003.jpg
+- [15:10] tutorials/frames/how-to-use-udims-properly/frame_004.jpg
+- [15:55] tutorials/frames/how-to-use-udims-properly/frame_005.jpg
+- [16:32] tutorials/frames/how-to-use-udims-properly/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Keeping texel density (pixel-per-unit resolution) consistent across every UV island when packing a UV-Tile (UDIM) layout, using RizomUV's texel-density-driven packing mode — plus how to verify the result is actually good enough directly inside Substance Painter using the built-in `UV Texel Density` generator.
 
 ### Summary
-[PENDING EXTRACTION]
+Mostly a UV-preparation video done in the third-party tool RizomUV (via a 3ds Max bridge plugin, though the concept applies in any DCC/UV tool), with a short Substance-Painter-side verification step at the end. Opens by demonstrating the actual problem UDIMs solve: packing a complex, many-small-pieces model into a single UV tile forces small UV islands and visibly pixelated 4K textures, while extending to multiple UV tiles (UDIMs) gives each island more UV space and therefore more texture resolution — but naively packing across multiple tiles can leave different islands at wildly different scales/texel densities relative to each other (demonstrated with a deliberately bad example). The fix is RizomUV's texel-density-driven packing: set `Map Res` to the actual final export resolution (4096 for 4K, 2048 for 2K, etc.), then derive a `Texel Density Target` value from the largest UV island in the scene (select it, isolate it, read its texel density, e.g. ~43 for a 4-tile pack) — if that number implies needing more tiles than currently allotted, rescale and increase the tile count accordingly (demoed going from 4 to 8 tiles, with the divide-by-100-for-centimeter-units caveat when computing texel density target from map res). Critically, `Initial Scale` in Packing Properties must be set to `Texel Density` (not the default) and `Scale Optimization` range must be turned `Off`, so RizomUV preserves the target density instead of auto-rescaling islands to save space — any resulting empty gaps are cleaned up by manually shrinking a few oversized islands to reclaim tile count (demoed reducing from 8 tiles down to 7). The same method is shown solving a tighter-constraint scenario — matching texel density across only 3 fixed UV tiles by manually dialing in a texel density target (22) partway between two islands' natural values (23 and 24) so both land on the same final number once packed. The video closes in Substance Painter: add the built-in `UV Texel Density` generator to a paint layer's Color channel to get a heatmap validation of the imported UV layout — red means insufficient resolution for the intended export size (must go higher, e.g. from 2K/1K up to 4K/8K), green means the current setting is workable but you couldn't safely go lower, and blue means there's headroom (a lower export resolution, e.g. 2K, would still look good) — demonstrated getting green on a single-tile model and copying the same generator setup onto an 8-UV-tile model for the same check.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Understand the baseline problem before reaching for UDIMs:** packing a complex model's many small pieces into a single UV tile forces tiny UV islands, which produces visibly pixelated results even at 4K export — demonstrated by tiling a 1K texture 4x to simulate a 4K result on a single-tile-packed model.
+2. **Extend to multiple UV tiles (UDIMs) for more resolution headroom:** in RizomUV, increase the UDIM tile count (demoed 1→4) via the tile-space window, then re-pack with `Accuracy: Ultra`, `Iteration: 4-8`, `Initial Orientation: V`, `Orientation Optimization: 90` — more tiles means more total UV space, which lets island sizes grow, which directly increases per-island pixel density.
+3. **Recognize the multi-tile trap:** naively packing across multiple UV tiles can leave different islands at very different scales relative to each other, producing visibly inconsistent texture quality across the model (some areas sharp, some blurry) even though the overall resolution increased — demonstrated with a deliberately mismatched pack for illustration.
+4. **Set `Map Res` to your actual final export resolution** (4096 for a 4K export, 2048 for 2K, etc.) in RizomUV — this is the reference the texel density calculation is built from.
+5. **Derive a `Texel Density Target` from your largest UV island**, not an arbitrary number: select and isolate the biggest island, read its texel density value (e.g. ~43), and use that as the packing target for every island in the scene.
+6. **Rescale and re-tile if the derived target needs more space than currently allotted**: if a target density requires more UV tiles than you have (e.g. 4 isn't enough, so go to 8), compute a matching texel density target from Map Res (Map Res ÷ 100 when working in centimeters, per this creator's modeling unit convention).
+7. **Set Packing Properties to actually honor the texel density target:** change `Initial Scale` to `Texel Density` (instead of the default automatic scaling) and turn `Scale Optimization` range from `Full` to `Off` — without this, RizomUV will silently re-optimize island sizes to save space and undo the consistent density you just calculated.
+8. **Clean up leftover empty tile space after a texel-density-locked pack:** select a subset of islands and manually reduce their scale slightly to reclaim wasted space, potentially reducing the total tile count needed (demoed 8 tiles down to 7) without sacrificing the target density on the islands that matter most.
+9. **Apply the same method under a fixed tile-count constraint:** when you can't add more tiles (e.g. locked to 3), read the texel density each island naturally lands at after a normal pack (e.g. 23 and 24), then manually set `Texel Density Target` to a value in that range (22), with `Initial Scale = Texel Density` and `Scale Optimization = Off`, so a final re-pack brings every island to the same density (23 across all three tiles in the demo) instead of leaving them slightly mismatched.
+10. **Verify the resulting UV layout's quality directly inside Substance Painter** once imported: add the built-in `UV Texel Density` generator to a layer's Color channel (Fill or Paint layer, Generator picker) — this heatmaps the model in red/green/blue based on how much resolution headroom the UVs provide relative to the project's current export size.
+11. **Read the heatmap result correctly:** red = not enough quality at the current export size, must go higher (e.g. bump from 2K/1K up to 4K/8K); green = current setting is right at the edge — usable, but don't try to go lower; blue = comfortable headroom, a lower export size (e.g. 2K) would still look fine. Repeat the same generator check on any other texture set/UV variant in the same project (demoed copying the layer setup from a 1-UV-tile model to an 8-UV-tile model) to confirm each holds up before committing to full texturing work.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **External tool used (not Painter):** RizomUV, connected via a 3ds Max bridge plugin (link provided by the creator) — packing properties: `Accuracy: Ultra`, `Iteration: 4-8`, `Initial Orientation: V`, `Orientation Optimization: 90`, `Initial Scale: Texel Density` (critical), `Scale Optimization: Off` (critical)
+- **RizomUV concepts used:** `Map Res` (set to the real final export resolution), `Texel Density Target` (derived from the largest UV island, or manually tuned to match a fixed tile-count constraint), UDIM tile-count window
+- **Substance Painter generator used:** `UV Texel Density` (Color channel), with a red/green/blue quality legend: red = insufficient resolution, green = at-the-edge but workable, blue = comfortable headroom
+- **Painter layer type used for the check:** a simple `Paint` layer holding only the generator, no actual paint data — purely diagnostic
+- **Texture Set List:** used to switch between UV-tile variants of the same model (1-tile vs. 8-tile) to compare texel-density results side by side
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — the underlying concept (texel density) is explicitly flagged by the creator as "kind of complex" and deliberately simplified into a repeatable recipe; executing it correctly requires comfort with a third-party UV tool (RizomUV) rather than anything inside Painter itself. The Painter-side verification step (UV Texel Density generator) is beginner-friendly on its own.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not stated on screen, and the Painter-side portion of this video (the `UV Texel Density` generator check) shows no version-specific UI markers to pin against `references/version-tracker.md`. The bulk of the video takes place in RizomUV (third-party UV-packing software, unrelated to Painter's own version history) via a 3ds Max bridge plugin.
 
 ### Tags
-[PENDING EXTRACTION]
+udim, texture-set, uv, texel-density, generator, layers, paint-layer, basecolor
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Texturing a Worn Wooden Stool in Substance Painter](texturing-a-worn-wooden-stool-in-substance-painter.md) — same creator (3DRedBox); shares the "solve texel-density problems for many-small-pieces models before entering Painter" philosophy (overlapping UVs there, texel-density-locked UDIM packing here), both explicitly framed as DCC-side prep done ahead of texturing.
+- [Speed Up Your Substance Painter Workflow with This Easy Trick!](speed-up-your-substance-painter-workflow-with-this-easy-trick.md) — same creator; both are short, focused troubleshooting videos addressing a specific pipeline pain point on complex multi-piece models, solved primarily outside Painter in the DCC/UV tool.
+- More 3DRedBox tutorials (shawl, tactical boots, UV-set/stencil video, NavyCap) will be cross-linked here as they are ingested — see `tutorials/INDEX.md` for the current full list.
