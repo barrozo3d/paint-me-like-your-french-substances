@@ -591,11 +591,22 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=xXad_mS7K9s
 - **Author:** Adobe Substance 3D
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `anchor-point` `masks` `layers` `fill-layer` `paint-layer` `smart-mask` `generator` `blend-mode` `curvature` `ambient-occlusion` `height` `basecolor` `roughness` `procedural` `tri-planar` `alpha` `advanced`
+- **Summary:** 3/3 of the footwear anchor-points series (longest and most complete). Two chained anchor points: a Leather_Roughness_Base (Roughness + AO generator + Blur + Levels) anchor drives Edge Highlights, Dirt (AO-referenced + Dirt generator Multiply), and Overall Highlights (white fade + Grunge Multiply, Tri-Planar seam fix); a second folds/creases anchor (hand-painted Height mask + Creases Soft texture, Tri-Planar rotation via E to align with flex joints) drives Folds Color via generator Micro Height anchor-referencing with Invert, plus fold-specific Dirt via an Add-mode anchor-referenced fill.
+- **File:** tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain.md
+
+
+### How to Enable Auto-Updates in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=13B82VtLuQY
+- **Author:** Adobe Substance 3D
 - **App:** [PENDING]
 - **Version:** [PENDING]
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain.md
+- **File:** tutorials/how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d.md
 
 ---
 
