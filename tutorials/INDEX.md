@@ -410,6 +410,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Short beginner rock-column texturing pass: Tri-Planar concrete base, Curvature-generator edge lightening, channel-restricted (height/roughness-only) Fill layers for surface detail and scratches, a Rust Coarse smart material driven by the built-in Ground Dirt Smart Mask, a Dirt-generator broad-rust pass, and a hand-painted mask confining a Large Rust Leaks streak texture to specific faces.
 - **File:** tutorials/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model.md
 
+
+### Advanced Peeling Paint Effect in Substance 3D Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=VE8aILV053Y
+- **Author:** Javad Rajabzade
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/advanced-peeling-paint-effect-in-substance-3d-painter.md
+
 ---
 
 ## Tag Reference
