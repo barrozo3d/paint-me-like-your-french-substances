@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=qkRJjA5rTcY
 author: FlippedNormals
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated numerically; scattering (subsurface) channel added manually via Texture Set Settings > Channels > \"support by shader,\" consistent with a modern shader-driven channel model, tentative"
+tags: [layers, fill-layer, paint-layer, masks, smart-mask, blend-mode, basecolor, roughness, height, alpha, texture-set, pbr, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Speeding Up Character Texturing with Smart Masks - Substance Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py speeding-up-character-texturing-with-smart-masks---substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -340,30 +336,64 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:44] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_000.jpg
+- [3:19] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_001.jpg
+- [3:41] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_002.jpg
+- [7:20] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_003.jpg
+- [8:05] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_004.jpg
+- [9:25] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_005.jpg
+- [10:19] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_006.jpg
+- [11:00] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_007.jpg
+- [14:17] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_008.jpg
+- [15:35] tutorials/frames/speeding-up-character-texturing-with-smart-masks---substance-painter/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Pre-build a one-time library of hand-painted, character-region **Smart Masks** (eye soft, eyelids, eye sharp, mouth, nose, ears, horns, etc.) saved once, then reuse each mask across every channel — Color, Roughness, Height, and Scattering/Subsurface — of a new character by simply dragging it into each new Fill layer's mask slot. Because each drag-in creates an independent, non-live copy of the mask data (not a linked reference), the same regional shape can carry completely different values per channel and be locally fine-tuned afterward without disturbing the original saved mask.
 
 ### Summary
-[PENDING EXTRACTION]
+Demonstrated on a horned fantasy-character bust (model credited to artist Niazi). **Building the mask library:** create a Fill layer inside a temporary "smart masks" group, give it a strongly saturated flat color (important for visibility — muted colors make mask edges hard to judge) and only enable the Color channel via Alt-click, add a black mask, add a Paint sub-layer, and hand-paint the target region (e.g. a soft eye-socket falloff) using a soft round brush with **pen pressure mapped to Flow rather than Size** for finer control over softness/opacity buildup; press `X` to swap between painting black (remove) and white (add). Alt+click the mask thumbnail to preview it in isolation (essential for verifying clean edges — hard to judge accurately in material/shaded view, and easy to miss small gaps like inside the eye opening). Rename the finished paint layer descriptively (e.g. "eye soft"), then right-click it and choose **Create Smart Mask** — save under the Smart Mask tab specifically (not Smart Material) with a consistent naming prefix (the video uses `CHR_` for "character") so the whole reusable set stays groupable and searchable later. Repeat for each recurring facial/character region: eyelids, eye sharp (a harder-edged variant of eye soft for crease/shelf definition), mouth, nose, ears, horns — the video argues this workflow suits **characters specifically** more than hard-surface props, because character texturing repeatedly revisits the same handful of anatomical regions (eyes/nose/mouth/ears and immediate surroundings), whereas prop texturing tends to spread work more evenly across the whole surface. **Reusing the library:** once saved, search the asset browser by the naming prefix and drag any smart mask directly into a new Fill layer's mask slot — Color-channel blocking becomes near-instant (drag "eye soft" under a skin-tone Fill layer, "mouth" under a lip-color layer, "horns" under a darker horn-color layer, etc.), and because copies are independent, adjusting one channel's color/coverage never disturbs another channel's use of the same region, and even editing the *original* saved smart mask afterward does not retroactively change any already-placed copy (useful for it to serve purely as a reusable starting point that gets blended/extended per-use). The exact same drag-in-a-smart-mask pattern is repeated for **Roughness** (distinct roughness values per region: soft/matte lips vs. sharp/shiny eye-shelf highlights) and for **Scattering/Subsurface** (added as a channel first via Texture Set Settings > Channels > "support by shader" if not already present, then per-region SSS intensity set directly rather than painted — full for skin-toned areas, zero for horns) — argued as strictly better than hand-painting these auxiliary maps directly, since a painted-in value can't be cleanly re-scaled, block-adjusted, or erased with the same control a Fill-layer-plus-mask setup gives. **Bonus grading technique:** to locally dampen an existing effect (e.g. reduce Height-channel bump intensity, or grade down Base Color saturation/darkness) only within one of the already-established regions, add a new Paint layer scoped to the relevant channel, add a `Levels` filter on it, set the layer's blend mode to **Pass Through** (so the Levels adjustment reads/affects the layers beneath it rather than compositing as its own new value), then mask that grading layer with one of the same reusable smart masks (e.g. "eyes soft") to confine the correction to just that region — described as "tremendously powerful" for fine local balancing after the initial block-in.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Build each reusable region mask from a saturated, single-channel Fill layer:** new Fill layer inside a temporary group, Alt-click to isolate the Color channel only, set a strongly saturated flat color (critical for visibility while painting/verifying), add a black mask, add a Paint sub-layer.
+2. **Hand-paint the region with a soft brush set to Flow-based pen pressure** (not Size-based) for finer control over edge softness; use `X` to toggle between painting black (remove from mask) and white (add to mask).
+3. **Verify the mask is clean by Alt+clicking its thumbnail** to preview it in isolation — material/shaded view alone makes it too easy to miss small gaps or leave a messy edge.
+4. **Rename the finished paint layer descriptively before saving** (naming discipline done early, e.g. "eye soft") — right-click the layer and choose **Create Smart Mask** (confirm you're saving under the Smart Mask tab, not Smart Material), using a consistent searchable prefix (`CHR_` in this video) across the whole set.
+5. **Repeat for every character region reused across a typical face/character build:** eye soft, eyelids, eye sharp, mouth, nose, ears, horns (or equivalent regions for a different character type) — budget roughly half an hour to build a first complete library from scratch (timed by the creator across multiple projects).
+6. **Reuse the library for fast color block-in:** search the asset browser by the naming prefix, drag a saved smart mask directly into a new Fill layer's mask slot, and adjust that Fill layer's own color — repeat per region to block in a full base color pass in minutes; each drag-in is an independent, non-live copy, so later edits to the original saved smart mask (or to one placed copy) never propagate to other already-placed copies.
+7. **Blend/extend a dropped-in smart mask locally when needed** (e.g. push a nose-mask's coverage further up the bridge) rather than treating it as fixed — the point of the library is a fast, editable starting point, not a rigid final shape.
+8. **Reuse the exact same masks for Roughness:** new Fill layer scoped to Roughness only, drag in the relevant region mask (e.g. "mouth" for smooth/matte lips, "eye sharp" for a harder specular shelf around the eye), and set distinct roughness values per region.
+9. **Reuse the same masks for Scattering/Subsurface:** if the Scattering channel isn't already present, add it via Texture Set Settings > Channels > add a channel supported by the active shader ("support by shader"), then for each region drag in the matching smart mask and set a direct subsurface-intensity value (not hand-painted) — full SSS for skin, none for horns, etc.
+10. **Use a Pass-Through Levels layer + a reused smart mask for local grading corrections:** add a new Paint layer on the target channel (e.g. Height, to reduce bump intensity in one area, or Base Color, to darken/desaturate one area), add a `Levels` filter to it, set the layer's blend mode to **Pass Through** so the Levels adjustment reads from the layers beneath rather than replacing them, then mask that grading layer with a saved smart mask (e.g. "eyes soft") to confine the correction to exactly that region.
+11. **Promote any frequently-repainted pattern into a new smart mask as you notice it** — if you catch yourself hand-painting the same kind of detail (e.g. scar darkening) repeatedly across a project, right-click that paint layer and save it as a smart mask immediately rather than continuing to repaint it by hand.
+12. **Manage the saved library directly on disk if needed:** smart masks not deletable from within Painter's asset browser for any reason can be found and removed manually under the Painter install's `assets/smart masks` directory (or the equivalent custom-assets path), searchable by the same naming prefix used when saving.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Mask-building layer:** Fill layer (Color-only via Alt-click), saturated flat color, black mask + Paint sub-layer, soft brush with pen pressure mapped to Flow
+- **Save/reuse:** right-click > Create Smart Mask (Smart Mask tab, not Smart Material), consistent naming prefix (e.g. `CHR_`) for searchability
+- **Verification:** Alt+click mask thumbnail to preview the mask in isolation
+- **Reused across channels:** Color, Roughness, Height, Scattering/Subsurface — each channel's Fill layer gets its own independent drag-in copy of the same saved mask
+- **Scattering channel setup:** Texture Set Settings > Channels > add a channel "support by shader"
+- **Local grading trick:** Paint layer (scoped to target channel) + `Levels` filter + blend mode `Pass Through` + masked by a reused smart mask
+- **Manual cleanup (if needed):** Painter install directory > `assets/smart masks`
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — the individual moves (Fill layers, black masks, Smart Mask save/reuse, Levels+Pass Through) are all basic Painter mechanics, but the video's real value is the workflow discipline of building a reusable library upfront and understanding that dragged-in smart mask copies are independent (not live-linked) — a subtlety that changes how you'd plan reuse versus expecting synced updates.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated numerically on screen. Scattering is added as a channel via Texture Set Settings' shader-supported-channel picker, consistent with this skill's other modern-era ingested tutorials; no other version-specific UI markers were visible in the captured frames.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, smart-mask, blend-mode, basecolor, roughness, height, alpha, texture-set, pbr, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); covers the general Smart Mask creation mechanic that this video applies specifically to a reusable character-region library workflow.
+- [Texturing a Clicker - FULL Substance 3D Painter Workflow](texturing-a-clicker---full-substance-3d-painter-workflow.md) — same creator (FlippedNormals); shares the same channel-separated-groups organizational philosophy (Color group / Roughness group per texture set) that this video's per-channel smart-mask reuse pattern builds directly on top of.
+- [10 New Features in Substance Painter You Didn't Know About](10-new-features-in-substance-painter-you-didnt-know-about.md) — same creator (FlippedNormals); the "Apply to all channels" blend-mode/opacity propagation feature covered there is a complementary efficiency trick to this video's per-channel smart-mask reuse workflow.
