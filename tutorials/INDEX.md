@@ -982,6 +982,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Talking-head/slide-deck methodology video (no live layer-building) laying out Jared Chavez's repeatable 3-phase texturing process, mapping primary/secondary/tertiary sculptural forms onto texturing: Phase 1 Blockout (color blocking + clean "fresh off the factory floor" material definition), Phase 2 Color & Roughness Breakup (~80-90% of final quality — subtle wear/edge-wear/grime value shifts, hue/saturation embellishment, roughness variation), Phase 3 Detail (sparse, high-contrast graphic damage — scratches/tears/blood — then a final global dirt/grime pass applied across the whole character, not per-material). Painter viewports/layer stacks appear only as B-roll validation, not step-by-step. Cross-linked with this creator's Building Masks Explained, both creature-texturing videos, and Texturing Metal from Scratch.
 - **File:** tutorials/how-to-master-texturing-in-substance-painter.md
 
+
+### HOW to Make a Peeled Paint Effect with ANCHOR Points | SUBSTANCE PAINTER
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=mLsXRzm7K0c
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-make-a-peeled-paint-effect-with-anchor-points-substance-painter.md
+
 ---
 
 ## Tag Reference
