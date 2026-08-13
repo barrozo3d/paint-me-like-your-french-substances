@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=dXDWFPHkeZM
 author: Unreal Sensei
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen"
+tags: [layers, fill-layer, paint-layer, masks, smart-material, generator, anchor-point, blend-mode, baking, mesh-maps, ambient-occlusion, curvature, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, tri-planar, procedural, particle-brush, export, export-preset, game-engine, unreal-export, beginner, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 18
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance Painter Beginner Tutorial for Unreal Engine 5
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-painter-beginner-tutorial-for-unreal-engine-5 <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -2202,30 +2198,111 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [16:10] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_000.jpg
+- [19:15] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_001.jpg
+- [23:05] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_002.jpg
+- [26:00] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_003.jpg
+- [28:35] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_004.jpg
+- [31:50] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_005.jpg
+- [35:00] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_006.jpg
+- [38:30] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_007.jpg
+- [42:10] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_008.jpg
+- [45:40] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_009.jpg
+- [54:00] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_010.jpg
+- [57:45] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_011.jpg
+- [63:00] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_012.jpg
+- [79:05] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_013.jpg
+- [110:05] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_014.jpg
+- [143:15] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_015.jpg
+- [153:00] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_016.jpg
+- [165:35] tutorials/frames/substance-painter-beginner-tutorial-for-unreal-engine-5/frame_017.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Exceptionally thorough, ground-up Painter fundamentals course (2h55m, 25 chapters) taught on two assets — a simple mascot character ("Meet Mac") for core features, then a Sci-Fi Crate for advanced/production techniques — with the second half covering the full Painter-to-Unreal-Engine-5 pipeline including Nanite tessellated height-map displacement. The throughline is PBR-first thinking (every material reduces to BaseColor + Metallic + Roughness + Height + Normal), building masks from combined/layered effects (generators + fills + paint, blended with Photoshop-equivalent blend modes) rather than single flat masks, and the Height-channel-vs-Normal-channel distinction (Height = real geometry displacement potential, Normal = fake shading only) carried all the way through to Unreal's Nanite tessellation settings.
 
 ### Summary
-[PENDING EXTRACTION]
+**Core Painter fundamentals (0:00-59:07):** Project setup (croissant-icon Baking, 3D+2D UV view). A **Fill layer** is the simplest material unit — editing BaseColor/Metallic/Roughness directly demonstrates the PBR model (Metallic 0=non-metal/1=metal; Roughness 0=mirror/1=fully diffuse). A Fill layer's channel checkboxes (Alt-click to isolate one) control which channels it overrides versus lets pass through from below. Procedural/photo **Textures** can drive any channel (e.g. `grunge rough dirty` into Roughness) and are edited via Balance/Contrast; **Tri-Planar** projection is the default recommendation for most textures to eliminate visible UV seams (vs. plain UV projection). **Masks**: black mask + white paint reveals a layer; Alt-click a mask thumbnail to preview it; the **Polygon Fill** tool (triangle/polygon-level or whole-disconnected-mesh-section "mesh fill select," with value 1=add/0=subtract) is the fast way to mask by geometry instead of hand-painting; Shift-click a mask to temporarily disable it (X icon). **Effects** turn a mask into "layers within layers" — a Fill or texture dropped onto a mask, combined with **generators** (procedural, mesh-map-driven masks — e.g. the built-in **Dirt** generator reads the baked **Ambient Occlusion** map to naturally place grime in crevices, and **Metal Edge Wear** reads the baked **Curvature** map to expose wear only at sharp edges) using standard Photoshop-style **blend modes** (Linear Dodge to add on top without replacing, Multiply to subtract/darken). **Baking mesh maps** (croissant icon, defaults are fine for most cases) unlocks AO/Curvature-driven generators; AO is auto-applied to the viewport (controllable via Shader Settings → AO Intensity) but is NOT baked into exported textures unless explicitly done later. Each layer/effect has independent **BaseColor vs. Roughness vs. Height blend-mode-and-opacity control** (selectable via the channel dropdown above the blend-mode row) — critical for e.g. zeroing out a dirt layer's Roughness contribution without touching its color. **Smart Materials** are just saved folders of layers (drag on to apply; right-click a group → **Create Smart Material** to save your own); they auto-wire to whatever mesh maps exist in the current project, so mesh maps must be baked first. Masking an entire Smart-Material group (rather than each internal layer) confines the whole reusable material to one mesh region via one mask. **Paint tool**: brush Size/Hardness/Flow/Spacing/Jitter (Size, Flow, Angle, Position) controlled via sliders or drag-shortcuts (Ctrl+RMB drag = size/hardness, Ctrl+LMB drag = flow/rotation), **Alphas** (brush stamp shapes, rotatable), painting entire materials (not just color) by dragging a texture/material into the brush's Material slot, and the strong recommendation to paint into a dedicated **paint effect layer nested on a mask** (not directly on the mask) so Blur or other filters can be layered on top non-destructively. **Symmetry** (mirror line + gear-icon axis/position controls) and **Distance** (stroke-smoothing) are covered via painting a cartoon face onto the character, including switching to 2D UV view for finer control and Alt+LMB-drag to rotate the UV map when painting at an awkward angle. **Advanced/production techniques on the Sci-Fi Crate (105:02-167:16):** **Texture Sets** (assigned per-material in the source DCC app) each carry an independent layer stack and independent export resolution — Ctrl+Alt+RMB-click on the mesh is the fast shortcut to jump texture sets without hunting the list; baking now bakes mesh maps per-texture-set. Multiple Smart Materials are blended per texture set (e.g. Steel Painted Stained as base, blended with Steel Painted Worn via a folder-opacity/Height-and-BaseColor-split trick — folder opacity in the BaseColor channel controls color blend strength while a separately-set Height-channel opacity keeps bump detail strong even at low color opacity, since Height/Opacity/BlendMode are independently controlled per channel), with generator Curvature-weight and Contrast retuned per-part. **Height vs. Normal channels**: both fake or create depth, but only Height data feeds the "Normal + Height" exported/combined normal map by default and only Height is eligible for real geometric displacement; Normal-channel edits require actual normal-map textures (not hand-picked colors) and never affect geometry. A worked example places a heart decal via a **Planar-projected, UV-Wrap-None** Alpha-driven Height fill (negative = recessed, positive = raised) plus a separate Normal-only fill for extra shading detail, with a **Blur** filter on the height mask for a natural black-to-white falloff (avoids a hard unrealistic edge) — then enabling **Shader Settings → Displacement and Tessellation** (with increased Subdivision) to preview real viewport geometry displacement (this preview setting is NOT exported). **Nanite Displacement in Unreal**: exporting a genuine Height grayscale texture requires a custom duplicated export **Output Template** (default UE4 template doesn't include a separate Height output) with `sRGB` unchecked on import for both the mask and height textures; in the Material Instance, checking **Use Height** + assigning the height texture, then enabling **Enable Tessellation** under Material Property Overrides (mesh must have Nanite enabled, on by default), unlocks real per-pixel geometric tessellated displacement with correct self-shadowing (verified by comparing tessellation on/off) — key Displacement Scaling controls: **Center** (0.5 keeps original silhouette; 0/1 pushes the whole mesh in/out, useful for flat ground meshes), **Displace Amount**, **Strength**, **Magnitude** (raises the strength ceiling when Strength alone hits its cap), **Contrast**, and **Displacement Offset**; Normal-map strength must stay nonzero even with displacement active, since Normal supplies fine shading detail Height/displacement alone won't reproduce; `Shadow Cache and Validation Behavior` set to **Always** (instead of Auto, revert when done — costs performance) makes displacement-driven shadow changes update live instead of needing a manual mesh nudge. **Paint Hard Surface Details directly in Painter** using the built-in hard-surface Alpha library on a Height-only fill/paint-effect layer (negative height to carve in), Blurred for a beveled edge — sculpting real exportable geometry detail without leaving Painter. **Anchor Points** solve the resulting problem that hand-painted height detail has no matching Curvature data for edge-wear generators to read: move the height mask to the very bottom of the stack (folders above must be set to **Linear Dodge**, not Normal, to add rather than replace height), add an **Anchor Point** effect on that mask (named e.g. "hard surface"), then in any Curvature-driven generator (e.g. Metal Edge Wear, Dirt) enable its **Micro Details → Micro Height** input and set it to reference that Anchor Point — with **Invert** toggled as needed depending on whether the detail should read as an inner or outer edge — so hand-sculpted height detail now correctly drives procedural edge-wear/dirt placement alongside the mesh's real baked curvature.
 
 ### Key Steps
-[PENDING EXTRACTION]
+**Fundamentals**
+1. A **Fill layer** carries BaseColor/Metallic/Roughness/Normal/Height at once; Alt-click a channel icon to isolate which channels that layer actually overrides (unchecked channels pass through from the layer below).
+2. PBR core: Metallic is 0 (non-metal) or 1 (metal) with rare in-between exceptions; Roughness 0=mirror-sharp, 1=fully diffuse.
+3. Drive any channel with a procedural/photo texture (drag onto the channel) — edit its Balance/Contrast for look control; use **Tri-Planar** projection (vs. plain UV) for most textures to eliminate visible UV seams, at the cost of losing UV-aligned directional control.
+4. Build masks: black mask + white-paint reveal; Alt-click a mask thumbnail to preview; **Polygon Fill** tool (per-polygon or whole-disconnected-mesh-section "mesh fill select," value 1=add/0=subtract) for fast geometry-based masking; Shift-click a mask to temporarily disable it.
+5. Add **Effects** to a mask (magic-wand icon → Add Fill / Add Generator / Add Paint / Add Filter / Add Anchor Point) to build masks from multiple stacked, independently-controllable layers rather than one flat mask.
+6. Use **generators** (Dirt reads baked Ambient Occlusion; Metal Edge Wear reads baked Curvature) for mesh-aware procedural masks — bake mesh maps first (croissant icon) or generators have nothing to read.
+7. Layer multiple mask effects with Photoshop-style **blend modes** (Linear Dodge to add without replacing, Multiply to subtract/darken) rather than letting each new effect override the last.
+8. Remember every channel (BaseColor, Roughness, Height, etc.) has its **own independent blend mode and opacity**, selectable via the small channel dropdown above the main blend-mode row — essential for e.g. zeroing a layer's Roughness contribution without touching its BaseColor.
+9. **Smart Materials** are just saved layer-group folders; drag on to apply (auto-wires to whatever mesh maps the current project has baked — bake first); right-click any group → **Create Smart Material** to save your own reusable material.
+10. Mask an entire Smart-Material **group** (not each internal layer) to confine a whole reusable material to one mesh region with a single mask.
+
+**Paint Tool**
+11. Brush controls: Size/Hardness via Ctrl+RMB-drag (horizontal=size, vertical=hardness), Flow/Rotation via Ctrl+LMB-drag; **Alphas** are the brush's stamp shape (rotatable, tileable via Spacing); Jitter (Size/Flow/Angle/Position) adds controlled randomness for organic brushes.
+12. A brush's **Material** slot can hold an entire texture/material (not just a color) for painting real surface variation, not flat paint.
+13. Best practice: never paint directly on a mask — add a **Paint effect** nested inside the mask instead, so filters (e.g. Blur) can be layered on top of the painted result non-destructively later.
+14. **Symmetry** (mirror-line + gear-icon axis/offset controls) mirrors strokes to the opposite side; **Distance** stroke-smoothing (adjustable circle radius) compensates for shaky freehand input; switch to 2D UV view for fine detail work, Alt+LMB-drag to rotate a poorly-aligned UV map while painting.
+
+**Baking & Ambient Occlusion**
+15. Bake mesh maps via the croissant icon (defaults are fine unless doing something specific); `B` cycles through baked-map previews, `M` returns to material view.
+16. Baked **Ambient Occlusion** auto-applies to the viewport (Shader Settings → AO Intensity controls strength) but is NOT included in exported textures unless deliberately baked into a channel later — it's a viewport-only visual aid by default.
+
+**Texture Sets & Multi-Material Blending (Sci-Fi Crate)**
+17. **Texture Sets** (assigned per-material in the source DCC app) each carry an independent layer stack and independent export resolution — `Ctrl+Alt+RMB-click` on the mesh jumps directly to that part's texture set (fast alternative to the texture-set list); lower resolution on less-important parts if viewport performance lags (no data loss — raise it again anytime before export).
+18. Bake mesh maps per-texture-set (baking now runs once per texture set, takes longer).
+19. Blend two Smart Materials on one texture set by copying a base color's hue into the second material's matching layer, then using a Dirt or Curvature generator to control where the second material shows through; independently tune folder opacity per channel (e.g. low BaseColor opacity but higher Height opacity) so bump detail survives even when color blending is kept subtle, since Height/Opacity/BlendMode are separately controlled per channel.
+20. Retune a Smart Material's internal generator Curvature-weight/Contrast/Levels per part — the same material can need very different curvature sensitivity on a sharp-edged device versus a broad crate panel.
+
+**Height vs. Normal Channels & Displacement**
+21. Height and Normal both fake/create depth, but only **Height** data feeds the exported combined "Normal + Height" map by default, and only Height is eligible for real geometric displacement; Normal-channel edits require real normal-map texture resources (never hand-picked colors) and never move geometry.
+22. Decal-style detail placement: a Height-only fill (Alt-click Height), masked with an Alpha texture, **Planar projection + UV Wrap: None** to place it as a non-repeating decal; negative Height value recesses, positive raises.
+23. **Blur** the height mask for a natural black-to-white falloff — an unblurred height mask cuts in/out with a hard, unrealistic edge.
+24. Preview real viewport geometric displacement via **Shader Settings → Displacement and Tessellation** (enable + increase Subdivision Count so there's enough extra geometry to displace) — this is a viewport-only preview setting, not exported.
+25. To actually export a Height grayscale texture, duplicate an existing Output Template (the default UE4 template omits a standalone Height output), add a Grayscale export mapped to the Height input map, and uncheck **sRGB** on import in Unreal for both mask and height textures.
+26. In Unreal: Material Instance → check **Use Height** + assign the height texture → Material Property Overrides → enable **Enable Tessellation** (mesh needs Nanite enabled, on by default on import) for real per-pixel tessellated geometric displacement with correct self-shadowing.
+27. Key Unreal Displacement Scaling controls: **Center** (0.5 preserves original silhouette; push toward 0 or 1 to inflate/deflate the whole mesh — useful for flat ground-plane meshes), **Displace Amount**, **Strength** (has a ceiling), **Magnitude** (raises that ceiling when Strength alone caps out), **Contrast**, **Displacement Offset**.
+28. Normal-map strength must stay nonzero even with displacement enabled — Normal supplies fine shading detail that Height/displacement geometry alone doesn't reproduce.
+29. Set `Shadow Cache and Validation Behavior` to **Always** (instead of Auto) while iterating on displacement so shadows update live instead of needing a manual mesh nudge — revert to Auto afterward, since Always costs performance.
+
+**Hand-Sculpting Height Detail + Anchor Points**
+30. Paint real hard-surface geometric detail directly in Painter using the built-in hard-surface **Alpha** library on a Height-only paint-effect layer (negative height to carve in), Blurred afterward for a beveled, non-harsh transition.
+31. Hand-painted height detail has no matching baked Curvature data, so Curvature-driven edge-wear/dirt generators can't see it by default — fix with **Anchor Points**: move the height mask to the very bottom of the layer stack (folders above it must use **Linear Dodge**, not Normal, in the Height channel so they add rather than replace height data), add an **Anchor Point** effect on that mask (give it a descriptive name), then in any Curvature-driven generator enable **Micro Details → Micro Height** and set its source to that Anchor Point, toggling **Invert** as needed depending on whether the hand-sculpted detail should read as an inner recess or an outer edge.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `Fill layer` channel isolation (Alt-click), `Paint layer` / `Paint effect` (nested in a mask, preferred over direct mask painting)
+- `Polygon Fill` tool: per-polygon / mesh-fill-select modes, value 1 (add) / 0 (subtract)
+- Generators: `Dirt` (Ambient-Occlusion-driven), `Metal Edge Wear` (Curvature-driven) — `Micro Details → Micro Height` input for Anchor-Point-referenced hand-sculpted detail, with `Invert`
+- Blend modes: `Linear Dodge` (add), `Multiply` (subtract/darken), `Soft Light`, per-channel blend mode + opacity (BaseColor vs. Roughness vs. Height independently)
+- `Smart Material` (drag-apply, auto-wires to baked mesh maps; right-click group → Create Smart Material)
+- Brush: Size/Hardness (Ctrl+RMB drag), Flow/Rotation (Ctrl+LMB drag), Alphas, Spacing, Jitter (Size/Flow/Angle/Position), Material slot (paint whole materials)
+- `Symmetry` (mirror line + gear axis/offset), `Distance` (stroke smoothing)
+- Baking: croissant icon, `B` to cycle baked-map previews; Ambient Occlusion viewport-only by default (Shader Settings → AO Intensity)
+- `Texture Set` per-part independent layer stack + export resolution; `Ctrl+Alt+RMB-click` to jump texture sets
+- Height channel (real/exportable geometry potential) vs. Normal channel (fake shading only, real texture resources required)
+- Decal placement: `Planar projection` + `UV Wrap: None`, `Blur` filter on height mask for falloff
+- `Shader Settings → Displacement and Tessellation` (viewport-only preview) + Subdivision Count
+- Export: custom Output Template with a Grayscale-mapped Height output, `sRGB` unchecked on import (mask + height)
+- Unreal: `Use Height`, `Enable Tessellation` (Material Property Overrides), Nanite, Displacement Scaling (`Center`/`Displace Amount`/`Strength`/`Magnitude`/`Contrast`/`Displacement Offset`), `Shadow Cache and Validation Behavior = Always` (temporary, while iterating)
+- `Anchor Point` effect (named, referenced by generator Micro Height inputs)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner through Intermediate — explicitly structured as a from-zero foundations course, escalating in its second half to genuinely advanced/production techniques (multi-texture-set blending, hand-sculpted height detail via Anchor Points, full Nanite tessellated displacement pipeline into Unreal Engine 5).
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen for Substance Painter; the Unreal Engine side is explicitly Unreal Engine 5 (Nanite-focused, per the video's own title).
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `paint-layer` `masks` `smart-material` `generator` `anchor-point` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `curvature` `texture-set` `uv` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `alpha` `tri-planar` `procedural` `particle-brush` `export` `export-preset` `game-engine` `unreal-export` `beginner` `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); a deeper, more advanced dive into the same layered-effects/generator masking philosophy this video introduces at foundational depth.
+- [How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial](how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md) — different creator (Jared Chavez); a dedicated Anchor Point deep-dive that pairs well with this video's specific hand-sculpted-height-detail-plus-Micro-Height-generator use case.
+- [Substance Painter Beginner To Pro - Course](substance-painter-beginner-to-pro---course.md) — different creator (TriGon); a comparably-scoped ground-up foundations course, useful for cross-referencing how two different creators teach the same core layer/mask/generator/smart-material concepts.
+- [How to Make the Substance Painter Viewport Match Unreal Engine](how-to-make-the-substance-painter-viewport-match-unreal-engine.md) / [How to Fix the Substance Painter Viewport to Match Unreal's](how-to-fix-the-substance-painter-viewport-to-match-unreals.md) — different creators; relevant follow-up for anyone doing the Painter-to-Unreal pipeline this video covers, addressing the separate problem of Painter's viewport not visually matching Unreal's renderer.
