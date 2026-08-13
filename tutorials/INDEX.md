@@ -916,6 +916,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** 8-trick grab bag: viewport/hotkey setup, a White-Noise+Histogram-Scan parkerizing-damage grain mask, a black-Paint-layer-on-Multiply trick for hand-guiding an automatic generator's reveal, black-and-white Photoshop decals placed with Edit Vertices + Surface Tool snapping, Auto Update Resources for live PSD re-linking, a Gradient-Linear mold seam, a two-Fill-layer (raised-lip + carved-groove) Anchor-Point scratch-depth technique for plastic damage, and — the video's centerpiece — a weld-seam rainbow heat-tint effect built by blurring/expanding the seam's own mask, capturing it as an Anchor Point, and feeding it into the creator's own Tempering Colors smart material in place of its default mask.
 - **File:** tutorials/powerful-substance-painter-tricks-that-you-need-to-know.md
 
+
+### Realistic Wood in Substance Painter | M24 Grenade Texturing
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=I3v-ESX4DxQ
+- **Author:** Dolinskyi
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/realistic-wood-in-substance-painter-m24-grenade-texturing.md
+
 ---
 
 ## Tag Reference
