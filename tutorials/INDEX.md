@@ -701,11 +701,22 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=Ix4eknncFU0
 - **Author:** Adobe Substance 3D
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `anchor-point` `masks` `layers` `fill-layer` `paint-layer` `generator` `blend-mode` `basecolor` `roughness` `metal-rough` `intermediate`
+- **Summary:** 1/4 of Adobe's foundational Anchor Point Magic series (bronze valve model). Two duplicate paint layers (White_Paint, Blue_Paint) share one Metal-Edge-Wear mask via an Anchor Point + fill-with-Anchor-Points-tab reference + independent Levels retuning. Demonstrates the critical rule that anchors can only be referenced by layers positioned above them (bottom-to-top resolution), and that anchors are fully live/dynamic (a new paint layer added below the anchor propagates through immediately). Note: Whisper transcript came back mostly Dutch (language-ID artifact); notes reconstructed from surviving English terms + frame verification.
+- **File:** tutorials/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan.md
+
+
+### Using UV set and Stencils In Substance Painter -- English version
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=FIvOFo-zbms
+- **Author:** 3DRedBox
 - **App:** [PENDING]
 - **Version:** [PENDING]
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan.md
+- **File:** tutorials/using-uv-set-and-stencils-in-substance-painter----english-version.md
 
 ---
 
