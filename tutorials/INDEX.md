@@ -784,6 +784,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/how-to-make-the-substance-painter-viewport-match-unreal-engine.md
 
+
+### 3D Path Tool Updates in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=rhraMw3YVpo
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
