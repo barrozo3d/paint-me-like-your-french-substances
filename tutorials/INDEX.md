@@ -437,10 +437,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=_oSPDoX37lM
 - **Author:** 3DRedBox
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; "PAINT ALONG PATH" tool panel pins this to the Painter 9.x-10.x window
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `smart-material` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `texture-set` `pbr` `metal-rough` `basecolor` `roughness` `height` `normal-map` `alpha` `beginner` `intermediate`
+- **Summary:** Short troubleshooting technique for the Pass tool (Paint Along Path) mis-detecting neighboring geometry on complex models with tightly-packed closed surfaces: after baking, duplicate the mesh in the DCC app, detach and spatially "explode" its small pieces apart (without touching materials/UVs), re-import via Project Configuration to paint detail cleanly on isolated surfaces, temporarily drop the Ambient Occlusion channel to suppress spacing-mismatch artifacts, then switch back to the original mesh for final render.
 - **File:** tutorials/speed-up-your-substance-painter-workflow-with-this-easy-trick.md
 
 
@@ -453,6 +453,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub.md
+
+
+### Preparing Models for Substance 3D Painter in 3DS Max | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=xuLRnFBvLyI
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d.md
 
 ---
 
