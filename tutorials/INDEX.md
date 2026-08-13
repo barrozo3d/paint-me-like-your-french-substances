@@ -602,10 +602,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=13B82VtLuQY
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 11.0.0
+- **Tags:** `layers` `masks` `alpha` `beginner`
+- **Summary:** Short feature explainer for the Auto-Updater panel (Assets panel toggle + Resources used in project toggle, both off by default): externally re-saved image files (Photoshop PSDs) and Substance 3D Designer filter graphs sent via "Send to Substance 3D Painter" now refresh live in the layer stack with no manual reload/redrag. Covers the Skip assets when their parameters mismatch safety toggle for the Designer round-trip. Version 11.0.0 stated explicitly on screen.
 - **File:** tutorials/how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d.md
 
 

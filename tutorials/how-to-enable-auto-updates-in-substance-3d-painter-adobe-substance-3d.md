@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=13B82VtLuQY
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "11.0.0"
+tags: [layers, masks, alpha, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 5
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to Enable Auto-Updates in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -137,30 +133,53 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:10] tutorials/frames/how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [1:22] tutorials/frames/how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [1:40] tutorials/frames/how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [3:05] tutorials/frames/how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [4:05] tutorials/frames/how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Auto-Updater settings panel (bottom of the Assets/Shelf panel, all off by default) that automatically reloads externally-modified resources — image files re-exported from Photoshop, or filter/graph assets round-tripped from Substance 3D Designer — without the old manual right-click → reload → redrag-into-mask routine.
 
 ### Summary
-[PENDING EXTRACTION]
+Short feature explainer, split into two demos. First: a decal PSD is imported into Painter as a project texture and dragged onto a mask; without auto-update, re-exporting the PSD from Photoshop does nothing in Painter until it's manually reloaded and redragged. Turning on **Assets panel** auto-update makes the Shelf/library thumbnail refresh instantly when a new file version is detected, but the layer stack still isn't updated — a separate **Resources used in project** toggle is needed to also refresh every place that resource is actually used (e.g. the mask), and both together make external-tool round-tripping (Photoshop, or any other editor) effectively instant. Second, more advanced demo: a custom Stylization filter is built as a Substance 3D Designer graph, sent to Painter via "Send to Substance 3D Painter," and applied as a filter layer on two objects; with both auto-update toggles already on, editing the graph back in Designer (e.g. adding an exposed Blur-intensity parameter before the stylization step) and re-sending it updates the filter live in Painter, including exposing the new parameter in its Properties panel — no manual re-drag needed. A third toggle, **Skip assets when their parameters mismatch** (Advanced Settings), is a safety net for this Designer workflow: if a graph's parameters get renamed/moved/deleted between sends, this setting skips applying the mismatched update rather than silently resetting affected parameters to default.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Open the Auto-Updater controls at the bottom of the Assets/Shelf panel — everything is disabled by default.
+2. Import an external image (e.g. a PSD decal from Photoshop) as a project texture, drag it onto the mesh, and use it as a mask.
+3. Edit and re-export the source file to the same path from the external tool; without auto-update, Painter does not reflect the change until you manually right-click → reload the asset and redrag it into the mask.
+4. Enable **Assets panel** auto-update — the Shelf/library thumbnail now refreshes automatically the instant a new file version is detected on disk.
+5. Enable **Resources used in project** auto-update — every place that resource is actually used in the layer stack (not just the library thumbnail) now updates automatically too, essentially instantly after each external re-save.
+6. Advanced workflow: build a custom filter (e.g. a Stylization-based graph) in Substance 3D Designer, right-click → **Send to Substance 3D Painter** to bring it in as a Shelf asset, then drag it onto a layer in Painter as normal.
+7. With both auto-update toggles already on, edit the Designer graph (e.g. add a Blur node before the stylization output and expose its intensity as a parameter) and **Send to Substance 3D Painter** again — the filter updates live in the already-applied layer, including any newly exposed parameter appearing in its Properties panel, with no manual re-drag or reload step.
+8. Use **Skip assets when their parameters mismatch** (Advanced Settings) as a safety toggle for the Designer round-trip: if renaming/moving/deleting graph parameters between sends would otherwise cause Painter to reset the mismatched parameters to their default value, this setting instead skips applying that particular update.
+9. Manual fallback buttons (**Update Assets panel** / **Update resources used in project**) remain available in the same panel for one-off refreshes without leaving auto-update on permanently.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Auto-Updater panel (bottom of Assets/Shelf): **Assets panel** toggle, **Resources used in project** toggle, **Update every [interval]** setting
+- Advanced Settings: **Skip assets when their parameters mismatch**
+- Manual buttons: **Update Assets panel**, **Update resources used in project**
+- Substance 3D Designer → Painter round-trip: right-click graph → **Send to Substance 3D Painter**
+- Demoed on: an image-based mask (PSD decal) and a custom Designer-built Stylization filter graph
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner (the core toggle) to Intermediate (the Designer round-trip use case).
 
 ### App & Version
-[PENDING EXTRACTION]
+**Substance 3D Painter 11.0.0** — stated explicitly on screen and in narration ("the new auto-updater in Substance 3D Painter 11"); matches `references/release-notes-painter-11.0.md`'s "Auto-update feature for modified assets" entry.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `masks` `alpha` `beginner`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"6 Powerful New Filters in Substance 3D Painter"** (`tutorials/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d.md`, video `aCi0RG9-9so`) — same 11.0.0 release; that video's Stylization filter is the same one customized in Designer and round-tripped here.
+- **"Stylized Asset Setup in Painter: Auto-Cage, PSD Workflows & Smart Detailing"** (`tutorials/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su.md`, video `LRy-Nc7B_bk`) — that video's PSD-Auto-Update workflow (decal texture, "Import As project", refresh icon with the same two checkboxes) is exactly the feature this video explains in more depth, applied there to a stylized still-life scene.
