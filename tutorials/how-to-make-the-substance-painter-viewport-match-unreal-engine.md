@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=UOcNnu2uW1Y
 author: Quinn Kuslich
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen"
+tags: [color-management, viewport, iray-render, roughness, metallic, pbr, unreal-export, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-make-the-substance-painter-viewport-match-unreal-engine/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to Make the Substance Painter Viewport Match Unreal Engine
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-make-the-substance-painter-viewport-match-unreal-engine <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -125,30 +121,57 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:44] tutorials/frames/how-to-make-the-substance-painter-viewport-match-unreal-engine/frame_000.jpg
+- [1:03] tutorials/frames/how-to-make-the-substance-painter-viewport-match-unreal-engine/frame_001.jpg
+- [2:20] tutorials/frames/how-to-make-the-substance-painter-viewport-match-unreal-engine/frame_002.jpg
+- [2:51] tutorials/frames/how-to-make-the-substance-painter-viewport-match-unreal-engine/frame_003.jpg
+- [3:25] tutorials/frames/how-to-make-the-substance-painter-viewport-match-unreal-engine/frame_004.jpg
+- [3:37] tutorials/frames/how-to-make-the-substance-painter-viewport-match-unreal-engine/frame_005.jpg
+- [4:50] tutorials/frames/how-to-make-the-substance-painter-viewport-match-unreal-engine/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Same core fix as "How to Fix the Substance Painter Viewport to Match Unreal's" (William Faucher, also in this library) — importing and activating the same **Brian Leleux ACES LUT** pack (ArtStation/Gumroad) via Display Settings → Activate Post Effects → Tone Mapping (Function: Linear → Log) → Activate Color Profile → ACES_UE4_log — with the added framing that this specifically corrects how **Roughness and Metallic** values read in Painter's default Iray viewport versus how they'll actually look in UE4, saving repeated back-and-forth material tuning.
 
 ### Summary
-[PENDING EXTRACTION]
+Opens by stating the business case: Painter's default Iray renderer misrepresents roughness/metallic response compared to UE4, forcing artists to re-tune values after import — costing time and, on professional jobs, money. Workflow: download the ACES LUT pack from Brian Leleux's ArtStation/Gumroad page; in Painter, **File → Import Resources → Add Resources**, select the **ACES Standard Log** and **ACES UE4 Log** EXR files, set both to type **Color LUT**, and import them to the **Library/your assets** shelf specifically (not just the current session) so they persist across every future project on that Painter install without needing to re-import. Open **Display Settings** (gear icon), set the Environment Map/background as preferred (creator prefers Studio 05 over Panorama) and Environment Opacity to 100% to bring the Iray environment directly behind the model. Scroll to **Tone Mapping**: check **Activate Post Effects**, open the Tone Mapping section, click **Restore Defaults** first (clean baseline), then change **Function** from **Linear to Log** — this is the setting that makes the ACES UE4 Log LUT usable. Scroll to **Activate Color Profile**, check it (screen goes very dark — expected, no LUT is chosen yet), click the Profile dropdown and select **ACES_UE4_log** — the corrected, UE4-matched viewport is now active, giving an accurate read of how roughness/metallic values will look in-engine before ever exporting. Closes with a side-by-side illustration: the same helmet asset imported onto a UE4 MetaHuman, noting the overall roughness/metallic material read is close between the two engines even though the lighting setups differ (a true 1:1 match would additionally require importing the exact same HDRI into both Painter and UE4).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Download the ACES LUT pack from Brian Leleux's ArtStation (or the linked Gumroad page).
+2. In Painter: **File → Import Resources → Add Resources**, navigate to the unzipped ACES files, select **ACES Standard Log** and **ACES UE4 Log** (EXR format).
+3. Set both imported resources' type to **Color LUT**.
+4. Import destination: choose your **Library/your assets** shelf (not just the current session) so the LUTs persist and never need re-importing for future projects on the same Painter install.
+5. Open **Display Settings** (gear icon in the viewport toolbar); optionally set Environment Map/background to a preferred studio HDRI (e.g. Studio 05) and drag **Environment Opacity to 100%** so the Iray-rendered environment shows directly behind the model.
+6. Scroll to the **Tone Mapping** section, check **Activate Post Effects**, expand Tone Mapping, click **Restore Defaults** to reset to a clean baseline first.
+7. Change **Function** from **Linear** to **Log** — required before the ACES UE4 Log LUT will read correctly.
+8. Scroll down to **Activate Color Profile** and check it — the viewport goes very dark at this point because no LUT has been picked yet (expected, not an error).
+9. Open the Profile dropdown and select **ACES_UE4_log** — the corrected UE4-matched viewport becomes active; roughness and metallic values now read much closer to their true in-engine appearance.
+10. Validate with a real cross-engine comparison: bring the same asset into UE4 (demoed on a MetaHuman wearing a helmet) and compare roughness/metallic response side by side — note that lighting setup differences alone (different HDRI/exposure per scene) will still cause a visual mismatch; for a true 1:1 match, import the exact same HDRI into both Painter and UE4.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `File → Import Resources → Add Resources` — ACES Standard Log + ACES UE4 Log (EXR), type = **Color LUT**, imported to the Library/your-assets shelf for persistence across projects
+- `Display Settings` (gear icon): Environment Map, **Environment Opacity = 100%**
+- `Tone Mapping`: **Activate Post Effects**, Restore Defaults, **Function: Linear → Log**
+- `Activate Color Profile` → **Profile = ACES_UE4_log**
+- Iray Renderer (Painter's default viewport renderer, the one being corrected)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner (identical difficulty/step-shape to the companion William Faucher video — a short sequence of Display Settings toggles once the LUT files are in hand)
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen.
 
 ### Tags
-[PENDING EXTRACTION]
+`color-management` `viewport` `iray-render` `roughness` `metallic` `pbr` `unreal-export` `beginner`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to Fix the Substance Painter Viewport to Match Unreal's](how-to-fix-the-substance-painter-viewport-to-match-unreals.md) — same topic, alternate creator (William Faucher). Both videos use the exact same underlying **Brian Leleux ACES LUT pack** and the identical Display Settings → Tone Mapping (Log) → Activate Color Profile → ACES UE4 Log sequence; this video adds the Environment Opacity/background-matching step and frames the fix specifically around Roughness/Metallic accuracy, while the Faucher video adds a rigorous Iray-vs-UE4-Path-Tracing validation pass. Treat as a matched pair — cross-reference both for the complete picture.
+- [Substance 3D Painter & ACES - 01 - Color Space Fundamentals](substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d.md) — Adobe's official ACES series covers the same underlying linear-vs-ACES color-space mismatch this third-party LUT works around, from the theory side.
+- [Substance 3D Painter & ACES - 02 - OCIO & ACEScg in Painter](substance-3d-painter-aces---02---ocio-acescg-in-painter.md) — Painter's own native OCIO/ACEScg Color Management is the built-in alternative to this third-party Display Settings LUT hack, solving a related (not identical) color-consistency goal through the project's actual Color Management system rather than a viewport post-effect.

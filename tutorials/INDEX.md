@@ -778,10 +778,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=UOcNnu2uW1Y
 - **Author:** Quinn Kuslich
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `color-management` `viewport` `iray-render` `roughness` `metallic` `pbr` `unreal-export` `beginner`
+- **Summary:** Same fix as the companion William Faucher video, same underlying Brian Leleux ACES LUT pack: File > Import Resources (ACES Standard Log + ACES UE4 Log, set to Color LUT, imported to the Library shelf for persistence) > Display Settings > Environment Opacity 100% > Tone Mapping (Restore Defaults, Function Linear to Log) > Activate Color Profile > ACES_UE4_log. Framed specifically around getting an accurate in-viewport read of Roughness/Metallic values before importing to UE4; closes with a MetaHuman side-by-side comparison and a note that matching HDRIs in both apps is needed for a true 1:1 lighting match.
 - **File:** tutorials/how-to-make-the-substance-painter-viewport-match-unreal-engine.md
 
 
