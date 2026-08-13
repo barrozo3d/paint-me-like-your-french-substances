@@ -1048,6 +1048,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Fully hand-painted (no scan/photo projection) realistic skin color map on an elderly priest bust, built as two tiers: a Subdermal group (base Red + AO-masked brighter Red + broad scattered Yellow for bone + localized Blue for beard/under-eye + sparse Purple for eyes/lips) followed by an Epidermal group (base skin color via reduced-Flow Dirt brush so subdermal breakup shows through, then a 3-zone face breakdown worked non-sequentially, Curvature-masked+Levels-clamped pore/cavity emphasis, Cracks-brush capillaries, sculpted-guide vein tracing, and a final Marble/Vein-pattern procedural for surface complexity). Lips + waterline "Caramel" color as final touches. Cross-linked with FlippedNormals' realistic-skin video, both creature-texturing videos, Orc Textures, Subsurface Scattering, and Adobe's Semi-Realistic Textures talk.
 - **File:** tutorials/how-to-make-hand-painted-skin-textures-in-substance-painter.md
 
+
+### How to Make  HAND PAINTED POKEMON in Substance Painter | Tutorial
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=ZbrZR-9iX_Q
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial.md
+
 ---
 
 ## Tag Reference
