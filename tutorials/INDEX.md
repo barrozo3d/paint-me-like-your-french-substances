@@ -839,6 +839,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Original launch tutorial for the 3D Paths tool (leather-shoe brogue-pattern demo): paint editable, non-destructive curve-based strokes directly on geometry on a paint layer or mask. Covers vertex placement/Bezier vs. corner interpolation, the Paths panel (per-layer path management), toolbar controls (curve overlay toggle/Q, direction-reverse, per-vertex pressure, close-curve, per-path mirror/symmetry), the shared-material-via-fill-layer-and-black-mask workaround, and fixing paint gaps from widely-spaced vertices (extra vertex or Projection Depth).
 - **File:** tutorials/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### Anchor Point Magic 02 - Micro Normals & Micro Height in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=HL5mZdzzgIg
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe.md
+
 ---
 
 ## Tag Reference
