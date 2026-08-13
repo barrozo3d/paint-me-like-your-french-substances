@@ -520,6 +520,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/how-to-use-udims-properly.md
 
+
+### Realistic Texturing Tips in Substance Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=_qirDRMN1WI
+- **Author:** FastTrack Tutorials
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/realistic-texturing-tips-in-substance-painter.md
+
 ---
 
 ## Tag Reference
