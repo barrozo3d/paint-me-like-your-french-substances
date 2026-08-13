@@ -558,10 +558,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=RTvgwZj-5Rw
 - **Author:** FlippedNormals
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated numerically; baker and brush-favoriting called out as "new"/"fairly new" features, tentative
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `curvature` `ambient-occlusion` `mesh-maps` `world-space-normal` `position-map` `high-to-low-poly` `baking` `cage` `udim` `texture-set` `uv` `pbr` `basecolor` `roughness` `height` `alpha` `procedural` `tri-planar` `blend-mode` `iray-render` `viewport` `color-management` `advanced`
+- **Summary:** Professional creature-texturing workflow on a fan-sculpted Clicker (The Last of Us) bust: per-channel-separated layer groups (Color vs. Roughness), curvature/AO-driven procedural masks combined with deliberate hand-painting, iterative Iray/external-render feedback as a mandatory checkpoint, Tri-Planar marble noise for organic skin, a combined-Color+Roughness exception for blood, an AO-hand-correction-then-Curvature-then-Levels mask chain for mushroom growths, and a Polygon Fill Tool UV-mode click-to-mask trick for per-tooth variation.
 - **File:** tutorials/texturing-a-clicker---full-substance-3d-painter-workflow.md
 
 

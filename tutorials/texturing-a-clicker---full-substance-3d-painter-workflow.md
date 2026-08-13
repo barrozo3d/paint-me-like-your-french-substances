@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=RTvgwZj-5Rw
 author: FlippedNormals
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated numerically on screen; creator calls the baking-panel baker \"the new baker they're adding\" as a then-recent addition, and the brush-favoriting right-click feature as \"fairly new\" — both relative-version markers without a specific number; UDIM/UV Tiles workflow (multiple texture sets per UDIM tile) visible throughout, tentative"
+tags: [layers, fill-layer, paint-layer, masks, generator, curvature, ambient-occlusion, mesh-maps, world-space-normal, position-map, high-to-low-poly, baking, cage, udim, texture-set, uv, pbr, basecolor, roughness, height, alpha, procedural, tri-planar, blend-mode, iray-render, viewport, color-management, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing a Clicker - FULL Substance 3D Painter Workflow
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-a-clicker---full-substance-3d-painter-workflow <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -689,30 +685,79 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [4:24] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_000.jpg
+- [8:30] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_001.jpg
+- [9:37] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_002.jpg
+- [10:33] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_003.jpg
+- [13:37] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_004.jpg
+- [19:48] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_005.jpg
+- [20:17] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_006.jpg
+- [21:41] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_007.jpg
+- [24:20] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_008.jpg
+- [25:00] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_009.jpg
+- [28:26] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_010.jpg
+- [30:53] tutorials/frames/texturing-a-clicker---full-substance-3d-painter-workflow/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A professional creature-texturing workflow philosophy demonstrated end-to-end on a fan-sculpted "Clicker" (The Last of Us) bust: organize the layer stack into per-channel groups (a Color group and a separate Roughness group, per texture set) rather than combined multi-channel Fill layers, build every material as a hybrid of procedural generators (curvature, AO-driven masks, B&W spots, marble noise) plus deliberately hand-painted color-variation passes, and treat iterative Iray/external-renderer test-renders as a mandatory checkpoint throughout — because texture decisions that look right in Painter's viewport frequently read as too subtle (or entirely wrong) once actually rendered.
 
 ### Summary
-[PENDING EXTRACTION]
+Henning (FlippedNormals; Whisper mis-transcribed the site name as "FlukeNomers.com") walks through texturing his own fan-sculpt creature bust, framing good sculpting as the real foundation of good texturing (bake quality, SSS accuracy, and roughness-map ease all trace back to sculpt quality) before ever opening Painter. **Baking:** decimates the ZBrush sculpt to per-texture-set high/low pairs via ZPlugin > Decimation Master, exports through Blender with consistent `_low`/`_high` naming and one material per texture set (texture sets are planned to mirror how materials would be assigned in a DCC), imports the low-poly FBX into a Legacy-color-space project, and bakes Normal/World Space Normal/ID/AO/Curvature/Position/Thickness at 1K using Painter's newer baker (matched by mesh name) — explicitly baking maps that aren't used directly, because many generators depend on them internally. **Organizational philosophy:** one group per texture-set part (e.g. tongue, head) with the mask isolating that part; inside, a Color group and a separate Roughness group (not combined per-material Fill layers) — acknowledged as less GPU-optimal but far easier for a human (including a future self or collaborator) to read and edit. **Core head material build:** starts with a plain base Fill layer (Color+Height+Roughness) to establish local color before any complexity; a darker Fill layer masked by a black mask + Fill sub-layer using a `Curvature` generator (which depends on the earlier-baked World Space Normal + Position/gradient maps) adds instant procedural "pop"; then a series of explicitly hand-painted color layers (red into deep crevices/scar tissue, yellow over bone areas, blue for a "dead" feel, green set to `Soft Light` for subtle breakup) using a small set of favorited brushes (Basic Soft, Cotton, Dots/Dots Erased for pores-and-pimples and the creator's primary sculpting-like brush, Dust for subtle top breakup, Smooth Noisy). A hand-painted dark-contrast layer follows, with an explicit warning against painting directly into a mask (locks out later opacity control — always paint into a Paint sub-layer instead) and a strong recommendation to push saturation rather than pure value-darkening for shadow areas, since desaturated darkness reads as flat/boring once rendered. **Iterative render-testing** is treated as a first-class step, not an afterthought — Henning shows a sequence of his own Iray/Blender-Cycles test renders across the project, each surfacing a different actionable note (sculpt needed more mid-frequency detail; head-mushroom edge roughness needed smoothing per feedback from colleagues; a large Photoshop-graded color shift on a test render got reproduced directly on the actual Fill-layer colors in Painter, rather than as a non-destructive grade, specifically because flat-color Fill layers make that trivial to do live). **Organic-skin detail:** two layers of Tri-Planar-projected, scaled-down `Marble` texture (chosen deliberately — "marble textures is awesome... almost looks like meat") add believable mottled organic variation; a hand-painted pimple pass uses a Paint layer specifically so its color can be changed instantly without regrading (and notes a variant technique for multi-colored pimples: mask a group with the paint pattern, then vary Fill-layer colors inside). **Combined-channel exception:** for blood specifically, Henning deliberately breaks his own Color/Roughness-separation rule and combines both channels on the same Fill layers (rough crusted blood, vibrant fresh blood, roughness streaks) so that painting once affects both Color and Roughness simultaneously — flagged as something anchor points could technically also achieve, but dismissed as "confusing as hell" in favor of this simpler combined-layer approach. **Roughness for the head** is built mostly by duplicating the same curvature/cavity setup used for color and re-targeting it at the Roughness channel instead, since a well-developed sculpt needs comparatively little separate roughness work. **Head-mushroom material:** curvature + a favorite `B&W Spots 01` procedural for organic-looking variety, plus a dedicated sub-group for the mushroom's orange edge whose own mask is built by hand-painting corrections onto the baked **Ambient Occlusion** map (removing overly extreme AO in specific spots) then layering a Curvature-generator Fill and a `Levels` filter on top to break the AO-based mask up further — described as "a really important mask." **Teeth/gums:** split into two groups; a reusable masking trick is introduced here — add a Paint layer, switch its brush to the **Polygon Fill Tool** in **UV** mode, then click individual UV shells/tooth-chunks to instantly assign each one 100%-masked or 0%-masked, producing fast per-tooth value/brightness variation without hand-painting each tooth's silhouette. **Preview and export loop:** Iray viewport preview (camera icon) is used constantly for a fast, in-Painter approximation (acknowledged as imperfect versus the real low-vs-high-poly/shader differences of a full external render) before committing to `Ctrl+Shift+E` export; for iterative work, Henning recommends overwriting the same export path every time (not incrementing filenames) so a Blender-side "refresh textures" plus re-render becomes the entire iteration loop.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Prioritize sculpt quality before texturing** — mid/high-frequency sculpted detail directly improves tileable-map disguise, bake quality, SSS plausibility, and roughness-map ease; texture work cannot fully compensate for an underdeveloped sculpt.
+2. **Decimate per texture set at both high and low resolutions** (ZPlugin > Decimation Master in ZBrush), export through a DCC (Blender used here, but any 3D software or even direct ZBrush FBX export with polygroups works) with consistent `_low`/`_high` suffixes and one material per texture set — plan texture sets exactly as you would plan material assignment.
+3. **Import the low-poly FBX into a new Painter project** (Legacy color space used here, nothing exotic) and bake via the newer built-in baker: load the high-poly, set Match to "By Mesh Name," and bake Normal/World Space Normal/ID/AO/Curvature/Position/Thickness at a modest resolution (1K here) even for maps not used directly, since many generators consume them internally; rebake at higher resolution later only if needed.
+4. **Organize the layer stack per texture-set part, then per channel:** one group per model part (masked to that part only), and inside each, a separate Color group and Roughness group rather than combined-channel Fill layers — a deliberate trade against pure performance, favoring long-term editability and readability.
+5. **Start every material with a plain base Fill layer** (flat Color/Height/Roughness values) to lock down local color before adding any complexity.
+6. **Add instant procedural variation with a Curvature generator:** on a darker Fill layer's black mask, add a Fill sub-layer with a `Curvature` generator (depends on the baked World Space Normal + Position maps) — purely bake-driven, no Tri-Planar or other proceduralism involved, so bake quality directly limits this step's ceiling.
+7. **Layer in deliberately hand-painted color variation:** red into crevices/scars, yellow over bone-like high points, blue for a "dead" undertone, green set to blend mode `Soft Light` for subtle breakup — using a small favorited brush set (Basic Soft, Cotton, Dots/Dots Erased, Dust, Smooth Noisy; favoriting via right-click, a then-fairly-new Painter feature).
+8. **Add a hand-painted dark-contrast layer, painted into a Paint sub-layer (never directly into the mask)** — painting straight into a mask permanently destroys later opacity control over that edit; push color saturation for shadow areas rather than just lowering value, since desaturated darkness reads as flat once actually rendered.
+9. **Test-render early and often** (Iray in-Painter preview and/or an external renderer like Blender Cycles) — use each render to identify concretely what's working/not working (sculpting gaps, unconvincing roughness, colors that read differently once lit) rather than judging purely from Painter's viewport.
+10. **Reproduce large color grading decisions directly on the source Fill-layer colors**, not as a non-destructive adjustment layer, when a Photoshop-graded test render reveals a big color shift you want to keep — flat-color Fill layers make this a fast, direct edit.
+11. **Add organic surface variation with Tri-Planar Marble noise:** two layers of a `Marble` texture, projection set to Tri-Planar, scale reduced, for believable mottled/meat-like organic detail without hand-painting every pore.
+12. **Build a fast-iterating pimple pass:** hand-paint pimples/pores into a Paint layer specifically so the layer's color can be changed instantly afterward without regrading; for multi-colored pimple variation, mask a group with the same paint pattern and vary Fill-layer colors inside that group instead of painting each color separately.
+13. **Deliberately combine Color+Roughness on the same layers for effects that must move together** (blood, here): break the earlier Color/Roughness-separation rule specifically so one paint stroke affects both channels simultaneously — considered simpler and more direct than the anchor-point alternative for this particular need.
+14. **Reuse the color-layer curvature/cavity setup for roughness** by duplicating it and switching the target channel — a well-developed sculpt needs comparatively little dedicated roughness complexity.
+15. **Build a bake-corrected mask from Ambient Occlusion:** for the head-mushroom "orange edge" sub-group, hand-paint corrections directly onto the baked AO map (removing overly extreme dark spots), then add a Curvature-generator Fill layer and a `Levels` filter on top of that same mask to break it up further — flagged explicitly as "a really important mask" for that material's believability.
+16. **Split teeth and gums into separate masked groups**, and use a `B&W Spots` procedural + hand-painted darker edges (grime buildup at the gumline) for the teeth base.
+17. **Assign per-tooth value variation via the Polygon Fill Tool trick:** add a Paint layer, switch its tool to Polygon Fill mode set to `UV`, then click individual UV shells (e.g. one tooth each) to instantly set each one to a chosen mask value (e.g. fully masked or fully unmasked) — fast, precise per-chunk variation without manual painting.
+18. **Use the Iray viewport preview (camera icon) for fast in-Painter iteration**, understanding its limits (uses the low-poly model and an approximate shader, unlike a true external high-poly/shader-accurate render) — good for quick go/no-go checks, not a substitute for final external rendering.
+19. **Set up an overwrite-based export/refresh loop for external rendering:** export via `Ctrl+Shift+E` to the same file path every iteration (don't create new filenames), then simply refresh textures in the external DCC/renderer (Blender shown here) and re-render — keeps the iteration loop to two clicks once the pipeline is set up once.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Baking:** Normal, World Space Normal, ID, Ambient Occlusion, Curvature, Position, Thickness — 1K, Match by Mesh Name, newer built-in baker
+- **Organization:** per-part groups (masked), Color group + separate Roughness group per part, one texture set per logical material
+- **Base:** flat Fill layer (Color/Height/Roughness)
+- **Procedural pop:** black mask + Fill sub-layer with `Curvature` generator (consumes baked World Space Normal + Position)
+- **Hand-painted color variation:** red/yellow/blue/green Paint layers (green at blend mode `Soft Light`); brush set: Basic Soft, Cotton, Dots, Dots Erased, Dust, Smooth Noisy (favorited via right-click)
+- **Dark contrast:** Paint sub-layer (never directly on the mask), saturation pushed over pure value-darkening
+- **Organic detail:** `Marble` texture, Tri-Planar projection, scaled down, x2 layers
+- **Pimples:** Paint layer for instant recolor; group-mask + varied Fill-layer colors for multi-color variants
+- **Blood (combined-channel exception):** Fill layers carrying both Color and Roughness simultaneously (rough crusted blood, vibrant blood, roughness streaks)
+- **Roughness:** duplicated curvature/cavity Fill setup retargeted to the Roughness channel
+- **Head-mushroom edge mask:** hand-painted corrections on the baked AO map + Curvature-generator Fill + `Levels` filter
+- **Teeth variation:** Paint layer + Polygon Fill Tool set to `UV` mode, click-to-assign per-UV-shell mask value
+- **Preview/export:** Iray viewport (camera icon) for fast preview; `Ctrl+Shift+E` export to a fixed overwritten path for a refresh-and-rerender iteration loop with an external DCC/renderer
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — not because any single tool is exotic, but because the video is fundamentally about professional judgment: organizational discipline (channel-separated groups) that trades performance for maintainability, the hand-painting-vs-procedural balance for organic creature skin, reading render feedback to prioritize where detail actually matters, and several efficiency tricks (Polygon Fill UV masking, combined-channel exception for coupled effects, fixed-path export/refresh loop) that assume comfort with the fundamentals already.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated numerically on screen. Two relative-version markers are called out by the creator: the baking-panel baker is referred to as "the new baker they're adding" (a then-recent addition, implying this was recorded shortly after a baker update), and brush right-click favoriting is called "fairly new." The project uses multiple UDIM/UV Tiles per texture set (visible in the Texture Set List panel across several captured frames) and Painter's Legacy color space (not ACES/OCIO). Neither marker pins an exact version number, but both are consistent with this skill's modern-era ingested tutorials.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, curvature, ambient-occlusion, mesh-maps, world-space-normal, position-map, high-to-low-poly, baking, cage, udim, texture-set, uv, pbr, basecolor, roughness, height, alpha, procedural, tri-planar, blend-mode, iray-render, viewport, color-management, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Texturing Creatures for Games in Substance Painter | Full Process](texturing-creatures-for-games-in-substance-painter-full-process.md) — different creator (Logan Wiesen); shares the same creature-texturing philosophy of combining procedural generators with deliberate hand-painted color-variation passes, and the same emphasis on verifying bakes/results against real shading before committing to further detail.
+- [REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER](realistic-creatures-hand-painted-textures-in-sustance-painter.md) — different creator (Jared Chavez); shares the anatomy-driven hand-painted color-zone-blocking approach (red/yellow/blue-style directional color coding) applied here to a different creature.
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); this Clicker video's AO-map-hand-correction-then-Curvature-then-Levels mask-building chain for the head-mushroom edge is a direct real-world application of that video's core "mask effect stack" teaching.
