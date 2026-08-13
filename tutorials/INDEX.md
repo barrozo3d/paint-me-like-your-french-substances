@@ -795,6 +795,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Update-tour of the (earlier, distinct) 3D Paths tool: per-path visibility toggle (eye icon), selective copy/paste (brush-properties-only vs. full vertex+pressure data, with same-sub-mode restriction on the former), freeform vertex movement off the mesh surface (with optional re-snap), and manual tangent-handle editing (two handles per vertex, Ctrl/Cmd to scale both together, Alt/Option to toggle smooth/corner) combinable with Corner Smooth for hand-shaped corners.
 - **File:** tutorials/3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### Preparing a 3D Asset in Substance 3D Painter | 3D in After Effects Part 1 | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=aZ8bzxuZ-pM
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su.md
+
 ---
 
 ## Tag Reference
