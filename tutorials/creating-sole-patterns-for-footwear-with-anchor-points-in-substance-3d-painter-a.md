@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=AoGXdldOWQA
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; window title reads 'License: 109 days remaining - 02 Soles', shader Displacement/Tessellation settings visible in-frame"
+tags: [anchor-point, masks, layers, fill-layer, paint-layer, blend-mode, height, basecolor, roughness, procedural, alpha, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Creating Sole Patterns for Footwear with Anchor Points in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -199,30 +195,64 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:55] tutorials/frames/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a/frame_000.jpg
+- [2:39] tutorials/frames/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a/frame_001.jpg
+- [3:51] tutorials/frames/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a/frame_002.jpg
+- [5:13] tutorials/frames/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a/frame_003.jpg
+- [6:49] tutorials/frames/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a/frame_004.jpg
+- [7:47] tutorials/frames/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a/frame_005.jpg
+- [8:56] tutorials/frames/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Building a shoe sole from a single hand-painted mask reused through Anchor Points three times over: once to derive the sole's own recessed shape/color, and again to constrain a separate tiled pattern layer (plus its own color pass) strictly inside that same sole area — all editable independently via Levels without repainting anything.
 
 ### Summary
-[PENDING EXTRACTION]
+Second video in the "advanced anchor points" footwear series (follow-up to a more basic anchor-point series on the same channel). Enables real-time viewport **Displacement + Tessellation** in Shader Settings (Source Channel = Height, Scale = 0.035, adaptive tessellation) purely as a nice-to-have visual aid while sculpting the sole in texture. Builds the sole shape: a "Sole" fill layer with only Color + Height enabled, Height set negative (to indent), which visibly breaks the model until a black mask is added; the sole outline and inner section are hand-painted with a basic hard brush (Shift-drag for straighter strokes) roughly, then cleaned up with a **Blur** filter on the mask rather than painted with high precision — Alt-click the layer to preview the raw mask. Sole color: add an **Anchor Point** to the sole mask, create a new "Sole Color" fill layer (Color, optionally Roughness), mask it with a black mask + fill referencing the sole anchor, then use **Levels** (push black point up, white point down) to even out the raw mask's blotchiness into a clean flat color fill — demonstrating that anchor-referenced layers stay independently tunable after the fact. Pattern layer: new "Pattern" fill layer (Height + Color only), Height set negative first, add a black mask, and critically set that mask's blend mode from Base Color to **Height**, with the pattern set specifically to **Max (Lighten) blend** so the tiled pattern can only ever push detail up, never down, into the sole recess. Inside that mask, add a fill (not an anchor reference) and drag in a built-in tileable pattern texture (Fabric Diamond Alternate used in the demo) from the pattern library, scaling it up (~10) to shrink the tile size; blur the result to soften the raw pattern edges, then mask the whole pattern layer to the sole's footprint by adding a fill referencing the **sole anchor point** with blend mode set to **Multiply**, and fine-tune the sole/pattern-edge transition with Levels; finally adjust the pattern's own Height push (kept subtle in the demo) for the final embossed look. Pattern color (optional): add a second Anchor Point on the pattern mask, create a "Pattern Color" fill layer (Color + Roughness, kept shinier/yellow in the demo), and repeat the same black-mask-plus-anchor-referencing-fill-plus-Levels recipe, this time referencing the pattern anchor instead of the sole anchor — giving the tiled pattern its own independently colored, independently editable pass.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Enable viewport Displacement for a nicer real-time preview while sculpting: Shader Settings → Displacement/Tessellation → enable, Source Channel = Height, Scale ≈ 0.035, with adaptive Tessellation — purely a visual aid, not required for the technique itself.
+2. Create a "Sole" fill layer: enable only Color + Height, set Height negative to indent, then add a black mask (fixes the initially broken/inverted-looking model preview).
+3. Hand-paint the sole's outer boundary and inner center section using a basic hard brush (size ~5), holding Shift for straighter strokes; precision isn't critical since a blur pass will clean it up afterward.
+4. Add a **Blur** filter to the mask to smooth and improve the rough hand-painted shape; Alt-click the layer/mask to preview it directly.
+5. Add an **Anchor Point** to the finished sole mask so it can be referenced elsewhere.
+6. Create a "Sole Color" fill layer (Color, optionally Roughness for a duller finish); add a black mask, then a fill inside it referencing the sole Anchor Point (via the grayscale/anchor-point field).
+7. Clean up the raw anchor-referenced mask with **Levels** — push the black point up and the white point down until the color reads as an even, clean fill rather than a blotchy/streaky one.
+8. Create a "Pattern" fill layer: enable Height + Color, set Height negative initially, add a black mask.
+9. On that mask, change the channel dropdown from Base Color to **Height**, and set the pattern's blend to **Max (Lighten)** — this lets the tiled pattern only raise detail upward, never push further into the sole's recess.
+10. Inside the mask, add a fill and drag in a tileable grayscale pattern texture from the built-in pattern library (Fabric Diamond Alternate demoed); increase its Scale (~10) to shrink the tile repeat to a usable size.
+11. Add a **Blur** filter to soften the raw pattern's harsh edges.
+12. Constrain the pattern to only the sole area: add another fill inside the mask referencing the **sole Anchor Point**, with its blend mode set to **Multiply** — instantly confines the pattern to the sole footprint.
+13. Fine-tune the sole/pattern boundary transition with Levels, and adjust the overall Blur amount and Height push amount to taste (kept subtle in the demo).
+14. Optional pattern coloring: add a second Anchor Point, this time on the Pattern layer's mask; create a "Pattern Color" fill layer (Color + Roughness — kept shinier/yellow in the demo); repeat the black-mask + anchor-referencing-fill + Levels recipe, referencing the pattern anchor this time, to give the tiled pattern its own independent, freely re-tunable color pass.
+15. Because every stage references an Anchor Point rather than duplicating paint data, any of the three layers (sole shape, sole color, pattern color) can be revisited and adjusted independently at any time without repainting.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Shader Settings → Displacement/Tessellation**: Source Channel = Height, Scale ≈ 0.035, adaptive Tessellation (viewport-only aid).
+- **Sole** fill layer: Color + Height (negative), black mask, hand-painted with a basic hard brush + Blur filter, carries an **Anchor Point**.
+- **Sole Color** fill layer: Color (+ optional Roughness), black mask + fill referencing the Sole anchor + Levels.
+- **Pattern** fill layer: Height (negative) + Color, black mask with channel set to **Height** and pattern blend mode **Max (Lighten)**; built-in tileable pattern texture (Fabric Diamond Alternate) scaled up; Blur filter; second fill referencing the Sole anchor with **Multiply** blend mode to confine it to the sole area; carries its own Anchor Point.
+- **Pattern Color** fill layer: Color + Roughness, black mask + fill referencing the Pattern anchor + Levels.
+- Recurring pattern throughout: black mask → fill referencing an Anchor Point → Levels for cleanup — the core reusable recipe demonstrated across all three color/pattern passes.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate (anchor-point-chained layer construction; more approachable than fully procedural generator-driven masking since hand-painting is the primary shape-definition tool).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number stated on screen; window title bar reads "License: 109 days remaining - 02 Soles" (subscription license countdown, not a version indicator).
 
 ### Tags
-[PENDING EXTRACTION]
+`anchor-point`, `masks`, `layers`, `fill-layer`, `paint-layer`, `blend-mode`, `height`, `basecolor`, `roughness`, `procedural`, `alpha`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Creating Fabric stitches for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter.md`) — first video in the same footwear/anchor-points series, same shoe asset.
+- **Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-painter.md`) — third video in the same series.
+- **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's independent anchor-point deep-dive, same core reuse technique.
+- **Anchor Point Magic 01-04** (Substance3D official series, if ingested) — the "basic anchor point series" this video explicitly builds on.

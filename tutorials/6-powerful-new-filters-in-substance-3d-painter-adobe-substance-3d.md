@@ -4,10 +4,10 @@ source: YouTube
 url: https://www.youtube.com/watch?v=aCi0RG9-9so
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "11.0.0"
+tags: [layers, masks, generator, anchor-point, procedural, height, alpha, basecolor, roughness, normal-map, viewport, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/
 frame_count: 0
 frame_status: pending-selection
@@ -212,28 +212,53 @@ frontmatter before you write the Structured Notes below.
 
 ## Structured Notes
 
+**Note on transcript:** presenter Guillaume Meier (Adobe Substance 3D technical artist) narrates genuinely in French, not a Whisper mis-detection — this is the language he actually speaks in the video. Notes below are translated from the French transcript and cross-checked against captured frames, which also confirmed several exact English UI parameter names (Quantize's "Color Amount"/"Contour Smoothing"/"Dithering"/"Dithering Pattern"/"Distance Color Space"/"Apply To Alpha"/"Alpha Threshold"; Directional Distance's "Distance"/"Angle"/"Contrast"/"Distance Map Multiplier") that the French audio only approximated.
+
 ### Core Technique
-[PENDING EXTRACTION]
+Feature tour of Painter's "6 new filters" batch — generic, stackable filters (usable on texture layers, masks, or whole texture sets) covering edge-preserving stylized blur (Anisotropic Kuwahara), pixel-artifact-free height/mask bevels (Bevel Smooth), UV-space directional drip/smear simulation (Directional Distance), color-to-grayscale mask derivation (Grayscale Conversion), posterized/vector flat-shading (Quantize), and full stylized hand-painted asset conversion (Stylization).
 
 ### Summary
-[PENDING EXTRACTION]
+This is the official Adobe feature-announcement video for the "6 new filters" batch that ships in Painter's then-latest version — the same filter set independently referenced across several other tutorials in this library as a version-11.0.0 marker (e.g. Gothic Architecture Part 1, Complex Wooden Medieval Door, Stylized Asset Setup, Creating & Reusing Smart Materials). All six filters are accessed the same way: right-click a texture set (or a specific layer/mask) and click the filter icon, or drag one from the Shelf's Filters category directly onto a texture set to apply it to every layer. Anisotropic Kuwahara is an edge-aware blur that preserves color boundaries for a hand-painted look (Radius, Sharpness, Flatten/contrast, Smooth Tensor to denoise the extracted flow direction, and an Anisotropy amount; direction can be driven locally via a custom input, including an anchor-point-referenced channel for uniform direction across multiple masks). Bevel Smooth is a smoother evolution of the classic Bevel filter, applied to a Height-only fill layer or a mask (demoed on a text-generator mask reading "HOT!") with a bevel-profile dropdown, Distance (bevel count/width), Smooth (blurs the source mask — too low leaves pixel artifacts, too high loses definition), and a Distance-map input for custom per-area bevel patterns. Directional Distance turns a painted black-and-white mask into UV-space directional drips/smears (demoed as rust streaks below a bolt) via Distance, Angle, Contrast, and a Distance Map input (noise/grunge) for organic variation; it also works on color paint layers to blend/smear colors together, and updates live while painting. Grayscale Conversion derives a clean grayscale mask from any dragged-in color map via a Channel Input toggle (Current Channel vs. Custom Input), Balance/Contrast, and channel-weight presets. Quantize posterizes a material into a limited color count (confirmed parameters: **Color Amount**, **Contour Smoothing**, **Dithering** + **Dithering Pattern** e.g. Blue Noise, **Distance Color Space**, **Apply To Alpha**, **Alpha Threshold**) for a flat vector-illustration look, with a Base Color mode vs. a data-map mode (normal/roughness/etc.) depending on which channel is being processed. Stylization converts an entire texture set into hand-painted-looking stylized assets by analyzing brush strokes via 3D projections plus isotropic variation; a dedicated deep-dive video covers it in full. The presenter closes with a stylized-look-preserving export workflow (Painter → Cinema 4D + Redshift for the final render, PBR maps baked/converted for real-time engines too).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Find the new filters: right-click a texture set (or select a layer/mask) and click the filter icon, or open the Shelf and filter its library to "Filters" — the six new entries are Anisotropic Kuwahara, Bevel Smooth, Directional Distance, Grayscale Conversion, Quantize, and Stylization. All are generic filters usable on texture layers or masks, anywhere in the layer stack.
+2. **Anisotropic Kuwahara**: right-click a texture set to add it directly. Preserves color edges while blurring — commonly used for a stylized painted look; Base Color is processed by default, other channels can be enabled. Key parameters: **Radius** (blur intensity, can be typed above the slider's default max of ~10), **Sharpness** (intensifies color diffusion for a painted look), a contrast-like parameter that flattens color transitions, **Smooth Tensor** (smooths the extracted flow direction to reduce noisy results), and **Anisotropy** (how strongly the effect follows the flow of color edges).
+3. Customize Kuwahara locally: drive intensity per-area via a **Base Radius** custom input map; drive blur direction via a **Custom Input Direction** selection in the menu. To force one uniform blur direction across several masks/channels, add an **anchor point** on a layer before the filter, set it as the custom input, and pick the channel to reference — every layer using that anchor gets the same direction map.
+4. **Bevel Smooth**: an evolution of the classic Bevel filter that produces smooth bevels with no pixel artifacts. Demoed on a Height-only (channel value 1) fill layer masked by a text generator reading "HOT!" projected onto the model; apply Bevel Smooth to that mask to bevel the letterforms.
+5. Bevel Smooth parameters: a **bevel-direction dropdown** for different profile designs, **Distance** (sets bevel width/count), **Smooth** (blurs the source mask to smooth the bevel — too low causes pixel artifacts on the bevel, too high loses the mask's original definition), and a **Mask Offset**-family parameter to extend/pull back the affected area beyond the original mask edges. Local per-area control is possible via a **Distance map** input — plug in a noise or custom map for unique bevel patterns.
+6. **Directional Distance**: paint a black mask (e.g. random noise strokes), then apply the filter to turn those strokes into directional drips/smears — demoed as rust streaks trailing down from a bolt.
+7. Directional Distance parameters (confirmed on-screen): **Distance** (drip length), **Angle** (drip direction, e.g. 270°), **Contrast**, and **Distance Map Multiplier** with an **Image Inputs → Distance Map** slot (default "uniform color") — plug in noise or a grunge texture for organic, varied drip shapes. Important: the effect is UV-space based, so drips follow the mesh's UV layout, not world space. Works in real time while still painting the source mask.
+8. Directional Distance can also run on a **paint/color layer** (not just a black mask) to blend or smear different colors/finishes into each other — it processes RGB and Alpha values alike.
+9. **Grayscale Conversion**: converts a dragged-in color map into a refined grayscale mask. Apply the filter, then set **Channel Input** to **Custom Input** (vs. **Current Channel**) and drag any color map into that custom-input slot; tune **Balance**/**Contrast** and channel-weight presets (e.g. per-channel Red/Green/Blue weights) from the dropdown to control which color values survive into the mask. A technical/finishing filter for deriving usable masks from arbitrary color textures.
+10. **Quantize**: drag the filter directly onto a texture set to apply it to every layer at once (or onto a single layer/mask). Reduces the number of distinct colors defining the material; Base Color is processed by default, other channels (height/rough/metal/normal) can be enabled per-channel.
+11. Quantize parameters (confirmed on-screen): **Color Amount** (number of colors kept — low values give a flat/minimalist look, high values a more detailed look; values near 8 look strong but are notably heavier on performance), **Contour Smoothing** (smooths banding between color steps into a unique vector-shape style — set to 0 to see the raw posterized effect clearly), **Dithering** + **Dithering Pattern** (e.g. Blue Noise, breaks up gradient banding), **Distance Color Space** (e.g. Lab (Color) — the color-distance metric used when grouping pixels into buckets; behaves differently for a Base Color map vs. a data map like normal/roughness), **Apply To Alpha** (whether alpha is processed too, for layers using brushed/alpha strokes) and **Alpha Threshold** (softens/refines alpha edges after quantizing).
+12. **Stylization**: drag onto a texture set to apply the hand-painted stylized look to every layer. Analyzes brush strokes across the model via 3D projections, then applies an isotropic variation pass for subtle stylized differences. Many tunable options — the presenter defers deep coverage to a separate dedicated tutorial (linked in the source video's description).
+13. Export note: a Stylization-filtered asset can be exported out of Painter to any external renderer/game engine while preserving its unique painted look; the presenter's own example was finished in **Cinema 4D + Redshift**, with all surface features still baked/conveyed through standard PBR texture maps for real-time/game use.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Filter access: right-click texture set/layer/mask → filter icon, or drag a Filters-category Shelf item onto a texture set
+- **Anisotropic Kuwahara**: Radius, Sharpness, flatten/contrast, Smooth Tensor, Anisotropy; custom Base Radius input map; custom Direction input (anchor-point-referenced for uniform multi-mask direction)
+- **Bevel Smooth**: bevel-direction dropdown, Distance, Smooth, Mask Offset; Distance map input for custom per-area patterns; applied to a Height-channel fill layer or a mask (demoed on a text-generator mask)
+- **Directional Distance**: Distance, Angle, Contrast, Distance Map Multiplier, Image Inputs → Distance Map (noise/grunge); UV-space based; works on black masks or color/paint layers (RGB + Alpha)
+- **Grayscale Conversion**: Channel Input (Current Channel / Custom Input), Balance, Contrast, channel-weight preset dropdown
+- **Quantize**: Color Amount, Contour Smoothing, Dithering, Dithering Pattern (e.g. Blue Noise), Distance Color Space (e.g. Lab (Color)), Apply To Alpha, Alpha Threshold; Base Color mode vs. data-map mode
+- **Stylization**: 3D-projection-based brush-stroke analysis + isotropic variation; texture-set-wide application
+- Text generator (used as a Bevel Smooth mask source in the demo)
+- Anchor points (referenced as a custom direction-input source for Anisotropic Kuwahara)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced — each filter is simple to apply, but getting production-quality results (organic Directional Distance drips, clean Quantize vector looks, controlled Kuwahara stylization) requires understanding of masks, UV space, and layer/channel targeting.
 
 ### App & Version
-[PENDING EXTRACTION]
+**Substance 3D Painter 11.0.0** — this is the official Adobe feature-tour video for the "6 new filters" batch (Anisotropic Kuwahara, Bevel Smooth, Directional Distance, Grayscale Conversion, Quantize, Stylization) that `references/release-notes-painter-11.0.md` lists as new in 11.0.0. This is the primary/authoritative source for that version pin — several other tutorials in this library (Gothic Architecture Part 1, Complex Wooden Medieval Door, Stylized Asset Setup, Creating & Reusing Smart Materials) cite this same filter batch as their own 11.0.0+ version evidence. Exact patch build not shown on screen.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `masks` `generator` `anchor-point` `procedural` `height` `alpha` `basecolor` `roughness` `normal-map` `viewport` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"Texturing Gothic Architecture in Substance 3D Painter: Part 1"** (`tutorials/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe.md`, video `UQkmXEWJr80`) — uses Directional Distance and Bevel Smooth in a real production context (dripping stains under roof tiles, softened decorative relief); this video is the primary feature-announcement source for both filters' 11.0.0 version pin.
+- **"Complex Wooden Medieval Door Tutorial in Substance 3D Painter"** (`tutorials/complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md`, video `cRKK4YOXLtQ`) — production use of a Blur → Bevel Smooth → Blur Slope filter chain for procedural height-carving; this video is the primary source confirming Bevel Smooth's 11.0.0 origin.
+- **"Stylized Asset Setup in Painter: Auto-Cage, PSD Workflows & Smart Detailing"** (`tutorials/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su.md`, video `LRy-Nc7B_bk`) — another production use of Bevel Smooth (softening a Path-tool height stroke into a rounded rim ridge), same 11.0.0 version floor.
+- **"Creating & Reusing Smart Materials in Substance 3D Painter | Stylized Crab"** (`tutorials/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub.md`, video `ZiWAe_iZ_CI`) — explicitly name-checks this exact "6 new filters" batch as a "recent update" while demonstrating Gradient and HSL Perception folder-level filters; this video is the direct source of that reference.
