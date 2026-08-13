@@ -932,10 +932,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=jrDHqY96beY
 - **Author:** FlippedNormals
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `procedural` `tri-planar` `blend-mode` `alpha` `basecolor` `color-management` `advanced`
+- **Summary:** Entirely hand-painted-first (no photo projection) skin color-map workflow: one folder per channel, one flat-color Fill layer per named skin tone (Base/Red/Redder/Yellow/Blue/Darker), each masked by a nested Paint layer, fully re-gradable by changing a single Fill layer's color later. Covers favorite skin-painting brushes (Dirt2, Dots/Dots Erase, Cracks, Cotton/Smooth Noise, Mold), then layers in Tri-Planar procedural masks (BNW Spots 3, 3D Berlin Noise, Grunge) all set to Soft Light blend once hand-painting hits its practical time limit, and closes with a ZBrush round-trip — a Levels-pushed displacement map and a hand-authored poly-painted pimple mask (ZBrush Color→Fill Object + RGB-intensity painting, exported via Multi Map Exporter as Poly Paint) fed back in as additional Fill-layer masks.
 - **File:** tutorials/how-to-paint-realistic-skin-in-substance-painter.md
 
 ---

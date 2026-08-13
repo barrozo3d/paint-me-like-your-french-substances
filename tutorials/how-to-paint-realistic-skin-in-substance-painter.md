@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=jrDHqY96beY
 author: FlippedNormals
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen"
+tags: [layers, fill-layer, paint-layer, masks, procedural, tri-planar, blend-mode, alpha, basecolor, color-management, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 13
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to Paint Realistic Skin in Substance Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-paint-realistic-skin-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -401,30 +397,69 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [2:15] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_000.jpg
+- [4:20] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_001.jpg
+- [4:45] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_002.jpg
+- [5:35] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_003.jpg
+- [6:30] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_004.jpg
+- [8:00] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_005.jpg
+- [10:05] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_006.jpg
+- [13:20] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_007.jpg
+- [17:40] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_008.jpg
+- [20:20] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_009.jpg
+- [23:50] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_010.jpg
+- [26:20] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_011.jpg
+- [27:50] tutorials/frames/how-to-paint-realistic-skin-in-substance-painter/frame_012.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Entirely hand-painted-first skin color-map workflow (no photo projection at all) built from a strict "one folder per channel, one Fill layer per color" architecture — Base + Red + Redder + Yellow + Blue + Darker layers, each a flat-color Fill layer masked by a nested Paint layer — so the whole map stays fully procedural and re-gradable (change any Fill layer's color at any time, globally, with zero re-masking), then supplemented with tri-planar procedural noise/grunge masks for variation beyond hand-painting's practical time budget, and finished with ZBrush-exported displacement and poly-painted pimple maps fed back in as Painter masks.
 
 ### Summary
-[PENDING EXTRACTION]
+Opens with a strong methodological point: texture quality is bottlenecked by sculpt quality — a model with all frequencies already present (pores, scars, wrinkles) textures far faster and better than an underdeveloped one; don't rush into texturing to compensate for a weak sculpt. **Project setup**: bottom-most **Temp** fill layer in a heavily saturated "shock" color across every channel (Color/Height/Roughness/Scattering) purely as a build-integrity check — if this color ever shows through unexpectedly, something's wrong. Above it, one **folder per channel** (starting with Color), each folder holding one flat-color Fill layer per named tone: **Base** (main desaturated skin tone, Alt-click-isolated to Color only — changing this single layer regrades the entire map later), then duplicates named **Red**, **Redder**, **Yellow**, **Blue**, **Darker** — each with a black mask containing a nested **Paint layer**, symmetry enabled. **Favorite brushes** for hand-painting skin: **Dirt2** (general-purpose, pen-pressure-enabled by default for organic shapes, or disable pressure on Size and enable it on Flow instead for an opacity-driven feel), **Dots** (freckle/pore-like base variation, used both additively and subtractively), **Dots Erase** (a softer, more organic variant of Dots — used most often, blends more naturally), **Cracks** (vein-like patterns, generally used on the Blue layer rather than Red), **Cotton** and **Smooth Noise** (soft blending/gradient brushes with a bit of inherent texture — deliberately not perfectly smooth, since realism needs some texture even in "smooth" areas; Smooth Noise is inspired by Mari's "super smooth" brush), and **Mold** (fast general base-variation brush, heavy X-key black/white toggling). **Hand-painting workflow**: work the Red layer first around the eyes, nose, mouth, and ears (the most naturally red facial zones), blocking boldly without hesitation since this becomes the foundation for everything after; the underlying Fill layer's color itself can still be adjusted at any time since the mask is separate from the color; repeat the identical fill+mask+paint-layer pattern for Redder, Yellow, Blue (mostly via Dots Erase), and Darker (value variation, not just hue — brightness/darkness variation matters as much as color variation). This full hand-painting stage on one character took roughly 3-4 hours total across all color layers in production (though a single layer's dedicated masterclass chapter ran ~30 minutes). Explicitly framed as more labor-intensive than reference-photo projection, but far more re-editable: changing an entire character's color scheme later is a one-click Fill-layer color change rather than re-grading baked photo data. Loosely follows traditional face color-zone theory (redder around blood-rich areas, more blue/yellow near bone/mouth) without treating it as a rigid chart — real faces are more subdued/subtle than classic color-zone diagrams suggest. **Adding Procedurals**: identical Fill-layer-plus-mask architecture, but the mask now holds a **Fill effect with a procedural texture** instead of a Paint layer — demonstrated with **BNW Spots 3** (black-and-white spots), set to **Tri-Planar** projection specifically to avoid UV seams (a plain UV projection would show them). Areas where a procedural doesn't read well can still be hand-painted out afterward with the Cotton or Smooth Noise brush — combining "the organic feel of a procedural with hand-painted control over where it applies." Additional procedural layers stack a **3D Berlin Noise** and a **Grunge** (e.g. Grunge Concrete, again Tri-Planar) — grunge maps specifically chosen with some inherent hue/saturation (not pure grayscale) so they read as organic variation rather than literal dirt. Critically, **every procedural mask layer's blend mode is set to Soft Light** (never left at Normal, which reads as visually broken/harsh) — and the recommendation is to judge the result in the full 3D material view, not the flat mask preview, since mask-view "problems" (seams, harsh edges) often aren't visible or relevant in the actual shaded result. **Finishing touches (ZBrush round-trip)**: rather than re-exporting the sculpted mesh, only new **maps** are exported from ZBrush back into Painter as additional mask sources on the same Fill-layer architecture — a **Displacement map** (Normal blend, opacity-adjusted, then aggressively pushed with Levels since the raw displacement range is too subtle to read, duplicated and inverted for a second variant, then hand-painted-out in unwanted areas like excess wrinkle noise, finished on Soft Light at reduced opacity) and a dedicated **pimple mask** authored directly in ZBrush (fill the whole mesh white via Color → Fill Object, switch foreground to black, enable RGB intensity 100%, then hand-paint pimple positions directly with the standard brush — full manual control beats extracting pimples from a displacement map, which tends to look dirty) exported via ZBrush's Multi Map Exporter set to **Poly Paint** (per-UDIM, 4 UDIMs for this character) and imported into Painter as yet another Fill-layer mask, inverted via Levels (painted black-on-white in ZBrush for visibility, then inverted since a white-on-black paint wouldn't have been visible while sculpting), Soft Light blend, reduced opacity.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Sculpt-quality check first: ensure the model already has full detail-frequency coverage (pores, scars, wrinkles) before texturing — texturing a well-developed sculpt needs only gradients, light procedurals, and a bit of hand-painting; an underdeveloped sculpt forces a much harder "black book of tricks" workflow (heavy projections, LookDev hacks).
+2. Bottom **Temp** Fill layer in a jarringly saturated color across every channel (Color/Height/Roughness/Scattering) as a build-integrity sanity check.
+3. Organize by **one folder per channel** (starting with Color); inside, one flat-color **Fill layer per named tone** (Base, Red, Redder, Yellow, Blue, Darker), each Alt-click-isolated to only the relevant channel.
+4. Base layer: a desaturated, slightly-saturated skin tone — exact color doesn't need to be final, since it's globally re-gradable later.
+5. For each color layer: right-click → Add Black Mask → add a nested **Paint layer** inside the mask (enable Symmetry) — this is the repeatable unit of the entire workflow.
+6. Hand-paint the Red layer first, focused around eyes/nose/mouth/ears (naturally reddest zones); block boldly, don't be shy — this is the foundation everything else builds on.
+7. Use **Dirt2** for general painting (pen-pressure-driven by default; alternatively disable Size pressure and enable Flow pressure for an opacity-driven feel), **Dots**/**Dots Erase** for pore/freckle-like base variation (Dots Erase preferred for its softer, more organic blend), **Cracks** for vein-like patterns (typically on the Blue layer), **Cotton**/**Smooth Noise** for soft gradient blending (retain a little inherent texture — avoid a perfectly smooth, unrealistic result), and **Mold** for fast general-purpose base variation.
+8. Repeat the fill+mask+paint pattern for Redder, Yellow, Blue, and Darker — Darker specifically for value/brightness variation, since color variation alone isn't enough; real skin varies in lightness too.
+9. Loosely reference traditional face color-zone theory (more red near blood-rich areas, more blue/yellow near bone/mouth zones) without treating it as an absolute rulebook — keep the effect subtle, since real faces don't show dramatic color-zone shifts.
+10. Add **procedural** variation once hand-painting reaches its practical time limit: same Fill-layer-plus-mask architecture, but the mask holds a **Fill effect with a procedural texture** (e.g. BNW Spots 3) instead of a Paint layer, set to **Tri-Planar** projection to avoid UV seams.
+11. Selectively hand-paint out areas where a procedural doesn't read well (Cotton or Smooth Noise brush) — combines procedural organic variation with hand-painted placement control.
+12. Layer additional procedurals (3D Berlin Noise, Grunge — e.g. Grunge Concrete, also Tri-Planar) — pick grunge textures with inherent hue/saturation, not pure grayscale, so they read as organic skin variation rather than literal dirt.
+13. Set every procedural mask layer's blend mode to **Soft Light** (Normal reads as broken/too-harsh) — evaluate results in the full 3D material view, not the flat mask preview, since many mask-view "issues" (seams, hard edges) don't actually show or matter in the shaded result.
+14. ZBrush round-trip for finishing: export new maps only (don't re-import the mesh) — a **Displacement map** into a Fill layer (Normal blend, opacity down initially since the raw range is too subtle), pushed hard with **Levels**, duplicated + inverted for a second pass, hand-painted-out where excessive (unwanted wrinkle noise), finished on **Soft Light** at reduced opacity.
+15. Author a dedicated pimple mask directly in ZBrush: fill the mesh white (Color → Fill Object), switch to black foreground, enable RGB Intensity 100%, hand-paint pimple positions with the standard brush (full manual placement control beats extracting pimples from displacement data, which tends to look dirty) — roughly a 10-minute pass.
+16. Export the pimple poly-paint via ZBrush's **Multi Map Exporter** set to **Poly Paint** (per-UDIM if multi-tile), import into Painter as another Fill-layer mask, **invert with Levels** (painted black-on-white in ZBrush for visibility while sculpting, so needs inverting on import), **Soft Light** blend, reduced opacity.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- One **folder per channel**, one **Fill layer per named color tone** (Base/Red/Redder/Yellow/Blue/Darker), each with a nested Paint layer in its mask
+- Brushes: `Dirt2`, `Dots`, `Dots Erase`, `Cracks`, `Cotton`, `Smooth Noise`, `Mold`, `Dust` — `X` to toggle paint color black/white
+- Procedural masks: `BNW Spots 3`, `3D Berlin Noise`, `Grunge Concrete` (or similar) — all **Tri-Planar** projection, all **Soft Light** blend mode
+- Favorites: right-click a brush → Add to Favorites (pins it to the top of the brush panel)
+- ZBrush round-trip: **Displacement map** (Normal blend + Levels push + invert + hand-paint-out + Soft Light), **poly-painted pimple mask** (Color → Fill Object white, black foreground, RGB Intensity 100%, hand-painted, exported via Multi Map Exporter as Poly Paint, per-UDIM) — imported as Fill-layer masks, Levels-inverted, Soft Light blend
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — assumes comfort with layer/mask architecture and Painter's brush system; the value is entirely in workflow discipline (one-color-per-layer, hand-paint-then-procedural-then-ZBrush-round-trip sequencing) rather than any single complex technique.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen; paired with ZBrush (PolyPaint, Multi Map Exporter) and, per the video's intro, eventually Blender/Cycles for shading and rendering (out of this skill's scope).
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `paint-layer` `masks` `procedural` `tri-planar` `blend-mode` `alpha` `basecolor` `color-management` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Speeding Up Character Texturing with Smart Masks - Substance Painter](speeding-up-character-texturing-with-smart-masks---substance-painter.md) — same creator (FlippedNormals); shares the same one-Fill-layer-per-facial-region architecture and reusable-mask philosophy, applied there to a Smart Mask library workflow instead of pure hand-painting.
+- [Texturing a Clicker - FULL Substance 3D Painter Workflow](texturing-a-clicker---full-substance-3d-painter-workflow.md) — same creator; another full character/creature texturing project sharing the channel-separated-groups organizational philosophy and iterative render-feedback discipline.
+- [10 New Features in Substance Painter You Didn't Know About](10-new-features-in-substance-painter-you-didnt-know-about.md) — same creator; the Favorites asset-browser feature demonstrated briefly in this video (right-click a brush → Add to Favorites) is one of the features that hub video covers in more depth.
