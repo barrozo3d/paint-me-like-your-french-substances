@@ -630,6 +630,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/texturing-tactical-boots-in-substance-painter.md
 
+
+### Substance 3D Stager - Rendering assets from Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=raGhfzhzVdU
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance.md
+
 ---
 
 ## Tag Reference
