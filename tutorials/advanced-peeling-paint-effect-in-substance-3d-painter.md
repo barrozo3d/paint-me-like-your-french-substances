@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=VE8aILV053Y
 author: Javad Rajabzade
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; UDIM workflow explicitly mentioned (multi-tile projection handling required) and modern generator/anchor-point UI, consistent with recent versions, tentative"
+tags: [layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, height, roughness, basecolor, alpha, procedural, udim, texture-set, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Advanced Peeling Paint Effect in Substance 3D Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py advanced-peeling-paint-effect-in-substance-3d-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -171,30 +167,71 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:20] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_000.jpg
+- [1:59] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_001.jpg
+- [2:57] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_002.jpg
+- [3:42] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_003.jpg
+- [4:37] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_004.jpg
+- [6:09] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_005.jpg
+- [7:02] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_006.jpg
+- [8:07] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_007.jpg
+- [9:03] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_008.jpg
+- [11:06] tutorials/frames/advanced-peeling-paint-effect-in-substance-3d-painter/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+An advanced, fully-procedural peeling/blistering paint mask built by layering a sharp edge-wear generator with a 3D Voronoi-fractal-driven blurred variant (combined via `Lighten`/`Divide` blend-mode math, then `Levels` invert + `Histogram Shift` cleanup), converted into an anchor point so a separate paint-color layer, an edge-detail layer, and an underlying rust material can all reference the exact same mask shape — plus a manual-paint-driven "reveal window" trick (a black-mask paint layer set to `Multiply Light` under a generator) that confines otherwise-uniform procedural wear to only the areas the artist actually paints.
 
 ### Summary
-[PENDING EXTRACTION]
+Demonstrated on a pre-baked fire hydrant model (three real-world paint-damage categories named up front: edge wear/chipping, peeling/blistering, and cracking — this video focuses specifically on peeling). Builds the peel mask from a Metal Edge Wear generator (grunge amount reduced, wear level/contrast raised for a sharp result) blurred and blended with `Lighten` so the sharp mask stays intact while gaining a softer gradient halo; layers in a 3D Voronoi Fractal noise (chosen over a cell texture for finer parameter control; UDIM tile projection adjusted since the asset uses multiple UV tiles) combined via `Divide` so the noise only appears within the softer blurred-edge halo, not the sharp core; cleans the resulting mask with `Levels` invert -> `Histogram Shift` (pushes black values to white without touching the rest of the range) -> a second `Levels` invert (preferred over a plain Invert filter for finer edge control) -> a Height boost to physically raise the damage. That finished mask is captured as an **anchor point** placed between the Levels and Histogram Shift layers, then referenced by: a new paint-color layer (masked via the anchor point + a Levels adjustment to control paint coverage) inside the same group, an additional Bevel filter (used non-standardly, purely for its erosion-like distortion to break up the procedural mask's "too perfect" look — duplicated via Ctrl+T and placed at a second position in the stack for compounding variation), and later an "edge paint" detail pass (fresh anchor point + Fill layer referencing it, brighter color, `Soft Light` blend, plus a duplicated-and-reconfigured Voronoi — switched from 3D Fractal to a plain 2D Voronoi with a Cell-Tiles preset — for sharp sun-cracked-edge detail). A key spatial-control trick is introduced twice: (1) a black-mask Paint layer placed *under* the wear generator with the generator's own blend mode switched to `Multiply Light` so hand-painting only reveals the procedural wear where painted; (2) a second, simpler paint layer placed directly on the mask (paint black to add peeling, press `X` to invert the brush and paint white to remove it) for direct manual spot-control. Closes on process philosophy (always decide the asset's backstory/environment first — humid climates favor moss + blistering from trapped moisture, arid/sun-exposed environments favor sharp Voronoi cracking) and a folder-based organization pattern: group the paint layer + all its detail layers together, then drop supporting materials (a Metal Rust material) underneath the folder so they show through in the "revealed" areas — fixing an issue where the rust material's Height channel was bleeding into/deforming the paint layer by switching the affected channel from Roughness to Height and its blend mode from Linear to Normal.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Build the sharp edge-wear base mask:** add a new Fill layer, add a black mask, add a generator to it — Metal Edge Wear generator used here (Curvature or a plain Edge Damage mask/builder are named as valid alternatives depending on the desired look); reduce the generator's Grunge Amount, raise Wear Level and Wear Contrast for a sharp, clean result.
+2. **Create a soft companion mask and combine with Lighten:** add a Blur filter on a copy/companion of the mask and slightly increase its value, then set that layer's blend mode to `Lighten` (keeps the maximum value between the sharp and blurred masks) so the sharp white core stays fully intact while gaining a soft gradient border — the sharp white area means "paint fully removed here," the blurred border means "gradual worn transition."
+3. **Layer in 3D Voronoi Fractal noise for organic edge detail:** add a `3D Voronoi Fractal` (chosen over a 2D Cell texture for finer parameter control), adjust its projection to the correct **UDIM tile** since the asset spans multiple UV tiles, tune its parameters to taste, then set its blend mode to `Divide` — this makes the noise appear predominantly in the softer blurred-edge region while leaving the sharp white core unaffected.
+4. **Clean up the combined mask with a Levels -> Histogram Shift -> Levels chain:** add a `Levels` filter and invert it; add a `Histogram Shift` filter (shifts black values toward white without disturbing the rest of the histogram); add a second `Levels` filter and invert again to finalize — explicitly preferred over a plain `Invert` filter because Levels gives finer control over exactly where the edge falls.
+5. **Push the mask into visible surface Height** by raising the channel's Height value so the age/damage reads as physical relief, not just a flat color mask.
+6. **Capture the finished mask as a reusable Anchor Point:** add the anchor point layer positioned specifically between the (second) Levels layer and the Histogram Shift layer in the stack, so downstream layers can reference this exact intermediate mask state.
+7. **Build the paint-color layer from the anchor point:** add a new layer, place it inside the same group, rename it (e.g. "paint layer"), pick a paint color and adjust roughness, add a black mask, reference the earlier anchor point on that mask, then add a `Levels` adjustment on top to fine-tune exactly how much of the referenced mask becomes visible paint.
+8. **Break up the mask's "too perfect" procedural look with a Bevel filter used for erosion, not bevelling:** add a Bevel filter on top of the layer stack purely for the organic distortion/erosion side-effect it produces on a mask, not for its literal bevel use case; duplicate it with Ctrl+T and place the duplicate at a different position (e.g. below the Histogram Shift layer) for additional compounded variation.
+9. **Add a paint-driven "reveal window" for spatial control (technique 1):** add a Paint layer with a black mask placed *underneath* the wear generator in the stack, then switch the generator's own blend mode to `Multiply Light` — hand-painting on that paint layer now reveals the procedural wear effect only in the painted areas, instead of the wear showing uniformly across the whole model.
+10. **Add a second, simpler manual paint layer for direct spot control (technique 2):** add another paint layer above the metal-edge-wear generator; painting in black adds the peeling-paint effect at that spot, pressing `X` inverts the active color so painting in white removes/erases the effect from already-peeling spots.
+11. **Add finer edge detail via a second anchor point + referenced fill layer:** create a new anchor point on top of the existing paint-mask layer, name it (e.g. "edge paint"), then build a new layer with a black mask + Fill sub-layer that references that anchor point (the mask auto-populates from the referenced anchor data); pick a slightly brighter fade-toward-edge color and set blend mode to `Soft Light` to simulate how real peeling-paint edges lighten/fade.
+12. **Add sharp sun-cracking detail:** duplicate the existing 2D/3D Voronoi Fractal noise, switch the duplicate from 3D Fractal to a plain **2D Voronoi** using the **Cell Tiles** preset — produces sharp cracking lines along the peeling-paint edges, appropriate for assets in harsh/sun-exposed environments (contrasted with a humid-environment look, which favors blistering/moss instead of sharp cracking).
+13. **Organize with a folder, then reveal an underlying material through it:** group the paint layer and all its detail layers into one folder; anything placed *underneath* that folder in the stack shows through wherever the folder's own masking reveals it — demonstrated by dragging a `Metal Rust` material below the paint folder so it appears in the peeled-away areas.
+14. **Fix a rust-material channel conflict:** when the dropped-in Metal Rust material's Height channel was found to be visibly deforming/affecting the paint layer above it, change the conflicting channel from Roughness to Height and switch that channel's blend mode from `Linear` to `Normal` to resolve the interaction cleanly.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Base wear mask:** Fill layer + black mask + `Metal Edge Wear` generator (Grunge Amount down, Wear Level/Contrast up); alternates named: Curvature mask, Edge Damage mask/builder
+- **Soft companion mask:** `Blur` filter, blend mode `Lighten`
+- **Organic edge noise:** `3D Voronoi Fractal` (UDIM tile projection adjusted), blend mode `Divide`
+- **Mask cleanup chain:** `Levels` (invert) -> `Histogram Shift` -> `Levels` (invert again) -> Height value increase
+- **Anchor Point:** placed between the second Levels layer and the Histogram Shift layer, referenced by multiple downstream layers/masks
+- **Paint-color layer:** inside the group, black mask referencing the anchor point + `Levels` adjustment
+- **Erosion trick:** `Bevel` filter (non-standard use for organic mask distortion), duplicated via Ctrl+T and placed at a second stack position
+- **Spatial-control trick 1:** black-mask Paint layer placed under the wear generator; generator blend mode switched to `Multiply Light`
+- **Spatial-control trick 2:** Paint layer above the generator, black = add peeling, `X` to invert brush, white = remove peeling
+- **Edge detail pass:** second Anchor Point ("edge paint") + Fill layer referencing it, brighter color, blend mode `Soft Light`
+- **Sun-cracking detail:** duplicated Voronoi switched from 3D Fractal to 2D Voronoi, `Cell Tiles` preset
+- **Organization:** paint layer + detail layers grouped in a folder; `Metal Rust` material placed underneath the folder to show through revealed areas; conflicting channel switched Roughness->Height, blend mode Linear->Normal
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — assumes comfort with generators, filters, and blend-mode math (Lighten/Divide/Multiply Light/Soft Light used deliberately for their exact mathematical behavior, not just visual trial-and-error), and introduces the anchor-point-as-shared-mask-source pattern applied across three separate downstream layers in one build.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen in any captured frame — no visible version-number UI element. The UDIM multi-tile workflow explicitly called out, plus the modern generator/anchor-point/Bevel-filter UI, are consistent with the same recent-version era as this skill's other ingested tutorials, but not independently version-pinned here.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, height, roughness, basecolor, alpha, procedural, udim, texture-set, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial](how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md) — different creator (Jared Chavez); the anchor-point-as-shared-mask-source pattern used throughout this hydrant video (one mask referenced by paint color, edge detail, and generator-reveal layers) is exactly the modular-reuse philosophy that anchor-points video teaches as its core lesson.
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); shares the blend-mode-stacking-as-mask-math approach (multiple generators/filters combined via specific blend modes to sculpt one final mask) though this hydrant video pushes further into Voronoi-noise and histogram-shift-specific tricks.
+- (Wes McDermott's "How to create a paint peeling effect in Substance Painter" covers the same core subject — cross-link will be added here once that video is ingested.)

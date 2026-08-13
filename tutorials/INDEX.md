@@ -415,10 +415,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=VE8aILV053Y
 - **Author:** Javad Rajabzade
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; UDIM multi-tile workflow and modern generator/anchor-point UI, tentative
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `anchor-point` `blend-mode` `height` `roughness` `basecolor` `alpha` `procedural` `udim` `texture-set` `intermediate` `advanced`
+- **Summary:** Advanced fully-procedural peeling/blistering paint mask on a fire hydrant: Metal Edge Wear generator + blurred companion combined via Lighten, 3D Voronoi Fractal noise combined via Divide, a Levels-invert/Histogram-Shift/Levels cleanup chain, captured as an Anchor Point referenced by a paint-color layer, an edge-detail pass, and a Bevel-filter erosion trick. Introduces a paint-driven "reveal window" (black-mask paint layer + generator set to Multiply Light) to confine uniform procedural wear to hand-painted areas only.
 - **File:** tutorials/advanced-peeling-paint-effect-in-substance-3d-painter.md
 
 
