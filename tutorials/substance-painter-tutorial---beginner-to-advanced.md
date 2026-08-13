@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=qcQPItAXxgE
 author: TriGon
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen"
+tags: [layers, fill-layer, masks, smart-material, smart-mask, generator, blend-mode, baking, mesh-maps, ambient-occlusion, curvature, id-map, texture-set, pbr, basecolor, roughness, height, alpha, tri-planar, procedural, export, export-preset, game-engine, unreal-export, beginner, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-painter-tutorial---beginner-to-advanced/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 13
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance Painter Tutorial -  Beginner To Advanced
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-painter-tutorial---beginner-to-advanced <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -1408,30 +1404,81 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [3:50] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_000.jpg
+- [6:05] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_001.jpg
+- [10:58] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_002.jpg
+- [12:50] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_003.jpg
+- [19:44] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_004.jpg
+- [27:00] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_005.jpg
+- [33:25] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_006.jpg
+- [40:03] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_007.jpg
+- [56:20] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_008.jpg
+- [57:57] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_009.jpg
+- [63:15] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_010.jpg
+- [74:05] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_011.jpg
+- [80:15] tutorials/frames/substance-painter-tutorial---beginner-to-advanced/frame_012.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Full personal-workflow walkthrough (not the official/default Painter workflow) for building one wooden barrel material from scratch: never use Painter's stock Materials or stock Smart Materials directly — always build custom Fill-layer bases and drive every subsequent adjustment through Pass-Through **filters** (never additional Fill layers) so the whole stack stays non-destructive and any base value can change later without breaking downstream layers. Structured around a repeatable **base → color/roughness variation → primary/secondary/tertiary detail → damage → effects (curvature) → weathering → hand-painting** layer hierarchy.
 
 ### Summary
-[PENDING EXTRACTION]
+Note: the demo asset is a wooden **barrel** (not a "boot" — Whisper's transcript consistently mis-hears "barrel" as "boot" throughout; verified visually against every captured frame). Opens with project setup (New → mesh + baked-map import, 4K resolution, an Unreal Engine or PBR template) and a custom UI layout preference. Contrasts Painter's stock **Materials** (single flat layer, limited) against stock **Smart Materials** (a full layer group you can inspect) against the creator's own preferred method: build your own Fill-layer base (flat color/roughness/metallic) and group it, since stock Smart Materials are still "a really limited way of working." **Color variation** is added with an HSL filter (never edited directly on the base) set to Pass Through, masked by a Tri-Planar-projected procedural (Clouds) to avoid UV seams — duplicated for a second "light" variant, both nested in a "color variation" folder with its own mask/fill for overall intensity control. Explicitly demonstrates **why filters beat fill layers**: changing the base color (even to an unrelated color like blue) instantly updates every downstream HSL filter correctly, whereas a hand-set fill-layer "darken" layer would visibly break (mixed brown-under-blue) the moment the base changes. **Details** are built the same way — a height-only tiling wood-grain procedural (rotated to align with the mesh), fed through Pass-Through HSL filters for color and roughness so one mask drives all three channels — and immediately run into a **separating-details problem**: procedural detail bleeding across separate wood-plank boundaries reads as fake, fixed later via the baked **ID map** (created in ZBrush via PolyPaint, previewed with the `B` hotkey) to mask each plank/part independently. **Edge damage** uses a built-in **Smart Mask** (search "edge damage" — e.g. "Edge Strong Scratched") which reads the baked **Curvature** map to bite into geometric edges; critically, the creator uses a **Base fill layer, not a filter**, for the actual edge-color/height override, because a filter would incorrectly preserve the underlying wood-grain detail in damaged areas where it should visually disappear — its own separate color-variation duplicate is nested inside for non-uniform damage color. **More/general damage** stacks multiple procedural Grunge layers with Multiply-mode breakup passes and Invert to vary scratch coverage, built partly from Smart Masks and partly from scratch depending on what looks right ("look around — maybe a smart mask works perfectly one time, in the other time you'll have to build your own"). **Secondary/tertiary details** repeats the whole base-recipe pattern at a finer scale (straight wood-grain lines, warped via a **Warp** filter on the mask so they don't read as perfectly straight, X/Y-unlocked tiling scale), with the explicit warning to watch each channel's height contribution individually — too much height stacking across multiple detail layers turns into noise, dialed back per-layer. Everything gets grouped and explicitly labeled **Primary Details** / **Secondary Details** (with tertiary/micro details named as further steps in the same size hierarchy, same concept used in ZBrush sculpting). An **Effects** group (kept at the very top of the stack) applies the baked **Curvature** map directly into BaseColor and Roughness at low **Overlay** opacity (~25%) for extra high-poly depth, followed by a **Color Correct** filter and a live **PBR Validator** check (red = broken PBR values, green = valid) — the creator's rule: it's fine to nudge values slightly into "broken" territory for a better look, but not to push far past the edge. Also demonstrates optionally baking **Ambient Occlusion** directly into BaseColor via an inverted mask (breaks strict PBR, acceptable for a Marmoset-only render, avoided for Unreal Engine work where AO intensity should instead be controlled in a custom engine shader). **Weathering** adds environmental storytelling: a dust layer (dark blue chosen as the brown material's complementary color, from a Smart Mask), a blood layer (imagined battle/Viking narrative, built from a "fluid" procedural at Tri-Planar projection, kept subtle), and ground-proximity dirt/mud (Smart Mask "ground", AO/curvature-adjusted, Multiply-mode Clouds breakup, mask copy/paste when a layer's mask stops updating — resolved in this video by simply re-dragging the Smart Mask in again). Closes with **hand painting**: a manual paint layer for edge damage using a soft brush, explicitly using the earlier procedural generator shapes as a visual guide for where to paint (rather than painting freehand), a **Blur and Slope** filter on the paint mask for a more organic look, a white top-level mask on the weathering group so hand-erased weathering can still be selectively repainted back only where the original generator placed it (less destructive than erasing procedural data outright), and a hand-painted grass-spot layer using the Dirt brush plus a Multiply-mode procedural breakup pass on top. Exports via `Ctrl+E`. Closing statement: this is the creator's personal, opinionated "everything I actually use" workflow, deliberately excluding techniques judged unnecessary for a strong foundation.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. New project: mesh + baked mesh maps import, 4K Document Resolution, Unreal Engine or PBR template depending on destination.
+2. Never use Painter's stock **Materials** (single flat layer) or rely on stock **Smart Materials** as-is (still judged too limited); instead build a custom Fill layer with hand-set base BaseColor/Roughness/Metallic values, then `Ctrl+G` to group it as your own material's foundation.
+3. Add **color variation** via an HSL filter (never a second Fill layer) — group blend mode must be **Pass Through** for the filter to apply; mask with a **Tri-Planar**-projected Clouds procedural to avoid visible UV seams; duplicate for a second "light" variant; nest both in a "color variation" folder with its own mask/fill for overall intensity.
+4. Verify the non-destructive payoff directly: change the base Fill layer's color (even to an unrelated hue) and confirm every HSL filter above it updates correctly — contrast against a hand-set fill-layer "darken" copy, which visibly breaks (mixes old and new color) the instant the base changes.
+5. Build **Details** the same filter-driven way: a height-only tiling procedural (rotated to follow the mesh), fed through Pass-Through HSL (color) and Contrast/HSL (roughness) filters referencing the same mask so one mask drives every channel consistently.
+6. Fix cross-part detail bleeding (procedural detail incorrectly continuing across separate mesh parts, e.g. individual wood planks) using the baked **ID map** (ZBrush PolyPaint-authored, previewed with `B`) to mask each part independently — group everything and set to Pass Through again once done, since grouping breaks filter visibility until reset.
+7. Build **edge damage** from a built-in **Smart Mask** search (e.g. "edge damage" → Edge Strong Scratched), which reads the baked **Curvature** map to concentrate on geometric edges; global-balance-adjust the Curvature reading for subtlety.
+8. Use a **Base fill layer** (not a filter) for the actual edge-damage color/height override — a filter would incorrectly let the underlying wood-grain detail show through in areas that should read as fully worn away/damaged.
+9. Add a nested, independent color-variation duplicate inside the edge-damage folder (own Tri-Planar procedural mask, own contrast/balance) so damage isn't a single flat color.
+10. Build additional **general/more damage** passes from stacked procedural Grunge layers, Multiply-mode breakup, and Invert — mixing Smart Masks and from-scratch procedural masks depending on what looks right for the asset; group and Pass-Through both BaseColor and Roughness channels.
+11. Build **secondary (finer) details** as a repeat of the base-detail recipe at smaller scale (straight wood-grain lines), adding a **Warp** filter on the mask (intensity ÷1000-scaled) so straight procedural lines don't read as artificially perfect, and unlocking X/Y tiling scale independently for directional control.
+12. Watch each detail layer's **Height** contribution individually — stacking too much height across multiple detail groups turns into visible noise; dial back per-layer rather than only adjusting the final result.
+13. Explicitly group and label detail passes by scale — **Primary Details**, **Secondary Details** (with tertiary/micro details as the natural next steps in the same hierarchy) — mirroring the same size-hierarchy principle used in ZBrush sculpting.
+14. Build a top-of-stack **Effects** group: a Curvature-map-driven layer (BaseColor + Roughness, Overlay blend, ~25% opacity) for extra high-poly-derived depth, a **Color Correct** filter for an overall grade, and a live **PBR Validator** check (red = broken values, green = valid) — acceptable to push slightly into "broken" for a better look, but stay near the edge, not far past it.
+15. Optionally bake **Ambient Occlusion** directly into BaseColor via an inverted-mask HSL filter for a nicer-looking bake-only/Marmoset render — explicitly avoid this for Unreal Engine work, where AO intensity should instead be controlled in a custom engine shader, not baked destructively into the color texture.
+16. Build **weathering** (environmental storytelling) as a top-level group: a dust layer in a complementary color to the base material (e.g. dark blue dust on brown wood), from a Smart Mask; a blood layer built from a "fluid" procedural at Tri-Planar projection, kept deliberately subtle; and ground-proximity dirt/mud using a "ground" Smart Mask, AO/curvature-adjusted, broken up with a Multiply-mode Clouds pass.
+17. If a mask's Smart Mask stops updating/breaks after being copy-pasted between layers, the practical fix demonstrated is simply re-dragging the same Smart Mask onto the layer again rather than debugging the copy.
+18. Finish with **hand painting**: a manual paint layer (soft brush) for edge damage, explicitly guided by the shapes already visible from earlier procedural generators rather than painted freehand; a **Blur and Slope** filter on the resulting paint mask for a more organic edge; work at a lower texture-set resolution (e.g. 2K) temporarily for faster paint responsiveness, then switch back to the final resolution (4K) once done.
+19. Add a **white mask on the whole weathering group** so any hand-erased weathering (e.g. blood painted away) can still be selectively repainted back — but only within the area the original procedural generator actually placed it, making hand-erasing less destructive than erasing procedural data outright.
+20. Add a hand-painted grass-spot layer (Dirt brush, green tint) plus a Multiply-mode procedural breakup pass to avoid a flat hand-painted look.
+21. Export via `Ctrl+E`, choosing an appropriate output template (e.g. Unreal Engine 4 Packed) and file settings.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Never: stock Materials (flat single layer) or as-is stock Smart Materials; always: custom Fill-layer base + filters
+- `HSL` filter (color), `Contrast and Luminance` / `Color Correct` filters (roughness/grade) — always Pass Through, never a second Fill layer, for non-destructive edits
+- `Tri-Planar` projection for all procedural masks (seam avoidance)
+- ID map (ZBrush PolyPaint-baked) for per-part mask isolation — preview with `B`
+- Smart Masks: "Edge Strong Scratched" (edge damage, Curvature-driven), "ground" (dirt/mud), dust presets (Soft Dust, etc.)
+- `Warp` filter (mask-only, breaks up artificially straight procedural lines)
+- `PBR Validator` (live red/green PBR-compliance overlay)
+- Curvature-map-driven Effects layer: BaseColor + Roughness, **Overlay** blend, ~25% opacity
+- AO-baked-into-BaseColor trick (inverted mask HSL) — Marmoset-only use case, avoided for Unreal Engine
+- `Blur and Slope` filter (organic edge on hand-painted masks)
+- White top-level mask on a weathering group (selective hand-repaint of procedural-only areas)
+- Export: `Ctrl+E`, Unreal Engine 4 Packed template (or other, per destination)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner to Intermediate — explicitly the creator's own condensed, opinionated "everything I actually use" foundational workflow, deliberately omitting techniques judged unnecessary.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen; no version-gated feature names appear in transcript or captured frames.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `masks` `smart-material` `smart-mask` `generator` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `curvature` `id-map` `texture-set` `pbr` `basecolor` `roughness` `height` `alpha` `tri-planar` `procedural` `export` `export-preset` `game-engine` `unreal-export` `beginner` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Substance Painter Beginner To Pro - Course](substance-painter-beginner-to-pro---course.md) — same creator (TriGon); companion course in the same beginner-to-pro learning arc, sharing the primary/secondary/tertiary breakup principle and non-destructive filter-first methodology. Cross-linked both ways.
+- [Substance Painter - Creating Professional Textures](substance-painter---creating-professional-textures.md) — same creator (TriGon); the most advanced of the three-part series. Cross-link both ways once ingested.
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); a deeper dive into the same masking primitives (generators, tri-planar, curvature) this video applies at a practical, opinionated-workflow level.

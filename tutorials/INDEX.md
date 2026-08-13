@@ -855,10 +855,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=qcQPItAXxgE
 - **Author:** TriGon
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `masks` `smart-material` `smart-mask` `generator` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `curvature` `id-map` `texture-set` `pbr` `basecolor` `roughness` `height` `alpha` `tri-planar` `procedural` `export` `export-preset` `game-engine` `unreal-export` `beginner` `intermediate` `advanced`
+- **Summary:** Personal-workflow course (1h21m) on a wooden barrel (note: Whisper transcript consistently mis-hears "barrel" as "boot"): never use Painter's stock Materials/Smart Materials directly — build custom Fill-layer bases and drive every adjustment through Pass-Through filters (never a second Fill layer) so nothing breaks when base values change later. Covers color/roughness variation via Tri-Planar-masked HSL filters, ID-map-driven per-part detail isolation, Curvature-map-driven edge damage via Smart Masks (using a Base layer not a filter so underlying detail correctly disappears in damaged zones), a Warp-filtered secondary-detail pass, explicit Primary/Secondary Details grouping, a top Effects group with Curvature-Overlay depth + PBR Validator check, weathering/environmental storytelling (dust/blood/mud), and closing hand-painting guided by the procedural shapes already on the model. Companion to two other TriGon courses in this library — cross-linked.
 - **File:** tutorials/substance-painter-tutorial---beginner-to-advanced.md
 
 

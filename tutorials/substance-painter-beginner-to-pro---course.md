@@ -2890,7 +2890,7 @@ Not stated on screen. UI (Baking Mode common settings layout, cage wireframe vis
 ---
 
 ## Related Tutorials
-- [Substance Painter Tutorial - Beginner To Advanced](substance-painter-tutorial---beginner-to-advanced.md) — same creator (TriGon); companion course in the same beginner-to-pro learning arc. Cross-link both ways once ingested.
+- [Substance Painter Tutorial - Beginner To Advanced](substance-painter-tutorial---beginner-to-advanced.md) — same creator (TriGon); companion course in the same beginner-to-pro learning arc, sharing the primary/secondary/tertiary breakup principle and non-destructive filter-first methodology (that video demoed on a wooden barrel).
 - [Substance Painter - Creating Professional Textures](substance-painter---creating-professional-textures.md) — same creator (TriGon); the most advanced of the three-part series, building further on this video's primary/secondary/tertiary breakup and non-destructive filter methodology. Cross-link both ways once ingested.
 - [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); a deeper dive into every masking primitive this course only introduces at a beginner level (generators, tri-planar grunge, anchor points).
 - [How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial](how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md) — different creator (Jared Chavez); a dedicated deep-dive on Anchor Points, which this course only briefly introduces in its "Refining Our Details" chapter.
