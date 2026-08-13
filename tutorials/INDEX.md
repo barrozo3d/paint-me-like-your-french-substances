@@ -652,6 +652,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### 10 New Features in Substance Painter You Didn't Know About
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=yebv44cOYW4
+- **Author:** FlippedNormals
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/10-new-features-in-substance-painter-you-didnt-know-about.md
+
 ---
 
 ## Tag Reference
