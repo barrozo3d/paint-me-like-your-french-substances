@@ -850,6 +850,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe.md
 
+
+### Substance Painter Tutorial -  Beginner To Advanced
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=qcQPItAXxgE
+- **Author:** TriGon
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-painter-tutorial---beginner-to-advanced.md
+
 ---
 
 ## Tag Reference
