@@ -432,6 +432,28 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d.md
 
+
+### Speed Up Your Substance Painter Workflow with This Easy Trick!
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=_oSPDoX37lM
+- **Author:** 3DRedBox
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/speed-up-your-substance-painter-workflow-with-this-easy-trick.md
+
+
+### Creating & Reusing Smart Materials in Substance 3D Painter | Stylized Crab | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=ZiWAe_iZ_CI
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub.md
+
 ---
 
 ## Tag Reference
