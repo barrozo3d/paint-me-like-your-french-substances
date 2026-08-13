@@ -1070,6 +1070,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Verify check confirmed: primarily Maya UV work + UE5 Virtual Texture setup (~6 of 8 chapters), Painter appearing as one pipeline stage — extracted at proportionate depth. Same Neomorph creature as the Subsurface Scattering video. Maya: joint-based UV cuts, texel-density-matched 6-tile UDIM layout, split-and-decimate high-poly export. Painter: mandatory `Use UV Tile` import toggle, Thickness-map seam-discontinuity manual fix, standard tile-aware export. UE5: Enable Virtual Texture Support project setting, Material Editor wiring, VT thumbnail badge as load-success indicator. Cross-linked with Subsurface Scattering (same character), How to use UDIMs properly! (3DRedBox), UV Set and Stencils, Baking in Painter 8.3.
 - **File:** tutorials/how-to-make-udims-for-unreal-engine.md
 
+
+### How to MAKE POKEMON in Zbrush and Substance Painter | Gengar
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=MJxjI4pwY3g
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar.md
+
 ---
 
 ## Tag Reference
