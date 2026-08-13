@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=pFUXJiTToc8
 author: Jared Chavez
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified"
+tags: [smart-material, smart-mask, anchor-point, masks, blend-mode, layers, fill-layer, paint-layer, generator, procedural, particle-brush, opacity, emissive, height, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-painter-smart-materials-demonstration/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 11
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # SUBSTANCE PAINTER: SMART MATERIALS Demonstration
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-painter-smart-materials-demonstration <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -224,30 +220,73 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:02] tutorials/frames/substance-painter-smart-materials-demonstration/frame_000.jpg
+- [2:05] tutorials/frames/substance-painter-smart-materials-demonstration/frame_001.jpg
+- [2:44] tutorials/frames/substance-painter-smart-materials-demonstration/frame_002.jpg
+- [3:19] tutorials/frames/substance-painter-smart-materials-demonstration/frame_003.jpg
+- [3:55] tutorials/frames/substance-painter-smart-materials-demonstration/frame_004.jpg
+- [5:19] tutorials/frames/substance-painter-smart-materials-demonstration/frame_005.jpg
+- [5:56] tutorials/frames/substance-painter-smart-materials-demonstration/frame_006.jpg
+- [6:58] tutorials/frames/substance-painter-smart-materials-demonstration/frame_007.jpg
+- [7:50] tutorials/frames/substance-painter-smart-materials-demonstration/frame_008.jpg
+- [8:52] tutorials/frames/substance-painter-smart-materials-demonstration/frame_009.jpg
+- [12:18] tutorials/frames/substance-painter-smart-materials-demonstration/frame_010.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A live walkthrough of a commercial 12-material anchor-point-driven Smart Material pack (Jared Chavez's ArtStation store), demonstrating the general architecture pattern shared by all of them: a top-level folder per material, with a "Paint Here" paint layer at the base that the user freehand-paints on, and every other layer in the folder (color variation, lifted edges, cracks, bubbling, denting, emissive heat) referencing that same paint information via anchor points to auto-generate coordinated secondary effects from one brush stroke.
 
 ### Summary
-[PENDING EXTRACTION]
+Though framed as a product demo (materials sold on Chavez's ArtStation store, not a from-scratch build tutorial), this is a genuinely instructive tour of Smart Material internal architecture and the drag-and-drop mechanics of reusing/layering them. Every material in the pack follows the same folder pattern: open the folder, find the "Paint Here" (base paint) layer, and paint directly on the model — everything else in the folder (HSL color variation, Lifted Edge control, crack/chip generators, bubble/dent height pushes) is anchor-point-driven off that paint layer and updates automatically as you paint, with most exposed parameters (HSL sliders, Lifted Edge intensity, crack/bubble scale) left tweakable per-instance. Materials covered: a layered paint material with built-in HSL variation and Lifted Edge; a Paint Peeled/edge-chipping material that starts pure white (intentional — reveals only where painted); a Bullet Hole material that uses Opacity to physically remove geometry-mapped material (punch-through, not just visual damage); a Dent Chipped Paint material where brush pressure controls both dent depth and paint erosion simultaneously; a Bubble material (built from a scaled-up "Dirt 3" generator) for tertiary paint-bubble nuance; a Damaged Leather material that cracks/wears as painted. A key production technique is demonstrated mid-video: dragging one Smart Material (Black Leather) underneath another material's active layer so the top material's paint/damage passes affect the newly-added base material beneath it, then separately drag-dropping a mask preset (Edge Gunware/"edge damage") onto the material's mask slot — moving it up the stack to just above the paint layer and setting its blend mode to `Linear Dodge` (Add) is the step required to make the mask's edge wear actually read together with the paint-driven effects, rather than looking visually disconnected. Later materials (Rust Streak, Burnt Streak, Burnt Emissive, Burnt Fabric Holes, Fabric Tear, Torn Cloth w/ threads, Tape) each layer additional anchor-driven behaviors: rust streak materials chain a second "rusty" smart material as their base and add dripping streaks with color variation; Burnt Emissive uses brush pressure to scale up an actual Emissive-channel "hot center" glow in real time; Burnt Fabric Holes uses Opacity to physically burn through cloth; the two cloth materials add frayed-string vs. laid-thread variants of tear damage with adjustable height; the Tape material uses a distinct "Sticker Shape" brush-driven layer so the artist draws the tape's outline directly, then separately controls wrinkling, edge lifting, and air-bubble pocket intensity.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Every Smart Material in the pack has a **top-level folder**; open it and find the base **paint layer** (labeled "Paint Here" in the layer stack) — this is the only layer the artist directly paints on.
+2. Painting on that base layer alone already produces a full layered look — the anchor-point-fed layers above it (color variation, edge lift, etc.) update live as you paint, no manual per-layer painting required.
+3. Materials expose tunable parameters directly on their sub-layers: **HSL** (hue/saturation/lightness) for color variation, and a dedicated **Lifted Edge** layer/parameter to increase or decrease how much the thicker/higher parts of the paint appear physically raised.
+4. Some materials (e.g. Paint Peeled) intentionally default to **pure white/blank** when first applied — this is expected; the material only reveals its actual look (edge-chipping) once painted.
+5. The **Bullet Hole** material uses the model's **Opacity** channel to actually remove/punch through surface material where painted (not just a visual dark spot) — different brush shapes/hardness give different hole silhouettes; a hard round brush with a single tap gives a clean circular hole.
+6. The **Dent Chipped Paint** material ties **brush pressure** to both height displacement (denting the surface) and paint erosion simultaneously — harder pressure = deeper dent + more paint eroded away; different brush presets in Painter's library give meaningfully different erosion character, worth testing several.
+7. The **Bubble** material is built from a scaled-up **"Dirt 3"** generator/noise preset repurposed to create small lifted paint bubbles — framed as a tertiary-detail addition on top of a base paint job.
+8. **Reusing/chaining Smart Materials — drag one material underneath another's active layer** so everything above it (the already-applied material's paint/damage layers) affects the newly-dropped material as its new base — demonstrated by dragging a separate "Black Leather" smart material underneath the Damaged Leather material's paint layer, producing a "worn-in leather" combined look in one action.
+9. **Dragging a standalone mask preset onto a Smart Material's mask slot** (e.g. an "Edge Gunware"/edge-damage mask) does not automatically read correctly with the material's other effects — the mask must be **manually repositioned up the layer stack** (moved to just above the paint layer) and its **blend mode changed to `Linear Dodge` (Add)** for the edge wear to visually integrate with the paint-driven damage below it, rather than sitting visually disconnected.
+10. The **Rust Streak** material is built on top of a separate "rusty" base smart material and adds dripping streak shapes with built-in color variation, flaked edges, and the same lifted-edge/bubbling behaviors seen in earlier materials — masks can also be layered onto rust materials the same way as the leather example.
+11. The **Burnt Emissive** material scales an actual Emissive-channel "hot glowing center" in real time based on brush pressure — light pressure exposes a small ember-like glow, heavy/repeated pressure exposes a much larger hot area; framed by the creator as the standout material in the pack because of the live Emissive interaction.
+12. The **Burnt Fabric Holes** material combines a charred-streak look with an **Opacity**-driven burn-through hole, letting the artist fully burn through cloth in painted areas.
+13. Two cloth-tear variants (**Fabric Tear** — frayed loose strings, and a threaded variant for torn-jeans-style laid threads) both expose small tertiary tear-detail parameters and a height control for how much the threads/strings protrude.
+14. The **Tape** material uses a distinct **"Sticker Shape"** paint-driven layer where the brush stroke itself defines the tape's outline/placement, with separate controls for wrinkling, edge lifting, and small air-bubble pocket intensity to sell a physically-applied piece of tape (e.g. electrical tape) rather than a flat decal.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Folder-per-material architecture; base **paint layer** ("Paint Here") as the single input surface.
+- **Anchor points** feeding every secondary effect layer within a material folder (color variation, Lifted Edge, crack generators, bubble/dent height pushes) off the base paint layer.
+- `HSL` adjustment exposed per-material for color variation tuning.
+- **Lifted Edge** control layer — raises/lowers the apparent height of thicker paint areas.
+- `Opacity` channel — used by Bullet Hole and Burnt Fabric Holes materials to physically remove/burn through surface material.
+- Brush pressure as a live parametric input — drives simultaneous dent-depth + paint-erosion (Dent Chipped Paint) and Emissive glow intensity (Burnt Emissive).
+- **Dirt 3** generator (scaled up) — repurposed as the Bubble material's core noise source.
+- **Mask Editor** generator (visible in frame_007, `Global Invert`/`Global Blur`/`Global Balance`/`Global Contrast`/dual `Texture` slots) used within the Leather material's mask stack.
+- `Linear Dodge` (Add) blend mode — required to make a dropped-in mask preset (e.g. Edge Gunware) visually integrate with a material's existing paint-driven layers; combined with repositioning the mask layer just above the paint layer.
+- **Sticker Shape** paint-driven layer type (Tape material) — the brush stroke directly defines the applied decal's outline rather than masking a pre-made shape.
+- Drag-and-drop material chaining — dropping one full Smart Material folder underneath another's active layer so upstream layers affect the newly added base.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate/Advanced for building materials like these from scratch (heavy anchor-point + generator + blend-mode chaining); Beginner-friendly for using them as pre-built Smart Materials (paint on the base layer, tweak exposed sliders).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not specified on screen or in narration.
 
 ### Tags
-[PENDING EXTRACTION]
+smart-material, smart-mask, anchor-point, masks, blend-mode, layers, fill-layer, paint-layer, generator, procedural, particle-brush, opacity, emissive, height, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — same creator; the anchor-point-as-mask-source fundamentals taught there underlie every material demonstrated in this pack.
+- [HOW to Make a Peeled Paint Effect with ANCHOR Points | SUBSTANCE PAINTER](how-to-make-a-peeled-paint-effect-with-anchor-points-substance-painter.md) — same creator; a full from-scratch build of the exact Paint Peeled/edge-chipping effect this video shows as a pre-built Smart Material — read together to see the finished product and its underlying construction.
+- [TEXTURING METAL from Scratch in SUBSTANCE PAINTER](texturing-metal-from-scratch-in-substance-painter.md) — same creator; shares the anchor-point-driven flake/peel technique in a live production build context.
+- [HOW TO MASTER TEXTURing in SUBSTANCE PAINTER](how-to-master-texturing-in-substance-painter.md) — same creator; conceptual companion — the "one paint stroke drives multiple coordinated damage/wear layers" architecture here is a direct implementation of that video's Phase 2/3 breakup-then-detail philosophy.
+- [Creating & Reusing Smart Materials in Substance 3D Painter | Stylized Crab](creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub.md) (Substance3D official) — different creator; a from-scratch Smart Material creation/save workflow that complements this video's usage-focused demonstration of pre-built ones.
