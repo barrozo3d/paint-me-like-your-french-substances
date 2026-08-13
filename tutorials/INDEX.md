@@ -564,6 +564,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/texturing-a-clicker---full-substance-3d-painter-workflow.md
 
+
+### Texturing a shawl in substance painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=urA-oaoqfpM
+- **Author:** 3DRedBox
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/texturing-a-shawl-in-substance-painter.md
+
 ---
 
 ## Tag Reference
