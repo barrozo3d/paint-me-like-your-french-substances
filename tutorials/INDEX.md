@@ -756,10 +756,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=Yu8wR4df0IE
 - **Author:** William Faucher
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; shown alongside Unreal Engine 4.26
+- **Tags:** `color-management` `viewport` `iray-render` `pbr` `intermediate`
+- **Summary:** Fixes Painter's default fully-linear viewport (hard-clipped, detail-less highlights) by importing a free third-party ACES LUT resource (ACES UE4 Log + ACES Standard Log, set to Color LUT type) and activating it via Display Settings > Post Effects > Tone Mapping (Function=Log) > Activate Color Profile > Profile=ACES UE4 Log — producing a near-exact visual match with Unreal's own ACES-based viewport. Validated with a same-HDRI, same-exposure side-by-side comparison using both apps' offline path tracers (Painter's Iray Renderer vs. Unreal's Path Tracing mode) to remove ray-tracing/screen-space-effect discrepancies from the test.
 - **File:** tutorials/how-to-fix-the-substance-painter-viewport-to-match-unreals.md
 
 

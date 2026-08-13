@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=Yu8wR4df0IE
 author: William Faucher
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; presented alongside Unreal Engine 4.26 (ray tracing referenced as a 4.26-era default)"
+tags: [color-management, viewport, iray-render, pbr, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-fix-the-substance-painter-viewport-to-match-unreals/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 6
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to Fix the Substance Painter Viewport to Match Unreal's
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-fix-the-substance-painter-viewport-to-match-unreals <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -177,30 +173,57 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:53] tutorials/frames/how-to-fix-the-substance-painter-viewport-to-match-unreals/frame_000.jpg
+- [2:44] tutorials/frames/how-to-fix-the-substance-painter-viewport-to-match-unreals/frame_001.jpg
+- [3:21] tutorials/frames/how-to-fix-the-substance-painter-viewport-to-match-unreals/frame_002.jpg
+- [3:57] tutorials/frames/how-to-fix-the-substance-painter-viewport-to-match-unreals/frame_003.jpg
+- [5:19] tutorials/frames/how-to-fix-the-substance-painter-viewport-to-match-unreals/frame_004.jpg
+- [6:04] tutorials/frames/how-to-fix-the-substance-painter-viewport-to-match-unreals/frame_005.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Import a free third-party ACES LUT resource (two Color-LUT files: ACES UE4 Log and ACES Standard Log) and activate it through Display Settings → Post Effects → Tone Mapping (Function = Log) → Activate Color Profile → Profile = ACES UE4 Log, to replace Painter's default fully-linear viewport tonemapping — fixing blown-out/clipped highlights and producing a near-exact visual match with Unreal Engine's own ACES-based viewport.
 
 ### Summary
-[PENDING EXTRACTION]
+Diagnoses the root problem first: Substance Painter's default viewport renders in pure linear space with no tonemapping curve, so highlights clip hard with zero retained detail (demonstrated in close-up on a metal helmet surface) — this mismatch is why textures that look fine in Painter often look wrong once brought into Unreal, which uses an ACES-based color workflow. The fix is a free downloadable "ACES LUT for Substance Painter" resource (ArtStation/Gumroad): import both included files (ACES UE4 Log, ACES Standard Log) via File → Import Resources → Add Resources, set each resource's type to **Color LUT**, then import to the shelf. Activate it via the Display Settings panel (the second icon from the top) → **Activate Post Effects** → open the **Tone Mapping** tab → check **Tone Mapping**, set **Function = Log** (viewport gets noticeably darker — expected) → scroll down and check **Activate Color Profile** → set **Profile = ACES UE4 Log** (darkens further, then resolves to a more contrasty, punchier image with full highlight detail restored, confirmed by re-toggling the two checkboxes for a direct before/after). This ACES workflow is argued as worth using even outside an Unreal pipeline, since linear-only viewing is a poor working space in general. To validate the match, the same model/textures/HDRI lighting setup (same HDRI, same exposure, HDRI Backdrop light in Unreal) is compared side-by-side in both apps; because Unreal 4.26 defaults to ray tracing/reflections/shadows that Painter's viewport lacks, both apps are switched to their respective **offline path tracers** (Unreal's Path Tracing view mode, Painter's **Iray Renderer**) to remove screen-space/ray-tracing feature discrepancies from the comparison — with the ACES LUT active, the two path-traced renders match closely (Iray reads slightly noisier; only depth-of-field and minor camera-angle differences remain).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Diagnose the problem first: zoom into a viewport highlight on a glancing angle — Painter's default linear viewport shows fully clipped/blown-out highlights with no retained detail.
+2. Download the free "ACES LUT for Substance Painter" resource pack (ArtStation/Gumroad link), which contains two LUT files: ACES UE4 Log and ACES Standard Log.
+3. In Painter: **File → Import Resources → Add Resources**, browse to the downloaded folder, select and import both LUT files.
+4. For each imported resource, change its type from "Undefined" to **Color LUT**; choose an import destination (current session or shelf).
+5. Open **Display Settings** (second icon from the top of the viewport toolbar) → **Activate Post Effects**.
+6. Open the **Tone Mapping** tab, check **Tone Mapping**, set **Function = Log** (viewport darkens — expected, not an error).
+7. Scroll to the bottom of the panel and check **Activate Color Profile**, then set **Profile = ACES UE4 Log** (viewport darkens again briefly, then resolves brighter/more contrasty with full highlight detail restored).
+8. Verify by toggling Tone Mapping/Color Profile off and back on — confirms the direct before/after difference in highlight retention.
+9. To validate a real Painter-to-Unreal match: build matching scenes in both apps using the **same HDRI** (same file imported into both, same exposure) — Unreal via an HDRI Backdrop light, Painter via its own environment lighting.
+10. Because Unreal defaults (4.26-era) to ray tracing/reflections/shadows that Painter's raster viewport doesn't have, switch **both** apps to an offline path tracer for the comparison: Unreal's **Path Tracing** view mode, Painter's **Iray Renderer** — this removes ray-tracing/screen-space-effect discrepancies as a confound.
+11. Compare the two path-traced renders side by side — with the ACES LUT active, colors/highlights match closely (Iray is slightly noisier by nature; remaining differences are just depth-of-field/camera-angle, not color).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `File → Import Resources → Add Resources` — import ACES UE4 Log + ACES Standard Log as **Color LUT** resource type
+- `Display Settings → Activate Post Effects → Tone Mapping` tab: `Tone Mapping` checked, `Function = Log`
+- `Display Settings → Activate Color Profile`, `Profile = ACES UE4 Log`
+- `Iray Renderer` (Painter's offline path tracer, used for the Unreal-comparison render) vs. Unreal's **Path Tracing** view mode
+- Matching HDRI environment imported into both apps at the same exposure (Unreal: HDRI Backdrop light)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner (all steps are UI toggles/imports — the value is knowing the fix exists and why, not technical complexity)
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen for Substance Painter; shown alongside Unreal Engine 4.26 (ray tracing/reflections/shadows-by-default referenced as a 4.26-era Unreal behavior).
 
 ### Tags
-[PENDING EXTRACTION]
+`color-management` `viewport` `iray-render` `pbr` `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **How to Make the Substance Painter Viewport Match Unreal Engine** (Quinn Kuslich) — alternate creator covering the same viewport-matching goal; cross-link both ways once ingested per the user's explicit instruction (same topic, alternate creators/techniques).
+- [Substance 3D Painter & ACES - 01 - Color Space Fundamentals](substance-3d-painter-aces---01---color-space-fundamentals-adobe-substance-3d.md) — Adobe's own official ACES series covers the same underlying linear-vs-ACES color-space problem this LUT trick works around, from the theory side (CIE diagram, sRGB gamma curve, why ACEScg matters).
+- [Substance 3D Painter & ACES - 02 - OCIO & ACEScg in Painter](substance-3d-painter-aces---02---ocio-acescg-in-painter.md) — Adobe's official, built-in alternative to this third-party LUT: Painter's native OpenColorIO/ACEScg project color-management setup achieves a related goal (consistent, non-clipped color across the pipeline) through Painter's own Color Management system rather than a Display Settings LUT hack.
