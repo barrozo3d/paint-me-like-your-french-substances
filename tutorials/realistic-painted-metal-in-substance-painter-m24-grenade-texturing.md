@@ -404,4 +404,4 @@ layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, amb
 
 ## Related Tutorials
 - [Tempering Colors in Substance Painter | Steel Heat Effects](tempering-colors-in-substance-painter-steel-heat-effects.md) — same creator (Dolinskyi); part of the same multi-video M24 Grenade weapon-texturing project. That video's anchor-point-driven paintable-mask technique is a simpler version of the anchor-point recipes used repeatedly here (Peeling Paint, Decal).
-- See `tutorials/INDEX.md` for a possible sibling-ingested "Realistic Wood in Substance Painter | M24 Grenade Texturing" entry — this video explicitly calls itself "part 2" of that series and references techniques from "part 1"; cross-link there once/if present.
+- [Realistic Wood in Substance Painter | M24 Grenade Texturing](realistic-wood-in-substance-painter-m24-grenade-texturing.md) — same creator, same project series, confirmed Part 1 (wood handle), directly preceding this video's metal parts per both videos' own closing/opening statements.

@@ -921,10 +921,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=I3v-ESX4DxQ
 - **Author:** Dolinskyi
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not specified (modern UI, consistent with this creator's other M24 Grenade series videos)
+- **Tags:** `layers` `fill-layer` `masks` `generator` `anchor-point` `blend-mode` `ambient-occlusion` `procedural` `alpha` `stencil` `basecolor` `roughness` `height` `metal-rough` `color-management` `advanced`
+- **Summary:** Part 1 of the M24 Grenade series (prequel to Tempering Colors / Realistic Painted Metal), texturing the wooden handle from a dark/mid/light three-tone reference framework where nearly every layer group derives its mask from one shared Anchor Point off the base texture. Key tricks: building Roughness/Height by reusing the base layer's own Base Color data via the Reference Channel dropdown, an AO-driven Dirt generator used in reverse (to remove dark-tone treatment from ZBrush-baked damage rather than add dirt), a Height-blend-mode switch to strip micro-detail from dark tones for a lacquer-like glossy/matte variation, and light-tone damage built from Painter's own stock wood texture used as a stencil. Deliberately restricted to only stock Painter grunges/stencils throughout. Cross-linked with the two later grenade-series videos and the Anchor-Point-centric "Powerful Tricks" video.
 - **File:** tutorials/realistic-wood-in-substance-painter-m24-grenade-texturing.md
 
 ---

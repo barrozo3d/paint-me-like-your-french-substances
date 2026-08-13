@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=I3v-ESX4DxQ
 author: Dolinskyi
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified (modern UI, consistent with this creator's other M24 Grenade series videos)"
+tags: [layers, fill-layer, masks, generator, anchor-point, blend-mode, ambient-occlusion, procedural, alpha, stencil, basecolor, roughness, height, metal-rough, color-management, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 13
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Realistic Wood in Substance Painter | M24 Grenade Texturing
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py realistic-wood-in-substance-painter-m24-grenade-texturing <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -162,30 +158,75 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:54] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_000.jpg
+- [1:34] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_001.jpg
+- [2:03] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_002.jpg
+- [2:28] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_003.jpg
+- [4:21] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_004.jpg
+- [5:09] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_005.jpg
+- [6:25] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_006.jpg
+- [8:53] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_007.jpg
+- [10:22] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_008.jpg
+- [11:50] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_009.jpg
+- [13:54] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_010.jpg
+- [15:02] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_011.jpg
+- [16:47] tutorials/frames/realistic-wood-in-substance-painter-m24-grenade-texturing/frame_012.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Part 1 of the creator's M24 Grenade series (prequel to the already-ingested "Tempering Colors" and "Realistic Painted Metal" videos), texturing the wooden handle with a **dark/mid/light three-tone reference framework** (dark = joints/spots, mid = base wood color, light = damaged/worn/fresh-wood areas), where every subsequent layer group derives its mask from one shared **Anchor Point** captured off the base texture — the single throughline technique across the whole build.
 
 ### Summary
-[PENDING EXTRACTION]
+Starts from a downloaded tileable wood photo reference, analyzed into three tonal bands before touching Painter. **Base material**: a Fill layer with the wood photo plugged into BaseColor, grain direction adjusted, then an **Anchor Point** added on top of it. A separate "wood material" group's Fill layer references that anchor for Metallic (set to black/0), with a Color Correct filter above it for base-color tuning from references. Roughness is built by taking the *same* base Fill layer's data but switching its **Reference Channel to Base Color** (i.e. reusing color information as roughness input) then increasing contrast with Levels to push it matte (wood should not read shiny). Height is built the same way — reusing Base Color as the height source — with Micro Details tuned afterward for a more natural surface. **Color/roughness variation**: a new layer referencing the base anchor for color, slight roughness adjustment, then an **HSL** filter to shift hue, masked by a grunge texture for subtle color variation; duplicated with a different color and different grunge to avoid a uniform look ("wood in real life is never perfectly even"), kept deliberately subtle. Grain is reinforced by increasing mask contrast on anchor-referenced layers to emphasize fibers, and roughness variation is layered similarly across multiple channels with experimentation in blend modes/opacity. **Removing dark tone from damage**: since the model's chips/damage were sculpted in ZBrush and baked into the mesh's Ambient Occlusion map, a **Dirt generator** (AO-driven) is added to a mask specifically to *remove* the dark-tone treatment from those already-damaged areas (so damage doesn't get double-darkened) — the resulting mask is itself captured as two more Anchor Points (one directly above the Dirt layer, one above the entire stack) for reuse in later stages. The Height channel's blend mode is switched from its default additive mode to **Normal** (with the containing folder set to Pass Through) specifically to *remove* micro-surface detail from dark tones, since darker wood areas should read visually smoother/glossier than lighter ones — like a lacquer coating — adding a matte/glossy variation dimension on top of the light/dark color variation. **Dark variation from base texture** (added depth): a very dark color Fill layer masked by the base anchor, contrast-increased and inverted, with the resulting mask itself reused (inserted into another Fill layer) so dark tones are excluded from the damaged areas; further dark-spot/imperfection layers are stacked with **Overlay** blend mode and grunge-texture masks, deliberately using only Painter's stock grunge/stencil library rather than custom stencils (explicitly called out as an artificial constraint for the tutorial). **Light tones (damage)**: following the same anchor-plus-Color-Correct pattern, shifted to a very light/matte wood tone (raw exposed wood is the brightest in Roughness); masked using Painter's **stock wood texture as a stencil**, contrast-increased to get a recognizable worn-grain damage pattern, placed by hand along edges and at plausible impact points ("as if it fell or was hit and fresh wood was revealed") — deliberately restrained ("less is more"). A **wood fibers** sub-layer inside the light-tone folder uses a near-straight-line procedural mask, subtractively masked to only the damaged areas, brightened and desaturated slightly for visibility. **Dust**: a `Grunge Dusty` mask for settled dust, cleaned up around tiling seams and hand-grip contact areas (where dust would be worn off by handling), a second layer for more defined dust spots, toned down and excluded from already-damaged wood. **Extra detail**: a subtle red-paint-spot layer for visual interest, plus (visible in the captured frames though only briefly implied in narration — "stickers, decals, anything you find in references") a stenciled "1939" date stamp and small crest/icon stamp burned into the wood, explicitly recommended to place via stencils. **Finishing**: a **Sharpen** filter applied to both Color and Roughness channels via Pass Through + right-click **Apply to all channels**, default strength reduced (too much sharpen reads as noise); a self-critique pass revisiting the wood-fiber layer because its start/end points read too obviously artificial — broken up further with additional grunge variation and a hand-brushed soft edge; damage simplified in some areas to create contrast between clean and worn zones; and a final top-of-stack **Color Correct** for overall saturation/contrast, arrived at by pushing sliders to extremes first to find the range before settling on a value.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Gather wood photo references and mentally sort the look into three tonal bands: dark (joints/spots), mid (base color), light (damage/wear/fresh wood) — plan the whole layer structure around this before starting.
+2. Base material: Fill layer with a tileable wood photo in BaseColor, grain direction adjusted to the mesh, then add an **Anchor Point** on top of this layer.
+3. In a separate "wood material" group, reference that anchor for Metallic (set to 0/black — wood isn't metal) and add a **Color Correct** filter above for base-color tuning against references.
+4. Build Roughness by reusing the base layer's data with its **Reference Channel switched to Base Color** (color data reused as roughness input), then Levels to raise contrast/push it matte.
+5. Build Height the same way — Base Color reused as the height source — then tune Micro Details for a more natural surface read.
+6. Add color/roughness variation: new anchor-referenced layer, slight roughness tweak, **HSL** to shift hue, masked by a grunge texture; duplicate with a different color and different grunge for non-uniformity.
+7. Reinforce grain by increasing mask contrast on anchor-referenced layers to emphasize fiber definition; layer additional roughness variation across channels, experimenting with blend modes/opacity.
+8. Add a **Dirt generator** (AO-driven — reads baked-in ZBrush sculpted damage) specifically to *remove* dark-tone treatment from already-damaged areas so damage doesn't get double-darkened; capture the resulting mask as two more **Anchor Points** (one directly above Dirt, one above the whole stack) for reuse downstream.
+9. Switch the Height channel's blend mode to **Normal** (folder set to Pass Through) to *remove* micro surface detail specifically from dark tones — darker wood should read smoother/glossier (like lacquer) than lighter, rougher areas, adding a matte/glossy dimension layered on top of the color variation.
+10. Add "dark variation from base texture" depth: a very dark Fill layer masked by the base anchor, contrast-increased and inverted, its resulting mask reused in a further layer to exclude dark tones from damaged areas; stack additional dark-spot/imperfection layers on **Overlay** blend mode with grunge masks — deliberately restricted to Painter's stock grunge/stencil library only (no custom stencils, as a tutorial constraint).
+11. Build light tones (damage): anchor + Color Correct shifted to a very light, matte wood tone (raw exposed wood reads brightest in Roughness); mask with Painter's **stock wood texture used as a stencil**, contrast-boosted for a recognizable worn-grain pattern, hand-placed along edges and at plausible impact points — kept restrained.
+12. Add a **wood fibers** sub-layer (near-straight-line procedural mask) inside the light-tone folder, subtractively masked to only the damaged areas, slightly brightened/desaturated for visibility.
+13. Add **dust**: `Grunge Dusty` mask, cleaned around tiling seams and hand-contact areas (dust worn off by handling); a second more-defined-spots dust layer, toned down and excluded from damaged wood.
+14. Add small interest details: a subtle red-paint-spot layer, plus stenciled decals/stamps (a date-stamp number and small crest icon observed in the captured frames) — recommends stencils for this kind of precise placed detail.
+15. Finish with **Sharpen** on both Color and Roughness (Pass Through + right-click **Apply to all channels**), default strength reduced to avoid a noisy look.
+16. Self-critique pass: identify a too-obviously-artificial-looking layer (the wood fiber lines had visible start/end points), break it up further with additional grunge variation and a hand-brushed soft edge; simplify/remove some damage in places to create clean-vs-worn contrast.
+17. Close with a top-of-stack **Color Correct** for overall saturation/contrast — push sliders to extremes first to understand the range, then settle on a balanced value.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `Anchor Point` (captured off the base texture layer; reused across nearly every subsequent group — color variation, dirt-generator-derived damage mask ×2, dark-variation exclusion mask)
+- Reference Channel trick: Fill layer's Roughness/Height driven by reading its own **Base Color** data instead of a dedicated grayscale texture
+- `Dirt` generator (Ambient-Occlusion-driven, reused here to *remove* dark tone from ZBrush-sculpted/baked damage areas, not to add dirt)
+- Height-channel blend mode switched to `Normal` (folder `Pass Through`) to selectively strip micro-detail from dark tones for a smoother/glossier look
+- `HSL`, `Color Correct` / `Levels` filters (color/roughness tuning and mask-contrast control throughout)
+- Blend modes: `Overlay` (dark spots), standard subtract-style masking (excluding damaged areas from various effects)
+- Painter's stock **wood texture used as a stencil** for light-tone damage patterning (explicitly not a custom stencil, by design)
+- Procedural near-straight-line texture (wood fibers mask)
+- `Grunge Dusty` (dust)
+- `Sharpen` filter, Pass Through + **Apply to all channels**
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — the anchor-point-as-shared-foundation architecture (nearly every group in the stack ultimately derives from one base anchor) and the Reference-Channel color-as-roughness/height trick are non-obvious, efficient techniques beyond basic layer/mask work.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen; UI consistent with this creator's other ingested M24 Grenade series videos (modern, post-8.3-era baking-mode UI).
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `masks` `generator` `anchor-point` `blend-mode` `ambient-occlusion` `procedural` `alpha` `stencil` `basecolor` `roughness` `height` `metal-rough` `color-management` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Tempering Colors in Substance Painter | Steel Heat Effects](tempering-colors-in-substance-painter-steel-heat-effects.md) — same creator (Dolinskyi), same M24 Grenade project series; this is the prequel video (Part 1: wood handle) to that steel-heat-effects video's metal parts.
+- [Realistic Painted Metal in Substance Painter | M24 Grenade Texturing](realistic-painted-metal-in-substance-painter-m24-grenade-texturing.md) — same creator, same project series (Part 2 of the grenade, per this video's own closing statement: "next video, we will make a painted metal for other parts of the grenade"); shares the anchor-point-driven layer architecture and stock-grunge/stencil-only constraint.
+- [Powerful Substance Painter Tricks That You Need To Know](powerful-substance-painter-tricks-that-you-need-to-know.md) — same creator; shares the Anchor-Point-as-reusable-mask-source philosophy this video builds its entire layer stack around, applied there to a weld-seam heat-tint effect instead of wood tonal variation.
