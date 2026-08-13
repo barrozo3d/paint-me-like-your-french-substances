@@ -542,6 +542,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a.md
 
+
+### 6 Powerful New Filters in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=aCi0RG9-9so
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
