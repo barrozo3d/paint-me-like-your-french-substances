@@ -371,10 +371,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=386o64sxSpw
 - **Author:** 3DRedBox
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; "PAINT ALONG PATH" tool panel pins this to the Painter 9.x-10.x window
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `anchor-point` `blend-mode` `alpha` `procedural` `MatFX` `texture-set` `uv` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `opacity` `ambient-occlusion` `mesh-maps` `export` `export-preset` `channel-packing` `iray-render` `advanced`
+- **Summary:** Glass-bottle texturing: a Translucency/Absorption-channel glass shader handed off to Marmoset Toolbag for a ray-traced glass render, ornate carved-ornament detail built from alphas plus a custom Pass-tool brush with radial symmetry, and anchor-point-driven mask reuse across separate folders — a Pass-Through "Ornament Plus" collector layer feeds the carved-detail height data into every generator inside the metal smart material, and the Glass folder subtracts all four ornament masks so the etched pattern reads through the glass too.
 - **File:** tutorials/how-to-create-a-realistic-poison-bottles-material-using-substance-painter.md
 
 
@@ -387,6 +387,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s.md
+
+
+### Preparing Models for Substance 3D Painter in Blender | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=jCwTEEyDX3Y
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d.md
 
 ---
 
