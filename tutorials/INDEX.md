@@ -789,10 +789,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=rhraMw3YVpo
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 3D Paths tool shipped 9.0.0 (June 2023, stated explicitly); this update video's own build not stated
+- **Tags:** `path-tool` `layers` `paint-layer` `masks` `alpha` `height` `procedural` `intermediate`
+- **Summary:** Update-tour of the (earlier, distinct) 3D Paths tool: per-path visibility toggle (eye icon), selective copy/paste (brush-properties-only vs. full vertex+pressure data, with same-sub-mode restriction on the former), freeform vertex movement off the mesh surface (with optional re-snap), and manual tangent-handle editing (two handles per vertex, Ctrl/Cmd to scale both together, Alt/Option to toggle smooth/corner) combinable with Corner Smooth for hand-shaped corners.
 - **File:** tutorials/3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d.md
 
 ---

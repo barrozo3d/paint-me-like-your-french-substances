@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=rhraMw3YVpo
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "3D Paths tool itself shipped 9.0.0 (June 2023, stated explicitly: 'you can find it in Substance 3D Painter 9.0.0 or above'); this update video's own build not stated"
+tags: [path-tool, layers, paint-layer, masks, alpha, height, procedural, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 5
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # 3D Path Tool Updates in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py 3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -97,30 +93,58 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:56] tutorials/frames/3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [1:20] tutorials/frames/3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [2:20] tutorials/frames/3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [2:55] tutorials/frames/3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [3:15] tutorials/frames/3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A round of quality-of-life updates to the **3D Paths** tool (Painter 9.0.0+, released June 2023 — note: this is a distinct, earlier tool from the later "Filled Path"/11.0.0 and "Ribbon Paths"/11.1.0 tools also in this library): per-path visibility toggling, selective copy/paste of path data (brush setup only vs. full vertex/pressure data), freeform vertex movement off the mesh surface, and fully manual tangent-handle editing for custom corner/curve control.
 
 ### Summary
-[PENDING EXTRACTION]
+Official short Adobe update video (carved wooden pillar model, then a lighthouse-pattern tin canister) covering four new 3D Paths tool features added since its June 2023 launch. **Path visibility toggle:** each path in the Paths panel now has an eye icon (matching conventions in other apps) to hide/show it individually — useful for comparing path variations without deleting anything. **Selective copy/paste:** beyond full path copy/paste, you can now paste just the **brush properties** from a copied path onto an existing path (shares material/brush setup via the Properties panel while leaving the target's own vertices and pressure data untouched) — this only works between paths using the same tool sub-mode (paint→paint, smudge→smudge, erase→erase, since these are different brush forms). Separately, you can paste **all vertex data including individual pressure values** onto a chosen path, and this variant works across all sub-modes (paint/smudge/erase interchangeably). **Freeform vertex movement:** vertices, previously locked to snapping onto the object's surface, can now be moved freely in 3D space (individually or all at once); they can still be snapped back to the surface, but doing so may shift them slightly if moving between different surface planes. **Custom tangents:** a long-requested feature — toggling "edit tangents" reveals two draggable handles per vertex for full manual control of that point's tangent/curvature, which can be combined with the Corner Smooth setting to create genuinely editable corner points. Tangent handles are constrained to move only within the vertex's normal plane (unlike the now-freely-movable vertices themselves). Hold **Ctrl/Cmd** while dragging a tangent handle to scale both handles symmetrically at once; hold **Alt/Option** while moving a tangent to toggle between smooth and corner behavior; the mouse button must be released to commit the tangent edit, or it reverts. An empty, user-assignable shortcut slot exists specifically for toggling tangent-edit mode.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Toggle a path's visibility** by clicking the eye icon next to its name in the Paths panel — lets you compare different path variations side-by-side without deleting or losing any of them.
+2. **Copy a source path**, then when pasting onto a different existing path, choose **paste brush properties only** to transfer just the Properties-panel brush/material setup, leaving the target path's own vertex positions and pressure data intact — remember this only works within the same tool sub-mode (paint↔paint, smudge↔smudge, erase↔erase).
+3. Alternatively, choose **paste all vertex data** (including per-vertex pressure values) to fully transfer the shape/pressure profile onto a target path — this mode works across all sub-modes (paint/smudge/erase can mix freely).
+4. **Select a vertex (or all vertices) and drag it directly in the 3D viewport** to move it freely off the mesh surface, rather than being locked to a surface-snapped position; re-snap to the surface at any time (expect a small positional shift if snapping across a differently-angled plane).
+5. **Toggle "Edit Tangents"** on a selected vertex to reveal two draggable tangent handles, giving full manual control over that point's curve tangent.
+6. **Combine tangent editing with the Corner Smooth setting** to build genuinely editable, hand-shaped corner points rather than relying on automatic corner behavior.
+7. Remember tangent handles are constrained to the **vertex's own normal plane** — they cannot be dragged freely through 3D space the way vertices themselves now can.
+8. **Hold Ctrl/Cmd while dragging a tangent handle** to scale both of that vertex's tangent handles symmetrically together.
+9. **Hold Alt/Option while moving a tangent handle** to switch that vertex between smooth and corner tangent behavior on the fly.
+10. Release the mouse button to **commit** a tangent edit — if the drag is interrupted before release, the tangent reverts to its prior state.
+11. Optionally **assign a custom keyboard shortcut** to the (default-blank) "toggle edit tangents manually" action for faster access.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Paths panel:** per-path eye-icon visibility toggle
+- **Copy/paste variants:** "paste brush properties" (Properties-panel data only, same sub-mode required) vs. "paste all vertex data" (full vertex + pressure, works across paint/smudge/erase sub-modes)
+- **Vertex manipulation:** free 3D-space movement (single or all vertices), optional re-snap to surface
+- **Edit Tangents** toggle — two draggable handles per vertex, constrained to the vertex normal plane
+- **Corner Smooth** setting — combined with tangent handles for editable corner points
+- Modifier keys: **Ctrl/Cmd** (scale both tangent handles together), **Alt/Option** (toggle smooth/corner while dragging a tangent)
+- Assignable (default-empty) keyboard shortcut slot for tangent-edit toggling
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate (assumes prior familiarity with the 3D Paths tool's basic path-drawing workflow; these are refinement/power-user features on top of it).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. The 3D Paths tool itself shipped in **9.0.0** (June 2023), stated explicitly in narration ("you can find it in Substance 3D Painter 9.0.0 or above"). This specific update video's own build/version is not stated on screen or in narration — the features described are cumulative additions since the 9.0.0 launch.
 
 ### Tags
-[PENDING EXTRACTION]
+`path-tool`, `layers`, `paint-layer`, `masks`, `alpha`, `height`, `procedural`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [New Path Tool Features & Improvements in Substance 3D Painter](new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe); covers the later, separate **Filled Path** tool's 11.0.0 update (Projection Depth, mesh-snapping, angle-snapping, transform gizmo) — a different tool generation from this video's 3D Paths (9.0.0) updates, useful to read together to understand Painter's path-tool family lineage.
+- [New Ribbon Paths in Substance 3D Painter](new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe); covers the still-later **Ribbon Paths** tool (11.1.0), the third and most advanced generation in the same path-tool family, explicitly introducing the `path-tool` tag also used here.
+- [Creating 3D Paths in Substance 3D Painter](creating-3d-paths-in-substance-3d-painter.md) — same channel (Adobe), same underlying 3D Paths tool this update video extends; a natural companion once ingested (queued in this same batch).
