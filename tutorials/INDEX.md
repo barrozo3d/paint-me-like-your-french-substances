@@ -360,10 +360,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=944ci1laePI
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Designer (base material) + Substance 3D Painter (texturing) + Substance 3D Stager (handoff)
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `smart-material` `generator` `anchor-point` `blend-mode` `curvature` `ambient-occlusion` `mesh-maps` `texture-set` `pbr` `metal-rough` `basecolor` `roughness` `height` `normal-map` `alpha` `procedural` `tri-planar` `export` `intermediate` `advanced`
+- **Summary:** Lion's-head sword-ornament texturing demonstrating Designer-vs-Painter division of labor: a Damascene gold material authored in Designer (Tile Sampler punch marks) sent to Painter, Tri-Planar projection fixing UV seam issues on an organic sculpt, multi-pass AO-generator-masked rust weathering (three duplicated/varied passes plus hand-painted cleanup), Smart-Material-driven iris construction, and an anchor-point-plus-Subtract-blend-mode technique for carved relief (iris rim, facial crack) reused from Jared Chavez's dedicated anchor-point tutorial. Ornament bands hand-carved with Lazy Mouse. Closes with one-click Send to Stager handoff.
 - **File:** tutorials/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d.md
 
 

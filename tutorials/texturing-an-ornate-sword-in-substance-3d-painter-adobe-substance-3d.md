@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=944ci1laePI
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Designer (base material authoring) + Substance 3D Painter (texturing) + Substance 3D Stager (handoff)"
+version: "not stated on screen; UI (Tri-Planar projection fill mode, Smart Materials with pre-built folders/masks, Send to Stager, Lazy Mouse) matches a modern Painter release, not precisely pinnable"
+tags: [layers, fill-layer, paint-layer, masks, smart-material, generator, anchor-point, blend-mode, curvature, ambient-occlusion, mesh-maps, texture-set, pbr, metal-rough, basecolor, roughness, height, normal-map, alpha, procedural, tri-planar, export, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing an ornate sword in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -270,30 +266,76 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:44] tutorials/frames/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [5:20] tutorials/frames/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [6:46] tutorials/frames/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [9:34] tutorials/frames/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [11:57] tutorials/frames/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [13:44] tutorials/frames/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+- [15:32] tutorials/frames/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
+- [18:28] tutorials/frames/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Fully texturing a sculpted-but-detail-light lion's-head sword ornament by leveraging texturing (not sculpting) for all tertiary detail: a Designer-authored Damascene gold base material, baked-mesh-map-driven weathering (AO-masked rust), anchor-point-referenced eye/iris construction, and Lazy-Mouse-drawn bevel carving for the ornament bands — closing with a one-click Send to Stager handoff.
 
 ### Summary
-[PENDING EXTRACTION]
+Demonstrates Adobe's philosophy of leveraging a simple sculpt ("Modeler") plus texture-driven tertiary detail rather than sculpting every chisel mark, explicitly framing the Designer/Painter split: Designer (or Sampler) for *material authoring* (tileable materials built from scratch), Painter for *texturing* (applying ready-made materials to specific mesh areas via brushes/generators). Project setup: Auto Unwrap re-pack (existing UVs from Modeler, just re-packing texture sets), 2048 bake at Texture Set Settings → Bake Mesh Maps. Quickly walks through authoring a Damascene (hand-punched gold inlay) material in Designer — cloudy noise metal base blended with a Tile Sampler of 3 varied hollow "punch mark" shapes (randomized position/scale/luminance), a curved/warped raised lip subtracted from the base — then Share → Send to Painter. In Painter: drags the material onto the face, diagnoses UV seam problems with a diagnostic solid-color-plus-UV-Border-generator mask trick, fixes it by switching the fill's Projection mode to **Tri-Planar** (then upping tiling and bumping resolution to 4K). Builds rust weathering in a layered, non-destructive way: base rust fill layer masked by an Ambient Occlusion generator (inverted, contrast/balance-tuned) so rust naturally collects in occluded crevices under the ornament swirls, refined with Blur + Warp + Grunge (also switched to Tri-Planar projection) and a considered blend mode; duplicates this layer for a second, darker rust pass with a Slope Blur mask tweak to avoid a uniform "buildup" look; duplicates again for a third pass of random speckled rust across the whole surface (cleared mask, grunge+Paint fill, then hand-erased in places with a Paint layer in Subtract mode over a chosen brush — deliberately manual for control, though a fully procedural approach was possible). Builds the eyes in a dedicated Group (masked once at the group level, with the group's Height blend mode also set to Normal to fully override the gold material's height showing through) — reddish background (rust-style layered masking again, this time benefiting from default UV projection which produces natural radial iris streaks), then Painter's **Smart Materials** library (an "Iron-old" material, dragged in complete with its own folder/masks, moved into the eyes group so it's constrained) for the iris base — demonstrating how Smart Materials auto-leverage baked maps for near-zero manual setup — followed by a hand-stamped heart-shaped brush mask limiting it to just the iris, plus a fully black no-specularity pupil fill hand-painted in. Iris pop-out relief is built via an **Anchor Point** technique: adds an anchor point on top of the iris paint layer, references that anchor from a new Height-only fill layer (instant reuse of the same shape with zero redraw risk — any edit to the base iris paint propagates upward automatically), then bevels the first fill and calls the same anchor again in **Subtract** mode plus a Levels adjustment to carve a raised rim around the iris — the same anchor-point+blend-mode-subtract trick is reused later on a large tear/crack detail on the face. Ornament bands (a separate texture set) get a flat gold base color-matched to the Damascene material, then hand-carved grooves via a Height-only fill layer drawn with **Lazy Mouse** enabled for smooth freehand lines, plus a secondary Grunge-masked, Blur-softened Height layer (switched to planar projection) for a wrinkled-grain finish. Finishing pass on the face: a lighter-color/smoother-height layer hand-painted onto the protruding nose bridge to fake polish-by-handling wear, a similarly-built lower-roughness "polished patch" layer for a frequently-touched area, and reuse of the same anchor-point-plus-blend-mode technique on a large facial crack for a believable raised lip. Notes most of the gilded surface decoration is a mix of loaded fill patterns plus hand-painted touch-ups. Closes with **File → Send to → Send to Stager**, which auto-transfers the mesh and all applied textures with zero manual export/reload step.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Project setup: with the model already UV-unwrapped in Modeler, use **Auto Unwrap** just to re-pack texture sets (choose UV tile count, hit OK) rather than regenerating seams/islands from scratch.
+2. Bake mesh maps via **Texture Set Settings → Bake Mesh Maps**: simple bake, 2048 output, only the needed maps selected; press **B** afterward to cycle/preview baked maps.
+3. In Substance 3D Designer, author a tileable Damascene (hand-punched gold) material: a soft-clouds-noise metal background, three varied hollow "punch mark" shapes fed into a **Tile Sampler** (randomized position/scale/luminance), a curved-and-warped raised lip subtracted from the metal base, with color/roughness derived from that height setup; finish with **Share → Send to Painter**.
+4. In Painter, drag the finished Damascene material from the Assets panel onto the face mesh.
+5. Diagnose UV seam problems: add a solid-color fill layer, mask it, and add a **UV Border** generator to the mask to visualize exactly where seams cross the surface.
+6. Fix visible seam distortion by switching the fill layer's **Projection** mode from UV to **Tri-Planar**; follow up by increasing tiling and raising resolution to 4K for a crisper result.
+7. Build rust pass 1: new fill layer, search the Smart Materials/materials library for a rust material, add a black mask; mask it with an **Ambient Occlusion** generator (Alt-click the mask to preview), invert the AO values, then tune contrast/balance so rust concentrates in occluded crevices under ornament details; press **M** to return to material view and fine-tune. Layer further softened with **Blur**, broken up with **Warp**, and finished with a **Grunge map** (remember to re-switch projection to Tri-Planar on every new fill operation, since Painter defaults new fills back to UV projection) plus a deliberately chosen blend mode.
+8. Rust pass 2: duplicate pass 1's layer, shift to a darker rust shade, adjust the mask with a **Slope Blur** to further break up the repeating pattern and avoid an obvious "buildup" look.
+9. Rust pass 3: duplicate again, clear the mask entirely, set a dark-brown rust color, mask with a **Grunge map** via a Paint fill (increase tiling, adjust contrast/balance), then hand-remove excess speckling with a **Paint layer in Subtract mode** using a chosen brush — a deliberate manual step for artistic control even though a fully procedural approach was possible.
+10. Group all rust layers together for organization.
+11. Eyes: create a dedicated **Group** for every eye-related layer (so the whole set can be masked once at the group level); add a black mask to the group and paint in just the eye area.
+12. Base eye fill layer: set channel values directly (not material mode); because the gold material's Height still shows through, go to the **Height channel** and set that layer's blend mode to **Normal** so it fully overrides what's below — note the containing **group's** blend mode must also be set to Normal for the override to actually take effect.
+13. Reddish eye background: same layered rust-style approach (duplicate, adjust, generator+grunge masking) but left on default UV projection this time, since it happens to produce a pleasing radial-streak look around the iris.
+14. Iris base: drag in a **Smart Material** (e.g. "Iron-old") from the library — it arrives in its own folder with ready-made masks; drag that folder into the Eyes group so it only affects the eye area; Smart Materials auto-leverage baked maps for near-zero manual mask setup. Add a second black mask on top and stamp a basic heart-shaped brush to constrain it to just the iris.
+15. Pupil: new fill layer, fully black material with zero specularity, masked out and hand-painted carefully inside the iris.
+16. Iris pop-out relief (anchor-point technique): go to the iris paint layer's mask stack and add an **Anchor Point** directly on top of the paint information to reuse (name it for clarity); create a new Height-only fill layer, disable all other channels, and in its **Anchor Point** tab reference the named anchor — any future edit to the base iris paint automatically propagates to this height layer. Add a **Bevel** to the first fill to expand it, then call the same anchor a second time in **Subtract** mode plus a **Levels** adjustment to carve a raised rim around the iris.
+17. Ornaments (separate texture set): fill the whole set with a flat gold material color-matched and roughness-matched to the Damascene face material.
+18. Carve the ornament bands: new Height-only fill layer, enable **Lazy Mouse** for smooth freehand strokes, and hand-draw the carved band lines directly.
+19. Add grain/detail to the carved bands: another Height-only fill layer masked by a **Grunge map**, slightly blurred for a wrinkled look, fine-tuned with **Levels**; notes it read better switched to straight **Planar** projection rather than the default.
+20. Face finishing touches (each demoed as a quick technique rather than fully rebuilt on camera): a lighter-color, smoother-height layer hand-painted onto the nose bridge to simulate handling-polish; a similarly-built lower-roughness "polished patch" layer for a frequently-touched protruding area; reuse of the anchor-point-plus-Subtract-blend-mode rim technique (same as the iris) on a large facial crack/tear to build a believable raised lip around the damage.
+21. Most remaining gilded surface pattern work is a mix of loading pre-made fill patterns plus targeted hand-painting.
+22. Handoff: **File → Send to → Send to Stager** — automatically opens Stager with the mesh and all applied textures already loaded, no manual export/reimport step required.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Substance 3D Designer**: Tile Sampler (randomized position/scale/luminance for punch marks), Curve/Warp nodes, Subtract blend for the Damascene raised-lip effect; Share → Send to Painter.
+- **Bake Mesh Maps** (Texture Set Settings), 2048 output; press B to preview baked maps.
+- **Fill layer Projection mode**: UV (default, reset on every new fill) vs. **Tri-Planar** (fixes seam distortion on organic sculpted surfaces) vs. **Planar** (used for the ornament grain pass).
+- **Generators**: UV Border (seam diagnostic), Ambient Occlusion (rust placement, inverted + contrast/balance tuned).
+- **Filters**: Blur, Warp, Slope Blur, Bevel, Levels.
+- **Grunge maps** (via Paint fill) for organic rust/grain breakup.
+- **Paint layer in Subtract mode**: manual removal of excess procedural detail (rust speckles).
+- **Groups**: used to mask multiple related layers (all eye layers) at once; group-level blend mode must match child-layer blend mode overrides (Height → Normal) for the override to propagate correctly.
+- **Smart Materials library**: "Iron-old" material for the iris base, dragged in as a ready-made folder with pre-built masks that auto-leverage baked maps.
+- **Anchor Point**: added to a base paint layer's mask stack, referenced by later Height-only fill layers (Normal mode for base relief, Subtract mode + Levels for a carved rim) — reused for both the iris pop-out and a facial crack/tear detail.
+- **Lazy Mouse**: enabled for smooth freehand height-channel line carving on the ornament bands.
+- **File → Send to → Send to Stager**: one-click mesh+texture handoff, no manual export step.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced (Designer material authoring, Tri-Planar seam fixing, multi-pass generator-and-hand-blended weathering, anchor-point relief carving).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Designer (base material authoring) → Substance 3D Painter (texturing) → Substance 3D Stager (final handoff, not detailed in this video — covered in the "next video" referenced at the end). No Painter version number stated on screen; the feature set (Tri-Planar fill projection, Smart Materials with pre-built folders, Lazy Mouse, Send to Stager) is consistent with a modern Painter release but not precisely pinnable to a single point version.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers`, `fill-layer`, `paint-layer`, `masks`, `smart-material`, `generator`, `anchor-point`, `blend-mode`, `curvature`, `ambient-occlusion`, `mesh-maps`, `texture-set`, `pbr`, `metal-rough`, `basecolor`, `roughness`, `height`, `normal-map`, `alpha`, `procedural`, `tri-planar`, `export`, `intermediate`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Substance 3D Stager - Rendering assets from Substance 3D Painter** (`tutorials/substance-3d-stager---rendering-assets-from-substance-3d-painter.md`, if ingested) — the natural follow-on video referenced at the end of this tutorial ("I'll see you in the next video... best light possible"), covering the Stager side of this exact Send-to-Stager handoff.
+- **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's dedicated anchor-point deep-dive; this video's iris-relief and facial-crack techniques both directly apply the anchor-point-plus-blend-mode-subtract pattern taught there.
