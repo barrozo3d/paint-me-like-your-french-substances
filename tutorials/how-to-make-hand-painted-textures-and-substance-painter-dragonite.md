@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=VPSYen29WbU
 author: Jared Chavez
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified"
+tags: [paint-layer, layers, fill-layer, masks, ambient-occlusion, curvature, blend-mode, basecolor, smart-material, beginner, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-make-hand-painted-textures-and-substance-painter-dragonite/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to MAKE HAND PAINTED TEXTURES and SUBSTANCE PAINTER | Dragonite
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-make-hand-painted-textures-and-substance-painter-dragonite <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -225,30 +221,57 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:44] tutorials/frames/how-to-make-hand-painted-textures-and-substance-painter-dragonite/frame_000.jpg
+- [3:15] tutorials/frames/how-to-make-hand-painted-textures-and-substance-painter-dragonite/frame_001.jpg
+- [5:44] tutorials/frames/how-to-make-hand-painted-textures-and-substance-painter-dragonite/frame_002.jpg
+- [6:45] tutorials/frames/how-to-make-hand-painted-textures-and-substance-painter-dragonite/frame_003.jpg
+- [7:24] tutorials/frames/how-to-make-hand-painted-textures-and-substance-painter-dragonite/frame_004.jpg
+- [7:55] tutorials/frames/how-to-make-hand-painted-textures-and-substance-painter-dragonite/frame_005.jpg
+- [10:55] tutorials/frames/how-to-make-hand-painted-textures-and-substance-painter-dragonite/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A fully hand-painted, illustration-style character color pass (no photo-real PBR breakup) built on top of a reused Smart Material base, prioritizing gradient-driven lighting/value logic and graphic (not photoreal) blood/damage shapes to match a painterly 2D concept — part of a larger ZBrush-sculpt → Painter-texture → ZBrush-pose → external-render pipeline (a "demonic Pokémon" personal art piece, Dragonite, based on concept art by Steven Oakley).
 
 ### Summary
-[PENDING EXTRACTION]
+This is a full personal-project pipeline video; only the middle third (~5:17-8:44) is Substance Painter, bracketed by ZBrush sculpting/blockout (Dynamesh from a sphere, Clay Spin Brush for directional wrinkle information, a light tertiary detail pass, Transpose Master for posing) and external rendering (subsurface scattering glow on the wings, rim light + fog "halo" effect, dark background) — documented briefly here for pipeline context, with the Painter section as the primary extraction focus per this skill's scope. In Painter, Chavez speeds up the start by **exporting a Smart Material from a previous, similar project** ("Paris," an earlier demonic-Pokémon piece in the same style) and applying it as a base — giving him pre-built gradient/shading groundwork layers (frame_002: `UnderGradient`, `HighLight`, `2_tone_gradient`, `RedGradientTop`, `Blur`, `YellowBelly`) instead of starting from a blank layer stack. The core of the video is the **hand-painted layer** stacked on top of that base — explicitly framed as outside his comfort zone (he doesn't consider himself a hand-painted-style artist) but treated as a deliberate practice. In this layer he paints: (1) the concept's blood-on-hands-and-feet detail, choosing a graphic/stylized shape over a more photoreal, nuanced treatment to match the concept's "cute Pokémon vs. violent real animal" tension; (2) color gradients matching the 2D concept art, refining transition zones like blood-up-the-arm and the wing's blue-to-orange color shift; (3) light-direction/value information — constantly thinking about where the key light is coming from and how that will read in the final render, painted directly into the color map rather than left to the shader alone. After the hand-painted pass, a few additional layers are added specifically for **AO-tinted color and curvature-driven accentuation** (frame_005: `WingShadow` and related layers) to pull the forms together and integrate the painted work with the underlying geometry read.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Speed up a new personal-style project by exporting a Smart Material from a previous similar piece** — reuse an established gradient/shading layer group as a starting groundwork rather than rebuilding lighting logic from a blank canvas each time.
+2. Identify which concept details need **hand-painted treatment vs. procedural/generator treatment** — here, blood on the hands/feet was deliberately chosen as a graphic, stylized shape (not a realistic wound) to match the source concept's illustrative tone.
+3. On the **hand-painted layer**, spend the majority of time matching colors to the 2D concept reference, using the pre-built gradient base layers as a rough guide for where color transitions should occur.
+4. Refine specific transition zones by hand where the base gradient isn't precise enough — e.g. blood color moving up the arm, or the wing's blue-to-orange shift — painting directly over/into the gradient base.
+5. While hand-painting, **continuously think about light direction and value** as if lighting the piece, not just coloring it — paint value information into the color map itself so it pre-integrates with the planned final-render lighting.
+6. After the hand-painted pass is complete, add **separate layers for AO-tinted color and curvature accentuation** on top — this is described as the point where the texture really "buttons up" and comes together as a whole, pulling the painted work and the underlying sculpted forms into visual agreement.
+7. (Pipeline context, outside Painter) Pose the finished-texture model using **ZBrush's Transpose Master** — masking individual body parts and moving them into a final pose after texturing is complete, since the model was deliberately kept in a neutral/symmetrical pose through the sculpt+texture stages to save time.
+8. (Pipeline context, outside Painter) Final render used a subsurface-scattering-driven glow localized to the wings via a mask, a rim light + fog for a head-focused halo effect, a dark background (a deliberate change from a prior white-background piece), and no black outline (also a deliberate change from the prior piece).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Reused **Smart Material** export from a prior project as a base groundwork layer group.
+- Gradient base layers: `UnderGradient`, `HighLight`, `2_tone_gradient`, `RedGradientTop`, `Blur`, `YellowBelly` (visible in frame_002) — pre-built shading/color-transition scaffolding.
+- Hand-painted **Paint layers**: `HandPaint`, `TearsPaint`, `IceReflection`, and generic numbered `Layer 3`/`Layer 4` (visible in frame_003/004) — the primary blood/color/light-value painting surface.
+- Post-paint accentuation layers: `WingShadow` and related numbered layers (frame_005) — AO-tinted color + curvature-driven form accentuation.
+- (Non-Painter, pipeline context) ZBrush: Dynamesh, Clay Spin Brush, Transpose Master.
+- (Non-Painter, pipeline context) External renderer with subsurface scattering, masked glow, rim light + fog.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner/Intermediate for the Painter-specific technique (hand-painting over a gradient base, light-value-aware color painting) — the surrounding ZBrush sculpt/pose and render stages are more advanced but out of this skill's scope.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter (one stage of a larger ZBrush + external-renderer pipeline) — version not specified on screen or in narration.
 
 ### Tags
-[PENDING EXTRACTION]
+paint-layer, layers, fill-layer, masks, ambient-occlusion, curvature, blend-mode, basecolor, smart-material, beginner, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [SUBSTANCE PAINTER: SMART MATERIALS Demonstration](substance-painter-smart-materials-demonstration.md) — same creator; shares the "export/reuse a Smart Material as a starting groundwork" production habit, here applied to a personal stylized-illustration project rather than a commercial hard-surface pack.
+- [HOW TO MASTER TEXTURing in SUBSTANCE PAINTER](how-to-master-texturing-in-substance-painter.md) — same creator; conceptual companion — the post-hand-paint AO/curvature accentuation pass here is a concrete example of that video's later-phase "detail that buttons things up" philosophy, applied to a stylized rather than realistic character.
+- [How to TEXTURE in SUBSTANCE PAINTER | ORC TEXTURES](how-to-texture-in-substance-painter-orc-textures.md) — same creator; shares the "continuously think about light/value while painting color" discipline and the practice of reusing a finished material/scene setup from a prior project to speed up a new one.
+- [How to Paint Realistic Skin in Substance Painter](how-to-paint-realistic-skin-in-substance-painter.md) (FlippedNormals) — different creator; a fully hand-painted-first color map for a photoreal target, useful contrast against this video's deliberately stylized/illustrative hand-painting approach.
