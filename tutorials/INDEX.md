@@ -421,6 +421,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/advanced-peeling-paint-effect-in-substance-3d-painter.md
 
+
+### Preparing Models for Substance 3D Painter in Maya | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=Gkx96GEextY
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
