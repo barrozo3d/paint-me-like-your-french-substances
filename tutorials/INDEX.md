@@ -426,10 +426,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=Gkx96GEextY
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Maya (model prep) + Substance 3D Painter (import/baking)
+- **Version:** not stated on screen
+- **Tags:** `texture-set` `uv` `id-map` `mesh-maps` `baking` `beginner`
+- **Summary:** 2/3 of the cross-DCC prep series (same roller-skate asset as the Blender entry). Maya-side Texture Set/Geometry Mask/ID Map workflow: right-click Assign New Material per texture set, UV Toolkit Layout with shell/tile padding (or Painter's Auto Unwrap regenerate-packing option), Vertex Color-based ID maps (Mesh Display → Apply Color, distinct from material assignment) baked in Painter's Bake Maps ID tab, and geometry masking via face Extract into new objects.
 - **File:** tutorials/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d.md
 
 

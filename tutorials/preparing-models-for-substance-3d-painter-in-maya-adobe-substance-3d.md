@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=Gkx96GEextY
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Maya (model prep) + Substance 3D Painter (import/baking)"
+version: "not stated on screen"
+tags: [texture-set, uv, id-map, mesh-maps, baking, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Preparing Models for Substance 3D Painter in Maya | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -165,30 +161,54 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [4:33] tutorials/frames/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d/frame_000.jpg
+- [5:22] tutorials/frames/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d/frame_001.jpg
+- [5:50] tutorials/frames/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d/frame_002.jpg
+- [6:40] tutorials/frames/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d/frame_003.jpg
+- [7:00] tutorials/frames/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d/frame_004.jpg
+- [7:35] tutorials/frames/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d/frame_005.jpg
+- [8:10] tutorials/frames/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Preparing a Maya model (same roller skate asset as the Blender entry in this series) for a clean Substance Painter import: material-per-texture-set assignment, per-texture-set UV shell packing with padding (via Maya's UV Toolkit Layout function or Painter's Auto Unwrap), and building ID maps via Maya Vertex Color or geometry-splitting for masking.
 
 ### Summary
-[PENDING EXTRACTION]
+Maya-side installment of the same 3-app prep series as the Blender video, covering the identical conceptual ground (Texture Sets auto-named from source-app materials, Geometry Masks by sub-object, ID Maps for Ctrl+drag material assignment, Auto-UV Unwrap's 3-step cut/unfold/pack pipeline) with Maya-specific mechanics: assigning materials via right-click → Assign New Material (any material type works, e.g. Lambert, just for organization — Hypershade setup gives the same result), naming materials clearly since the name becomes the Painter texture set name, and giving each texture set's material a distinct viewport color purely for the artist's own visual tracking. UV packing is done per texture set using Maya's UV Editor + UV Toolkit: select all objects sharing a material (via right-click → Select Objects with Material, or the Outliner's "assigned materials" display toggle), select all UV shells, then Arrange and Layout → **Layout**; Shift+click the Layout button to open its Functions options and add a couple of pixels of shell/tile padding to avoid baking errors — or skip Maya-side packing entirely and let Painter's **Auto Unwrap** (in the New Project dialog, with the option to regenerate all packing) handle it per texture set on import. Building an ID map via Vertex Color: select target faces, Mesh Display → **Apply Color** option box, pick and apply a distinct color per section (color choice itself is arbitrary, only needs to differ per section) — explicitly notes Vertex Color assignment is separate from material assignment (the texture-set material stays assigned; Display Colors is a separate viewport toggle). In Painter: Bake Maps dialog → **ID** selection, set ID map **Color Source = Vertex Color**, Bake Selected Textures — after which Ctrl+drag-dropping a material onto the model snaps it to the vertex-color-defined sections. Geometry masking: for a single/few-part mesh, face-select the target region and use **Extract** to split it into a new object (delete history and rename afterward for clarity); in Painter, geometry masks then let you toggle inclusion per split object, or use dropdown shortcuts to include/exclude all objects at once.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Prerequisite: model already retopologized (if needed) and given a first-pass UV unwrap before this workflow begins.
+2. Assign materials to drive Texture Set creation: right-click a selection → **Assign New Material** (or use Hypershade — same result), edit in the Attribute Editor; material type doesn't matter (Lambert is fine) but give each a distinct viewport color purely so texture sets are easy to tell apart while working in Maya.
+3. Name materials clearly and deliberately — the material name becomes the Painter texture set name. One material per object is best practice but not required.
+4. Pack UVs per texture set in Maya: open the **UV Editor** + **UV Toolkit**, select all objects sharing one material (right-click → **Select Objects with Material**, or toggle "assigned materials" display in the Outliner), select all their UV shells in the UV Editor, then use **Arrange and Layout → Layout**.
+5. Add shell/tile padding to avoid baking errors: Shift+left-click the Layout button to open its Functions options, then in Layout Settings add a couple of pixels of padding between shells and at tile edges.
+6. Alternative: skip Maya-side packing entirely — export right after material assignment, then in Painter's New Project dialog enable **Auto Unwrap**, open its options, and choose to regenerate packing (optionally seams/unfold too, depending on prior UV state); this repacks per texture set automatically on import.
+7. Build an ID map via Vertex Color: select the faces for a sub-section (e.g. wheels within a larger texture set), go to **Mesh Display → Apply Color** (option box) to open the vertex-color assignment tool, pick a color, click Apply — repeat with a different color per distinct section. Note this is independent of material assignment (the texture-set material remains assigned; vertex color is just a separate, toggleable viewport display via **Display Colors** in Mesh Display).
+8. In Painter, after import, go to the **Bake Maps** dialog, select the **ID** map, set its **Color Source to Vertex Color**, and click **Bake Selected Textures**.
+9. Use the baked ID map: hold **Ctrl** while dragging a material onto the model — Painter snaps the material to whichever vertex-color-defined section you drop it on.
+10. Geometry masking: if the mesh isn't already split into enough separate objects, enter face selection mode, select the faces to isolate, and use **Extract** to split them into a new object; delete history and rename the new object clearly afterward.
+11. In Painter, geometry masks let you toggle each separated object's inclusion individually (click to toggle) or use dropdown shortcuts to include/exclude all objects at once when building a mask.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Maya**: right-click → Assign New Material (or Hypershade); Attribute Editor; UV Editor + UV Toolkit (Select Objects with Material, Arrange and Layout → Layout, Layout Settings padding options); face selection mode + **Extract**; Mesh Display → **Apply Color** (Vertex Color assignment) and **Display Colors** toggle; Outliner "assigned materials" display toggle.
+- **Substance 3D Painter**: New Project dialog **Auto Unwrap** option (regenerate packing per texture set); **Bake Maps** dialog → ID tab → Color Source = Vertex Color; Ctrl+drag material assignment onto ID-mapped sections; Texture Set List panel; per-layer Geometry Mask (toggle objects individually or via include/exclude-all shortcuts).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner (model/UV/material prep fundamentals, no advanced texturing).
 
 ### App & Version
-[PENDING EXTRACTION]
+Maya (model prep side, version not stated on screen) + Substance 3D Painter (import/baking side, version not stated on screen).
 
 ### Tags
-[PENDING EXTRACTION]
+`texture-set`, `uv`, `id-map`, `mesh-maps`, `baking`, `beginner`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Preparing Models for Substance 3D Painter in Blender** (`tutorials/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d.md`) — same 3-app prep series and same roller-skate demo asset; Blender-side equivalent workflow (materials, UV packing, vertex-color ID maps, mesh separation).
+- **Preparing Models for Substance 3D Painter in 3DS Max** (`tutorials/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d.md`) — same series, 3ds Max-side equivalent.
