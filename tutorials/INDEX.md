@@ -295,10 +295,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=UQkmXEWJr80
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 11.0.0+
+- **Tags:** `generator` `masks` `anchor-point` `path-tool` `height` `curvature` `procedural` `intermediate` `advanced`
+- **Summary:** Part 1 of Adobe's two-part Gothic Architecture series (Part 2, "Texturing Stained Glass & Ceiling Paintings," `NCkQ1eq8a-o`, also in this library). Full stonework pass on a Gothic hallway: reusable Concrete Cast base with a Curvature-generator mask for fake bevels, stacked Dirt/Moss/Stains-Scratches generator layers for aging, a Plastic Tool-Worn smart material swap (Marble Vane) for roof tiles, hand-painted drip stains shaped with the Directional Distance filter, a Height-only Brick generator reused at three scales (walls, anchor-point-masked ground, scaled-up columns), and Path-tool-drawn decorative relief (Gothic "keld cross"/floral patterns) finished with a Bevel Smooth filter. Version floor 11.0.0+ confirmed via two independent filter names (Directional Distance, Bevel Smooth) matching release-notes-painter-11.0.md.
 - **File:** tutorials/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe.md
 
 
@@ -327,10 +327,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=QoVWM-IKmFw
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter + Unreal Engine (final scene) + 3ds Max (UV unwrap)
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `masks` `generator` `anchor-point` `smart-material` `blend-mode` `curvature` `ambient-occlusion` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `opacity` `alpha` `procedural` `uv` `game-engine` `unreal-export` `advanced`
+- **Summary:** Part 2/2 of Adobe's Create Trim Sheets series. Finishes the trim sheet's base color pass entirely with Anchor-Point-referenced fill layers (masking every zone from Part 1's Color ID map, combined via Add/Linear Dodge blend mode), builds a proper decal cutout (Opacity-only Cutout layer + Extract Alpha), adds text decals with grunge breakup, and introduces a "Master Anchor" (pass-through filter + anchor point combining all normal/height details) referenced by Micro Normal/Micro Height fields on Dirt (Sharp Dirt smart material) and Edge Highlights (Curvature generator) layers. Closes with the finished trim sheet's UV unwrap in 3ds Max and full deployment across a real-time Unreal Engine 5 sci-fi corridor scene.
 - **File:** tutorials/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d.md
 
 ---

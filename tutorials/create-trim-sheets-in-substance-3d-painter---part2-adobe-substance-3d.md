@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=QoVWM-IKmFw
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (texturing) + Unreal Engine (final in-scene showcase) + 3ds Max (UV unwrap of dependent assets)"
+version: "not stated on screen; UI (Smart Materials library, anchor-point-referencing Micro Normal/Micro Height in generator settings, pass-through filter trick, Extract Alpha behavior) matches a modern Painter release, not precisely pinnable"
+tags: [layers, fill-layer, masks, generator, anchor-point, smart-material, blend-mode, curvature, ambient-occlusion, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, opacity, alpha, procedural, uv, game-engine, unreal-export, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Create Trim Sheets in Substance 3D Painter - Part2 | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -313,30 +309,73 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:12] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d/frame_000.jpg
+- [2:20] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d/frame_001.jpg
+- [5:20] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d/frame_002.jpg
+- [7:50] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d/frame_003.jpg
+- [10:56] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d/frame_004.jpg
+- [13:46] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d/frame_005.jpg
+- [15:17] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d/frame_006.jpg
+- [18:14] tutorials/frames/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Finishing the trim sheet's base-color pass entirely with anchor-point-referenced fill layers (every color zone masked by referencing the Part 1 Color-ID anchor points, never repainted by hand), building a proper alpha cutout for decal-style reuse, adding text decals and procedural dirt/edge-wear via a single "master anchor" that combines all normal/height detail into one reusable reference, then showing the finished trim sheet applied across a full sci-fi corridor level in Unreal Engine (UVs unwrapped in 3ds Max).
 
 ### Summary
-[PENDING EXTRACTION]
+Part 2/2 of Adobe's Create Trim Sheets series, picking up immediately after Part 1's Color ID map and normal/height detail work. Base color construction: starts from a Smart Material (a Steel/Clear Coat material family) dragged above the normal-detail layers and renamed "Base Steel" — disables the coating's built-in metal-edge-wear mask (set to plain white so only the coating shows), tunes the underpaint to a light bluish metallic tone, and controls roughness via both the metal's "Finish Rough" (brushing intensity + scale) and the Clear Coat amount (which drives most of the perceived roughness). Color variation zones are built as separate materials (e.g. "Gray Metal", "Light Metal") each masked by one-or-more fill layers whose masks reference specific Part-1 Color-ID Anchor Points (Base Metal, random details, floor panel, wall line, console, decals, gears, cable, etc.), combined with the **Add (Linear Dodge)** blend mode so multiple anchor-referenced fills stack into one mask; a duplicate anchor point is added to each new base-color material so that a later "Base Steel" layer can itself reference and exclude those zones via its own black mask. All these are organized into a **Base Colors** folder set to combine/pass-through normals so the folder doesn't overwrite the normal-detail layers below it. Cutout/decal-readiness: enabling the shader's built-in Opacity-based cutout on the steel material, then building a dedicated cutout pass in the Normal Details folder — an anchor point on the relevant Color-ID zone, a fill layer with only Opacity enabled (set to black) named "Cutout", masked by a fill layer referencing the normal-detail anchor with its reference channel set to Opacity, Invert checked, and Alpha Behavior set to **Extract Alpha** — producing a clean per-shape cutout so the normal-detail panels can be placed on a plane and used as real decal geometry, matching Part 1's stated Unreal Engine decal use case. Decals: a **Decals** folder with a "Text" fill layer (white-ish, dull roughness, black metallic) masked either by stamping Painter's built-in text-decal alphas (warning/caution words like AUTHORIZED PERSONNEL ONLY, DANGER, KEEP OUT, OPEN, LOCK SECTION, CONTROL ROOM AREA) directly with a large brush, or by projecting them; then breaking up the decals' crispness with grunge-map fill layers (Crunch Charcoal, Crunch Concrete Dirty/Old) for wear variation. Dirt/edge-highlight finishing: creates a **Master Anchor** by adding any filter (set to pass-through) at the base of the Normal Details folder and dropping an anchor point on it — a shortcut vs. manually pass-through-ing a paint layer on every channel — which then combines every normal-map and height-map detail layer below it into one referenceable anchor. Placed inside Base Steel (so dirt doesn't affect the clean steel elsewhere), a new **Dirt** folder holds: an Occlusion Dirt fill layer (low roughness, brownish tint, Height/Normal/Opacity off) masked by the **Sharp Dirt** Smart Material, whose Micro Normal and Micro Height reference channels are pointed at the Master Anchor (Normal reference channel = Normal, Height reference channel = Height) with Micro Details enabled — exposing AO Radius and Height Detail Intensity controls, plus a Levels adjustment to tone down dirt contrast/opacity for subtlety; and an Edge Highlights fill layer (bright color, lowered roughness, only Base Color + Roughness on) masked by a **Curvature** generator with the same Master-Anchor Micro Normal/Micro Height referencing, whose own Opacity slider is used as the primary intensity control. Final section switches to 3ds Max to show the trim sheet's UV unwrap on a pillar asset (strategically split so segments map onto matching trim regions, sometimes adding extra geometry cuts purely to align UVs, with Part 1's construction lines used to visually hide seams) and then to Unreal Engine, where the same single trim-sheet material is shown driving pillars, cutout window/decal meshes, floor, and wall details across a fully real-time corridor scene.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Turn off/hide the Color ID folder from Part 1 — no longer needed once base-color work begins.
+2. Base steel: open the Smart Materials shelf, find a Steel/Clear Coat family material, drag it in above the Normal Details layers, rename to **Base Steel**.
+3. In the Coating sub-layer: disable the built-in metal-edge-wear effect and set its mask to plain white so only the coating renders; keep the underlying Metal layer active for its contribution.
+4. In Under Paint: pick a light, slightly bluish metallic base tone.
+5. Tune roughness in two places: **Finish Rough** under Metal (Brushing Intensity + Scale, both set low here) and the **Clear Coat** amount (which dominates overall perceived roughness) — reduce Clear Coat somewhat for a cleaner base.
+6. Build color-variation materials (e.g. "Gray Metal", "Light Metal") the same way — duplicate/adjust Base Steel, then mask each with one or more fill layers whose masks are set via **Anchor Points → [Color-ID zone]** (Base Metal, random details, floor panel, wall line/console/decals/gears/cable, etc.); when combining multiple anchor-referenced masks into one, set additional fill layers' blend mode to **Add (Linear Dodge)** so they union together instead of replacing.
+7. Add a fresh Anchor Point to each new color-variation material (Gray Metal, Light Metal) so the top-level Base Steel layer can later mask them out of its own coverage.
+8. On Base Steel itself, add a black mask, then add fill layers referencing the Gray Metal and Light Metal anchors (Add blend mode) to exclude those zones from the plain base steel, plus fix any zone accidentally masked to the wrong anchor (video catches and corrects a vent-mask mistake this way).
+9. Organize into a **Base Colors** folder; set the folder's blend/pass settings so normals combine rather than get overwritten by the folder — keeps normal-detail layers underneath intact.
+10. Fix the missing cutout: on the Steel material's Base sub-layer, disable the Opacity toggle so the shader's Alpha-Test cutout actually takes effect.
+11. Build the decal-ready cutout: in Normal Details, add an Anchor Point to the relevant Color-ID zone; wrap Normal Details in its own folder (enables immediate anchor+mask referencing); add a black mask + fill layer referencing the raw color-zone anchor (not the normal-detail anchor); inside that, add another fill layer with every channel off except Opacity (set to black), name it **Cutout**; mask it with a fill layer referencing the Normal Details anchor, with **Reference Channel = Opacity**, **Invert** checked, and **Alpha Behavior = Extract Alpha** — this cleanly cuts the shape so it can be used as decal geometry on a plane.
+12. Decals folder: new "Text" fill layer — near-white Base Color, dull Roughness, Metallic = black. Mask it either by directly stamping Painter's built-in text/warning-sign decal library brushes (large brush size) or by projecting them, placing multiple decal words/labels around the trim sheet.
+13. Break up decal crispness: add a black mask + fill layer using a Grunge map (e.g. Crunch Charcoal, Crunch Concrete Dirty/Old) over the decals, tuning Balance/Contrast for partial wear.
+14. Build the **Master Anchor**: at the base of the Normal Details folder, add any filter (its default is pass-through) purely as a shortcut to avoid manually setting a paint layer to pass-through on every channel; add an Anchor Point to this filter layer and name it (e.g. "Master Anchor") — it now represents the combined result of every normal-map and height-map detail layer beneath it in the stack.
+15. Place a new **Dirt** folder inside Base Steel (so dirt only affects the base steel zones, not other color-variant materials) containing: an **Occlusion Dirt** fill layer (low Roughness, brownish tint, Height/Normal/Opacity channels off) masked by the **Sharp Dirt** Smart Material.
+16. On the Sharp Dirt mask's generator settings, scroll to **Micro Normal** and **Micro Height**: reference the Master Anchor for both, and set Reference Channel = Normal (for Micro Normal) and Reference Channel = Height (for Micro Height); enable **Micro Details** to activate the effect — exposes AO Radius and Height Detail Intensity sliders to tune how much dirt appears and where. Use a Levels adjustment on the dirt layer to tone down contrast/opacity for subtlety.
+17. Add an **Edge Highlights** fill layer (bright Base Color, reduced Roughness, only Base Color + Roughness channels on) masked by a **Curvature** generator, again referencing the Master Anchor for Micro Normal/Micro Height with the same Normal/Height reference-channel settings — produces soft edge-wear highlights. Use the Curvature layer's own Opacity slider as the main intensity control for the whole effect.
+18. Further polishing (metal balance, extra roughness variation, more localized dirt/detail) is left as an off-camera exercise — not shown step by step.
+19. Switch to 3ds Max: inspect the UV layout of a corridor pillar asset built mostly from the trim-sheet metal, showing the mesh strategically segmented (sometimes with extra geometry cuts purely for UV alignment) so each piece maps onto the correct trim region; Part 1's construction lines are used specifically to visually disguise these UV seams.
+20. Switch to Unreal Engine: shows the same single trim-sheet material driving the pillar, cutout window/decal meshes (using the Extract-Alpha cutout built above), floor details, and wall details across one fully real-time sci-fi corridor scene — the payoff of building everything from one shared texture.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Smart Materials shelf**: Steel/Clear Coat family material as the Base Steel starting point.
+- **Base Steel material sublayers**: Coating (metal-edge-wear disabled, white mask), Metal/Under Paint (light bluish tone), Finish Rough (Brushing Intensity, Scale), Clear Coat (roughness-dominant amount slider).
+- **Anchor-Point-referenced fill layers**: the core masking mechanism throughout — every color-variation zone is masked by one or more fill layers set to a specific Part-1 Color-ID Anchor Point, several combined via **Add (Linear Dodge)** blend mode.
+- **Base Colors folder**: groups all base-color layers; configured so normals combine/pass through rather than being overwritten.
+- **Cutout construction**: Opacity channel toggle on the Steel base sublayer; dedicated "Cutout" fill layer (Opacity-only, black) masked via a fill layer with Reference Channel = Opacity, Invert on, Alpha Behavior = **Extract Alpha**.
+- **Decals folder**: Text fill layer (Base Color near-white, Roughness dull, Metallic black) masked by built-in text/warning decal brushes or projection; Grunge-map fill layers (Crunch Charcoal, Crunch Concrete Dirty/Old) for wear breakup.
+- **Master Anchor**: a pass-through filter (any filter, default pass-through behavior) at the base of the Normal Details folder, carrying an Anchor Point that represents the combined normal+height result of every layer beneath it — the key reusable reference for downstream dirt/wear effects.
+- **Dirt folder** (inside Base Steel): Occlusion Dirt fill layer masked by the **Sharp Dirt** Smart Material, whose generator exposes **Micro Normal** / **Micro Height** reference-channel fields (both pointed at Master Anchor, Reference Channel = Normal / Height respectively) and a **Micro Details** enable toggle (AO Radius, Height Detail Intensity sliders); Levels adjustment for contrast/opacity taming.
+- **Edge Highlights fill layer**: masked by a **Curvature** generator, same Master-Anchor Micro Normal/Micro Height referencing pattern; layer/generator Opacity slider used as the master intensity dial.
+- **3ds Max**: UV unwrap inspection of a trim-sheet-driven pillar asset.
+- **Unreal Engine**: final real-time corridor scene using the finished trim-sheet material across pillars, cutout decal meshes, floor, and wall assets.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced/Expert (deep anchor-point-referencing masking system, Micro Normal/Micro Height generator referencing, cutout/Extract-Alpha decal construction, cross-app UV+engine payoff).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter (texturing), 3ds Max (UV unwrap inspection), Unreal Engine (final real-time scene, confirmed as Unreal Engine 5 per Part 1's closing note and this video's visible modern Unreal editor UI). No Painter version number is stated on screen; the feature set (Smart Materials, Micro Normal/Micro Height reference-channel fields in generator settings, Extract Alpha behavior, pass-through filter trick) is consistent with a modern Painter release but not precisely pinnable to a single point version.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers`, `fill-layer`, `masks`, `generator`, `anchor-point`, `smart-material`, `blend-mode`, `curvature`, `ambient-occlusion`, `pbr`, `metal-rough`, `basecolor`, `roughness`, `metallic`, `height`, `normal-map`, `opacity`, `alpha`, `procedural`, `uv`, `game-engine`, `unreal-export`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Create Trim Sheets in Substance 3D Painter - Part 1** (`tutorials/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d.md`) — direct prerequisite: builds the Color ID map, per-mask Anchor Points, and normal/height detail layers this video's base-color and dirt/wear passes reference throughout.
+- **Creating Trim Sheet UVs for Substance 3D Painter** (`tutorials/creating-trim-sheet-uvs-for-substance-3d-painter-adobe-substance-3d.md`) — same broader Adobe trim-sheet series; covers the same 3ds Max UV-unwrap process shown briefly at the end of this video, in much greater depth.
