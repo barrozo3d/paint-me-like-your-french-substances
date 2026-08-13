@@ -553,6 +553,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Official Adobe feature-tour of the "6 new filters" batch: Anisotropic Kuwahara (edge-preserving stylized blur), Bevel Smooth (pixel-artifact-free bevels on Height layers/masks), Directional Distance (UV-space directional drips/smears), Grayscale Conversion (color-to-mask derivation), Quantize (posterized/vector flat-shading — confirmed parameters Color Amount/Contour Smoothing/Dithering/Distance Color Space/Apply To Alpha/Alpha Threshold), and Stylization (full hand-painted asset conversion). This is the primary/authoritative 11.0.0 version-pin source cited by several other tutorials in this library.
 - **File:** tutorials/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### Texturing a Clicker - FULL Substance 3D Painter Workflow
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=RTvgwZj-5Rw
+- **Author:** FlippedNormals
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/texturing-a-clicker---full-substance-3d-painter-workflow.md
+
 ---
 
 ## Tag Reference
