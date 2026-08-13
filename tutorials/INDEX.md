@@ -806,6 +806,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Beginner fundamentals video (Part 1/2, smartwatch asset; Part 2 covers After Effects and is out of scope). Covers paint vs. fill layers, environment/lighting basics (World vs. Camera alignment), sourcing/applying smart materials with Tiling, black-mask + Object Fill (Mesh Fill) per-part masking, applying 2D Illustrator textures and SVG vector decals (dragged onto the 3D model directly), and building a working glass material via a custom Opacity channel plus Shader Settings' Alpha Blending toggle. Finishes with a layer-reorder fix (bottom-to-top compositing) for a graphic's background color.
 - **File:** tutorials/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su.md
 
+
+### Baking in Substance 3D painter 8.3 | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=hYtHp4IXvsM
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/baking-in-substance-3d-painter-83-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
