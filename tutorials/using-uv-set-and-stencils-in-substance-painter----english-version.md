@@ -402,4 +402,5 @@ Not stated on screen; no version-gated UI markers visible in the captured frames
 ## Related Tutorials
 - **How to use UDIMs properly!** (`tutorials/how-to-use-udims-properly.md`) — same creator, same underlying theme of UV-layout choices controlling in-Painter texture fidelity (texel density there, per-island scale/rotation here).
 - **Texturing a Worn Wooden Stool in Substance Painter** (`tutorials/texturing-a-worn-wooden-stool-in-substance-painter.md`) — same creator, another case of fixing per-UV-island tiling/rotation mismatches on a real prop.
+- [HOW to Make UDIMS for UNREAL ENGINE](how-to-make-udims-for-unreal-engine.md) (Jared Chavez) — different creator; a full external-DCC (Maya) to Painter to Unreal UDIM pipeline, a useful complement for artists who need a full multi-tile texture-set workflow rather than in-Painter UV-space tricks on a single-tile mesh.
 - **Speed Up Your Substance Painter Workflow with This Easy Trick!** (`tutorials/speed-up-your-substance-painter-workflow-with-this-easy-trick.md`) — same creator, same "practical workflow trick" video format.

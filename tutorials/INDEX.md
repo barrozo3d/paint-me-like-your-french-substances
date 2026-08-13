@@ -1064,10 +1064,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=fonCA0jiEF8
 - **Author:** Jared Chavez
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not specified
+- **Tags:** `udim` `texture-set` `baking` `mesh-maps` `thickness` `export` `unreal-export` `game-engine` `uv` `texel-density` `intermediate` `advanced`
+- **Summary:** Verify check confirmed: primarily Maya UV work + UE5 Virtual Texture setup (~6 of 8 chapters), Painter appearing as one pipeline stage — extracted at proportionate depth. Same Neomorph creature as the Subsurface Scattering video. Maya: joint-based UV cuts, texel-density-matched 6-tile UDIM layout, split-and-decimate high-poly export. Painter: mandatory `Use UV Tile` import toggle, Thickness-map seam-discontinuity manual fix, standard tile-aware export. UE5: Enable Virtual Texture Support project setting, Material Editor wiring, VT thumbnail badge as load-success indicator. Cross-linked with Subsurface Scattering (same character), How to use UDIMs properly! (3DRedBox), UV Set and Stencils, Baking in Painter 8.3.
 - **File:** tutorials/how-to-make-udims-for-unreal-engine.md
 
 ---

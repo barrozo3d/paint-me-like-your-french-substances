@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=fonCA0jiEF8
 author: Jared Chavez
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified"
+tags: [udim, texture-set, baking, mesh-maps, thickness, export, unreal-export, game-engine, uv, texel-density, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-make-udims-for-unreal-engine/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 6
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # HOW to Make UDIMS for UNREAL ENGINE
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-make-udims-for-unreal-engine <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -173,30 +169,57 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [2:10] tutorials/frames/how-to-make-udims-for-unreal-engine/frame_000.jpg
+- [3:20] tutorials/frames/how-to-make-udims-for-unreal-engine/frame_001.jpg
+- [6:00] tutorials/frames/how-to-make-udims-for-unreal-engine/frame_002.jpg
+- [6:56] tutorials/frames/how-to-make-udims-for-unreal-engine/frame_003.jpg
+- [7:58] tutorials/frames/how-to-make-udims-for-unreal-engine/frame_004.jpg
+- [9:00] tutorials/frames/how-to-make-udims-for-unreal-engine/frame_005.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A full UDIM pipeline walkthrough spanning three tools — Maya (UV cutting/layout across multiple tile spaces), Substance 3D Painter (multi-tile baking + tile-aware texture export), and Unreal Engine 5 (Virtual Texture project settings + material graph wiring) — for the Neomorph creature, done specifically to preserve very fine sculpted detail that a single-tile UV set couldn't hold at sufficient resolution.
 
 ### Summary
-[PENDING EXTRACTION]
+Confirmed title/verify check: this video is **primarily Maya UV work and UE5 Virtual Texture setup** (roughly 6 of 8 chapters, ~6 of 10:39 minutes), with Substance Painter appearing as one connecting pipeline stage rather than the main subject — consistent with this skill's scope boundary, the Painter-specific content is extracted at proportionate (not maximal) depth, while the surrounding Maya/UE5 context is summarized briefly for continuity since it's what makes the UDIM pipeline work end-to-end. **Maya (UV/context):** the low-poly was built from a ZBrush Z-Remesh of the lowest subdivision level rather than manual retopology (a deliberate speed shortcut for a non-animated personal piece); UV cuts were placed at joints (shoulders, hips) for deformation-safe seams, additional cuts added at wrists/ankles purely to claim extra independent texel-density budget for those areas, and the head/torso were seamed down the center and folded to share tile space between symmetric halves; texel density was locked from the torso's fit into a 0-1 UV space, then propagated to build out the remaining UDIM tiles at matching density; the high-poly was split to roughly match the UV seam layout (with the split geometry cap extended slightly past each seam to guarantee full detail capture up to the cut) and each split piece decimated and exported as its own FBX — both to preserve maximum per-piece sculpted crispness and to keep memory-per-bake manageable during the Painter baking stage. **Substance Painter (the Painter-specific portion):** when importing a mesh built for UDIMs, the **`Use UV Tile` workflow** must be enabled at import time or the multi-tile mesh won't load/bake correctly (frame_002/004: `Texture Set List` shows `Neomorph` with `UV Tile (6)` listing tiles `1001`-`1006`). Baking settings themselves are otherwise unchanged from the creator's standard bake setup (covered in other videos, not repeated here) — the one UDIM-specific gotcha called out is that certain bakes (Thickness map named specifically) can produce visible discontinuities right at UDIM tile seams, requiring a manual paint-fix inside Painter to smooth over. After baking, textures are exported normally, and as long as the UV-Tile workflow was respected end-to-end, the export automatically carries tile-numbered filenames Unreal can consume as Virtual Textures. **Unreal Engine 5 (Virtual Texture setup):** enable Virtual Texture support via Project Settings → search "virtual" → toggle on the relevant Virtual Texture switches (the required one being **Enable Virtual Texture Support**) → restart the engine when prompted; create a new Material and wire in the imported UDIM textures (frame_005: a `Texture Sample` node per channel feeding the material graph) — imported textures that loaded correctly as UDIMs show a small **"VT"** badge in the asset thumbnail's corner; a texture-set-at-a-time import/test approach (start with one texture set, confirm the material result reads correctly on the model, then import the remaining sets) is recommended over importing everything at once, since a partially-loaded texture set will visibly "jumble" on the model until all tiles for that set are present.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. (Maya) Build the low-poly from a **ZBrush Z-Remesh** of the lowest sculpt subdivision level when the model won't be animated and speed matters more than a hand-optimized topology.
+2. (Maya) Place initial UV cuts at deformation-relevant joints (shoulders, hips) first.
+3. (Maya) Add extra cuts at high-value-but-small areas (wrists, ankles, head) purely to let those regions claim independent UDIM tile space/resolution rather than sharing a tile with lower-priority geometry.
+4. (Maya) Use center-line seams on symmetric parts (torso sides, head down the middle) so both halves can share a single tile space efficiently.
+5. (Maya) Establish texel density from one reference shell fit into a 0-1 UV space, then build every other UDIM tile to match that density for consistency across the whole character.
+6. (Maya, pre-bake prep) Split the high-poly mesh to roughly mirror the final UV seam layout, extending each split piece's cap slightly past the seam line to guarantee full sculpted detail is captured right up to the cut — then decimate and export each piece as its own FBX, both for per-piece detail retention and to keep memory load manageable during baking.
+7. **(Substance Painter) Enable the `Use UV Tile` workflow at mesh import** — this is the one mandatory Painter-side setting for a UDIM mesh to load and bake correctly; without it, expect the mesh/bakes to behave unexpectedly.
+8. **(Substance Painter) Watch for Thickness-map seam discontinuities** at UDIM tile boundaries specifically — this bake type is called out as prone to visible mismatches right at the seam; fix by manually painting over the discontinuity directly in Painter rather than re-baking.
+9. **(Substance Painter) Export textures normally** once the UV-Tile workflow was respected on import — exports automatically carry the tile-numbered naming Unreal needs to recognize them as Virtual Textures.
+10. **(Unreal Engine 5) Enable Virtual Texture support:** Project Settings → search "virtual" → toggle on the Virtual Texture switches (the load-bearing one being **Enable Virtual Texture Support**) → restart the engine when prompted.
+11. **(Unreal Engine 5) Create a Material and wire in the UDIM textures** via Texture Sample nodes per channel; confirm each imported texture shows the small **VT badge** in its thumbnail, confirming it loaded as a Virtual Texture.
+12. **(Unreal Engine 5) Test incrementally:** import and wire one texture set first to confirm the material/UDIM pipeline works before importing every remaining texture set — a texture set that's only partially loaded will visibly jumble on the model, which is expected and not a failure signal.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Maya: UV Editor multi-cut/seam tools, texel-density-matched UV tile layout across a 6-tile UDIM set.
+- Substance Painter: `Texture Set List` with `UV Tile` mode enabled (tiles `1001`-`1006` for this asset); standard Mesh Map Bakers panel (Normal, World Space Normal, AO, Curvature, Position, Height, Bent Normals) — settings otherwise unchanged from the creator's normal bake process; a manual paint-fix pass specifically for Thickness-map seam mismatches.
+- Unreal Engine 5: Project Settings → Virtual Texture toggles (**Enable Virtual Texture Support** required); Material Editor `Texture Sample` nodes; imported-asset **VT** badge as the load-success indicator.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate/Advanced — assumes comfort with UV layout fundamentals and basic Unreal material graph editing; the Painter-specific piece (`Use UV Tile` import toggle + Thickness-seam fix) is a small, easily-missed detail rather than a complex technique on its own.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter, as one stage of a Maya → Painter → Unreal Engine 5 UDIM pipeline — version not specified on screen or in narration for any of the three applications.
 
 ### Tags
-[PENDING EXTRACTION]
+udim, texture-set, baking, mesh-maps, thickness, export, unreal-export, game-engine, uv, texel-density, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [SUBSURFACE SCATTERING: Subsurface Scattering in SUBSTANCE PAINTER for UNREAL ENGINE 5](subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi.md) — same creator, same Neomorph character; a later pipeline stage on the identical asset (the UDIM setup here is the UV/baking prerequisite for that video's Scattering channel work).
+- [How to use UDIMs properly!](how-to-use-udims-properly.md) (3DRedBox) — different creator; another UDIM-focused video with a similarly thin direct-Painter-content share (there: mostly RizomUV, Painter side is a Texel Density generator check) — useful comparison of two independent UDIM pipelines around Painter.
+- [Using UV set and Stencils In Substance Painter -- English version](using-uv-set-and-stencils-in-substance-painter----english-version.md) (3DRedBox) — different creator; covers UV-set-to-UV-set projection and stencil workflows inside Painter itself, a useful complement for artists who need in-Painter UV-space tricks rather than a full external UDIM pipeline.
+- [Baking in Substance 3D painter 8.3](baking-in-substance-3d-painter-83-adobe-substance-3d.md) (Substance3D official) — different source; the general Painter baking-mode UI/features (croissant icon, cage overlays, sync/desync, Match by Mesh Name) this video's brief Painter baking mention assumes as already-known background.
