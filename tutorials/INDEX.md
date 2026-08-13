@@ -663,6 +663,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Feature-tour hub video: camera-linked environment lighting, Warp Projection (manual vertex-editing + surface-snap, for tattoos/decals and Height-channel detail alphas alike), native UDIM/UV Tiles support, SBSAR export, an overhauled click-to-pick Eyedropper, asset-browser Favorites, one-click blend-mode/opacity propagation across all channels, quick mesh reimport, 3 new bake types, and Temporal Anti-Aliasing.
 - **File:** tutorials/10-new-features-in-substance-painter-you-didnt-know-about.md
 
+
+### Warp Projection in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=6_8CCf6v-uM
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/warp-projection-in-substance-3d-painter-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
