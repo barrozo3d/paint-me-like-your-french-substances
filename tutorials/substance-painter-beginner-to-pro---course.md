@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=UCKwN3QA_FM
 author: TriGon
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; modern Baking Mode UI (Common Settings / cage wireframe / matching-error red-green heatmap) consistent with a post-8.3 era build"
+tags: [layers, fill-layer, paint-layer, masks, smart-material, smart-mask, generator, anchor-point, blend-mode, baking, mesh-maps, ambient-occlusion, curvature, high-to-low-poly, cage, id-map, texture-set, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, tri-planar, procedural, export, export-preset, channel-packing, game-engine, unreal-export, beginner, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-painter-beginner-to-pro---course/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 17
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance Painter Beginner To Pro - Course
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-painter-beginner-to-pro---course <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -2781,30 +2777,121 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [6:10] tutorials/frames/substance-painter-beginner-to-pro---course/frame_000.jpg
+- [11:20] tutorials/frames/substance-painter-beginner-to-pro---course/frame_001.jpg
+- [14:14] tutorials/frames/substance-painter-beginner-to-pro---course/frame_002.jpg
+- [24:25] tutorials/frames/substance-painter-beginner-to-pro---course/frame_003.jpg
+- [39:05] tutorials/frames/substance-painter-beginner-to-pro---course/frame_004.jpg
+- [53:00] tutorials/frames/substance-painter-beginner-to-pro---course/frame_005.jpg
+- [60:53] tutorials/frames/substance-painter-beginner-to-pro---course/frame_006.jpg
+- [66:33] tutorials/frames/substance-painter-beginner-to-pro---course/frame_007.jpg
+- [73:50] tutorials/frames/substance-painter-beginner-to-pro---course/frame_008.jpg
+- [77:03] tutorials/frames/substance-painter-beginner-to-pro---course/frame_009.jpg
+- [84:08] tutorials/frames/substance-painter-beginner-to-pro---course/frame_010.jpg
+- [100:58] tutorials/frames/substance-painter-beginner-to-pro---course/frame_011.jpg
+- [119:15] tutorials/frames/substance-painter-beginner-to-pro---course/frame_012.jpg
+- [120:50] tutorials/frames/substance-painter-beginner-to-pro---course/frame_013.jpg
+- [140:48] tutorials/frames/substance-painter-beginner-to-pro---course/frame_014.jpg
+- [155:00] tutorials/frames/substance-painter-beginner-to-pro---course/frame_015.jpg
+- [164:25] tutorials/frames/substance-painter-beginner-to-pro---course/frame_016.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Complete zero-to-production foundations course (2h48m, 26 chapters) building up Painter's core mental model layer by layer — layers/fill-layers → channels → masking → smart materials → filters → baking → ID maps — then applying every piece to a single real asset (a leather belt with metal buckle) through blocking-out, a fully non-destructive filter-driven "primary/secondary/tertiary breakup" material-building method, baked-map-driven refinement (AO/curvature), environmental wear/storytelling, and export. The throughline technique taught across nearly every later chapter is **building materials entirely from Pass-Through filters (HSL / Contrast & Luminance / Color Balance / Levels) rather than editing base Fill-layer values directly**, so that any earlier decision (e.g. base leather color) can be changed once and propagate through every dependent layer automatically.
 
 ### Summary
-[PENDING EXTRACTION]
+**Fundamentals (0:00-44:39):** Establishes layers vs. fill layers (fill layers carry all base channel values at once), the channel model (BaseColor/Height/Roughness/Metallic/Normal — Metallic should almost always stay a pure 0 or 1, not an intermediate value), masking (right-click → Add White/Black Mask, Alt-click a mask thumbnail to preview it in isolation, paint mask values in grayscale — not just pure black/white — for partial-strength effects, hotkey X to swap paint color between black/white), Smart Materials (pre-built layer/effect stacks you drag onto a model or into the stack; a Smart Material's internal layers should always be clearly named — e.g. Base Metal / Dirt / Surface Details / Edges / Damage / Sharpen — so you know what to tweak), and Filters (a filter layer holds a filter — e.g. HSL, Contrast & Luminance — that can target one channel via Alt-click on that channel button, letting you re-grade a material's color or roughness in seconds instead of hunting through every base layer; filters should always be named for what they do). **Baking (46:27-65:06):** explains what each mesh map means (Normal and Ambient Occlusion are the two you'll always use directly; ID, Curvature, Position, Thickness mainly exist to build masks later); demonstrates baking a real high-to-low-poly asset (belt + buckle from ZBrush), the ID map needing its Color Source switched from Material Color to **Vertex Color** (since the ID color was authored as ZBrush PolyPaint), baking best-practice (bake test passes at low Anti-Aliasing/resolution first, final pass at 64x AA and double your final texture resolution — e.g. bake 4K for a 2K final export, except at 4K final where you bake at 4K to avoid an unwieldy 8K), fixing intersection/projection bake errors by splitting a mesh into separate objects (belt / buckle / buckle-clip) with matching `_low`/`_high` name suffixes and setting **Match by mesh name** in the Baking settings, and manually widening the **Cage** (inflated bake-ray-search mesh, visualized as green wireframe) as close to the high-poly as possible without it self-intersecting (shown in the red/green **matching-error heatmap**) — noting plainly that Painter's cage tools have real limits and the video's own residual bake artifact was left unfixed as an honest example (creator's own preference for hard cases: bake externally in Marmoset and import the maps). **ID Maps (65:06-69:18):** using **Add Mask with Color Selection** to pick a color from the baked ID map and instantly get a perfect mask for that mesh region, adjustable Hardness/Tolerance for near-identical ID colors, and an alternate "background white / output black" ID mode for isolating a single color as a hole-punch mask (used later for stitches). **Blocking Out Materials (69:18-75:35):** establishes flat base-color/roughness/metallic values and ID-map-driven masks for every material up front (leather base layers, a second "shiny top-coat" leather layer masked to just part of the ID region, a separate stitches layer) before any detail work — creating "all the masks you'll ever need" early so later chapters just swap folder contents. **The Power of Effects (75:35-80:24):** the pivotal non-destructive-workflow lesson — instead of hand-painting a fixed color onto stitches (which breaks the moment the base leather color changes), copy the base layer's mask onto an HSL filter layer (Ctrl+Alt+C / Ctrl+Alt+V) set to only lighten/tweak, so the stitches automatically track any future base-color change; filters can themselves be placed inside their own layer (magic-wand "Add Filter" icon) targeted to a single channel via Alt-click. **Adding Variation (80:24-98:58):** the core material-breakup recipe — duplicate a base Fill layer, mask it with a **Tri-Planar-projected** procedural noise (Clouds/Grunge from the Assets shelf, chosen specifically to avoid UV seams), add a second smaller-scale noise on **Multiply** to break up the first noise's own visible tiling, group multiple such passes (Lighten / Darken / Saturation-spots) under a **Pass Through**-blended folder, and organize them by scale into a **primary / secondary / tertiary breakup structure** (one big low-frequency pass, one medium pass, one small subtle pass) — the video's stated single most important realism principle. **Adding Details (98:58-119:51):** layering a tileable material texture (default Painter leather resource, deliberately over-scaled beyond real-world size so it "reads" at game distance) into Height only, inverting via Levels if needed, Blurring a noisy height mask to soften it, then feeding the same mask into a Pass-Through HSL (color) and Contrast & Luminance (roughness) so the detail affects every channel consistently; breaking up an obviously-tiling detail pass with a Tri-Planar Multiply noise, controlled via Opacity rather than deleting the effect; and a first introduction to **Anchor Points** (add on a mask, reference it from any layer above via "Fill → Anchor Points" or a filter's mask source) used here to re-inject a saved mask as an extra Roughness-only boost layer. **Smart Material save/reuse (119:51-139:25):** grouping a finished material (cannot have a mask on the group itself, or the resulting thumbnail breaks) and right-click → **Create Smart Material**, with a deliberate naming convention (`Material_YourName` / `Material_Trigon`) so personal libraries stay searchable and distinct from Painter's defaults; demonstrates rapidly re-skinning a blockout by dragging saved Smart Materials in, deleting the temporary blockout layer, then grading the whole result with one top HSL filter; and building a second (metal) Smart Material the same way. **Baked-Map Refinement (139:25-144:06):** an AO-driven darkening pass (HSL/Contrast layer set to Pass-Through-all-channels, masked by the baked **Ambient Occlusion** map inverted via Levels) and a Curvature-driven pass (Curvature map loaded directly into a Fill layer's BaseColor at low Overlay opacity and Roughness at a small amount) to push baked high-poly surface detail back into the final texture, finished with a subtle **Sharpen** filter. **Wear and Tear (144:06-160:55):** environmental storytelling — building a "blood" Smart Material from layered Moisture/Dirt-texture masks with Tri-Planar + Multiply breakup, HSL color variation, hand-painted cleanup with the Dirt brush, and Contrast & Luminance for rough blood, saved as another reusable Smart Material; a "dust" pass built from the built-in **Smart Masks** library (search "dust", e.g. Dust Double / Sand Dust) rather than hand-built masks, tinted and layered with a second dust pass and Tri-Planar breakup; and cross-material edge wear achieved by copying the top-coat leather layer's mask onto a new masked-with-a-Smart-Mask ("Fabric Edges", inverted) layer set to reveal the rough base-leather layer underneath at the edges/cracks, finished with a Subtract-mode Scratches Smart Mask. **Final Adjustments & Export (160:55-168:03):** a closing top-of-stack HSL/Color-Balance/Contrast pass (Pass-Through, all channels) purely for a final look-grade after "sleeping on it," then **Ctrl+Shift+E** to open Export Textures — choosing an output template (Unreal Engine template if game-bound, or "Document Channels + Normal + AO" for a straight render), No Alpha unless Opacity is used, PNG at 16-bit for extra dynamic range, exporting at full target resolution regardless of the texturing resolution (the layer stack recalculates at whatever export size is chosen), and a custom filename template via **Save Settings**.
 
 ### Key Steps
-[PENDING EXTRACTION]
+**Fundamentals**
+1. Fill layers carry every channel's base value at once (vs. plain paint layers, which hold only paint strokes); delete the default layer and build from a blank stack to learn the primitives cleanly.
+2. Channels = Base Color, Height, Roughness, Metallic, Normal; hit `C` repeatedly to cycle the 2D channel-preview view, `F2`/`F3` to toggle 3D/2D, `M` for the full shaded material view.
+3. Metallic should almost always be a pure 0 or 1 (non-metal or metal), not an in-between value, with rare exceptions.
+4. Add masks via right-click → Add White Mask / Add Black Mask; Alt-click the mask thumbnail to preview it in isolation; paint mask values can be any gray value (not just pure black/white) for partial-strength effects; `X` swaps the paint color between black and white.
+5. Smart Materials are just grouped, well-named fill-layer + effect stacks; drag one onto the model or into the layer stack; open one up and inspect/rename its internal layers (Base / Dirt / Surface Details / Edges / Damage / Sharpen) to learn how professionally-built materials are organized.
+6. Filters (HSL, Contrast & Luminance, etc.) placed above a material re-grade color/roughness/etc. in seconds without hunting through base layers; Alt-click a specific channel icon on the filter to restrict it to just that channel; always name filters for what they do (e.g. "Color Adjustment", "Roughness Adjustment").
+
+**Baking**
+7. Mesh maps to know: Normal and Ambient Occlusion are used directly; ID, Curvature, Position, Thickness mainly exist to build masks later; World Space Normal is mostly a masking helper too.
+8. ID map's **Color Source** must be set to **Vertex Color** (not Material Color) when the ID data was authored as ZBrush PolyPaint.
+9. Bake at low settings first for a fast test pass; final bake at 64x supersampling and roughly double your intended final export resolution (bake 4K for a 2K export; bake 4K, not 8K, if your final target is already 4K).
+10. Fix bake intersection/projection errors by splitting the mesh into separate low/high objects with matching name suffixes (`_low` / `_high`) and setting the Baker's **Match** mode to **By mesh name** — verify with the Match-by-name check panel, which flags mismatched names in red.
+11. The **Cage** (inflated search-mesh, shown as a colored wireframe) should be pushed as close to the high-poly as possible without self-intersecting; the **matching-error heatmap** (red = bad, green = good) is the direct feedback signal; acknowledges Painter's cage tools have real limits — some intersection artifacts may not be fixable purely in Painter's cage UI (creator's own workaround for hard cases: bake externally in Marmoset, import the resulting maps).
+12. Preview any individual baked map at any time with the `B` hotkey to cycle through bakes.
+
+**ID Maps → Blocking Out**
+13. Right-click a mask → **Add Mask with Color Selection** → Pick Color from the baked ID map for an instant, perfectly-fitted regional mask; Hardness/Tolerance sliders help when two ID colors are close together.
+14. An alternate ID-map mode ("background = white, output = black") turns any picked ID color into a hole-punch/cutout mask — used for isolating stitches.
+15. Before any detail work, block out every material's base BaseColor/Roughness/Metallic values and every mask (including a separate "shiny top-coat" leather layer masked to a sub-region of the base leather's ID color, and a dedicated stitches layer) — this "quick representation of the final texture" front-loads all mask-building so later chapters only swap folder contents.
+
+**Non-Destructive Workflow (Power of Effects)**
+16. Instead of hand-painting a fixed detail color (e.g. stitches) that breaks when the base material color changes later, **copy the base layer's mask** (Ctrl+Alt+C) and **paste it onto a filter layer** (Ctrl+Alt+V, e.g. HSL set to only lighten) — the detail then automatically tracks any future base-color edit.
+17. A filter can live inside its own dedicated layer (magic-wand "Add Filter" icon) so multiple filters can be organized, named, and toggled independently; Alt-click a channel icon to restrict a filter to just that channel.
+
+**Adding Variation (primary/secondary/tertiary breakup)**
+18. Duplicate a base Fill layer to create a "Lighten" (or "Darken") variant with slightly different Base Color/Roughness values.
+19. Mask it with a **Tri-Planar**-projected procedural noise from Assets → Procedurals/Grunges (e.g. Clouds 3) — Tri-Planar avoids visible UV seams that plain UV projection would show.
+20. Add a second, smaller-scale noise on top set to **Multiply** blend mode to break up the first noise's own repeating tiling pattern; adjust Balance/Contrast/Tiling/Rotation on both until the pattern reads as organic, not obviously repeating.
+21. Duplicate this whole recipe for additional passes (a "Saturation" pass for small colorful spots, a "Big Breakup" pass on Roughness for large-scale variation) and group them all under one folder set to **Pass Through** blend mode (required — filters inside a group default to Normal and go invisible until switched) via right-click → Pass Through → **Apply to all channels**.
+22. Organize breakup passes explicitly by scale — small, medium, and large ("primary, secondary, tertiary structure") — as the single stated most important realism principle in the whole course.
+
+**Adding Details**
+23. Load a tileable detail texture (Painter's built-in leather resource, or your own) into a Fill layer's Height channel only (Alt-click Height to isolate it); deliberately scale the tiling **larger** than real-world size so detail reads at typical viewing/game distance.
+24. Invert the detail mask with a **Levels** filter if the source texture reads backwards (dark cracks vs. light cracks); **Blur** a noisy detail mask slightly (e.g. 0.6-0.9) to soften without losing the pattern.
+25. Feed the same detail mask into a Pass-Through **HSL** (color) and **Contrast & Luminance** (roughness) layer so the detail consistently affects every channel, not just Height.
+26. Break up an obviously-tiling detail pass with a small Tri-Planar Multiply noise layer, controlling its strength via **Opacity** rather than deleting the effect outright if it removes too much detail.
+27. First introduction to **Anchor Points**: add one on a mask, then any layer positioned above it can reference that exact mask via "Fill → Anchor Points" (or as a filter's mask source) — demonstrated re-injecting a saved detail mask as a separate, independently-tunable Roughness-boost layer via added Levels.
+
+**Smart Material Save/Reuse**
+28. A group cannot have a mask directly on it when saved as a Smart Material (the resulting thumbnail breaks) — group the material's contents cleanly first, then right-click → **Create Smart Material**.
+29. Use a deliberate naming convention (e.g. `Leather_Trigon`, prefixed with your name/studio) so your own Smart Material library stays searchable and distinct from Painter's built-in defaults, especially once you've built dozens of variants.
+30. Rapidly re-skin a blocked-out mesh by dragging a saved Smart Material onto each masked base layer, deleting the temporary flat-color blockout layer once replaced, then applying one top-level grading filter (HSL: saturation/lightness) for quick large color changes (e.g. "the concept says this leather should be black").
+
+**Baked-Map Refinement**
+31. Add an AO-driven darkening pass: an HSL or Contrast layer set to **Pass Through + Apply to all channels**, masked by the baked **Ambient Occlusion** map (dropped from the Project/baked-maps panel) with **Levels → Invert** so occluded crevices read darker — adds real depth from the high-poly bake.
+32. Add a Curvature-driven pass: load the baked **Curvature** map directly into a Fill layer's Base Color channel at a low **Overlay** opacity (~25-30%) and independently into Roughness (Apply to all channels first, then dial per-channel), pushing baked-in sculpt detail (edges/creases) back into the final texture.
+33. Finish with a subtle **Sharpen** filter (~0.25) applied per-channel — kept deliberately mild to avoid a noisy/burnt look.
+
+**Wear and Tear**
+34. Build a "blood" Smart Material the same layered way as any other material: base red Fill layer, masked with **Moisture**/Dirt textures at Tri-Planar projection plus a Multiply breakup pass, hand-painted cleanup with the Dirt brush (`X` to toggle black/white paint), an HSL variation pass (masked by more Tri-Planar clouds) for non-uniform blood color, and a Contrast & Luminance pass for rough blood — saved as its own reusable Smart Material once finished.
+35. Build a "dust" pass from Painter's built-in **Smart Masks** library (search "dust" — e.g. Dust Double, Sand Dust) instead of hand-building a mask from scratch; tint with color, layer a second dust pass, and break up with a Tri-Planar Multiply noise.
+36. Cross-material edge wear: copy the top-coat leather layer's mask (Ctrl+Alt+C/V) onto a new layer, mask it with a built-in **Smart Mask** ("Fabric Edges", inverted) so the rough base-leather layer shows through at edges/cracks (curvature-driven), finish with a **Subtract**-mode Scratches Smart Mask for fine damage.
+
+**Final Adjustments & Export**
+37. Close with a top-of-stack HSL/Color-Balance/Contrast/Levels pass (grouped, Pass-Through, Apply to all channels) purely as a final look-grade — a habit worth doing even after "finishing," often after stepping away and returning with fresh eyes.
+38. Export via `Ctrl+Shift+E` (or File → Export Textures): choose an output template (an Unreal Engine template for game work so maps pack correctly; "Document Channels + Normal + AO" for a straight external render), set Alpha to No Alpha unless Opacity is genuinely used, PNG at 16-bit for extra dynamic range, and export at your true target resolution regardless of what resolution you textured at (the layer stack recalculates fresh at export time) — customize the output filename template via **Save Settings**.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `Fill layer` (all-channel base values) vs. `Paint layer` (strokes only); `Ctrl+G` group, `Ctrl+D` duplicate
+- Masks: right-click → Add White/Black Mask, **Add Mask with Color Selection** (ID-map-driven), Alt-click to preview in isolation, `X` to swap paint color
+- `Smart Material` (drag-on preset) vs. `Smart Mask` (drag-on mask preset, e.g. Fabric Edges, Dust Double, Sand Dust, Scratches)
+- `Filters`: HSL, Contrast and Luminance, Color Balance, Levels, Sharpen, Blur — Alt-click a channel to restrict; group blend mode must be **Pass Through** (+ "Apply to all channels") for filters inside a folder to take effect
+- `Anchor Point` (add on a mask; reference via "Fill → Anchor Points" or as a filter's mask source)
+- Projection: **Tri-Planar** (seam-free procedural noise placement) vs. plain UV
+- Baking: **Match by mesh name**, **Cage** wireframe + matching-error red/green heatmap, ID map **Color Source = Vertex Color**, Anti-Aliasing (test low, final 64x), bake resolution ≈ 2x final export resolution
+- Baked maps used directly in-material: **Ambient Occlusion** (Levels-inverted darkening mask), **Curvature** (Overlay BaseColor + Roughness push)
+- Copy/paste mask: `Ctrl+Alt+C` / `Ctrl+Alt+V`
+- Export: `Ctrl+Shift+E`, output template (Unreal Engine / Document Channels+Normal+AO), 16-bit PNG, No Alpha (unless Opacity used), custom filename via Save Settings
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner through Intermediate — explicitly structured as a ground-up foundations course; the creator states this single chapter/asset ("if you can master these techniques you can pretty much texture anything") is the strongest single foundation in the whole series, with more advanced chapters continuing beyond it depending on when the course is viewed.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen. UI (Baking Mode common settings layout, cage wireframe visualization, matching-error heatmap) is consistent with a modern, post-8.3-era Painter build; no explicit numeric version or version-gated feature name appears in the transcript or captured frames.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `paint-layer` `masks` `smart-material` `smart-mask` `generator` `anchor-point` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `curvature` `high-to-low-poly` `cage` `id-map` `texture-set` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `alpha` `tri-planar` `procedural` `export` `export-preset` `channel-packing` `game-engine` `unreal-export` `beginner` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Substance Painter Tutorial - Beginner To Advanced](substance-painter-tutorial---beginner-to-advanced.md) — same creator (TriGon); companion course in the same beginner-to-pro learning arc. Cross-link both ways once ingested.
+- [Substance Painter - Creating Professional Textures](substance-painter---creating-professional-textures.md) — same creator (TriGon); the most advanced of the three-part series, building further on this video's primary/secondary/tertiary breakup and non-destructive filter methodology. Cross-link both ways once ingested.
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); a deeper dive into every masking primitive this course only introduces at a beginner level (generators, tri-planar grunge, anchor points).
+- [How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial](how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md) — different creator (Jared Chavez); a dedicated deep-dive on Anchor Points, which this course only briefly introduces in its "Refining Our Details" chapter.
+- [Hand Painted Workflow in Substance 3D Painter](hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d.md) — different creator (Adobe); shares the AO/Position-generator-driven value-first approach that complements this course's AO/Curvature baked-map refinement chapter.

@@ -822,10 +822,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=UCKwN3QA_FM
 - **Author:** TriGon
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; modern Baking Mode UI consistent with a post-8.3-era build
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `smart-material` `smart-mask` `generator` `anchor-point` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `curvature` `high-to-low-poly` `cage` `id-map` `texture-set` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `alpha` `tri-planar` `procedural` `export` `export-preset` `channel-packing` `game-engine` `unreal-export` `beginner` `intermediate` `advanced`
+- **Summary:** Flagship 2h48m zero-to-production foundations course (26 chapters, one leather-belt-and-buckle asset): layers/channels/masking/smart-materials/filters fundamentals, then a full real pipeline — ZBrush-to-Painter baking (cage tuning, matching-error heatmap, Match by mesh name, ID map via Vertex Color), ID-map-driven blocking-out, a fully non-destructive filter-and-Pass-Through material-building method (the throughline technique — copy a base mask onto a filter layer instead of hand-editing color so everything stays reactive to later changes), a primary/secondary/tertiary Tri-Planar-noise breakup recipe for realistic variation, Anchor Points introduced for mask reuse, Smart Material save/reuse with a personal naming convention, AO/Curvature baked-map refinement, environmental wear/storytelling (blood + dust Smart Materials/Masks, cross-material edge wear), a final top-of-stack grading pass, and export settings. Companion to two other TriGon courses in this library (escalating skill level) — cross-linked.
 - **File:** tutorials/substance-painter-beginner-to-pro---course.md
 
 
