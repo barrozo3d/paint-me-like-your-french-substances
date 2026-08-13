@@ -586,6 +586,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/achieve-stunning-stylized-textures-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter | Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=xXad_mS7K9s
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain.md
+
 ---
 
 ## Tag Reference
