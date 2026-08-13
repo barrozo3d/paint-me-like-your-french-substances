@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=urA-oaoqfpM
 author: 3DRedBox
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; UI (standard Fill/Generator/Filter properties, no OpenPBR/Skew) consistent with the pre-12.1-era seen across this creator's other ingested videos"
+tags: [layers, fill-layer, paint-layer, masks, generator, curvature, anchor-point, blend-mode, texture-set, ambient-occlusion, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-a-shawl-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing a shawl in substance painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-a-shawl-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -279,30 +275,72 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [2:39] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_000.jpg
+- [3:47] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_001.jpg
+- [5:06] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_002.jpg
+- [7:00] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_003.jpg
+- [9:19] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_004.jpg
+- [12:19] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_005.jpg
+- [13:43] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_006.jpg
+- [16:36] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_007.jpg
+- [19:28] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_008.jpg
+- [24:32] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_009.jpg
+- [27:10] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_010.jpg
+- [31:00] tutorials/frames/texturing-a-shawl-in-substance-painter/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A single reusable "Edge Border" anchor-point mask, built once early in the stack, becomes the shared reference geometry every subsequent layer (fabric patterns, stitching, golden trim, fabric design, curvature sheen) is masked against — via Subtract or direct-load — to keep dozens of layers cleanly aligned to the shawl's hood/collar edge without re-masking by hand each time.
 
 ### Summary
-[PENDING EXTRACTION]
+A dense, effects-heavy garment build (red/gold inner fabric, silver/blue-and-white embroidered outer fabric) organized around two texture-set folders (`First Fabric`, `Second Fabric`). The inner fabric starts simply — base color, two curvature/cloth-fold-driven color-variation layers, then an `Edge Border` layer built from a `UV Seam`/`UV Border Distance` generator mask refined with a `Gradient Curve` filter (Round preset) — immediately anchor-pointed since it becomes the shared reference for nearly everything downstream. A library `Fabric Pattern` (numbered swatches like Motif 14/15/16) is applied Height+Normal(+AO)-only, DirectX-matched, and masked by loading the Edge Border anchor point in Subtract to get a clean-cut pattern boundary; AO is added at the Texture Set level for depth. The second (outer) fabric reuses the same Edge Border anchor point directly (recalled, not rebuilt), adds a second, independently-shaped border strip (2D-view UV-tile positioning, duplicated with Linear Dodge blend, Blur + Gradient Curve filters, subtracted against the Edge Border mask), then layers two more numbered fabric-pattern swatches — one placed only on the border line via its own anchor point, one applied broadly then subtracted against both anchor points to avoid stepping on the border — plus a hand-tuned crease/wrinkle sublayer for cloth folds. A `Stitches` folder (masked from the Edge Border anchor point) layers three stitch types: a `Top Stitching` material-mode stitch (Category `Satin`, `Triangle Satin Stitch`) with its own anchor point so the exact same stitch line can be recalled/repositioned elsewhere in the stack; a `Golden Stitches` layer (Metallic 1, Roughness 0.5, low height range) also anchor-pointed for reuse; and a `Middle Stitches` layer recolored to the fabric's blue. A Midjourney-generated dragon/ornamental design image is imported and applied as a `Fabric Design` Base-Color fill (tiling corrected for aspect ratio, masked against both the border and edge-border anchor points), then two more effect layers build on top: a `Pop-up` fill (partial-area black mask, boosted height, Blur + Gradient Curve for a raised emboss look) anchor-pointed so a following `Beadwork`-style metallic pattern layer can mask itself against exactly the popped-up area, with the design/pattern conflict between the two resolved by subtracting the pop-up mask from the design layer. The video closes with two atmospheric finishing layers: a `Curvature` generator referencing the fabric-pattern's own height data as a custom Image Input (Reference Channel = Height) to add localized soft-light brightening only where the woven pattern actually has raised detail (masked to a specific area via yet another anchor point, Multiply-blended in), and a final broad Curvature-generator color layer (Soft Light, low opacity, heavy Blur) that reads as a subtle cloth "sheen" even though — as the creator notes — it isn't an actual Sheen shader parameter.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Split the model into two texture-set folders early** (`First Fabric`, `Second Fabric`), each with its own paint mask, and build each fabric's material independently but sharing techniques/anchor points between them.
+2. **Build the inner fabric's base:** pick a base color (orange), roughness 0.5, then two Color Variation fills — one masked by the `Curvature` generator (Soft Light blend, white value, opacity ~60), one masked by a `Cloth Fold Large` alpha fill (tiling ~6) for a slightly darker secondary variation.
+3. **Build the reusable `Edge Border` layer — the video's structural throughline:** black mask + `UV Seam`/`UV Border Distance` generator (balance lowered), refined with a `Gradient Curve` filter set to the `Round` preset; keep only Height + Color channels (height increased, color white, Soft Light blend); add an **Anchor Point** to this layer immediately, since "we are going to use this edge border a lot."
+4. **Apply a library fabric pattern (e.g. Motif 15) Height+Normal-only:** match `Normal Format` to the project's format (DirectX), reduce the pattern's default intensity (10→2), tune Height Range (~0.4), raise tiling as needed; mask it with a black mask + full-white fill, then a second fill loading the **Edge Border anchor point** in `Subtract` blend, refined with Levels, to cleanly cut the pattern at the border boundary.
+5. **Add Ambient Occlusion at the Texture Set level:** Texture Set Settings → add the `Ambient Occlusion` channel, then control its strength via the layer's AO Depth parameter.
+6. **On the second (outer) fabric, recall the first fabric's Edge Border anchor point directly** rather than rebuilding the mask — load the anchor point into a new `Edge Border` layer on this fabric, control with a Levels slider.
+7. **Build a second, independently-positioned border strip:** black mask with UV Wrap off, position/scale it via the 2D/UV view's tile-region box (numeric bounds like "1 and 30"), duplicate with `Linear Dodge` blend, add `Blur` (~0.2) and `Gradient Curve` (Round) filters, then subtract the original **Edge Border anchor point mask** from it via Levels so the two borders don't overlap; tune Color+Height+Roughness on both the border and border-align layers (height ~0.1-0.2, slightly different per layer for depth separation).
+8. **Layer two more fabric-pattern swatches (Motif 14, Motif 16) with different placement roles:** Motif 14 masked to the border line only via its own new anchor point (Subtract-cleaned against Edge Border); Motif 16 applied broadly (tiling 10, rotation 90) then masked with a Subtract layer loading *both* prior anchor points so it avoids the border areas entirely — demonstrates stacking multiple anchor-point references in one mask to carve out a complex "everywhere except these regions" shape.
+9. **Add a crease/wrinkle sublayer for cloth folds:** search a `Crease` alpha, Height-only, tiling increased (~10-15) and seed varied until the wrinkle placement reads naturally; separately tune the border's Roughness (~0.5) once the extra detail made the surface read too shiny.
+10. **Build a `Stitches` folder masked from the Edge Border anchor point**, containing: (a) a `Top Stitching` layer using the built-in stitching material in Material mode (Category `Satin`, sub-style `Triangle Satin Stitch`, UV Wrap `Repeat Vertically`, tiling ~100), Color+Height+Roughness only, anchor-pointed so the same stitch line can be recalled elsewhere with UV Wrap set to `None`; (b) a `Golden Stitches` layer using a different stitching material (Motif 20-style), Metallic 1, Roughness 0.5, low Normal Intensity/Height Range, gold color, also anchor-pointed and recalled/repositioned via a duplicate fill; (c) a `Middle Stitches` layer using yet another stitching material (tiling ~50-62, UV Wrap `Repeat Vertically`), recolored to the fabric's own blue, Roughness ~0.1, also anchor-pointed.
+11. **Import an AI-generated design image (Midjourney) as the centerpiece pattern:** bring the image in as a `Fabric Design` Base-Color fill, correct tiling for the image's aspect ratio (e.g. 3:1), reposition to center the focal artwork (a dragon motif), mask by subtracting both the `Border` mask and the `Edge Border` anchor point (via two Subtract sublayers with Levels cleanup) so the design doesn't bleed onto the border/stitching areas; anchor-point the finished design mask for reuse.
+12. **Build a "pop-up"/embossed accent layer on top of the design:** a `Pop Up` fill with a hand-painted partial-area black mask, Height boosted (~0.2), `Blur` (~0.2) + `Gradient Curve` (Round) filters for a soft raised-edge look; anchor-point this pop-up mask.
+13. **Add a metallic beadwork-style pattern layer masked to exactly the pop-up area:** load a library pattern (Beadwork-style, Motif 29-ish), tiling ~60, rotation 90°, Color off (uses the fabric design's own color beneath), Height Range ~0.05, Normal Intensity ~3, Metallic 1, Roughness 0.2; mask it by loading the **pop-up anchor point** directly so the beadwork only appears where the emboss was painted.
+14. **Resolve the resulting design/pattern conflict** by adding a Subtract layer to the `Fabric Design` layer's mask that loads the **pop-up anchor point**, removing the design's own color from the popped-up/beadwork area so the two effects don't visually fight.
+15. **Add a localized curvature-driven highlight layer referencing the fabric pattern's own height, not the mesh's baked curvature map:** new `Curvature`-generator layer (Color only), Macro Detail mode, with its Image Input's custom map explicitly set to the fabric pattern layer already in the stack and Reference Channel = `Height` — this reads curvature from the *procedural pattern's* raised threads rather than the low-poly mesh, so highlights land exactly on the woven detail; Soft Light blend, white value, opacity ~50; masked to a specific area via another anchor point, Multiply-blended into the mask.
+16. **Finish with a broad, subtle "fabric sheen" layer:** a final `Curvature` generator (Global Balance only, no Macro Details) driving a Color (Soft Light, white, opacity ~40-60, heavy Blur) + Roughness (~40%) pass across the whole garment — explicitly flagged by the creator as visually similar to a Sheen shader parameter but not actually using one, since it's a static baked-in color effect rather than a view-dependent shader term.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Generators used:** `Curvature` (color variation; also a second instance with a custom fabric-pattern-height Image Input for localized highlights; a third broad instance for the final sheen pass), `UV Seam` / `UV Border Distance` (Edge Border mask source)
+- **Filters used:** `Gradient Curve` (Round preset, used repeatedly on border-related masks), `Blur` (border softening, pop-up emboss, final sheen), `Levels` (anchor-point mask cleanup throughout — the single most-repeated operation in this video)
+- **Library fabric-pattern swatches used:** Motif 14, 15, 16 (numbered "MB Fabric Pattern" assets, Height+Normal(+AO) only, DirectX normal format, intensity/height-range tuned per use), plus a `Beadwork`-style metallic pattern (Motif 29-ish) for the emboss accent
+- **Stitching materials used (Material mode, not the Pass tool):** `Top Stitching` (Category Satin, sub-style Triangle Satin Stitch), a gold-toned stitch material (Motif-20-style), a third "middle stitches" material — all applied as Fill layers in Material mode rather than hand-drawn with a stroke tool
+- **External asset:** Midjourney-generated dragon/ornamental design image, imported and used as a Base Color fill
+- **Blend modes used:** `Soft Light` (color variation, curvature highlights, final sheen), `Subtract` (the dominant mask-combination technique throughout, used with anchor-point-loaded masks almost everywhere), `Linear Dodge` (duplicated border layer), `Multiply` (localized curvature highlight mask)
+- **Anchor Point usage (this video's central technique):** Edge Border (created once, reused across nearly every subsequent layer on both fabrics), a second border-line anchor point, two fabric-pattern-placement anchor points, three stitch-layer anchor points (Top Stitching, Golden Stitches, Middle Stitches), a Fabric Design anchor point, a Pop-Up anchor point, and a localized-highlight-area anchor point — at least 8-9 distinct anchor points active simultaneously by the end of the build
+- **Texture Set Settings:** `Ambient Occlusion` channel added specifically for the first fabric's depth pass
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — not for any single technique in isolation (fill layers, generators, and filters are all standard), but for the sheer density of simultaneously-active anchor points and the discipline required to track which mask references which anchor point across two fabrics, three stitch layers, a design layer, and multiple effect layers without losing track of the dependency graph.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not stated on screen. UI (standard Fill/Generator/Filter properties panels, Texture Set Settings, no OpenPBR or Skew baking UI) is consistent with the pre-12.1-era seen across this creator's other ingested videos, though no single version-specific feature (like the "PAINT ALONG PATH" tool name seen in other 3DRedBox videos) appears here to pin it more precisely — this video's stitching is done via Material-mode stitching assets rather than the Pass/Paint-Along-Path stroke tool.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, curvature, anchor-point, blend-mode, texture-set, ambient-occlusion, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to texture a realistic slipper model](how-to-texture-a-realistic-slipper-model.md) — same creator (3DRedBox); shares the same anchor-point-as-reusable-mask-source philosophy taken to an even greater extreme here (placeholder masks there, ~9 simultaneous anchor points here).
+- [Texturing a Black Suit in Substance Painter](texturing-a-black-suit-in-substance-painter.md) — same creator; shares Curvature-generator-driven color variation and library fabric-pattern usage for garment surfaces.
+- [Texturing Women's Shorts with Lace Trim in Substance Painter](texturing-womens-shorts-with-lace-trim-in-substance-painter.md) — same creator; both duplicate a finished decorative layer (lace there, stitching/borders here) onto multiple garment locations via anchor points rather than copying whole layers.
+- More 3DRedBox tutorials (tactical boots, UV-set/stencil video, NavyCap) will be cross-linked here as they are ingested — see `tutorials/INDEX.md` for the current full list.
