@@ -366,6 +366,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/texturing-an-ornate-sword-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### How to Create a Realistic Poison Bottles Material Using Substance Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=386o64sxSpw
+- **Author:** 3DRedBox
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-create-a-realistic-poison-bottles-material-using-substance-painter.md
+
 ---
 
 ## Tag Reference
