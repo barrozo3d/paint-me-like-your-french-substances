@@ -998,10 +998,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=mjLiJ5yjto0
 - **Author:** Jared Chavez
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not specified
+- **Tags:** `thickness` `masks` `generator` `curvature` `blend-mode` `layers` `fill-layer` `paint-layer` `game-engine` `unreal-export` `export` `advanced`
+- **Summary:** SSS follow-up to Chavez's Neomorph creature texturing video: hand-paints a custom "Scattering" channel (white=max light transmission, black=fully bone-blocked, grays in between) starting loosely from a baked Thickness map, using per-region Paint layers (Stomach/Feet/Hands/ribcage) + `Levels - Scattering` adjustments + Blur for soft transitions + Curvature generator for edge detail, plus a non-physical "fake mass" belly-darkening trick for readability. Exports into an Unreal Engine 5 `SubsurfaceProfile` asset (Mean Free Path, Extinction Scale, Scattering Distribution, etc.) for final shader tuning. Cross-linked with both creature-texturing videos, Master Texturing, Unreal Sensei's UE5 tutorial, and Optimizing Textures (custom-channel-to-engine-asset pattern).
 - **File:** tutorials/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi.md
 
 ---

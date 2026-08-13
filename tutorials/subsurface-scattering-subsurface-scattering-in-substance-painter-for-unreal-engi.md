@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=mjLiJ5yjto0
 author: Jared Chavez
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified"
+tags: [thickness, masks, generator, curvature, blend-mode, layers, fill-layer, paint-layer, game-engine, unreal-export, export, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # SUBSURFACE SCATTERING: Subsurface Scattering in SUBSTANCE PAINTER for UNREAL ENGINE 5
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -169,30 +165,68 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:05] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_000.jpg
+- [1:14] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_001.jpg
+- [1:38] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_002.jpg
+- [2:00] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_003.jpg
+- [2:45] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_004.jpg
+- [4:03] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_005.jpg
+- [4:50] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_006.jpg
+- [5:30] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_007.jpg
+- [6:08] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_008.jpg
+- [7:17] tutorials/frames/subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Hand-painting a custom **Scattering** user/material channel in Painter (starting from a baked Thickness map as a rough guide, not a literal driver) to art-direct exactly where subsurface light transmission should read as bone-blocked vs. thin/fleshy, then exporting that channel into an Unreal Engine 5 `SubsurfaceProfile` asset for the final render look.
 
 ### Summary
-[PENDING EXTRACTION]
+Direct follow-up to Chavez's Neomorph creature texturing videos — this one isolates just the subsurface-scattering (SSS) map process he skipped over previously. The creature's Texture Set is named "Neomorph" with a dedicated **Scattering** channel visible in the Texture Set list (frame_002/006/008), painted with a grayscale value system: pure white = maximum light transmission (the top of the skull, his chosen "hero" scattering zone), pure/near black = fully blocked (bony landmarks: ribcage, spine, joints), with grays in between for partial transmission (arms/legs/tail — "more bone than flesh," so darker but not fully black). The workflow deliberately starts from the baked Thickness map as a loose starting point/sanity check (used to preview in Unreal early), then is almost entirely hand-repainted on top because thickness alone produces an undirected, gelatin/candle-like glow with no readable anatomy. The layer stack (visible in frame_002/006/008) is built from multiple named Paint layers per body region (`Stomach`, `Feet`, `Hands`, a spine/ribcage layer, etc.) interleaved with `Levels - Scattering` adjustment layers per region and a `Blur` filter to soften the on/off transitions at region boundaries. Later passes add: a second refinement pass for finer landmarks (tendons), a Curvature-generator layer to concentrate scattering control into edge/detail areas, and localized "fake mass" tricks — e.g. darkening the belly center to suggest solid organs blocking light even though nothing physically exists there to do so ("not 100% physically accurate... but it was able to get the point across"). The final step is iterating the actual `SubsurfaceProfile` asset in Unreal (frame_009: `Neomorph_SSProfile`) — Surface Albedo, Mean Free Path Color/Distance, World Unit Scale, Tint, Boundary Color Bleed, Extinction Scale, Normal Scale, Scattering Distribution, Transmission Tint Color, Dual Specular Roughness 0/1, Lobe Mix — dialing the shader itself to exaggerate scattering further than the painted map alone would produce, described as partly a "lucky" outcome from experimentation rather than a fully deterministic recipe.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Bake/inspect a **Thickness map** as the starting reference for the subsurface layer — accept it will have baking errors in complex areas (this asset had incorrect thickness at the feet); manually paint-fix small baking artifacts directly rather than chasing a perfect bake.
+2. Create the initial subsurface layer(s) set to **black** as the base (no scattering by default), then hand-paint value into it — this "secondary subsurface layers" approach treats the SSS map as fully authored, not thickness-derived.
+3. Paint black/near-black directly over **bony landmarks** — any area where bone sits close to the surface (ribcage, spine) — to block light transmission there and create a visible bone-vs-flesh read.
+4. Do a fast, rough first pass (e.g. just the ribcage) and preview it — validate early that the contrast between "bone" and "skin" areas is reading before investing more painting time.
+5. Add a **Blur** filter on top of the painted layer to soften the transition edges between scattering/non-scattering zones — prevents harsh on/off banding artifacts.
+6. Export the in-progress bake/paint to **Unreal Engine 5** early and iterate by eye against the real shader response — treat the engine's live material preview as the actual feedback loop, not the Painter viewport alone.
+7. Decide on one "hero" maximum-transmission zone per character (here: the top of the skull) and paint that area **pure white** — establishes the top of the value range; everything else is graded down from there in variations of gray/black.
+8. Paint **arms, legs, and tail** as a partial-transmission mid-tone (not pure black) — "more bone than flesh" areas get a darker gray that still allows a little light through, distinct from the pure-black bone landmarks.
+9. Do a **second refinement pass** adding finer-grained landmarks like tendons — areas that should read as slightly less scattering than surrounding flesh, adding nuance beyond the broad first pass.
+10. Layer a **Curvature-generator** on top of the hand-painted base to pull additional scattering detail control into edge/crevice areas, making fine details "pop" in the final SSS read.
+11. Add dedicated **custom paint layers for flake/damage skin areas** — retained separately so damaged/thin skin patches can be independently tuned to not read as fully thin/scattering, preserving the flake detail's visual identity in the SSS channel too.
+12. Use a **"fake mass" trick** for organs: paint extra black into the center of the belly (and a few other spots) purely to imply something solid is blocking light behind the skin, even though there's no actual geometry driving it — a pure illusion/read-improvement move, explicitly non-physically-accurate but visually convincing from multiple angles.
+13. Final step happens outside Painter: dial in the Unreal **SubsurfaceProfile** asset parameters (Surface Albedo, Mean Free Path Color/Distance, World Unit Scale, Tint, Boundary Color Bleed, Extinction Scale, Normal Scale, Scattering Distribution, Transmission Tint Color, Dual Specular Roughness 0/1, Lobe Mix) to push the shader's own scattering response further — the painted map and the shader profile work together, and some of the final look came from experimentally pushing the shader beyond what the map alone implies.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Baked **Thickness map** — starting reference only, not the final driver.
+- Custom/user **Scattering** channel (Texture Set: "Neomorph") — the channel all subsurface layers paint into.
+- Multiple named **Paint layers**, one per body region (seen in frames: `Stomach`, `Feet`, `Hands`, a ribcage/spine layer, plus others for arms/legs) — hand-painted grayscale values, white = max transmission, black = fully blocked.
+- `Levels - Scattering` adjustment layers — one per region, refining the black/white/gray range per painted area (`Affected channel: Scattering` visible in frame_004).
+- `Blur` filter — softens hard transmission/no-transmission transition edges.
+- **Curvature generator** — layered on top for edge/detail-driven scattering control.
+- Separate custom paint layers for **flake/damaged-skin** areas — kept independent so damage detail isn't washed out by the broader scattering pass.
+- Unreal Engine 5 **SubsurfaceProfile asset** (`Neomorph_SSProfile`) — Surface Albedo, Mean Free Path Color, Mean Free Path Distance, World Unit Scale, Tint, Boundary Color Bleed, Extinction Scale, Normal Scale, Scattering Distribution, Transmission Tint Color, Dual Specular Roughness 0 / Roughness 1, Lobe Mix.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — assumes comfort with custom/user channels, multi-layer value painting, and round-tripping a texture between Painter and a live Unreal shader for iterative tuning; not a beginner "toggle Subsurface on" workflow.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter (paired with Unreal Engine 5) — version not specified on screen or in narration.
 
 ### Tags
-[PENDING EXTRACTION]
+thickness, masks, generator, curvature, blend-mode, layers, fill-layer, paint-layer, game-engine, unreal-export, export, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER](realistic-creatures-hand-painted-textures-in-sustance-painter.md) — same creator, same Neomorph creature; this video is the direct SSS-map follow-up the base texturing video explicitly deferred ("I left out the subsurface scattering portion").
+- [How to TEXTURE in SUBSTANCE PAINTER | Creature TEXTURING](how-to-texture-in-substance-painter-creature-texturing.md) — same creator; shares the same hand-painted-value-zones-over-anatomy methodology (there: color zones for bone/fat/cavities; here: grayscale zones for light transmission).
+- [HOW TO MASTER TEXTURing in SUBSTANCE PAINTER](how-to-master-texturing-in-substance-painter.md) — same creator; conceptual companion — the "fake mass" belly trick here is a concrete example of that video's Phase 3 "embellishing reality for readability" philosophy applied to a non-color channel.
+- [Substance Painter Beginner Tutorial for Unreal Engine 5](substance-painter-beginner-tutorial-for-unreal-engine-5.md) (Unreal Sensei) — different creator; broader Painter-to-UE5 pipeline coverage including multi-texture-set blending and Nanite export, useful context for the export side of this video's Unreal round-trip.
+- [Optimizing Textures - How to Pack Masks Like a Pro](optimizing-textures---how-to-pack-masks-like-a-pro.md) (Abe Leal 3D) — different creator; shares the "author a custom User Channel in Painter, then reconstruct/consume it via a dedicated Unreal material asset" pattern (there: a packed "blood" channel driving a Material Instance parameter; here: a "Scattering" channel driving a SubsurfaceProfile asset).
