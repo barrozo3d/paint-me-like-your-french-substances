@@ -322,6 +322,7 @@ layers, masks, ambient-occlusion, roughness, basecolor, beginner, intermediate
 ## Related Tutorials
 - `substance-painter-building-masks-explained.md` (Jared Chavez) — his own detailed mask-construction video; this video is the philosophy underpinning why those masks are built in that order.
 - `realistic-creatures-hand-painted-textures-in-sustance-painter.md` (Jared Chavez) — direct hands-on application of this exact primary/secondary/tertiary phase breakdown to a creature texture.
+- [How to TEXTURE in SUBSTANCE PAINTER | ORC TEXTURES](how-to-texture-in-substance-painter-orc-textures.md) — same creator; a full-character production project that maps closely onto this video's stated 3-phase (Blockout / Breakup / Detail) structure across every material (metal, leather, cloth, skin).
 - `how-to-texture-in-substance-painter-creature-texturing.md` (Jared Chavez) — companion creature-texturing walkthrough, same underlying method.
 - `texturing-metal-from-scratch-in-substance-painter.md` (Jared Chavez) — Phase 1 material-definition and Phase 2 roughness-breakup principles applied concretely to a metal material.
 - `izakayas-paradigm-chapter-3-substance-3d-painter.md` (Substance3D/artist interview) — another workflow-philosophy piece (stated working principles rather than step-by-step), same "concept over mechanics" format.

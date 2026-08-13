@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=lbMaYHlflp0
 author: Jared Chavez
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified"
+tags: [layers, fill-layer, paint-layer, masks, blend-mode, procedural, tri-planar, stencil, roughness, basecolor, height, curvature, texture-set, export, game-engine, beginner, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-texture-in-substance-painter-orc-textures/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to TEXTURE in SUBSTANCE PAINTER | ORC TEXTURES
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-texture-in-substance-painter-orc-textures <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -335,30 +331,79 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [2:32] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_000.jpg
+- [3:49] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_001.jpg
+- [4:11] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_002.jpg
+- [7:20] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_003.jpg
+- [8:15] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_004.jpg
+- [9:05] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_005.jpg
+- [10:45] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_006.jpg
+- [11:50] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_007.jpg
+- [18:20] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_008.jpg
+- [23:00] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_009.jpg
+- [24:00] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_010.jpg
+- [26:45] tutorials/frames/how-to-texture-in-substance-painter-orc-textures/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A full-character, multi-material production walkthrough (metal armor → gold trim → leather → cloth → teeth/gums → skin → eyes) built around the same discipline repeated per material: establish a clean base, layer in procedural color/roughness breakup, then art-direct hand-painted damage/discoloration on top — validated continuously against a real-time render in Marmoset Toolbag rather than trusting the Painter viewport alone.
 
 ### Summary
-[PENDING EXTRACTION]
+A reference-driven, story-first project breakdown of an orc bust (a personal piece revisited years after its high-poly sculpt, based on concept work by Cosmin Podar). Before opening Painter, Chavez establishes a narrative ("cave-dweller, pale skin, armor recently stolen from someone of high status") and gathers a reference board (frame_000: material references, Lord of the Rings stills, other artists' work) — the story directly drives material choices (pale, light-starved skin; "new but used" armor with gold trim signaling stolen high-status gear). Work order is deliberately clothes/accessories first, face last, to build confidence early. **Metal armor:** establish a base material, layer procedurals for color/roughness breakup (frame_001: `Metal` / `Metal Pure` / layers), then hand-paint gold trim along edges using a stencil (frame_002: `Advanced Blending` stencil panel, `No Tiling` mode) to mark the "stolen from nobility" story beat. Two separate rust passes are layered: a **subdued, heavily art-directed base rust** confined to cavities (painted in/out by hand, not left procedural, to avoid an overly-decayed read), then a **punchier, more saturated "hero" rust layer** concentrated on specific scratches/crevices to draw eye attention (frame_003/004: `Rust` folder containing `Rust Fine` fill + paint layers + a `Mask Editor` generator). A final **orange/blue complementary color-nuance pass** (frame_005: `EdgeWear` / `SurfaceNoise` / `ColorNoise` / `ColorBreak` layers) is called out as one of the most important layers on any metal material for organic believability. The finished gold material is then drag-and-dropped onto the crown/helmet and re-art-directed for rust placement only, reusing the base build. **Leather:** discoloration/breakup on Base Color first (grunge/pattern maps chosen specifically for their organic shape, not just their noise quality), then the identical breakup process repeated on Roughness (called "probably your most important map" for PBR materials), followed by intentional edge-lightening/discoloration to reinforce sculpted gouges and indicate tearing, then a procedural cracking-detail pass for a "dried out" read, and finally an off-camera black-flaking layer suggesting fire/spark damage. **Cloth** (frame_006/007: `ColorBreakupLight` / `ColorBreakup` layers, `RoughnessBreak` groups) gets stain/discoloration variation on both Base Color and Roughness; Chavez notes he captured fabric weave detail directly in Painter here even though he'd normally prefer a Detail Normal Map applied at the engine level for higher quality. **Teeth/gums:** high-frequency textures for gum discoloration/abscesses (frame_008: base-color picker on a `ColorVariation`-type layer), marble-pattern noise repurposed for interesting vein-like tooth breakup, and — critically — a **thin transitional mesh** placed between tooth and gum geometry purely to visually blur the hard seam between two separately-textured meshes (the same trick is reused later between eye and eyelid). **Skin** follows his standard subdermal-first process (deferred in full detail to his dedicated skin-texturing video); color-balance struggle is explicitly discussed (over-saturated reds initially read as "sick," not intentional). Detail pass is called the turning point for this piece: three frequency bands of discoloration — large-frequency purple blotches over the mouth, medium darker spots on nose/forehead, small orange/yellow subtle marks (frame_009: `Base` / `BrightSpots` / `BrightSpots2` layers) — followed by a tiling splatter noise for sunburn-style skin damage, refined with hand-painted raised flaking skin (added Height) around the edges of those sunburn shapes for a convincing tertiary damage read. Roughness/Subsurface maps are called straightforward except for balancing the flaking-skin areas so they don't read as "gummy"/latex compared to the rest of the skin. **Eyes** reuse a pre-built ray-traced eye rig (Chavez's own ArtStation product) modified for iris shape, with two integration touches: a small metallic mesh placed inside the iris for a corneal-opacity/"blind eye" look, and — again — a thin transitional mesh between eye and eyelid to seat the two separately-modeled parts together (frame_011: the finished eye rendered in Marmoset Toolbag with its own material graph — Transmission/Scatter, Reflection/Microsurface panels visible).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Establish a **story/theme before opening Painter** — even two simple narrative ideas (character backstory + one material-condition idea) are enough to drive concrete material decisions across an entire character.
+2. Build a **reference board** (material refs, film stills, other artists' work) before texturing starts, especially when the source concept has no color/material information (a black-and-white sketch, in this case).
+3. Work order: **accessories/armor/clothing first, face last** — tackling the "easier"/more confidence-building materials first before the highest-stakes area (the face).
+4. **Metal base:** establish a clean base material, then layer procedurals on top purely for color/roughness variation and breakup — a first pass with no manual painting yet.
+5. **Gold trim:** hand-paint along story-relevant edges using a **Stencil** in `No Tiling` mode to place a secondary material (gold) precisely along armor seams — used to visually communicate the "stolen from nobility" backstory.
+6. Deliberately **cap detail level relative to the character's focal hierarchy** — push metal wear/detail further than usual for storytelling reasons, but keep it "manicured," subtle, and never competing with the face for viewer attention.
+7. **Rust — two-layer split:** first, a subdued/desaturated rust localized to cavities via careful hand-painting in/out (heavily art-directed to avoid an over-decayed read); second, a punchier, more color-saturated rust confined to specific "hero" scratches/crevices to draw focused attention, contrasted against the subtler base layer.
+8. **Orange/blue complementary color-nuance layer** on top of the metal, described as one of the most consistently important layers for making any metal material feel organic rather than flat — implemented as separate `EdgeWear`/`SurfaceNoise`/`ColorNoise`/`ColorBreak` layers.
+9. **Reuse a finished material across parts:** drag the completed gold material onto a second piece (the crown) and re-art-direct only the parts that need it (rust placement) rather than rebuilding from scratch.
+10. **Leather — Base Color breakup first, then repeat the identical breakup process on Roughness** — pick grunge/pattern maps specifically for their organic shape (not just generic noise) to extract interesting silhouettes onto the base.
+11. **Leather edge-lightening pass:** intentionally placed (not fully procedural) light discoloration along sculpted gouges/tears to reinforce existing high-poly detail and indicate wear-over-time.
+12. **Leather cracking + black-flaking detail:** a procedural cracking layer for a "dried out" read, plus an off-camera black-flake layer suggesting fire/spark damage as a final punchy accent — both kept subtle relative to the base breakup.
+13. **Cloth:** Base Color and Roughness breakup via stains/discoloration for a used, dirty feel; fabric weave detail captured directly in Painter for this piece (noted as a deliberate deviation from his usual preference for an engine-side Detail Normal Map).
+14. **Teeth/gums:** high-frequency texture layers for gum discoloration/abscesses; a **marble-pattern noise** repurposed as a tooth-breakup texture for believable veiny variation — cross-material texture reuse as a general technique.
+15. **Transitional mesh trick (teeth/gum and eye/eyelid):** insert a thin sliver of extra geometry between two separately-textured meshes purely to blur/seat the hard seam between them — used twice in this project (mouth and eye) as a reusable integration technique, independent of texturing itself.
+16. **Continuous engine round-tripping:** load the in-progress character into **Marmoset Toolbag** early and often (metal, cloth, skin, eyes) to validate how materials actually read under real lighting — treat the engine, not the Painter viewport, as the final feedback loop, especially for color-balance decisions on skin.
+17. **Skin detail pass — three frequency bands of discoloration**, layered independently: large-frequency purple blotches (e.g. over the mouth), medium darker spots (nose/forehead), small subtle orange/yellow marks — described as the layer combination that made this particular character's skin "click."
+18. **Sunburn/flaking-skin damage:** start from a tiling splatter noise for the base sunburn-mark shapes, then hand-paint raised flaking skin (with added Height) around the edges of those shapes as the necessary tertiary reinforcement — the splatter noise alone "doesn't look great" without this second pass.
+19. **Roughness/Subsurface balancing for skin:** the main pitfall to solve is keeping flaking-skin areas from reading as "latex-y"/gummy relative to the rest of the face — requires deliberate roughness contrast between damaged and healthy skin zones.
+20. **Eye integration:** reuse a pre-built ray-traced eye rig, adjust iris shape per-character, add a small metallic mesh inside the iris for a corneal-opacity effect, and use the same transitional-mesh trick as the teeth/gums to seat the eye into the eyelid.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Metal: `Metal` / `Metal Pure` base layers, procedural breakup layers, `Advanced Blending` **Stencil** (No Tiling mode) for gold trim placement.
+- Rust: `Rust` folder containing `Rust Fine` fill/paint layers plus a `Mask Editor` generator (`Global Invert`/`Global Blur`/`Global Balance`/`Global Contrast` parameters) — two separate instances for the subdued and punchy rust passes.
+- Metal color nuance: `EdgeWear`, `SurfaceNoise`, `ColorNoise`, `ColorBreak` layers — orange/blue complementary variation.
+- Leather: sequential Base Color then Roughness breakup using grunge/pattern maps chosen for organic shape; edge-lightening paint layer; procedural cracking layer; off-camera black-flaking layer.
+- Cloth (`Cloth` Texture Set): `ColorBreakupLight`, `ColorBreakup` (Base Color) and `RoughnessBreak` groups with `Group 1`/`Group 3` sub-layers (Roughness channel).
+- Teeth/Gums: high-frequency discoloration paint layers, marble-pattern noise repurposed for tooth veining; thin **transitional mesh** geometry between tooth and gum.
+- Skin (`Skin` Texture Set): `Base`, `BrightSpots`, `BrightSpots2` layers (large/medium/small-frequency discoloration bands); tiling splatter noise for sunburn base shapes; hand-painted flaking-skin Height detail on top.
+- Eyes: pre-built ray-traced eye rig (Chavez's own ArtStation asset), small metallic mesh inside iris for corneal-opacity, transitional mesh between eye and eyelid.
+- External validation: **Marmoset Toolbag** real-time renderer used continuously throughout for look-development iteration (visible in frame_011: Transmission/Scatter and Reflection/Microsurface material panels).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — full-character production pipeline assuming comfort with layered procedural+hand-painted breakup on every material type, multi-texture-set organization, and iterative engine round-tripping; not a from-zero beginner tutorial, though individual techniques (stencil trim, two-tier rust, transitional meshes) are independently reusable at intermediate level.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter (paired with Marmoset Toolbag for render validation) — version not specified on screen or in narration.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, blend-mode, procedural, tri-planar, stencil, roughness, basecolor, height, curvature, texture-set, export, game-engine, beginner, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER](realistic-creatures-hand-painted-textures-in-sustance-painter.md) — same creator; shares the hand-painted-zone-plus-procedural-repurposing methodology (e.g. marble noise for teeth here, granite-style grunge for a rash there).
+- [How to TEXTURE in SUBSTANCE PAINTER | Creature TEXTURING](how-to-texture-in-substance-painter-creature-texturing.md) — same creator; shares the complementary-color (blue/orange here, explicit hue/saturation layering there) philosophy for avoiding flat materials.
+- [TEXTURING METAL from Scratch in SUBSTANCE PAINTER](texturing-metal-from-scratch-in-substance-painter.md) — same creator; a focused from-scratch build of exactly the base-material-then-procedural-breakup-then-rust metal process summarized at high level here.
+- [HOW TO MASTER TEXTURing in SUBSTANCE PAINTER](how-to-master-texturing-in-substance-painter.md) — same creator; this video is close to a direct full-project demonstration of that video's stated 3-phase (Blockout / Breakup / Detail) philosophy — the two-tier rust, edge-lightening, and skin frequency-band passes map almost exactly onto the described Phase 1/2/3 structure.
+- [SUBSURFACE SCATTERING: Subsurface Scattering in SUBSTANCE PAINTER for UNREAL ENGINE 5](subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi.md) — same creator, different character (Neomorph) — same subdermal-first skin methodology and multi-frequency detail-layering approach, applied there to a light-transmission channel instead of color.
+- [How to Paint Realistic Skin in Substance Painter](how-to-paint-realistic-skin-in-substance-painter.md) (FlippedNormals) — different creator; complementary fully hand-painted skin methodology, useful comparison for skin color-zone strategy.

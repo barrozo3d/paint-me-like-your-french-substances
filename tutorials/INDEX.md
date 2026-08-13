@@ -1020,10 +1020,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=lbMaYHlflp0
 - **Author:** Jared Chavez
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not specified
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `blend-mode` `procedural` `tri-planar` `stencil` `roughness` `basecolor` `height` `curvature` `texture-set` `export` `game-engine` `beginner` `intermediate` `advanced`
+- **Summary:** Full-character project breakdown of an orc bust (story-first: cave-dweller pale skin, stolen high-status armor). Metal: base + procedural breakup, stencil-placed gold trim, two-tier rust (subdued cavity rust + punchy hero-scratch rust), orange/blue complementary color-nuance layer. Leather: Base Color then Roughness breakup with organic-shaped grunge maps, edge-lightening, procedural cracking. Cloth stain/discoloration breakup. Teeth/gums: marble-noise veining + a thin transitional mesh to seat tooth/gum geometry (reused later for eye/eyelid). Skin: 3-frequency-band discoloration (large/medium/small), tiling-splatter sunburn base + hand-painted raised flaking-skin Height detail. Continuous Marmoset Toolbag round-tripping throughout. Cross-linked with both creature-texturing videos, Texturing Metal from Scratch, Master Texturing, Subsurface Scattering, and FlippedNormals' skin-painting video.
 - **File:** tutorials/how-to-texture-in-substance-painter-orc-textures.md
 
 ---
