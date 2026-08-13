@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=6eRY49oxJNI
 author: 3DRedBox
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; UI (Display Settings ACES tone-mapping, standard Shader Settings panel, no OpenPBR/Skew) consistent with the pre-12.1-era UI seen across this creator's other ingested videos"
+tags: [layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, alpha, procedural, basecolor, roughness, height, normal-map, opacity, metallic, smart-material, texture-set, iray-render, viewport, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # 🎨 Texturing Women's Shorts with Lace Trim in Substance Painter 🎨
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-womens-shorts-with-lace-trim-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -118,30 +114,74 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:53] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_000.jpg
+- [3:24] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_001.jpg
+- [6:29] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_002.jpg
+- [8:53] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_003.jpg
+- [12:40] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_004.jpg
+- [13:58] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_005.jpg
+- [16:51] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_006.jpg
+- [18:42] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_007.jpg
+- [21:12] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_008.jpg
+- [22:03] tutorials/frames/texturing-womens-shorts-with-lace-trim-in-substance-painter/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Garment texturing (women's shorts with a floral AI-generated pattern and a crochet lace trim) built from viewport/shader calibration, Marvelous-Designer-baked wrinkle alphas applied directly as height data (no ZBrush step), an AI-image-generator-sourced tiling pattern, and an opacity-channel-driven lace decal system duplicated across straps via anchor points.
 
 ### Summary
-[PENDING EXTRACTION]
+Opens with viewport/shader calibration rather than jumping straight into layers: environment map + exposure, camera focal length 75mm, tone mapping set to `ACES`, and Shader Settings with `Double Sided`, `Alpha Blending` (needed later for the opacity-channel lace), and `Bent Normal` all enabled. The main fabric body starts from the built-in `Fabric Canvas Crease(d)` smart material, pruned down (sharpen/HSL/folds/edge-fold sublayers removed in favor of building those effects manually later) and recolored. A `Gradient Color` fill (Soft Light blend, inverted 3D-Linear-generator mask) adds broad value variation, and a `Seam and Stitches` paint layer uses the shelf's stitching tool for visible seams. The video's signature technique is importing two Marvelous-Designer-baked wrinkle alphas directly as Height-only fill layers, then routing their effect through a top-of-stack Pass-Through "Effect" layer's `Height to Normal` filter — with the crucial detail of setting the *lower* wrinkle layers' own Height channel to `Linear Dodge` and Normal channel to `Normal Map Combine` so the wrinkle detail survives underneath the effect layer without being overwritten or distorted by layers above it. A base pattern is generated with an AI image tool (tiling explicitly enabled in the generator settings) and applied as a `Color+Height+Roughness` fill layer, masked via a UV-island paint selection refined with an anchor-point-referenced Multiply mask. The lace trim is built as a purchased/imported lace tool loaded into a Height+Opacity-only fill layer (after adding the `Opacity` channel via Texture Set Settings), with two overlapping lace-strip variants combined via `Linear Dodge` on the Opacity channel and sharpened with a `Levels` filter targeting Opacity specifically; the finished lace layer is then anchor-pointed so it can be duplicated onto every strap via lightweight anchor-referencing sublayers instead of copying the whole layer (with the mask's Channel Mapping set to reference Opacity directly to fix a stray-line artifact). A final `Strip` fill layer (Multiply blend, polygon-selected mask) adds a decorative stripe accent on the waistband trim.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Calibrate the viewport/shader before texturing:** Display Settings — environment map set to a city HDRI, exposure to 1, camera focal length 75mm, tone mapping `Function` set to `ACES`; Shader Settings — enable `Double Sided`, `Alpha Blending` (needed for the lace's opacity channel later), and `Bent Normal`.
+2. **Start the main fabric from the built-in `Fabric Canvas Crease(d)` smart material**, then prune it: delete the built-in Sharpen sublayer (a Sharpen filter will be added manually at the end instead), recolor the base to light blue, remove the HSL adjustment sublayer, keep Fibers on, but turn off Folds and Edge Fold (wrinkles will be added separately via baked alphas), keep Dust.
+3. **Add a `Gradient Color` fill layer** for broad value variation: black color, `Soft Light` blend, black mask + `3D Linear` generator, inverted, then balance/contrast tuned live against the model.
+4. **Add a `Seam and Stitches` paint layer** using the shelf's stitching brush/tool to hand-place visible seam stitching along the garment's construction lines.
+5. **Import Marvelous-Designer-baked wrinkle alphas as Height-only fill layers** (placed after Fabric Canvas Crease): Height set to ~0.5, black mask + Fill loading the wrinkle alpha into the grayscale input, UV Wrap set to `None` for 2D placement/positioning via the 2D view (F3).
+6. **Boost wrinkle visibility with a Pass-Through "Effect" layer + Height to Normal filter:** add a paint layer named `Effect` above Seam and Stitches, blend mode `Pass Through`, apply to all channels; add a `Height to Normal` filter with `Use World Unit` off, tuning Normal Intensity until the wrinkle read strengthens dramatically (demonstrated by isolating with Fabric Canvas Crease disabled).
+7. **Fix the "effect layer can't see the wrinkle layers below it" problem with a channel-specific blend-mode trick:** move the Effect + wrinkle layers back down the stack, then on the Fabric Canvas Crease layer specifically set its Height channel's blend mode to `Linear Dodge` and its Normal channel's blend mode to `Normal Map Combine` — this lets the wrinkle detail read through correctly without being distorted or hidden by the layers stacked above.
+8. **Duplicate the wrinkle fill layer for a second wrinkle placement**, keeping it in `Linear Dodge` blend and repositioning independently in the 2D view.
+9. **Generate a tiling base pattern with an AI image tool** rather than hand-painting or sourcing stock art: set a style preset (e.g. "graphic design vector"), 1:1 aspect, explicitly enable `Tiling` and a negative prompt in Advanced Settings (tiling is called out as essential for a seamless in-Painter result), generate, download.
+10. **Apply the AI pattern as a `Pattern` fill layer** (Color + Height + Roughness only): load the downloaded pattern into Base Color, tiling ~3, rotated 90°; mask built from a UV-island paint selection (select all islands, `Subtract` blend, invert with X, then re-select only the desired island) captured via an Anchor Point, referenced by a separate Fill sublayer in `Multiply` blend so the pattern only appears within the selected UV region; roughness set ~0.8, Height ~0.3, finished with a `Blur` filter (~0.2) on the mask to soften pattern edges and avoid aliasing.
+11. **Add the `Opacity` channel via Texture Set Settings** before starting the lace work — required because the lace decal relies on an alpha/opacity cutout rather than a solid fill.
+12. **Build the lace trim as a paint layer with a fill sublayer:** create a `Lace` paint layer, right-click → Add Fill for a sub-layer, load the purchased lace tool material, disable Color/Roughness/Metal/Normal so only Height and Opacity carry data, set UV Wrap to `Repeat Horizontally`, mask via `Polygon Fill` (Element/Mesh Fill mode) to isolate the trim geometry, position/scale in 2D.
+13. **Layer a second lace tool variant on top**, combined via the Opacity channel's blend mode set to `Linear Dodge` (Normal → Linear Dodge, not the layer's overall blend mode) so both lace patterns are visible simultaneously rather than one occluding the other.
+14. **Sharpen the lace cutout with a `Levels` filter targeting the Opacity channel specifically** (`Effect channel` set to Opacity), pushing the slider until the opacity mask reads as a clean, strong cutout rather than a soft gradient.
+15. **Duplicate the lace onto every strap via Anchor Point, not layer copies:** anchor-point the finished lace paint layer, then for each additional strap create a new fill layer that loads that anchor point as its mask source (so opacity/pattern/color edits to the original propagate everywhere) — explicitly framed as the correct approach because "we always want to change the opacity, the pattern, the color" and duplicating whole layers would break that; set each duplicate's Opacity-channel blend mode to `Linear Dodge` and manually place/select the correct area per strap.
+16. **Fix a stray-line artifact on the duplicated straps via mask Channel Mapping:** in the mask's `Channel Mapping` section, explicitly set the mask to reference the source layer's `Opacity` channel — resolves an artifact that appeared on two of the strap instances.
+17. **Add a final `Strip` fill layer for a waistband accent:** Height only, increased height amount, black mask via Polygon Fill selecting the trim line, Fill loading a `Strip` pattern (reduced Shift, increased Strip count/tiling), blend mode `Multiply` so the stripe only reads within the already-selected mask area.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Smart material used:** built-in `Fabric Canvas Crease(d)` (heavily pruned — Sharpen/HSL/Folds/Edge Fold sublayers removed or disabled)
+- **External content used:** two Marvelous-Designer-baked wrinkle alphas (imported as grayscale height alphas, no ZBrush step), a purchased lace "tool" material (loaded twice, two variants combined), an AI-generated tiling floral pattern image (image-generation settings: style preset, 1:1 aspect, Tiling + negative prompt enabled in Advanced Settings)
+- **Generators used:** `3D Linear` (Gradient Color mask, inverted)
+- **Filters used:** `Height to Normal` (World Unit off, tuned Normal Intensity), `Blur` (~0.2, pattern-edge anti-aliasing), `Levels` (Effect channel set to Opacity, lace cutout sharpening)
+- **Fills/patterns used:** `Strip` (final waistband accent, reduced Shift, increased tiling)
+- **Blend-mode tricks (channel-specific, not layer-wide):** Fabric Canvas Crease's Height channel set to `Linear Dodge` and Normal channel set to `Normal Map Combine` so wrinkle layers read through correctly from below a Pass-Through effect layer; lace Opacity channel set to `Linear Dodge` to combine two lace variants without one occluding the other
+- **Layer-wide blend modes used:** `Soft Light` (Gradient Color), `Multiply` (AI-pattern mask layer, final Strip layer), `Pass Through` (top-of-stack Effect layer applied to all channels)
+- **Anchor Point usage:** one on the UV-island pattern mask (referenced by a Multiply sublayer), one on the finished Lace paint layer (referenced by new fill-layer sublayers for every additional strap instead of duplicating the whole layer)
+- **Mask tooling:** `Polygon Fill` (Element/Mesh Fill mode) for UV-island/geometry-based mask selection, mask `Channel Mapping` explicitly pointed at the source layer's `Opacity` channel to fix a strap artifact
+- **Texture Set Settings:** `Opacity` channel added specifically to support the lace decal
+- **Shader Settings:** `Double Sided`, `Alpha Blending`, `Bent Normal` all enabled
+- **Display Settings:** ACES tone mapping, city-HDRI environment (exposure 1), 75mm camera focal length
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — the channel-specific (not layer-wide) blend-mode routing for the wrinkle/effect-layer interaction and the opacity-channel lace system (dual-variant Linear Dodge combine, Levels-on-Opacity sharpening, anchor-point-driven multi-strap duplication with Channel Mapping fixes) are genuinely advanced techniques; the AI-pattern-generation step is comparatively simple but assumes access to an external AI image tool.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not stated on screen. Display Settings (ACES tone mapping, environment/exposure controls) and Shader Settings (Double Sided, Alpha Blending, Bent Normal) shown are long-standing features not tied to a specific version; overall UI is consistent with the pre-12.1-era (no OpenPBR/Skew) seen across this creator's other ingested videos.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, alpha, procedural, basecolor, roughness, height, normal-map, opacity, metallic, smart-material, texture-set, iray-render, viewport, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Texturing a Black Suit in Substance Painter](texturing-a-black-suit-in-substance-painter.md) — same creator (3DRedBox); both use UV-island/Polygon-Fill mask selection combined with anchor points to drive reusable, non-rendered mask sources.
+- [How to texture a realistic slipper model](how-to-texture-a-realistic-slipper-model.md) — same creator; shares the anchor-point-as-reusable-mask-source philosophy (placeholder masks there, the multi-strap lace duplication here) and a Pass-Through "Effect" layer used to stack finishing filters at the top of the stack.
+- [Texturing a Worn Wooden Stool in Substance Painter](texturing-a-worn-wooden-stool-in-substance-painter.md) — same creator; the wrinkle layers' Height-channel-to-Linear-Dodge trick here is the same channel-specific blend-mode approach used for the stool's border-effect layer.
