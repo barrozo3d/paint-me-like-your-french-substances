@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=gv9R6a6VPYQ
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen"
+tags: [layers, fill-layer, masks, generator, anchor-point, blend-mode, height, basecolor, roughness, metallic, emissive, alpha, procedural, viewport, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing a Cyberpunk Building in Substance 3D Painter – Project Breakdown | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -166,30 +162,72 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:14] tutorials/frames/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s/frame_000.jpg
+- [0:48] tutorials/frames/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s/frame_001.jpg
+- [1:39] tutorials/frames/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s/frame_002.jpg
+- [3:06] tutorials/frames/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s/frame_003.jpg
+- [4:10] tutorials/frames/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s/frame_004.jpg
+- [5:03] tutorials/frames/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s/frame_005.jpg
+- [6:41] tutorials/frames/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s/frame_006.jpg
+- [7:43] tutorials/frames/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Fast-paced full-building project breakdown: every surface (brick, concrete, fabric awnings/blinds, metal, tile, rug) built from drag-and-drop base textures/smart materials plus stacked generator-driven grayscale masks (dirt, grunge, checker, tile), with a recurring anchor-point pattern (referred to as "ankle points" in the Whisper transcript — a mis-transcription of **anchor points**) linking engraved-height detail layers to downstream dirt/wear masks via Micro Height/Micro Normal.
 
 ### Summary
-[PENDING EXTRACTION]
+Adobe collaboration piece walking through texturing an entire Cyberpunk-style street-level building shopfront: layered brick walls (concrete + terracotta base, inverted/tiled brick-pattern mask, height-boosted duplicate, color-correct/color-balance saturation pass, dirt/moss generator layers, then hand-erased "fallen off" bricks with a custom brush), concrete elements (Plastic Dusty smart material re-skinned with a chosen base texture, Concrete Cast corner pieces with engraved height-channel line details referenced by anchor points into a dirt layer, finished with a cracks brush), a red/gold stacked-fabric awning pattern (duplicated masked layers blended with Oil Paint + Sharpen filters), neon signage (Emissive channel + Emissive Intensity in shader settings + viewport Glare toggle), marble-veined door/window surrounds reusing the Plastic Dusty smart material, tile flooring (checker-fill height/color layers switched to tri-planar projection when UV checker tiling looked wrong, plus Sharp Dirt and roughness grunge leaks), and a final entrance rug with a hand-painted footprint using a footprint brush refined with a basic brush for a shoe-print look. Some sub-topics (window/glass materials, AC unit texturing) are explicitly deferred to the creator's Instagram, not covered on-screen here.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Wall base: drop a Concrete Cast texture as the base fill layer, add a Clay Terracotta layer on top.
+2. New fill layer with a Brick pattern mask; invert it, adjust X/Y tile counts, and scale down until the brick read looks right.
+3. Duplicate the brick layer, disable all channels except Height, and raise it slightly so bricks read with more relief.
+4. On the color layer, apply **Color Correct** and **Color Balance** filters to push saturation/darken the brick color.
+5. New dark-gray layer + black mask + **Dirt generator**, tuned to read as grease/smoke buildup.
+6. Moss accents: drag a skin/vegetation texture, recolor it, drive placement with a **3D Linear Gradient generator** (green tint toward the base) plus a **Dripping Grass generator** for moss higher up the wall.
+7. Group all wall layers into one folder; add a folder-level black mask and hand-paint to remove bricks from corners; switch to a different brush (size/angle tuned) to erase bricks one-by-one near pipes and other "logical" damage spots for a fallen-off-brick look.
+8. Add a dirt layer over the whole folder, then apply a **Sharpen filter** (0.1 amount) as a final wall touch.
+9. Ground/pavement: Concrete Coarse base texture; drop the **Plastic Dusty** smart material and swap its fill layer for the chosen base texture; retune its dirt/dust masks and fill colors; add a separate dirtier layer for the sidewalk look; reuse the same material on curb elements.
+10. Building corners: switch base to **Concrete Cast**, duplicate + darken it, fill a black mask with a grunge texture (scale/rotation tuned) to age the surface.
+11. Add a brighter-color layer masked with a **Concrete Edges** generator/mask; add a Height-only layer, lower its height value so painted strokes read as engraved (not raised) lines; paint dividing lines in 2D view to break the concrete into panels.
+12. Add **anchor points** on this engraved layer, then reference them in the dirt layer by enabling **Micro Height** and **Micro Normal** in its properties — dirt now concentrates correctly along the engraved grooves; adjust dirt scale/invert as needed; finish with a **cracks brush** hand-painted on vulnerable edges/ground-adjacent areas. Same material reused on the roof.
+13. Awning: drop a blue fabric texture, recolor red, duplicate + darken; add a black mask using the **Fabric Circle Half Overlap** texture as the grayscale pattern (rotation/scale/border-width tuned); stack further duplicated layers with different colors/mask tweaks to build a multi-color scalloped pattern.
+14. Group the awning layers, blend them with **Oil Paint** + **Sharpen** filters; add a white layer + **Dripping Rust generator** for damage, and a dark-brown layer + **Dust Soft mask** for grime.
+15. Metal details: mostly Substance 3D Library smart materials, just retuning dirt masks or swapping base textures.
+16. Neon signs: enable the **Emissive** channel in Texture Set Settings on the color-filled layer, raise **Emissive Intensity** in the shader settings tab, and enable **Glare** in Display Settings for the glow; repeat per sign with different emissive colors (pink/green).
+17. Entrance door/window frames: reuse the **Plastic Dusty** smart material, retune color/dirt mask; add a Height-only layer with a **Tile generator** (later swapped for a **Stripes generator**) at the top of the stack for raised trim detail; add anchor points and reference them in a dirt layer for wear around the raised details (new anchor points per object — anchor data is object-specific, not shared).
+18. Small objects (AC unit etc.): same height/metallic/anchor-point/mask toolkit, plus hand-added small details like screws for realism; grunge-grayscale fills throughout for a greasy, dusty city look.
+19. Tile flooring: drop a **Marble Veined** texture; new layer with raised Height + black mask filled by a **Checker** generator; duplicate the same checker approach for the color layer; when checker tiling looked wrong, switch the projection to **tri-planar** (mis-transcribed "tree planner") and retune colors; add a **Sharp Dirt** mask and grunge leaks in the roughness layer (low value) for subtle wear; same setup reused for interior tiles with adjusted contrast/color/scale, plus anchor points on the walls.
+20. Rugs/blinds: roll blinds textured the same way as the awning (fabric base + stacked masked duplicates); entrance rug uses a different fabric plus a diagonal-pattern duplicate for variation; finishing touch — a mud layer with Base Color swapped for Height, blend mode set to **Replace** (so height only affects this layer), hand-painted with a **footprint brush** and refined with a basic brush for a more shoe-like print.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Base textures: Concrete Cast, Clay Terracotta, Concrete Coarse, Marble Veined, fabric textures
+- Generators: Brick pattern, Dirt, 3D Linear Gradient, Dripping Grass, Dripping Rust, Concrete Edges, Checker, Fabric Circle Half Overlap (grayscale mask), Dust Soft mask, Sharp Dirt
+- Smart materials: Plastic Dusty (reused across concrete/door/metal elements)
+- Filters: Color Correct, Color Balance, Sharpen (0.1), Oil Paint
+- Height-only layers for engraved/raised detail; Anchor Points + Micro Height/Micro Normal referencing (per-object, not shared)
+- Brushes: custom erase brush (bricks), cracks brush, footprint brush + basic brush refinement
+- Emissive channel (Texture Set Settings) + Emissive Intensity (shader settings) + Glare (Display Settings) for neon glow
+- Projection: UV vs. tri-planar (switched mid-workflow for tile checker pattern)
+- Blend mode: Replace (mud/footprint height-only layer)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — extremely fast-paced, assumes fluency with generators, anchor points, smart materials, filters, and multi-projection masking; not a beginner step-by-step despite the creator's "possible for beginners" framing.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version **not stated on screen**; no version-gated filter/feature names (Bevel Smooth, Directional Distance, Auto-Cage, etc.) appear in transcript or captured frames, so no version floor could be pinned from this video alone.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `masks` `generator` `anchor-point` `blend-mode` `height` `basecolor` `roughness` `metallic` `emissive` `alpha` `procedural` `viewport` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"Complex Wooden Medieval Door Tutorial in Substance 3D Painter"** (`tutorials/complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md`, video `cRKK4YOXLtQ`) — same anchor-point-driven engraved-height-to-dirt-mask pattern (Micro Height/Micro Normal referencing), applied there to a single hero door instead of a whole building.
+- **"Texturing Gothic Architecture in Substance 3D Painter: Part 1"** (`tutorials/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe.md`, video `UQkmXEWJr80`) — same Adobe-official architectural-texturing genre: brick generators reused at multiple scales, dirt/moss generator stacking, anchor-point mask reuse.
+- **"SUBSTANCE PAINTER: Building Masks Explained"** (`tutorials/substance-painter-building-masks-explained.md`, video `um3YRzqwYU4`) — deeper dedicated dive into the same masking-primitive toolkit (generators, tri-planar procedural breakup, anchor points) used loosely throughout this building breakdown.

@@ -382,10 +382,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=gv9R6a6VPYQ
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `masks` `generator` `anchor-point` `blend-mode` `height` `basecolor` `roughness` `metallic` `emissive` `alpha` `procedural` `viewport` `advanced`
+- **Summary:** Fast-paced full-building project breakdown covering layered brick walls (concrete+terracotta base, inverted brick mask, height-boosted duplicate, hand-erased "fallen off" bricks), concrete elements (Plastic Dusty smart material reuse, engraved-height anchor-point-linked dirt masks), a stacked-fabric awning pattern, neon emissive signage (Emissive channel + Emissive Intensity + viewport Glare), tri-planar-projected checker tile flooring, and a hand-painted footprint rug detail. Anchor points referred to as "ankle points" in the Whisper transcript (mis-transcription). No version-gated features referenced — version not pinned.
 - **File:** tutorials/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s.md
 
 
