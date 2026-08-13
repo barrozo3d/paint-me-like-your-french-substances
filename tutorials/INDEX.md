@@ -674,6 +674,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/warp-projection-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### Izakaya's Paradigm, Chapter 3: Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=_HcSf9i4kIY
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/izakayas-paradigm-chapter-3-substance-3d-painter-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
