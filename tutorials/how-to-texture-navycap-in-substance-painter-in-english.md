@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=dGmVGU7aHb4
 author: 3DRedBox
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; \"newest version\" name-checked for the duplicate-path-preserves-settings stitching feature, not otherwise pinned"
+tags: [layers, fill-layer, paint-layer, masks, smart-material, generator, anchor-point, blend-mode, baking, mesh-maps, ambient-occlusion, curvature, thickness, high-to-low-poly, world-space-normal, texture-set, uv, pbr, basecolor, roughness, height, normal-map, alpha, procedural, particle-brush, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 11
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to Texture NavyCap In Substance Painter in English
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-texture-navycap-in-substance-painter-in-english <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -108,30 +104,74 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:47] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_000.jpg
+- [1:30] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_001.jpg
+- [2:25] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_002.jpg
+- [4:07] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_003.jpg
+- [6:40] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_004.jpg
+- [8:02] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_005.jpg
+- [9:35] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_006.jpg
+- [13:12] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_007.jpg
+- [16:11] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_008.jpg
+- [18:43] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_009.jpg
+- [21:49] tutorials/frames/how-to-texture-navycap-in-substance-painter-in-english/frame_010.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Full military-cap texturing pipeline whose two throughline techniques are: (1) baking Curvature and Thickness from a separate **TurboSmooth-subdivided high-poly stand-in** (same UVs as the low-poly) to eliminate mesh-wire edge artifacts in those two mesh maps specifically, and (2) an anchor-point-driven **dynamic mask combination** (Soft Track blend of two loaded anchor masks) so a folder mask stays live even as the source masks it depends on change.
 
 ### Summary
-[PENDING EXTRACTION]
+Imports an FBX from 3ds Max into a new Unreal-Engine-4-template project (2K resolution, DirectX normal format), bakes standard mesh maps at 4K/64x AA with Bent Normal enabled, then discovers both Curvature and Thickness show a visible mesh-wire edge artifact from the low-poly's faceted geometry. Fix: re-export the same mesh with a TurboSmooth modifier (same UVs preserved) as a separate high-poly FBX, bake a second throwaway project against itself, export just Curvature+Thickness (or all channels, GPU permitting) as Template Mesh Maps textures, then re-import those as resources into the main low-poly project's Texture Set Settings so the clean high-poly-baked maps drive the same generators the low-poly's own bake would have. Sets up three base folders (Steel, Leather Part, Top Hat) using black masks + Paint sub-layers with Alt-click Polygon/UV-chunk-fill selection (X to invert). The Top Hat mask is built without any hand-painting: an Anchor Point loads the Leather Part mask (inverted), and a second Anchor Point loads the Steel mask set to **Soft Track** blend mode on top — combining two anchors this way keeps the resulting mask fully dynamic (edits to either source folder's mask propagate automatically), as an alternative to the equivalent manual fix (adding a Subtract paint layer). Smart materials (Steel Dark Edge, a marketplace V11 Leather, and a custom "MK Fabric" material) are dropped onto each folder for a fast base look. Stitches/seams are placed with the **Path/Stitching tool** (adjust Normal Intensity and Height Range after placement to tone down an overly strong initial result); a key workflow shortcut in "the newest version" of Painter is that duplicating a placed path (Ctrl+D) preserves its exact geometry, letting you swap only the stitch-style preset (Seam to Top Stitching, brush size/color/thickness tuned) rather than re-drawing the curve from scratch. A "USS Independence CV-62" fabric patch decal is placed with **Wrap Projection** (Projection = Wrap Projection, UV Transformations reset to Tiling 1 / Rotation 0 / Offset 0,0, then Surface tool click-drag to place the projection window, Scale tool instead of Tiling for sizing, and Edit Vertices for local correction when Surface mode alone doesn't fit the curved cap surface) — the earlier plain-UV attempt failed because the patch fell across a UV-island seam and broke continuity. The patch's own Anchor Point (loaded from itself, inverted) drives a dynamic Height-based emboss mask that follows the projection if it's moved later; **right-click blend mode → Apply to all channels** is used to fix a case where an unwanted under-surface noise pattern was bleeding through only some channels. A from-scratch fabric-noise trick: an extra Fill layer with only the Height channel enabled, loaded with the patch texture again but with its **Reference Channel set to Base Color** instead of Height, produces a random RGB-driven bump pattern usable as free surface noise when no other resource is on hand — toned down with a Levels filter on Height. The Logo layer (also anchor-point-driven, self-referencing outline via Blur + Subtract for an embossed edge) uses negative Height + white Base Color in Soft Light blend mode to read as a debossed/inked mark rather than raised geometry. Closes with a hand-painted scratch layer (stencil-varied brush, high Roughness, negative Height, white Base Color in Soft Light) for wear accents.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Import the FBX with the Unreal Engine 4 starter-assets template (2K Document Resolution, DirectX Normal Map Format), bake standard mesh maps at 4K/64x AA, Bent Normal enabled.
+2. Inspect the bake result per-channel: Curvature and Thickness both show a hard mesh-wire edge artifact traceable directly to the low-poly's facets.
+3. Back in the DCC app, add a **TurboSmooth** modifier to the same mesh (same UVs preserved), export as a separate high-poly FBX.
+4. In a throwaway new Substance project, load the high-poly FBX and bake only Curvature + Thickness (or all channels if GPU allows) against itself.
+5. Export those bakes as Template Mesh Maps textures, then **Import Resources** them into the real low-poly project; in **Texture Set Settings**, manually wire Normal→Normal, Bent Normal→Bent Normal, Thickness→Thickness, Curvature→Curvature, AO→Ambient Occlusion — the low-poly model now reads the clean, artifact-free high-poly-baked Curvature/Thickness.
+6. Build 3 base folders (Steel, Leather Part, Top Hat) via black mask + Paint sub-layer, Alt-click to preview the mask, Polygon/UV-chunk Fill selection with X to invert for fast region isolation.
+7. Build the Top Hat mask without hand-painting: add an Anchor Point, load the Leather Part folder's mask into it (inverted), then add a second Anchor Point loading the Steel folder's mask with blend mode **Soft Track** — the combined result is a live, self-updating "everything except leather and steel" mask (equivalent manual alternative: a plain Subtract-mode paint layer).
+8. Drop Smart Materials onto each folder (Steel Dark Edge, marketplace V11 Leather, custom MK Fabric) for the fast base look; nudge individual channel values (e.g. brightness) afterward as needed.
+9. Place stitches/seams with the **Path/Stitching tool**, click points along the model, then reduce Normal Intensity and Height Range in the path's Technical Parameters if the initial result reads too strong.
+10. To reuse a placed stitch path with a different stitch style, **Ctrl+D to duplicate the path** (geometry preserved exactly), rename it, then swap the stitch preset from the library (e.g. Seam → Top Stitching / Double Stretch Stitches) and retune size/color/thickness — much faster than re-drawing the curve.
+11. Place a fabric patch decal with plain UV projection first — note the failure mode (patch straddles a UV-island seam, breaks continuity at the edge) — then fix by switching **Projection → Wrap Projection**: reset UV Transformations (Tiling 1, Rotation 0, Offset 0/0), use the Surface tool to click-drag the projection window onto the target spot, the **Scale** tool (not Tiling) to size it, and **Edit Vertices** to hand-correct local fit on curved geometry the Surface tool alone can't match.
+12. Give the patch layer a dynamic emboss mask via its own Anchor Point (load the layer's own result, inverted), enable Height and set a small amount (~0.3); if an unwanted under-surface noise leaks into only some channels, **right-click the blend mode → Apply to all channels** to normalize it across the whole layer.
+13. Clean the emboss mask edge with a Blur filter, then raise the filter's black-point slightly to remove an unwanted white outline artifact from the blur.
+14. Free procedural noise trick: add a Fill layer restricted to Height only, load the same patch texture into Height but set its **Reference Channel to Base Color** (not Height) — produces a random RGB-derived bump pattern usable as surface noise without a dedicated resource; tone down with a Levels filter on the Height channel.
+15. Build the Logo layer the same anchor-point way (self-referencing outline via Blur + Subtract for a debossed rim), set Height to a negative value, Base Color to white, blend mode **Soft Light** — reads as an inked/debossed mark rather than raised geometry.
+16. Finish with a hand-painted Scratch layer: randomized stencil-varied brush strokes, high Roughness, negative Height, white Base Color, Soft Light blend for wear accents.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `Baking → Common Settings`: Output Size 4K, Anti-Aliasing 64x, Bent Normal enabled
+- High-poly rebake workaround: TurboSmooth-subdivided duplicate mesh (same UVs) → separate throwaway project → bake Curvature+Thickness only → export as Template Mesh Maps → re-import as resources → wire in Texture Set Settings
+- Folder masks: black mask + Paint sub-layer, Alt-click for isolated mask preview, Polygon/UV-chunk Fill (X = invert)
+- `Anchor Point` (folder mask), second Anchor Point with blend mode **Soft Track** for dynamic multi-source mask combination
+- Smart Materials: Steel Dark Edge, V11 Leather (marketplace), MK Fabric (custom)
+- `Path`/Stitching tool: Normal Intensity, Height Range (Technical Parameters); Ctrl+D duplicate-path-preserve-geometry for stitch-style swaps (Seam, Top Stitching, Double Stretch Stitches — size/color/thickness tuned per style)
+- `Fill layer → Projection = Wrap Projection`: UV Transformations reset (Tiling 1, Rotation 0, Offset 0/0), Surface tool (placement), Scale tool (sizing, not Tiling), Edit Vertices (local correction)
+- Blend-mode right-click → **Apply to all channels**
+- `Blur` filter (mask edge cleanup) + raised black point to remove blur-induced white outline
+- Height-from-Base-Color noise trick: Fill layer, Height channel only, texture loaded with **Reference Channel = Base Color** instead of Height; `Levels` filter to tone down
+- Logo/Scratch layers: negative Height, white Base Color, blend mode **Soft Light**
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced (the TurboSmooth hi-poly rebake workaround and the two-anchor Soft-Track dynamic mask combination are non-obvious techniques beyond basic layer/mask work)
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen. The path-duplication-preserves-geometry stitching workflow is explicitly called out as "the newest version of the Substance Painter" at time of filming, but no numeric version appears in transcript or captured frames.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `paint-layer` `masks` `smart-material` `generator` `anchor-point` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `curvature` `thickness` `high-to-low-poly` `world-space-normal` `texture-set` `uv` `pbr` `basecolor` `roughness` `height` `normal-map` `alpha` `procedural` `particle-brush` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Using UV set and Stencils In Substance Painter -- English version](using-uv-set-and-stencils-in-substance-painter----english-version.md) — same creator (3DRedBox); shares the theme of solving a projection/UV-space rendering problem with a dedicated Painter tool (UV-set-to-UV-set projection there, Wrap Projection here) rather than hand-painting around it.
+- [Texturing Tactical Boots In Substance Painter](texturing-tactical-boots-in-substance-painter.md) — same creator; shares the same anchor-point-driven decal/patch workflow (Anchor Point + Extract Alpha style dynamic transparent masking) and stitching-tool usage.
+- [How to texture a realistic slipper model](how-to-texture-a-realistic-slipper-model.md) — same creator; shares the Paint-Along-Path/stitching-tool technique and stacked anchor-point-referenced mask layers as the core organizing principle.
+- [How to Create a Realistic Poison Bottles Material Using Substance Painter](how-to-create-a-realistic-poison-bottles-material-using-substance-painter.md) — same creator; shares the anchor-point mask-reuse-across-folders pattern (a Pass-Through collector layer there, direct multi-anchor Soft-Track combination here).
