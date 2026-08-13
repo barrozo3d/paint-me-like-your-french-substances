@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=xuLRnFBvLyI
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "3ds Max (model prep, 2022 confirmed in viewport title bar) + Substance 3D Painter (import/baking)"
+version: "3ds Max 2022 confirmed on screen; Painter version not stated"
+tags: [texture-set, uv, id-map, mesh-maps, baking, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Preparing Models for Substance 3D Painter in 3DS Max | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -121,30 +117,53 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [3:50] tutorials/frames/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d/frame_000.jpg
+- [4:38] tutorials/frames/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d/frame_001.jpg
+- [5:03] tutorials/frames/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d/frame_002.jpg
+- [5:30] tutorials/frames/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d/frame_003.jpg
+- [5:50] tutorials/frames/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d/frame_004.jpg
+- [6:10] tutorials/frames/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d/frame_005.jpg
+- [6:33] tutorials/frames/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Preparing a 3ds Max model (same roller skate asset as the Blender/Maya entries in this series, shown in 3ds Max 2022) for a clean Substance Painter import: Compact Material Editor-driven texture-set assignment, per-texture-set UV packing via Unwrap UVW's Arrange Elements tool (or Painter's Auto Unwrap), Vertex Paint-based ID maps, and Detach-based geometry mask prep.
 
 ### Summary
-[PENDING EXTRACTION]
+3ds Max installment of the same 3-app prep series as the Blender and Maya videos, covering identical concepts (Texture Sets auto-named from source-app materials, Geometry Masks by sub-object inclusion toggling, ID Maps for Ctrl+drag material assignment, Auto-UV Unwrap's 3-step cut/unfold/pack pipeline preserving existing UV data at each step) with 3ds Max-specific mechanics. Materials: use the **Compact Material Editor** (better overview of material names than alternatives) to create one named material per intended texture set — material type doesn't matter, but distinct colors help visually distinguish texture sets in the Max viewport; assign via selection or drag-and-drop onto viewport objects; one material per object is best practice but not mandatory. UV packing per texture set: select all objects belonging to one texture set, add an **Unwrap UVW** modifier, open the UV editor, and use **Arrange Elements** to pack shells within the UV range (Pack Normalize option preferred, manual packing also possible) — or skip Max-side packing entirely and let Painter's **Auto Unwrap** (New Project dialog, with the option to regenerate all packing per texture set) handle it on import. ID maps via vertex color: select the relevant objects, add a **Vertex Paint** modifier to all of them together, enter Vertex Paint Edit mode, toggle vertex color display on in the left toolbar, then use the Fill and Paint tools to assign a unique color per mesh section (select a face/sub-object, assign a color) — explicitly warns to turn vertex color display back **off** before exiting the modifier, since this isn't automatic. In Painter: after import, open the Baking dialog and set the ID map's **Color Source to Vertex Color**. Geometry mask prep: for meshes not already split into enough separate objects, enter **Edit Poly** mode, select sub-object faces, and use **Detach** to split them into new objects, naming them clearly for easier navigation in Painter — Painter's geometry masking then toggles inclusion per object (click to toggle, or use a dropdown for include/exclude-all shortcuts, e.g. exclude all then click a few back in).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Prerequisite: base modeling and UV-unwrapping understanding already in place (referred to an earlier video in the series).
+2. Assign materials to drive Texture Set creation: use the **Compact Material Editor** for the clearest overview of material names; create one named material per intended texture set (name becomes the Painter texture set name), material type doesn't matter but distinct colors help differentiate texture sets visually in the Max viewport.
+3. Assign materials to geometry via selection or by dragging/dropping directly onto viewport objects; one material per object is best practice but not required.
+4. Pack UVs per texture set in Max: select all objects belonging to one texture set, add an **Unwrap UVW** modifier, open the UV Editor, then use **Arrange Elements** to pack shells within the UV range — Pack Normalize is the presenter's preferred option, manual packing is also possible.
+5. Alternative: skip Max-side packing entirely — export right after material assignment, then in Painter's New Project dialog enable **Auto Unwrap**, open its options, and (depending on whether seams/unfolding were already done) tell Painter to regenerate all packing; this is applied per texture set and produces a workable starting layout.
+6. Build an ID map via vertex color: select the target objects, add a **Vertex Paint** modifier to all of them together, enter Vertex Paint Edit mode, toggle on vertex color display in the left-side toolbar, then use the **Fill** and **Paint** tools to assign a unique color to each mesh section (select a face or sub-object, assign its color).
+7. Important cleanup step: turn vertex color display back **off** before exiting the Vertex Paint modifier — Max does not do this automatically, and leaving it on can cause confusion later.
+8. In Painter, after import, open the **Baking** dialog and set the ID map's **Color Source to Vertex Color** to bake the ID map from the vertex-color data.
+9. Prep for geometry masks: if the mesh isn't already split into enough separate objects, go into **Edit Poly** mode, select the relevant sub-object faces, and use **Detach** to split them into new objects; name each object clearly for easier navigation once in Painter.
+10. In Painter, geometry masking then lets you mask based on those 3ds Max objects: click an object to toggle its inclusion on/off, or use the dropdown's shortcuts to include/exclude all objects at once (e.g. exclude all, then click a few back in to build a mask quickly).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **3ds Max**: Compact Material Editor (named, distinctly-colored materials per texture set); drag-and-drop or selection-based material assignment; **Unwrap UVW** modifier + UV Editor **Arrange Elements** tool (Pack Normalize preferred); **Vertex Paint** modifier (vertex color display toggle, Fill/Paint tools) for ID maps; **Edit Poly** mode + **Detach** for splitting geometry-mask sub-objects.
+- **Substance 3D Painter**: New Project dialog **Auto Unwrap** option (regenerate packing per texture set); **Baking** dialog → ID map **Color Source = Vertex Color**; Texture Set List; per-layer Geometry Mask (toggle objects individually or via include/exclude-all dropdown shortcuts).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner (model/UV/material prep fundamentals, no advanced texturing).
 
 ### App & Version
-[PENDING EXTRACTION]
+3ds Max **2022** (confirmed in the viewport title bar) for model prep; Substance 3D Painter (import/baking side) version not stated on screen.
 
 ### Tags
-[PENDING EXTRACTION]
+`texture-set`, `uv`, `id-map`, `mesh-maps`, `baking`, `beginner`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Preparing Models for Substance 3D Painter in Blender** (`tutorials/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d.md`) — same 3-app prep series and same roller-skate demo asset; Blender-side equivalent workflow.
+- **Preparing Models for Substance 3D Painter in Maya** (`tutorials/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d.md`) — same series, Maya-side equivalent workflow.
