@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=Ro5dADu3vpM
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen or in narration; this appears to be the original launch tutorial for the 3D Paths tool, which the companion '3D Path Tool Updates' video states shipped in 9.0.0 (June 2023)"
+tags: [path-tool, layers, paint-layer, masks, fill-layer, blend-mode, alpha, procedural, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Creating 3D Paths in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py creating-3d-paths-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -123,30 +119,64 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:46] tutorials/frames/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [2:11] tutorials/frames/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [2:54] tutorials/frames/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [3:24] tutorials/frames/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [3:49] tutorials/frames/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [4:43] tutorials/frames/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+- [5:09] tutorials/frames/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+The original launch tutorial for the **3D Paths tool**: paint editable, curve-based brush strokes directly on a model's geometry (rather than freehand), fully non-destructively — brush, material, and per-vertex properties can all be changed at any time after the path is drawn, since the path remains a live, editable curve rather than baked-in paint.
 
 ### Summary
-[PENDING EXTRACTION]
+Official Adobe introduction to the 3D Paths tool (demoed on a leather brogue shoe, drawing the circular "broguing" perforation pattern along the toe cap). Unlike the regular paint brush, a 3D Path is an editable curve you can keep reshaping and re-styling after the fact — change brush, size, or material properties at any point, non-destructively. The tool works on **paint layers** (regular paint layers or inside a mask) and supports paint, erase, and smudge modes; found in the top-left toolbar just below the eraser. Note: at time of this video, the 3D Paths tool did not yet work with the pre-existing tool-brushes tied to the original paint/smudge/erase tools — new tool-brushes made specifically for 3D Paths existed but were covered in a separate video. **Workflow:** with a paint layer active, select the 3D Paths pen icon and click to place points/vertices along the model's surface — a small **Paths panel** appears top-left of the viewport, functioning like a mini layer stack for all paths on that layer (visualize, select, right-click to copy/cut/paste/duplicate/remove, double-click to rename). New vertices default to smooth automatic Bezier interpolation; double-click a vertex (or select it and click the interpolation-toggle icon) to make it a sharp linear corner — this also works on multi-selections (click-drag a box, or Ctrl/Cmd+A to select all vertices) to batch-convert or batch-delete points. Bezier handles themselves aren't directly editable; the workaround is adding more vertices along the curve (hover an existing segment and click) — don't hesitate to add many vertices on complex geometry. Press **Escape** or **Enter** to finish the current path; the next click starts a brand-new path on the same layer. **Toolbar controls specific to 3D Paths:** a toggle (also bound to **Q**) to show/hide the curve-and-vertices overlay on the model; a display-settings window controlling how the path renders on the geometry; a direction-reverse button (useful for continuing a path from its other end); a per-vertex **pressure slider** (adjusts brush size per point, single or multi-selected); the vertex-interpolation toggle (smooth/corner); a close-curve button (select an endpoint, click to close the loop into a closed shape); a delete button (same as the Delete key); and a **mirror/symmetry** toggle that applies per-path within a layer (not all-or-nothing across the whole layer), with adjustable mirror-axis settings next to it. Each path carries its own independent brush and material properties by default; to make multiple paths **share** the same material, build a fill layer with a black mask and add the 3D Paths inside that mask instead of on separate paint layers. A known gotcha: widely-spaced vertices can leave visible gaps/lost paint between them — fix by adding an extra vertex partway between the sparse points, or by adjusting **Projection Depth** in the Properties panel.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Select or create a paint layer** (regular paint layer, or a mask) — the 3D Paths tool only works within paint-layer contexts.
+2. **Select the 3D Paths pen icon** in the top-left toolbar, just below the eraser tool.
+3. **Click on the model to place vertices** along the desired curve; watch the small **Paths panel** appear top-left of the viewport, tracking every path on the current layer.
+4. **Leave new vertices as smooth automatic Bezier** by default, or **double-click a vertex** to convert it to a sharp linear corner; the same toggle icon in the top toolbar does this for a selection.
+5. **Batch-edit multiple vertices** by click-dragging a selection box (or Ctrl/Cmd+A to select all), then apply the corner-conversion icon or press Delete to affect all selected points at once.
+6. **Add intermediate vertices for finer curve control** (Bezier handles aren't directly editable) by hovering an existing path segment and clicking where you want the new point — add generously on complex geometry.
+7. **Finish the current path** with **Escape** or **Enter**; your next click on the model starts an entirely new, separate path on the same layer.
+8. **Manage multiple paths per layer** via the Paths panel: right-click a path to copy/cut/paste/duplicate/remove, or double-click to rename it.
+9. **Toggle the curve/vertex overlay display** with the dedicated toolbar icon or the **Q** key; open the adjacent display-settings window to control how the path visualizes on the geometry.
+10. **Reverse a path's direction** with its dedicated toolbar button if you need to continue drawing from the opposite end.
+11. **Adjust per-vertex pressure** (effectively per-point brush size) via the pressure slider, applied to a single selected vertex or a multi-selection.
+12. **Close an open path into a loop:** select an endpoint vertex, then click the close-curve button.
+13. **Enable mirror/symmetry** per path (not globally per layer) via the mirror icon, and fine-tune the mirror axis with the buttons beside it.
+14. **Share material properties across multiple paths:** instead of giving each path its own separate paint layer, build a fill layer with a black mask and add all the 3D Paths inside that shared mask.
+15. **Fix gaps/lost paint from widely-spaced vertices:** add an extra vertex partway between the sparse points, or increase **Projection Depth** in the Properties panel.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **3D Paths tool** — top-left toolbar, just below the eraser; works on paint layers (including masks); supports paint/erase/smudge modes
+- **Paths panel** (top-left of viewport) — per-layer list of paths; right-click copy/cut/paste/duplicate/remove; double-click rename
+- **Vertex controls:** default smooth automatic Bezier vs. linear/corner (double-click or toolbar toggle icon), multi-select via click-drag or Ctrl/Cmd+A, mid-segment click to insert a vertex
+- **Toolbar-specific controls:** curve/vertex overlay toggle (also **Q**), path-visualization display-settings window, direction-reverse button, per-vertex pressure slider, vertex-interpolation toggle, close-curve button, delete button, mirror/symmetry toggle (per-path) + mirror-axis buttons
+- **Shared-material technique:** fill layer + black mask, with 3D Paths drawn inside that mask instead of on individual paint layers
+- **Projection Depth** (Properties panel) — fixes paint-loss gaps between widely-spaced vertices
+- Shortcuts: **Escape**/**Enter** to finish a path, **Q** to toggle curve overlay, **Ctrl/Cmd+A** to select all vertices, **Delete** to remove selected vertices
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate (the drawing mechanics are approachable, but non-destructive re-editing, mirror-per-path behavior, and the shared-material-via-mask workaround take some practice).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number is stated on screen or in narration in this specific video; this is evidently the original launch/introduction tutorial for the **3D Paths** tool, which — per the companion "3D Path Tool Updates" video in this same library — shipped in Painter **9.0.0** (June 2023).
 
 ### Tags
-[PENDING EXTRACTION]
+`path-tool`, `layers`, `paint-layer`, `masks`, `fill-layer`, `blend-mode`, `alpha`, `procedural`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [3D Path Tool Updates in Substance 3D Painter](3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe), direct sequel: covers feature additions (path visibility toggle, selective copy/paste, freeform vertex movement, manual tangent editing) built on top of the exact 3D Paths tool introduced in this video.
+- [New Path Tool Features & Improvements in Substance 3D Painter](new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe); covers the later, separate **Filled Path** tool (11.0.0) — a different tool generation in the same path-tool family this video's 3D Paths belongs to.
+- [New Ribbon Paths in Substance 3D Painter](new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe); covers the still-later **Ribbon Paths** tool (11.1.0), the third generation in the path-tool family lineage this video begins.

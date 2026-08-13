@@ -833,10 +833,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=Ro5dADu3vpM
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated; original launch tutorial for the 3D Paths tool (9.0.0, per the companion "3D Path Tool Updates" video)
+- **Tags:** `path-tool` `layers` `paint-layer` `masks` `fill-layer` `blend-mode` `alpha` `procedural` `intermediate`
+- **Summary:** Original launch tutorial for the 3D Paths tool (leather-shoe brogue-pattern demo): paint editable, non-destructive curve-based strokes directly on geometry on a paint layer or mask. Covers vertex placement/Bezier vs. corner interpolation, the Paths panel (per-layer path management), toolbar controls (curve overlay toggle/Q, direction-reverse, per-vertex pressure, close-curve, per-path mirror/symmetry), the shared-material-via-fill-layer-and-black-mask workaround, and fixing paint gaps from widely-spaced vertices (extra vertex or Projection Depth).
 - **File:** tutorials/creating-3d-paths-in-substance-3d-painter-adobe-substance-3d.md
 
 ---
