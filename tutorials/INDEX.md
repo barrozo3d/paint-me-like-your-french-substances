@@ -399,6 +399,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d.md
 
+
+### Substance Painter Tutorial for Beginners - Texturing A Rock 3D Model
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=hKg_N96EUjA
+- **Author:** 3DWolf
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model.md
+
 ---
 
 ## Tag Reference
