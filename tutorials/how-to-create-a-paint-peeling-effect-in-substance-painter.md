@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=JnWvMys9xNk
 author: Wes McDermott
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen (title bar: \"Adobe Substance 3D Painter - PaintPeeling\"); creator explicitly notes filters gaining their own per-layer blending mode as a then-recent feature (previously required anchor points/multiple layers to combine a filter with underlying layers), tentative"
+tags: [layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, ambient-occlusion, MatFX, height, roughness, basecolor, alpha, procedural, tri-planar, smart-material, texture-set, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to create a paint peeling effect in Substance Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-create-a-paint-peeling-effect-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -503,30 +499,76 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:19] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_000.jpg
+- [2:11] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_001.jpg
+- [8:00] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_002.jpg
+- [10:05] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_003.jpg
+- [11:47] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_004.jpg
+- [13:44] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_005.jpg
+- [17:05] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_006.jpg
+- [19:01] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_007.jpg
+- [20:19] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_008.jpg
+- [22:42] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_009.jpg
+- [25:24] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_010.jpg
+- [28:40] tutorials/frames/how-to-create-a-paint-peeling-effect-in-substance-painter/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A full, from-scratch build of a reusable **Paint Peeling Smart Material**: an underlying "base" material group sits beneath a "paint layer" group whose mask is sculpted through a long procedural chain (dirt generator -> grunge multiply -> blur -> levels -> a filter-native `Warp` and `Slope Blur` both set to `Multiply`/`Min` so they read the layers beneath them instead of applying uniformly), then that entire finished mask is captured once as an **Anchor Point** and reused by name across four separate downstream layers (cracks-inside subtraction, the peeling-edge height push via `Mask Outline`, a colored peel-edge accent via a second `Mask Outline` config, and manual paint control) — turning one sculpted mask into the single source of truth for the whole effect.
 
 ### Summary
-[PENDING EXTRACTION]
+Wes McDermott builds a paint-peeling Smart Material end-to-end on a sphere-topped prop, narrating every layer in the finished group. **Base layer:** a Fill layer (Color/Metal/Roughness) as the "revealed" material seen once paint peels away, built up with two more Fill layers for color variation (each masked by a built-in grunge map — `Concrete Moss Small`, `Grunge Concrete Spots` — with Projection corrected from the default UV to **Tri-Planar** to avoid seam/UV-layout dependence, a fix the creator flags as something he "should have done" originally). **Paint layer mask stack:** starting from a Dirt generator (Level slider for occlusion-based wear, optional Grunge Amount/Contrast/Scale tuning), combined with a `Grunge Map 04` Fill layer set to blend mode `Multiply` (chosen over Normal/Lighten so the two masks combine rather than overwrite) — explicitly named as "the core of creating masking inside of Painter," i.e. a **mask effect stack**. This combined mask is then Blurred (creates a soft gray transitional slope), tightened with a `Levels` filter, then passed through a `Warp` filter and a `Slope Blur` filter — both demonstrated as a **then-new capability: filters carry their own per-layer blend mode**, set here to `Multiply` (Warp) and `Min` (Slope Blur, meaning dark values erode toward white) so each filter reads and combines with the layers underneath rather than distorting/blurring the whole canvas uniformly; both filters use a custom **Perlin noise** source for organic, non-uniform edges. A final `Levels` pass crunches the result to a clean edge. **Manual paint control:** a Paint sub-layer sits directly in the mask stack — painting black removes paint (reveals base), `X` inverts to white to restore paint; a grunge-tipped brush (vs. a plain round brush) gives a more organic torn-paint look. **Anchor point capture:** once the mask stack is finished, it's wrapped in an Anchor Point (named "Paint Layer Mask") — described as Painter's equivalent of a non-destructive layer-merge, since there's no true merge command. That anchor is then referenced four separate times: (1) a "cracks inside" layer subtracts the anchor-referenced fill from a `Marble Fine` noise layer to confine interior crack detail to the base material only; (2) the actual peeling-height illusion is a Height-only Fill layer (value 1) masked by a Fill referencing the anchor, run through a **Mask Outline** filter (`Start From Black = false`, `Mask Position = Both`, curve shape set to -1) which turns the flat mask into a graduated inside+outside slope right at the peel boundary; (3) a "Peel Edge" colored accent layer (a sampled-and-brightened blue, low opacity) uses a second Mask Outline config (`Start From Black = false`, `Mask Position = Inside` only) further broken up by a `Fractal Sum 4` grunge map set to `Subtract` blend and cleaned with another `Levels`; (4) ambient occlusion depth is added via `Texture Set Settings` (add an Ambient Occlusion channel) and the **HBAO (Horizon-Based Ambient Occlusion)** MatFX effect dragged in from the asset library, tuned via Height Depth/Radius/Blur Intensity. Finishes with a subtle color-variation Fill layer (grunge map remapped through a `Gradient` filter's 4-color ramp, deliberately over-saturated then tamed with an `HSL Perceptive` filter, opacity dropped to ~30%) and a top-of-stack `Sharpen` filter, then a live demo of hand-painting the peel pattern with the dirt slider and a grunge brush for final artistic control.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Build the underlying base material** (what shows once paint peels away): Fill layer named "base" with Color/Metallic/Roughness values, then layer 1-2 more Fill layers for color variation, each masked by a built-in grunge map (Concrete Moss Small, Grunge Concrete Spots) with mask Projection set to **Tri-Planar** (not the default UV) to avoid UV-seam dependence when reusing the material elsewhere.
+2. **Group the paint layer's contents in its own folder** specifically because its mask needs heavy, multi-step sculpting — keeping it isolated from the base material's own layers.
+3. **Build the paint-layer's own base + color variation** the same way as step 1 (a "base" Fill layer plus 1-2 color-variation Fill layers masked by grunge maps), including a technique of setting a Fill layer's own channel **opacity low (e.g. ~26%)** to rely on optical color blending against the layer below rather than a hard override.
+4. **Start the peeling mask with a Dirt generator on a black mask**, tuning the Level slider (this alone approximates occlusion-based wear), optionally raising Grunge Amount for surface erosion and Contrast/Scale to control noise character — used at fairly clean/subtle settings here.
+5. **Combine a second grunge mask via Multiply:** add a Fill layer masked with `Grunge Map 04`, set its blend mode to `Multiply` (not the default Normal, which would just overwrite the dirt mask below, or Lighten/Add which combine differently) — this is the core "mask effect stack" principle: several generators/fills/filters compositing together into one final mask.
+6. **Blur the combined mask** to create a soft gray transitional gradient at the wear boundary, then run a `Levels` filter pushing input-black up to crunch that gradient into a harder edge.
+7. **Add a `Warp` filter set to blend mode `Multiply`** with Source Mode = Custom Noise = **Perlin noise** — using the filter's own blend mode (a then-new Painter capability, previously requiring anchor points or extra layers to combine a filter with underlying layers) means the warp distortion is driven by/combined with the mask data beneath it rather than distorting the whole canvas uniformly.
+8. **Add a `Slope Blur` filter set to blend mode `Min`** (Perlin noise source again) for a subtle non-uniform edge erosion — `Min` pushes dark values inward toward white (vs. `Max`, which pushes white toward dark); run a final `Levels` pass afterward to re-crunch the result.
+9. **Add manual paint control inside the mask stack:** a Paint sub-layer where painting black removes the paint effect (reveals the peel), pressing `X` inverts to paint white (restores paint); switching from a plain round brush to a grunge/dirt-textured brush produces a more organic torn-paint edge than a clean circular reveal.
+10. **Capture the finished mask stack as an Anchor Point** (named e.g. "Paint Layer Mask") positioned at the top of that layer group — functions as Painter's substitute for a non-destructive layer merge, making the whole stack's result referenceable by any other layer's mask.
+11. **Build "cracks" and "cracks inside" detail layers:** a Height-only Fill layer masked by `Marble Fine` noise (Tri-Planar projection) for surface cracking; a second "cracks inside" variant adds a Fill referencing the Anchor Point and **subtracts** it from the Marble Fine mask, confining that crack variant to just the base material's revealed area (positive/negative height value flips which direction the crack reads).
+12. **Build the actual peeling-height illusion:** a Height-only Fill layer (value 1) whose mask starts from a Fill referencing the Anchor Point, then add a **Mask Outline** filter on top with `Start From Black = false` and `Mask Position = Both` (not the defaults) — this converts the flat referenced mask into a graduated slope on both the inside and outside of the peel boundary; further shape it with the filter's own Blur, Width, and **Curve Shape = -1** parameters for the desired fall-off profile.
+13. **Build a colored "Peel Edge" accent layer:** new Fill layer using a sampled-and-brightened accent color (low opacity) whose mask again references the Anchor Point through a Mask Outline filter, this time `Start From Black = false` / `Mask Position = Inside` only; break up the resulting uniform gray slope by adding a Fill layer with a grunge map (`Fractal Sum 4`) set to blend mode `Subtract` at reduced opacity, then clean the result with another `Levels` filter.
+14. **Add ambient-occlusion depth for readability:** open Texture Set Settings and add an Ambient Occlusion channel, then drag the **HBAO (Horizon-Based Ambient Occlusion)** MatFX effect from the asset library shelf (search "HBAO") into the layer stack; tune its Height Depth, Radius, and Blur Intensity to add contact shading within the peeled crevices.
+15. **Add subtle overall color variation:** a Fill layer with a low-opacity (~33%) base color, topped by a second Fill layer using a grunge map (`Grunge Concrete Old`) on the base-color channel at reduced opacity for a black/white blend against the flat color, then a `Gradient` filter on top to remap that grunge map's black/white values through a deliberately over-saturated 3-4-color ramp, tamed afterward with an `HSL Perceptive` filter; drop the whole color-variation layer's opacity to ~30% for a subtle final effect.
+16. **Finish with a top-of-stack `Sharpen` filter**, dialing its intensity to taste.
+17. **Right-click the finished group and choose "Create Smart Material"** to package the entire layer stack as a single reusable, drag-and-drop asset for future projects.
+18. **Live-paint the final result:** use the Paint sub-layer from step 9 with the Dirt slider (from step 4) and a grunge/dirt-textured brush to hand-place peeling exactly where wanted, toggling between black (peel) and white (restore, via `X`) as needed.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Base material:** Fill layer(s) with Color/Metal/Roughness, masked by built-in grunge maps (Concrete Moss Small, Grunge Concrete Spots), Projection corrected to **Tri-Planar**
+- **Paint mask stack:** `Dirt` generator (Level/Grunge Amount/Contrast/Scale) -> `Grunge Map 04` Fill blend mode `Multiply` -> `Blur` -> `Levels` -> `Warp` filter (blend mode `Multiply`, Source = custom Perlin noise) -> `Slope Blur` filter (blend mode `Min`, Perlin noise) -> `Levels`
+- **Manual control:** Paint sub-layer (black = remove paint, white via `X` = restore), grunge-tipped brush for organic edges
+- **Anchor Point:** captures the entire finished mask stack, referenced by 4 separate downstream layers/masks
+- **Cracks:** Height-only Fill masked by `Marble Fine` (Tri-Planar); "cracks inside" variant subtracts an anchor-referenced Fill from the Marble Fine mask
+- **Peel height:** Height-only Fill (value 1), mask = anchor-referenced Fill + `Mask Outline` filter (`Start From Black=false`, `Mask Position=Both`, `Curve Shape=-1`, tuned Blur/Width)
+- **Peel Edge accent:** colored Fill (sampled/brightened, low opacity), mask = anchor-referenced Fill + `Mask Outline` (`Start From Black=false`, `Mask Position=Inside`) + `Fractal Sum 4` grunge Fill blend mode `Subtract` + `Levels`
+- **Ambient occlusion:** Texture Set Settings AO channel + `MatFX HBAO` (Horizon-Based Ambient Occlusion) effect, tuned Height Depth/Radius/Blur Intensity
+- **Color variation:** low-opacity base color Fill + `Grunge Concrete Old` Fill + `Gradient` filter (4-color remap) + `HSL Perceptive` filter, overall opacity ~30%
+- **Finish:** top-of-stack `Sharpen` filter
+- **Packaging:** right-click group -> Create Smart Material
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — this is a complete ground-up Smart Material construction assuming fluency with generators, multi-filter mask stacks, blend-mode math, and (critically) the anchor-point-as-single-source-of-truth pattern referenced across four different downstream layers; the Mask Outline filter's `Start From Black`/`Mask Position` parameters and the filter-native blend-mode feature are both explained but assumed to be genuinely new concepts to the viewer.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated numerically on screen (title bar reads "Adobe Substance 3D Painter - PaintPeeling", the project file name). The creator explicitly calls out filters having their own per-layer blend mode as a **then-recent feature** ("previously... I'd have to use maybe an anchor point or... multiple layers to basically combine this warp in") — a useful relative-version marker even without a specific version number, and consistent with this skill's modern-era ingested tutorials.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, anchor-point, blend-mode, ambient-occlusion, MatFX, height, roughness, basecolor, alpha, procedural, tri-planar, smart-material, texture-set, intermediate, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Advanced Peeling Paint Effect in Substance 3D Painter](advanced-peeling-paint-effect-in-substance-3d-painter.md) — different creator (Javad Rajabzade), same core subject (procedural paint peeling) and the same anchor-point-as-shared-mask-source pattern; that video leans on Voronoi-fractal noise and a Multiply-Light paint-reveal trick where this one leans on the Mask Outline filter and filter-native blend modes — strong side-by-side comparison for the same effect family.
+- [How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial](how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md) — different creator (Jared Chavez); this video's core anchor-point-as-reusable-mask-source technique (one anchor referenced by 4 separate downstream layers) is a direct, exhaustive real-world application of that anchor-points tutorial's central lesson.
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); shares the "mask effect stack" philosophy (generators/fills/filters combined via specific blend modes to sculpt one final mask) at a similarly exhaustive level of detail.

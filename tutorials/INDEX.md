@@ -481,10 +481,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=JnWvMys9xNk
 - **Author:** Wes McDermott
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; creator notes filter-native blend modes as a then-recent feature, tentative
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `anchor-point` `blend-mode` `ambient-occlusion` `MatFX` `height` `roughness` `basecolor` `alpha` `procedural` `tri-planar` `smart-material` `texture-set` `intermediate` `advanced`
+- **Summary:** Exhaustive from-scratch build of a reusable Paint Peeling Smart Material: a dirt-generator+grunge mask stack sculpted via Blur/Levels/Warp/Slope-Blur (Warp and Slope Blur using filter-native blend modes Multiply/Min with Perlin noise), captured once as an Anchor Point and referenced by 4 downstream layers (cracks-inside subtraction, a Mask-Outline-driven peel-height layer, a colored Peel Edge accent, and manual paint control), finished with HBAO ambient occlusion and gradient-remapped color variation.
 - **File:** tutorials/how-to-create-a-paint-peeling-effect-in-substance-painter.md
 
 
