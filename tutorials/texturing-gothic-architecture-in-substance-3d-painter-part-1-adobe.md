@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=UQkmXEWJr80
 author: Adobe Substance 3D
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "11.0.0+"
+tags: [generator, masks, anchor-point, path-tool, height, curvature, procedural, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 9
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing Gothic Architecture in Substance 3D Painter: Part 1 | Adobe
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -97,30 +93,69 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:22] tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/frame_000.jpg
+- [0:52] tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/frame_001.jpg
+- [1:20] tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/frame_002.jpg
+- [1:51] tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/frame_003.jpg
+- [2:07] tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/frame_004.jpg
+- [2:36] tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/frame_005.jpg
+- [3:15] tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/frame_006.jpg
+- [3:29] tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/frame_007.jpg
+- [4:31] tutorials/frames/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe/frame_008.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Layered architectural weathering on a Gothic hallway: a Concrete Cast base with Curvature-driven fake-bevel edge highlights, stacked Dirt/Moss generator layers, a Height-only Brick generator reused at different scales (walls/floor/columns), hand-painted drip stains refined with the **Directional Distance filter**, and Path-tool-drawn decorative relief patterns (Gothic crosses, floral motifs) finished with a **Bevel Smooth filter**.
 
 ### Summary
-[PENDING EXTRACTION]
+Part 1 of Adobe's official two-part Gothic Architecture series (Part 2, "Texturing Stained Glass & Ceiling Paintings," `NCkQ1eq8a-o`, is already in this library — that video explicitly recaps this one's base texture as its starting point). Covers the full stonework pass: a reusable Concrete Cast base material (duplicated with a Curvature-generator mask for fake bevels, applied scene-wide with per-mesh tweaks for consistent-but-varied results), several stacked Dirt/Moss/Stains-Scratches generator layers for aging, a distinct smart-material swap for the roof tiles (Plastic Tool-Worn with its base texture swapped to Marble Vane), custom hand-painted drip stains shaped with the Directional Distance filter, a Height-only Brick generator pattern reused at three different scales (walls, ground — linked via anchor points to a dirt/AO mask, and columns scaled up to imply sub-segments), and Path-tool-drawn decorative relief (Gothic quatrefoil "keld crosses" and floral patterns) on the entrance arches and walls, finished with a Bevel Smooth filter for softer edges.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Base material: add the **Concrete Cast** starter-asset texture as the base fill layer.
+2. Duplicate it, brighten the duplicate's color, add a black mask driven by a **Curvature generator** — highlights edges to fake a beveled look without adding geometry.
+3. Reuse this same base texture across the whole scene, but tweak settings per-mesh individually — keeps everything visually consistent while still reading as slightly varied.
+4. Add another Concrete Cast layer, darkened, masked by a **Dirt** grayscale generator (black mask) for grime buildup.
+5. Duplicate that dirt layer and scale its grayscale mask down for extra depth/variation.
+6. New brown-green-toned layer using the **Dirt Ground** generator, tuned to taste, for moss.
+7. Add height-only aging detail via the **Stains/Scratches generator** (only the Height channel enabled) — applied to the rest of the meshes with small per-mesh tweaks each time.
+8. Add a second, separate moss layer specifically to emphasize corners, since the base material still read "too clean."
+9. Roof tiles (hallway corners): reuse the **Plastic Tool-Worn** smart material, but swap its base texture input for **Marble Vane** and recolor it dark gray.
+10. Custom dripping stains: new darker layer, hand-paint just under the roof tiles, then apply a **Directional Distance filter** to control drip length and smudge; add/remove paint via the `X` toggle; repeat the same process on the lower wall sections.
+11. Texture the roof and floor (not shown in detail) before returning to the walls — a deliberate workflow-ordering choice.
+12. Brick pattern: new layer, Height channel only, value lowered, apply the **Brick generator**; increase tiling and tune the pattern, then manually paint out unwanted brick areas.
+13. Reuse the same brick pattern on the ground, this time masked with a dirt/ambient-occlusion combination **linked via Anchor Points**, adjusting grunge/AO for a subtle, realistic look; reused broadly across the scene since it "emphasizes the height details nicely."
+14. Apply the same brick pattern to the columns, but scaled up significantly so each column visually reads as divided into three smaller segments.
+15. Entrance arches: new layer, Height channel enabled, black mask added; select the **Path tool** from the left toolbar, choose a decorative curve preset, enable **Symmetry**, and draw directly on the mesh.
+16. Adjust **Size** and **Spacing** at the top toolbar; reshape the curve afterward by clicking to add/move vertices.
+17. Choose one of the "keld cross" (Gothic quatrefoil) presets and lower Spacing to bring the repeated crosses closer together; grab the curve and drag it all the way down the arch.
+18. Repeat the same method with other decorative patterns on the walls — emphasized as a major time-saver since curves stay fully editable after the fact.
+19. For one of the floral patterns, add a **Bevel Smooth filter** to soften its edges.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Concrete Cast texture, Curvature generator, Dirt generator, Dirt Ground generator, Stains/Scratches generator (Height channel only)
+- Plastic Tool-Worn smart material (base texture swapped to Marble Vane)
+- Directional Distance filter, `X` (paint/erase toggle)
+- Brick generator (Tiling)
+- Anchor Points (dirt/AO mask linking/reuse)
+- Path tool (curve presets, Symmetry, Size, Spacing, vertex editing)
+- Bevel Smooth filter
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced — mostly generator/mask layering (accessible), with Path-tool decorative work and anchor-point mask reuse pushing into more advanced territory.
 
 ### App & Version
-[PENDING EXTRACTION]
+**Substance 3D Painter 11.0.0+** — this video uses both the **Directional Distance filter** (step 10) and the **Bevel Smooth filter** (step 19), and `references/release-notes-painter-11.0.md` lists both by name as new in 11.0.0 ("6 new filters: stylization, quantize, anisotropic Kuwahara, bevel smooth, directional distance, grayscale conversion"). Two independent filter confirmations in one video — a strong, unambiguous version floor. Exact build not shown on screen.
 
 ### Tags
-[PENDING EXTRACTION]
+`generator` `masks` `anchor-point` `path-tool` `height` `curvature` `procedural` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"Texturing Stained Glass & Ceiling Paintings in Adobe Substance 3D Painter: Part 2"** (`tutorials/texturing-stained-glass-ceiling-paintings-in-adobe-substance-3d-painter-part-2-a.md`, video `NCkQ1eq8a-o`) — direct continuation of this video on the same Gothic-hallway asset; Part 2 explicitly recaps this video's Concrete Cast/Scratches/Dirt/Moss base ("You may have seen it in part 1") before building stained-glass windows and a fresco ceiling on top of it. Read Part 1 (this file) before Part 2 for the full picture.
+- **"New Ribbon Paths in Substance 3D Painter"** (`tutorials/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d.md`) — same Path-tool feature family (`path-tool` tag) used here for the decorative crosses/floral relief; that video covers the Path/Ribbon tool in much greater depth (presets, corner modes, custom start/end/corner images).

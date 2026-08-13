@@ -184,4 +184,4 @@ Not confirmed from an on-screen version watermark in the captured frames (this v
 ---
 
 ## Related Tutorials
-- **"Texturing Gothic Architecture in Substance 3D Painter: Part 1"** (video `UQkmXEWJr80`, planned later in this same ingest batch, same "Julia"/Adobe series, same cathedral asset) — Part 1 builds the base stonework (aged stone, brick patterns, moss, grime, decorative details) that this Part 2 video explicitly recaps and builds on top of for the ceiling fresco. Cross-link reciprocally once Part 1 is ingested.
+- **"Texturing Gothic Architecture in Substance 3D Painter: Part 1"** (`tutorials/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe.md`, video `UQkmXEWJr80`, same Adobe series, same cathedral/hallway asset) — Part 1 builds the base stonework (Concrete Cast base, Curvature-driven fake bevels, Dirt/Moss/Stains-Scratches aging, Brick generator at three scales, Path-tool decorative relief) that this Part 2 video explicitly recaps and builds on top of for the stained glass and ceiling fresco.
