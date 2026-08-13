@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=hYtHp4IXvsM
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "8.3.0 (stated in title; exact match confirmed against references/release-notes-painter-8.3.md — see App & Version note)"
+tags: [baking, mesh-maps, high-to-low-poly, cage, ambient-occlusion, curvature, thickness, position-map, world-space-normal, id-map, texture-set, opacity, python-scripting, python-api, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Baking in Substance 3D painter 8.3 | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py baking-in-substance-3d-painter-83-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -291,30 +287,75 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:01] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_000.jpg
+- [2:52] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_001.jpg
+- [3:37] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_002.jpg
+- [6:53] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_003.jpg
+- [7:41] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_004.jpg
+- [8:35] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_005.jpg
+- [10:01] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_006.jpg
+- [11:37] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_007.jpg
+- [13:12] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_008.jpg
+- [14:24] tutorials/frames/baking-in-substance-3d-painter-83-adobe-substance-3d/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Painter 8.3's ground-up rebuild of baking into a dedicated, non-blocking **Baking Mode** (F8) with a fully interactive viewport (live cage/high-poly/low-poly overlays you can tweak with instant visual feedback instead of blind trial-and-error bakes), plus a new synchronize/desynchronize system that lets per-Texture-Set and per-baker settings either follow shared "common" values or break off and be tuned independently — including Match by Mesh Name applied selectively to just the parts that need it.
 
 ### Summary
-[PENDING EXTRACTION]
+Official Adobe walkthrough (a dragon model, then a submachine-gun model) of the then-brand-new dedicated Baking Mode introduced in Painter 8.3, replacing the old inline "Bake Mesh Maps" dialog. **Access:** the croissant-shaped icon at the top-right of the viewport, the Mode menu, or the **F8** shortcut; return to painting via "Return to painting mode" or the brush icon. **Interface tour:** Texture Set List + selectable UV tiles (top right, lets you bake only specific mesh parts) → individual Mesh Map Bakers with a **link icon** per baker (shared/synchronized settings indicator) → Baker Settings panel for the currently selected baker → Baking Log at the bottom, which now also tracks high-poly mesh loading and any high/low-poly mismatches, with warnings that point directly at the offending setting. **Interactive viewport / Baking Visualization panel:** overlays for the high-poly mesh (blue), the cage (yellow tint + wireframe, showing exactly how rays will be cast), missing-seam warnings on hard edges (pink outline), and the low-poly/"Project mesh" itself shown with an adjustable neutral material (quality, roughness, metallic, bent-normal options) for post-bake inspection; all overlays can be hidden individually, and cage-offset sliders are exponential (fine control at small values) with full undo (Ctrl+Z) support. **Baking workflow:** select Texture Sets/UV tiles → select which bakers to run (Alt-click to isolate one) → explicitly **Apply Selection to All Texture Sets** if you want the same baker choice everywhere (baker selection is NOT synchronized by default) → set output resolution → **Bake Texture Sets** (or bake just the selected set) — the whole interface stays responsive during the bake, so you can keep inspecting the mesh while it runs. Press **B** post-bake to cycle through baked-map preview channels; press **M** to return to material/high-poly inspection mode. **Fixing baking artifacts (claws example):** a bad or missing high-poly region produces visibly wrong output on that baked map; fixes are either re-exporting a corrected high-poly from the DCC tool, or enabling **"Use Low Poly Mesh as High Poly Mesh"** for a self-baked (cage-less) result — but this common-settings toggle is synchronized across all Texture Sets by default, so changing it for one part changes it everywhere unless you first **break the link** (click the link icon next to Common Settings, uncheck the Texture Set you want to isolate from the shared pop-up list) to desynchronize just that Texture Set. **Hard-edge/seam artifacts (gun example):** a pink outline flags a hard edge without a matching UV seam — vertex normals split across two faces there confuse the baker's UV-space interpolation; fix by smoothing the edge (or adding a UV seam) in the DCC tool, then **Edit > Re-Import Mesh** in Painter to reload without restarting the project. **Granular per-baker sync (gun example continued):** individual bakers (not just the whole Common Settings block) can also be synchronized/desynchronized via their own link icon — demonstrated by giving the trigger a lower Ambient Occlusion secondary rays value than the rest of the mesh, and re-syncing later via **Sync Settings**. Right-clicking a baker also offers **Apply [Baker] to All Texture Sets**, a quick way to add a new baker everywhere without disturbing the rest of the per-Texture-Set setup. **Selective Match by Mesh Name (magazine example):** for an asset with parts meant to be animated/removable (e.g. a magazine), global mutual occlusion is usually wanted between parts EXCEPT the moving one; the fix is desynchronizing just that Texture Set's Common Settings, enabling **Match by Mesh Name** there (Common Settings > Match dropdown), then also desynchronizing and enabling Match by Mesh Name on the relevant Ambient Occlusion baker specifically — enabling Match by Mesh Name immediately surfaces a **Matching By Name** log tab listing any mesh names missing a low-poly counterpart, useful for catching naming inconsistencies even when no fix is currently needed.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Enter Baking Mode** via the croissant icon (top-right of the viewport), the Mode menu, or the **F8** shortcut; return to painting via "Return to painting mode" or the brush icon.
+2. **Select Texture Sets and UV tiles** to bake (top-right panel) — both are individually selectable, so you can bake only specific mesh parts. Use the panel's "Select All Texture Sets and UV Tiles" shortcut to grab everything quickly.
+3. **Load high-poly mesh(es)** in the Command/High Poly Parameters settings; watch the Baking Log to confirm successful loading and catch any high/low-poly mismatch warnings (which link directly to the offending setting).
+4. **Read the interactive viewport overlays:** yellow tint + wireframe = the cage (ray-casting boundary), blue = the high-poly mesh, plus the low-poly "Project mesh" itself — all three can be shown simultaneously for direct visual feedback.
+5. **Tune the cage interactively:** adjust Max Frontal Distance / Max Rear Distance while watching the cage in the viewport wrap around the model live; matching errors appear in red if pushed too far. Sliders are exponential for fine control; Ctrl+Z undoes the last adjustment.
+6. **Use the Baking Visualization panel's individual toggles** to hide/show the high-poly mesh, the cage (with its own color/opacity), missing-seams-on-hard-edges warnings, and the low-poly/Project mesh (shown with an adjustable neutral material — quality, roughness, metallic, bent normal — for post-bake artifact inspection).
+7. **Choose which bakers to run** (Normal, World Space Normal, ID, Ambient Occlusion, Curvature, Position, Thickness, Height, Bent Normals, Opacity, etc.) by Alt-clicking to isolate one; remember baker selection is per-Texture-Set by default, so click **"Apply Selection to All Texture Sets"** to broadcast your choice everywhere.
+8. **Set output resolution, then click Bake Texture Sets** (or bake just the currently selected Texture Set) — the UI remains fully interactive during the bake; you can keep inspecting the mesh while it processes.
+9. **After baking, press B to cycle through baked map previews**, and **M** to return to material/high-poly inspection — use this to spot artifacts (e.g. a body part with no matching high-poly geometry bakes incorrectly).
+10. **Fix a missing-high-poly-detail artifact** either by re-exporting a corrected high-poly mesh from your DCC tool and re-importing, or by enabling **"Use Low Poly Mesh as High Poly Mesh"** for that part (self-bake, no cage needed).
+11. **Desynchronize Common Settings for one Texture Set** before making a part-specific change like step 10: click the **link icon** next to Common Settings, uncheck the Texture Set(s) you want isolated from the shared pop-up list — that Texture Set's cage/common parameters can now be tuned independently without affecting the rest.
+12. **Diagnose a pink hard-edge-without-seam warning** by checking the mesh in your DCC/modeling tool: a hard (non-averaged) edge with insufficient UV-island spacing causes normal-interpolation artifacts at the bake. Fix by smoothing the edge (average the vertex normals) or by adding a UV seam there.
+13. **Reload a fixed mesh without restarting the project:** Edit > **Re-Import Mesh** — the pink warning outline disappears once the fix lands.
+14. **Desynchronize an individual baker (not just Common Settings)** the same way — click that baker's own link icon, uncheck the Texture Set to isolate, adjust its parameter (e.g. a lower Ambient Occlusion secondary-rays value for a less-visible part), and use **Sync Settings** later to re-join it to the shared group value.
+15. **Quickly add a baker to every Texture Set without disturbing existing per-set setups:** right-click the baker in the Mesh Map Bakers list and choose **Apply [Baker] to All Texture Sets**.
+16. **Set up selective Match by Mesh Name for an animated/removable part:** desynchronize that Texture Set's Common Settings, open the **Match** dropdown, select **By Mesh Name** — this immediately surfaces a **Matching By Name** log tab listing any mesh names lacking a low-poly counterpart (useful diagnostic even beyond this specific use case).
+17. **Also desynchronize and enable Match by Mesh Name on the relevant baker itself** (e.g. Ambient Occlusion) for that same Texture Set, so mutual occlusion with the rest of the mesh is suppressed only for the part that will move independently (e.g. a gun magazine) while staying intact everywhere else.
+18. **Isolate and re-bake just the affected Texture Set** (hide the rest via the Texture Set List) to verify the fix, adjusting cage rear/frontal distance further if the rays still don't reach deep enough.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Baking Mode entry points:** croissant icon (viewport top-right), Mode menu, **F8** shortcut
+- **Texture Set List + UV tiles** (top-right, individually selectable) → **Mesh Map Bakers** list (each with a link/sync icon) → **Baker Settings** panel → **Baking Log** (tracks high-poly loading, mismatches, links warnings to their source setting)
+- **Bakers covered:** Normal, World Space Normal, ID, Ambient Occlusion, Curvature, Position, Thickness, Height, Bent Normals, Opacity
+- **Baking Visualization panel toggles:** high-poly mesh (blue), Cage (surface/wireframe, color + opacity), missing-seams-on-hard-edges (pink), Project mesh/low-poly (adjustable neutral material: quality, roughness, metallic, bent normal)
+- **Cage controls:** Max Frontal Distance, Max Rear Distance (exponential sliders), live red error highlighting when mismatched, Ctrl+Z undo
+- **Sync system:** link icon on Common Settings and on each individual baker — click to open a per-Texture-Set opt-out list (desynchronize), **Sync Settings** to re-join
+- **High-poly options:** "Use Low Poly Mesh as High Poly Mesh" (self-bake, no cage)
+- **Match dropdown (Common Settings):** includes **By Mesh Name** — surfaces a **Matching By Name** log tab listing meshes missing a low-poly counterpart
+- **Right-click baker context menu:** "Apply [Baker] to All Texture Sets"
+- **Post-bake inspection shortcuts:** **B** cycles baked-map previews, **M** returns to material/high-poly mode
+- **Edit > Re-Import Mesh** — reload a corrected mesh without restarting the project
+- **Bake Selected Textures** / **Bake Texture Sets** action buttons; "Apply Selection to All Texture Sets" for broadcasting baker choice
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced (the basic bake-and-go workflow is approachable, but the synchronize/desynchronize-per-Texture-Set system and Match-by-Mesh-Name troubleshooting require understanding Painter's Texture Set/baker settings hierarchy).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter **8.3.0** — stated directly in the video title, and every feature described (dedicated Baking Mode replacing the old inline dialog, F8 shortcut, croissant icon, interactive viewport with cage/high-poly/low-poly overlays and live cage feedback, exponential cage sliders, the new Baking Log tracking mesh loading/mismatches, baker-settings synchronization with per-Texture-Set/per-baker desync via the link icon, Match by Mesh Name selective application) is an exact match against this skill's own `references/release-notes-painter-8.3.md`, which documents Painter 8.3.0 (January 10, 2023) as introducing precisely this "Dedicated Baking Mode" — confirming this video is a first-party feature-launch tutorial for that exact release, not a later video mislabeled with an old version number.
 
 ### Tags
-[PENDING EXTRACTION]
+`baking`, `mesh-maps`, `high-to-low-poly`, `cage`, `ambient-occlusion`, `curvature`, `thickness`, `position-map`, `world-space-normal`, `id-map`, `texture-set`, `opacity`, `python-scripting`, `python-api`, `intermediate`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Hand Painted Workflow in Substance 3D Painter](hand-painted-workflow-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe); uses AutoCage-assisted baking (11.0.0+) as a starting step, a later evolution of the baking pipeline this video documents at its 8.3.0 foundation.
+- [Complex Wooden Medieval Door Tutorial in Substance 3D Painter](complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md) — same channel (Adobe); production use of Auto-Cage baking (11.0.0+), useful to read alongside this video to see how the baking-mode fundamentals here evolved by 11.0.0.
+- `references/release-notes-painter-8.3.md` — this skill's own version-tracker entry for the exact release this video demonstrates; every UI element and workflow named in this video (Baking Mode, F8, Baking Log, cage overlays, settings synchronization, Match by Mesh Name) is independently confirmed there.

@@ -811,10 +811,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=hYtHp4IXvsM
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 8.3.0 — exact match confirmed against `references/release-notes-painter-8.3.md`
+- **Tags:** `baking` `mesh-maps` `high-to-low-poly` `cage` `ambient-occlusion` `curvature` `thickness` `position-map` `world-space-normal` `id-map` `texture-set` `opacity` `python-scripting` `python-api` `intermediate` `advanced`
+- **Summary:** First-party feature-launch tour of the then-new dedicated Baking Mode (F8/croissant icon): interactive viewport with live cage/high-poly/low-poly overlays (exponential cage sliders, red mismatch highlighting), a Baking Log tracking mesh loading/mismatches, non-blocking bakes, and a synchronize/desynchronize system for Common Settings and individual bakers per Texture Set — including selective Match by Mesh Name for animated/removable parts (demoed on a dragon then a submachine gun). Every feature independently confirmed against this skill's own release-notes-painter-8.3.md.
 - **File:** tutorials/baking-in-substance-3d-painter-83-adobe-substance-3d.md
 
 
