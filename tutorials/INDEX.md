@@ -503,10 +503,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=dIO6cJiE7JM
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `anchor-point` `masks` `layers` `fill-layer` `paint-layer` `blend-mode` `height` `basecolor` `roughness` `alpha` `particle-brush` `intermediate`
+- **Summary:** 1/3 of a footwear anchor-points series. Paints stitches with the built-in Stitches brush on a base layer, adds an Anchor Point, then builds a Deform layer (negative Height, anchor-referenced mask with Extract Alpha, double-blur transition trick) and a Color layer (Base Color+Roughness, same anchor referencing) — both automatically apply to any future stroke on the base layer, demonstrated by swapping in a different brush for a plain seam line that still gets the same denting/color treatment. Also shows isolating mesh parts (e.g. hiding laces) while painting.
 - **File:** tutorials/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter.md
 
 ---

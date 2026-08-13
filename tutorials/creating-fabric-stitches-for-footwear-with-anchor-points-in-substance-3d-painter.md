@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=dIO6cJiE7JM
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; window title reads 'License: 109 days remaining - Stitches'"
+tags: [anchor-point, masks, layers, fill-layer, paint-layer, blend-mode, height, basecolor, roughness, alpha, particle-brush, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Creating Fabric stitches for Footwear with Anchor Points in Substance 3D Painter | Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -165,30 +161,63 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:42] tutorials/frames/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter/frame_000.jpg
+- [3:11] tutorials/frames/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter/frame_001.jpg
+- [3:51] tutorials/frames/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter/frame_002.jpg
+- [4:47] tutorials/frames/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter/frame_003.jpg
+- [5:58] tutorials/frames/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter/frame_004.jpg
+- [6:52] tutorials/frames/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter/frame_005.jpg
+- [7:44] tutorials/frames/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Hand-painting stitches with Painter's built-in Stitches brush on a base paint layer, then using an Anchor Point on that layer to drive every downstream effect (fabric denting, color, and even alternate seam-line brushes) so a single painted stroke automatically deforms and colors consistently everywhere it's reused.
 
 ### Summary
-[PENDING EXTRACTION]
+First video in a follow-up "advanced anchor points" series (built on an earlier basic anchor-point series on the same channel), demonstrated on a shoe model. Explains anchor points as a way to define a mask or layer once and reference it dynamically elsewhere in the stack, with every reference updating automatically if the source changes. Workflow: create a new paint layer ("stitch_base"), select the built-in **Stitches** brush from the Assets/Brushes panel, tune its properties (removes the default connecting seam line so only individual stitch marks show, increases brush size, uses Shift-click for straight runs), hand-paints the stitch line, then adds an **Anchor Point** to this layer. Builds a "Deform" fill layer with only Height enabled (negative value, to recess the fabric around the stitches) masked by a black mask + fill layer that references the stitch_base anchor with **Alpha Behavior = Extract Alpha** — demonstrates a double-blur trick (two separate Blur filter instances at different intensities, e.g. 0.6 then 0.5, rather than one strong blur) for a noticeably smoother recess transition than a single blur pass, then dials in the final negative height amount (~-0.4) for the dent depth. Adds a "Color" fill layer (Base Color + Roughness only, roughness pulled down for a duller thread look) similarly masked via an anchor-referenced fill with Extract Alpha, using black Levels to pull back color bleed at the edges. Demonstrates isolating specific mesh parts while painting by toggling off other sub-objects' visibility in the Texture Set/Layer list (e.g. hiding shoelaces that get in the way while painting a stitch line), clicking back onto the layer to exit isolation mode. Finally shows the anchor point's real power: switching the paint layer's active brush to something completely different (a basic heart/soft brush, after pressing the material's X button to clear the stitch material assignment) and painting a plain seam line — the Deform and Color layers still apply their same referenced effects to this new stroke automatically, since they reference the anchor, not the specific brush used.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Create a new paint layer to hold the base stitch strokes.
+2. In Assets → Brushes, search "stitch" and select the built-in **Stitches** brush; double-click to activate.
+3. In the brush's Properties, disable the default connecting seam line so only individual stitch marks render (no thin line between them); increase brush size as needed (top toolbar, right-click menu, or Properties panel all work).
+4. Hold **Shift** while clicking to draw straight stitch lines.
+5. Name this layer clearly (e.g. "stitch_base") once satisfied with the painted result.
+6. Add an **Anchor Point** to the stitch_base layer — the core enabler for everything that follows.
+7. Build fabric denting: add a new fill layer ("Deform" / "Form"), disable every channel except **Height**, set it negative (final value tuned to roughly -0.4 in this demo) so referenced areas recess into the fabric.
+8. Mask the Deform layer: add a black mask, then add a fill inside it, click its grayscale/anchor-point field and select the stitch_base anchor point.
+9. Set that fill's **Alpha Behavior to Extract Alpha** — required, otherwise the reference renders as an unwanted gradient/grayscale look instead of the crisp stitch shape.
+10. Refine the mask transition with a **double-blur** technique: add a Blur filter at a stronger setting (e.g. 0.6), then add a second, separate Blur filter at a slightly lower setting (e.g. 0.5) — two staged blurs produce a visibly smoother transition than one single strong blur pass.
+11. Build stitch color: add a new fill layer ("Color"), enable only Base Color and Roughness (Roughness pulled down for a duller, less shiny thread look), pick any color (red used for visibility in the demo).
+12. Mask the Color layer the same way — black mask + fill referencing the stitch_base anchor point with Alpha Behavior = Extract Alpha — then use the mask's black Levels point to pull back any color bleeding past the stitch edges for a cleaner result.
+13. When painting the actual stitches across the model, temporarily hide mesh parts that get in the way (e.g. shoelaces) by toggling their visibility off in the Texture Set/mesh list, then click back on the layer to exit isolation mode and resume normal painting.
+14. Bonus technique — reusing the same anchor-driven effect stack with a different brush: on the stitch_base layer, clear the currently-assigned stitch brush/material (scroll down, press the **X** button), select a different brush (e.g. a basic soft/heart brush at reduced size), and paint a plain seam line instead — the Deform and Color layers, since they reference the anchor rather than a specific brush stroke type, automatically apply the same denting and coloring to this new line too, producing a distinct-looking "seam line" variant for free.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Stitches** brush (Assets → Brushes): connecting-line toggle, brush size, Base Color, Stitch Selection, Thread Type, Puncture Intensity, Seam Intensity, Advanced/Technical Parameters sub-panels (visible in captured frames).
+- **stitch_base** paint layer with an **Anchor Point**.
+- **Deform** fill layer: Height-only, negative value (~-0.4), black mask + anchor-referencing fill (Alpha Behavior = Extract Alpha) + two staged Blur filters (~0.6 then ~0.5).
+- **Color** fill layer: Base Color + Roughness only, black mask + anchor-referencing fill (Extract Alpha) + black Levels point to control edge bleed.
+- Mesh-part visibility toggling (Texture Set/layer list) to isolate specific model sections while painting.
+- X button (clear assigned brush material) to swap a paint layer's active brush mid-project while keeping all anchor-referenced downstream layers intact.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate (anchor-point-driven layer construction, requires comfort with masks/fills/blend chains).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number stated on screen; the window title bar reads "License: 109 days remaining - Stitches" (subscription license countdown, not a version indicator).
 
 ### Tags
-[PENDING EXTRACTION]
+`anchor-point`, `masks`, `layers`, `fill-layer`, `paint-layer`, `blend-mode`, `height`, `basecolor`, `roughness`, `alpha`, `particle-brush`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Creating Sole Patterns for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter.md`) — same footwear/anchor-points series, same shoe asset.
+- **Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-painter.md`) — same series, third installment.
+- **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's dedicated anchor-point deep-dive; complementary independent treatment of the same core technique (reusable, dynamically-updating mask/layer references).
+- **Anchor Point Magic 01-04** (Substance3D official series, if ingested) — same anchor-point technique family, referenced by this video as a "basic anchor point series" on the same channel.
