@@ -338,10 +338,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=7kV4Q4UBvl4
 - **Author:** Abe Leal 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; UI consistent with this creator's other ingested 11.0.0+-pinned tutorial, tentative
+- **Tags:** `layers` `fill-layer` `masks` `generator` `baking` `mesh-maps` `ambient-occlusion` `curvature` `cage` `texture-set` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `alpha` `procedural` `blend-mode` `export` `export-preset` `game-engine` `unreal-export` `intermediate`
+- **Summary:** Small game-prop pipeline (brief Maya retopology/UVs, then Painter baking+texturing) for a treasure coin: bakes 4 duplicate low-polys into one Texture Set so procedural rust/wear/scratch mask stacks (Dirt generator, tileable grunge masks, Metal Edge Wear generator, Clouds, scratch masks, AO-driven cavity rust with inverted Levels) read differently per coin from shared settings alone, no per-coin hand-painting. Includes an Alt+click channel-isolation UI tip and export to Unreal Engine.
 - **File:** tutorials/substance-painter-tutorial-texturing-the-coin.md
 
 
@@ -349,10 +349,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=LRy-Nc7B_bk
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 11.0.0+
+- **Tags:** `mesh-maps` `high-to-low-poly` `cage` `generator` `masks` `height` `path-tool` `procedural` `intermediate`
+- **Summary:** Foundation-setup video (no painting yet) covering Auto-Cage baking (adaptive cage that eliminates manual tightness tuning against red "matching error" artifacts), a PSD-based Auto-Update texture pipeline (edit in Photoshop, refresh instantly everywhere in Painter), and a height-only Path-tool + Smooth Bevel filter trick for sculpting stylized rim ornaments using only texture. Version floor 11.0.0+ confirmed via three independent markers (Auto-Cage, Auto-Update, Smooth Bevel filter) matching release-notes-painter-11.0.md.
 - **File:** tutorials/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su.md
 
 

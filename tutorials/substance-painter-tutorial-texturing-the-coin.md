@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=7kV4Q4UBvl4
 author: Abe Leal 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen (title bar reads \"Adobe Substance 3D Painter - ASM - PBR Metallic Roughness\"); modern layer-stack/Texture-Set-Settings/baker UI consistent with this creator's other ingested tutorial (Complex Wooden Medieval Door, pinned 11.0.0+), tentative"
+tags: [layers, fill-layer, masks, generator, baking, mesh-maps, ambient-occlusion, curvature, cage, texture-set, pbr, metal-rough, basecolor, roughness, metallic, height, alpha, procedural, blend-mode, export, export-preset, game-engine, unreal-export, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-painter-tutorial-texturing-the-coin/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance Painter Tutorial: Texturing the Coin
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-painter-tutorial-texturing-the-coin <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -393,30 +389,68 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [15:43] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_000.jpg
+- [16:35] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_001.jpg
+- [18:20] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_002.jpg
+- [19:02] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_003.jpg
+- [20:21] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_004.jpg
+- [21:28] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_005.jpg
+- [22:44] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_006.jpg
+- [24:07] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_007.jpg
+- [25:15] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_008.jpg
+- [26:49] tutorials/frames/substance-painter-tutorial-texturing-the-coin/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A full small-prop game-asset pipeline (Maya retopology/UVs -> Painter baking -> Painter texturing) demonstrated on a game-ready treasure coin, with the Painter half built around baking **four duplicate low-polys into one Texture Set simultaneously** so every generator/fill-layer pass (rust, edge wear, scratches, dirt) reads slightly differently per coin instance purely from procedural mask variation — no per-coin hand-painting needed to get four "identical geometry, different wear" variants.
 
 ### Summary
-[PENDING EXTRACTION]
+Note: the first ~15 minutes are Maya-side retopology/UV work (trim dynamic/inflate/clay buildup cleanup of a ZBrush-style high poly, manual low-poly creation with Create Polygon + Quad Draw, real-world-scale freezing, a flat front-projection UV layout cut down the middle, then duplicating the whole coin 4x and combining all 4 low-polys into one object/UV space before export) — out of this skill's scope but included here briefly since it explains why the Painter texture set ends up as 4 coins baked and textured together. In Painter: imports the 4-coin low poly at 2K/DirectX, bakes mesh maps (Normal, World Space Normal, Ambient Occlusion, Curvature, Position, Thickness) from the matching 4-coin high poly using the built-in GPU baker (default cage, x4 anti-aliasing) — deliberately keeping the 4 coins spaced apart in UV/world space so AO doesn't bleed between them. Textures a tarnished-bronze/gold "ancient coin" look entirely from PureRef reference: base metal color+roughness sampled from the reference photo, then a stack of procedural rust/dirt/wear passes (dirt generator, grunge-mask fill layers, metal edge wear generator, clouds fill layer, scratch fill layer, and a final AO-driven cavity rust pass) — each one intentionally randomized per-coin via mask tiling/balance so the 4 coins, while geometrically identical, read as 4 distinct found objects. Ends with File > Export Textures for a direct Unreal Engine 5 handoff.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Bake 4 low-poly coin duplicates as one Texture Set:** in the baking panel, set output size (2K used here), load the matching 4-coin high-definition mesh, enable Normal / World Space Normal / Ambient Occlusion / Curvature / Position / Thickness / Bent Normal outputs, set Anti-Aliasing to x4 for a softer normal map, use the default auto-generated cage (no manual cage-matching needed for this simple geometry), and bake on GPU — the panel shows the empty-cage warning is absent, confirming the auto-cage catches all high-poly detail.
+2. **Keep the duplicated coins spaced apart in UV/3D space during Maya prep** (noted explicitly as a Painter-baking concern) so each coin's baked Ambient Occlusion doesn't contaminate its neighbor with false rim shadowing.
+3. **Gather a real reference image first** (PureRef, dropped a tarnished ancient-bronze/gold coin photo into the Painter viewport area) before choosing any color — sample the reference's base color and push roughness up significantly to match a dull, tarnished (not shiny) base metal.
+4. **Build the base rust pass with a Dirt generator:** add a black mask on the base metal fill layer, add a Dirt generator on it, then tune the generator's own Contrast (up, for spottier rust) and Intensity (up); separately fix an unwanted side-effect where the generator injects Height detail by either lowering the channel's Technical Parameters height position (~0.4) or reducing the generator's own Height intensity — both routes work, pick one.
+5. **Break the "all 4 coins look identical" problem with a grunge-mask fill layer:** add a new Fill layer, mask it with a grunge/rust mask asset ("grunge rust define" style), raise the mask's Balance/Contrast/Tiling so it reads as spotty variation, set the fill layer's blend mode to Multiply against the coins — because the mask is UV-tiled rather than baked-map-driven, each of the 4 coins samples a different region of the tileable texture and gets visibly different rust patterning from the same settings.
+6. **Isolate a mask/generator to color-only output when needed:** Alt+click a channel-enable icon in a layer's channel row to toggle every channel off except the one clicked (e.g. Color only) — a fast way to use a rust/dirt generator purely as a tint pass without also affecting Roughness/Height.
+7. **Add a second dirt-tint pass with an inverted mask:** duplicate the rust-generator approach on a new black-masked fill layer, then add a Levels filter on the mask and invert it, set the fill layer's blend mode to Overlay and reduce its intensity — produces subtle color-undertone variation without an obviously "dirty" look.
+8. **Build the metal edge-wear pass:** new fill layer sampling the same reference gold color, black mask + Metal Edge Wear generator (finds high-curvature/rubbed-against-fingers areas automatically), raise Wear Level and lower Wear Contrast to soften the effect, then add a Blur filter on top of the generator for an even softer transition; set the fill layer's own blend mode to Linear Dodge to punch the highlight color, and reduce the layer's Color intensity so it doesn't blow out the exposure.
+9. **Add a clouds-mask fill layer set to Multiply** to non-uniformly hide/reveal the metal-edge-wear layer per coin — since clouds is a tileable procedural noise (not baked-map-driven), each of the 4 coins gets a different wear coverage pattern from one shared layer setup; follow by nudging the Metal / Roughness channel values on the same layer to balance shine vs. tarnish, and consider reordering this layer below the rust passes if a coin reads "too shiny" relative to its damage level.
+10. **Add a scratch pass:** new stylized-metal fill layer, black mask with a Fill layer using a scratch-pattern mask asset, raise the mask's Balance and Contrast so scratches read individually per coin; optionally lower the channel's Technical Parameters Height Position to carve the scratches in as real (procedural, not sculpted) surface depth.
+11. **Add a final cavity-only rust pass driven by the baked Ambient Occlusion map (not a generator):** on a new fill layer using a metal-rust preset, set its mask/mapping source to the Texture Set's baked Ambient Occlusion output, add a Levels filter and invert it (the raw AO bake reads inverted for this purpose), push the fill's rust amount high with a green-ish tint color, set the layer blend mode first to Overlay (Multiply was noted as "too destructive"), then dial the layer opacity down; Alt+click to restrict this pass to Color-only so it tints cavities without also darkening Roughness.
+12. **Finish with File > Save, then File > Export Textures** for a direct Unreal Engine handoff — the video notes the low-poly + exported maps are import-ready as-is.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Baker:** Common Settings (output 2K, DirectX normal format), High Definition Meshes = matching 4-coin high poly, Anti-Aliasing x4, default auto-cage, outputs: Normal, World Space Normal, Ambient Occlusion, Curvature, Position, Thickness, Bent Normal
+- **Base metal fill layer:** Base Color + Roughness sampled/matched from a PureRef reference image
+- **Rust pass 1:** black mask + `Dirt` generator, tuned Contrast/Intensity, Height channel toned down via Technical Parameters or generator Height intensity
+- **Rust variation pass:** Fill layer with a tileable grunge/rust mask asset (raised Balance/Contrast/Tiling), blend mode `Multiply`
+- **Rust tint pass 2:** Fill layer + generator restricted to Color-only via Alt+click, mask driven by a `Levels` filter set to Invert, blend mode `Overlay`, reduced intensity
+- **Metal edge wear:** Fill layer + black mask + `Metal Edge Wear` generator (Wear Level up, Wear Contrast down) + `Blur` filter on the generator, layer blend mode `Linear Dodge`, reduced Color intensity
+- **Wear-coverage variation:** `Clouds` fill layer mask, blend mode `Multiply`
+- **Scratches:** Fill layer + black mask + Fill sub-layer using a scratch mask asset (Balance/Contrast raised), Height Position lowered via Technical Parameters for real carved depth
+- **Cavity rust (final pass):** Fill layer sourced from the Texture Set's baked Ambient Occlusion map, `Levels` filter set to Invert on the mask, blend mode `Overlay` with reduced opacity, restricted to Color-only via Alt+click
+- **UI trick used throughout:** Alt+click a layer's channel-enable icon to isolate that single channel (e.g. Color) and disable all others in one click
+- **Export:** File > Export Textures, DirectX-format maps for Unreal Engine
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — no single technique is exotic, but the tutorial's real value is the "one bake, one texture stack, four automatically-varied results" workflow (mask tiling/balance driving per-instance variation across identical geometry) plus several small non-obvious UI moves (Alt+click channel isolation, AO-map-as-mask-source with inversion, generator height-injection cleanup).
 
 ### App & Version
-[PENDING EXTRACTION]
+Confirmed on-screen as **"Adobe Substance 3D Painter"** (title bar: `ASM - PBR Metallic Roughness`) — no version number visible in any captured frame. Baker panel, Texture Set List, and generator/fill-layer UI match this creator's other ingested tutorial (Complex Wooden Medieval Door, pinned Painter 11.0.0+); treated as the same approximate era but not independently confirmed here.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, masks, generator, baking, mesh-maps, ambient-occlusion, curvature, cage, texture-set, pbr, metal-rough, basecolor, roughness, metallic, height, alpha, procedural, blend-mode, export, export-preset, game-engine, unreal-export, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Complex Wooden Medieval Door Tutorial in Substance 3D Painter](complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md) — same creator (Abe Leal 3D); shares the same baking-panel/generator-driven wear philosophy and UI era, applied here to a small metal prop instead of a large wooden asset.
+- [TEXTURING METAL from Scratch in SUBSTANCE PAINTER](texturing-metal-from-scratch-in-substance-painter.md) — different creator (Jared Chavez); shares the same big-to-small metal wear-buildup logic (base metal -> generator-driven edge wear -> localized rust as focal detail) though this coin video leans more on tileable-mask-driven per-instance randomization than hand-painted breakup.
+- [Realistic Painted Metal in Substance Painter | M24 Grenade Texturing](realistic-painted-metal-in-substance-painter-m24-grenade-texturing.md) — different creator (Dolinskyi); complementary metal-wear reference — both use Metal Edge Wear-style generators plus blur softening, this video's contribution is the AO-map-as-cavity-rust-mask trick and the multi-instance-variation-from-one-mask-stack approach.

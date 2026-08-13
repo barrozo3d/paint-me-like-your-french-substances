@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=LRy-Nc7B_bk
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "11.0.0+"
+tags: [mesh-maps, high-to-low-poly, cage, generator, masks, height, path-tool, procedural, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Stylized Asset Setup in Painter: Auto-Cage, PSD Workflows & Smart Detailing | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -163,30 +159,62 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:35] tutorials/frames/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su/frame_000.jpg
+- [1:22] tutorials/frames/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su/frame_001.jpg
+- [1:39] tutorials/frames/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su/frame_002.jpg
+- [2:03] tutorials/frames/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su/frame_003.jpg
+- [2:46] tutorials/frames/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su/frame_004.jpg
+- [3:22] tutorials/frames/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su/frame_005.jpg
+- [4:08] tutorials/frames/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su/frame_006.jpg
+- [4:56] tutorials/frames/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Non-destructive project-setup pass (no painting yet): Auto-Cage baking to eliminate manual cage-tightness fixes, a PSD-based Auto-Update texture pipeline for round-tripping edits from Photoshop, and Path-tool height-only sculpting finished with a Smooth Bevel filter to add "modeled-looking" surface detail purely through texture.
 
 ### Summary
-[PENDING EXTRACTION]
+Pablo (3D concept/character artist) sets up a stylized still-life scene (lemons, sardines, ceramic pieces) in Painter, explicitly deferring all texturing/painting to a follow-up video. Covers three foundation techniques: (1) baking mesh maps with the new Auto-Cage mode instead of manually tuning cage tightness against red "matching error" artifacts on tricky overlapping geometry, (2) importing a UV-matched PSD photo reference as a project asset and wiring up Auto-Update so edits made back in Photoshop refresh instantly everywhere the texture is used in Painter, and (3) a height-only fill layer + black mask + Path tool trick for sculpting stylized ridges/ornaments (e.g. a jug rim) using only texture, finished with a Smooth Bevel filter to round the flat stroke into a real-looking ridge, with alphas swappable at any time for different ornament styles.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Scene overview: stylized still-life with lemons, sardines, and ceramic pieces — this video is foundation-setup only, texturing covered in a follow-up video.
+2. Click **Bake Mesh Maps**, leave most settings default, load the high-resolution mesh reference.
+3. Default/manual cage: adjust the tightness slider — too tight produces red "matching error" zones (gaps/artifacts) especially where mesh pieces overlap or sit close together (sardines, ceramics).
+4. Switch the **Cage** dropdown to **Auto-Cage** — an adaptive mode that wraps the cage around the mesh automatically, conforms to tight corners, and gives a clean bake with no red zones in one click.
+5. Import a UV-matched PSD photo (sardine reference) into the **Asset Library**: set its type to Texture, and in the Import dropdown choose **Import As → project** so the texture is embedded and saved with the project file.
+6. Create a new fill layer in the Layer Stack; drag the PSD texture directly into the **Base Color** slot — it matches the mesh's UV layout immediately.
+7. Enable **Auto-Update**: in the Asset Library, click the small refresh icon at the bottom, then check both "update resources in the library" and "update resource in all instances of the project" — subsequent Photoshop edits to the PSD (save only, no re-export/re-import) now refresh instantly everywhere that texture is used in Painter.
+8. Extra surface sculpting via texture only (no geometry edits), demoed on a ceramic jug: create a new fill layer, disable every channel except **Height**.
+9. Add a black mask to the layer, add a paint effect, select the **Path tool**, and click around the rim to draw an editable curve — invisible at first since Height value starts low.
+10. Raise the Height value to make the stroke visible; drag path points at any time to reshape the curve non-destructively.
+11. Open **Stroke settings** and increase **Size** and **Spacing** of the instanced alpha along the path to make the detail read more clearly.
+12. Add a **Smooth Bevel** filter on top to soften/round the flat height stroke into a real-looking rounded ridge; fine-tune **Curvature Distance** and **Smoothness** sliders to taste.
+13. Swap in a different alpha from the Library's Alphas filter into the stroke settings, and re-tweak Size/Spacing, to produce a completely different ornament pattern without losing any non-destructive flexibility.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Bake Mesh Maps dialog: Cage type (manual/Distance-Based tightness slider vs. **Auto-Cage**), matching-error (red) bake visualization
+- Asset Library: Import As "project"; Auto-Update refresh icon; "update resources in library" + "update resource in all instances of project" checkboxes
+- Fill layer → Base Color slot (drag-drop PSD texture)
+- Fill layer, Height channel only, black mask, paint effect
+- Path tool (click-to-draw curve, editable vertices, Stroke settings: Size, Spacing, swappable Alpha)
+- Smooth Bevel filter (Curvature Distance, Smoothness sliders)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — the baking/Auto-Update setup is beginner-accessible, but the height-only Path-tool sculpting + Smooth Bevel workflow assumes comfort with non-destructive layer/mask/filter stacking.
 
 ### App & Version
-[PENDING EXTRACTION]
+**Substance 3D Painter 11.0.0+** — three independent version markers all land exactly on 11.0.0 per `references/release-notes-painter-11.0.md`: **Auto-Cage generation** ("experimental Auto-cage generation for baking"), **Auto-Update for modified assets**, and the **Smooth Bevel filter** (one of the "6 new filters" in 11.0.0). The Path tool used here is also the 11.0.0-era Filled Path tool (post-9.0 redesign). Exact patch build not shown on screen.
 
 ### Tags
-[PENDING EXTRACTION]
+`mesh-maps` `high-to-low-poly` `cage` `generator` `masks` `height` `path-tool` `procedural` `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"Complex Wooden Medieval Door Tutorial in Substance 3D Painter"** (`tutorials/complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md`, video `cRKK4YOXLtQ`) — same two 11.0.0 features confirmed together (Auto-Cage baking + Bevel Smooth filter), applied there to procedural height-carving instead of rim ornamentation.
+- **"New Ribbon Paths in Substance 3D Painter"** (`tutorials/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d.md`) — same `path-tool` feature family; goes deeper into Path/Ribbon presets, corner modes, and custom start/end/corner images than this video's rim-ornament use case.
+- **"Texturing Gothic Architecture in Substance 3D Painter: Part 1"** (`tutorials/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe.md`, video `UQkmXEWJr80`) — another Adobe-official video combining the Path tool for decorative relief with a Bevel Smooth filter finishing pass, same 11.0.0+ version floor.
