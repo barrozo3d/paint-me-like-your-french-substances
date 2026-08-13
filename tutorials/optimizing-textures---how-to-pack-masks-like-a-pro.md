@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=yZA_QMeZU0Q
 author: Abe Leal 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (channel packing/export) + Unreal Engine 5 (material graph reconstruction)"
+version: "not stated on screen"
+tags: [texture-set, channel-packing, export, export-preset, basecolor, roughness, metallic, normal-map, ambient-occlusion, curvature, thickness, height, alpha, masks, generator, procedural, blend-mode, game-engine, unreal-export, color-management, advanced, expert]
+extraction_status: complete
 frames_dir: tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Optimizing Textures - How to Pack Masks Like a Pro
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py optimizing-textures---how-to-pack-masks-like-a-pro <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -315,30 +311,72 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:50] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_000.jpg
+- [3:15] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_001.jpg
+- [4:00] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_002.jpg
+- [5:50] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_003.jpg
+- [6:55] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_004.jpg
+- [7:35] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_005.jpg
+- [9:35] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_006.jpg
+- [10:50] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_007.jpg
+- [13:00] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_008.jpg
+- [14:40] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_009.jpg
+- [18:25] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_010.jpg
+- [21:15] tutorials/frames/optimizing-textures---how-to-pack-masks-like-a-pro/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Aggressive texture-channel packing beyond the standard "Unreal Engine 4 Packed" export preset — reconstructing a normal map's Blue channel mathematically inside Unreal Engine so it never needs to be stored, freeing that map's RGBA slots for Roughness + Metallic instead, plus a custom **User Channel** ("blood" mask) built entirely from procedural generators/grunges in Painter and exported as a fourth packed channel, then reconstructed and dynamically toggled as a runtime material parameter in Unreal.
 
 ### Summary
-[PENDING EXTRACTION]
+Starts from the problem: a full default PBR export (BaseColor, Roughness, Metallic, Normal, plus optional Emissive/Height/AO) can produce many separate 4K textures per asset — at scale (e.g. 200 assets in a scene) this becomes enormous. **Level 1 optimization** is the standard **Unreal Engine 4 (Packed)** output template, which already merges Occlusion/Roughness/Metallic into one RGB image and keeps BaseColor+Opacity and Normal separate (TGA/PNG images have 4 usable slots: R, G, B, Alpha). **Level 2 (this video's real content)**: duplicate that template (e.g. "Unreal Engine Packed - Min Max"), delete unneeded maps (Emissive if not used), and — the core trick — delete the standalone Normal map output entirely and rebuild it as a custom RGBA output: Normal DirectX's X data into the R channel, Y data into the G channel (both as Greyscale channel, not Alpha channel, to avoid triggering transparency), Roughness into B, Metallic into Alpha. This works because a tangent-space normal map's Blue (Z) channel is mathematically derivable from X and Y at render time — Unreal (and most modern engines) doesn't need it stored at all. The freed Alpha slot on the BaseColor+Opacity map (since this asset has no real opacity) is instead repurposed for a **custom mask**: a **User Channel** (Texture Set Settings → Channels → + → User Channels → User0, renamed e.g. "Blood") is added to the texture set, built as its own Fill-layer-based procedural mask entirely inside Painter (a red-tinted base color for visualization purposes, driven by a black mask stack: a Grunge fill for blood-splatter shape, a Curvature-or-similar generator flipped and set to Multiply to remove blood from crevices, and a second Grunge fill on Multiply to further break up the shape) — previewable via the `C` channel-cycle hotkey. This user channel is then mapped into the custom export template's spare Alpha slot in place of Opacity. A third, fully-loaded "masks" template variant is also demonstrated (AO + Thickness + Curvature + Height all packed into one RGBA texture) as a general technique for handing technical/shader artists a rich set of look-dev channels in a single custom texture, applicable to any DCC/engine (Maya, Blender, etc.), not just Unreal — though not used in this video's final asset. **Export settings**: TGA recommended over PNG specifically when using alpha channels (PNG's alpha gets pre-multiplied into the RGB colors, changing the result; TGA is lossless and keeps alpha as a fully separate channel) — the final result for this shield asset is just **two 4K textures** instead of five-plus. **Unreal-side reconstruction**: import both textures, set the packed-normal texture's compression to a setting that preserves quality (BC7 instead of the default BC1/DXT1, visibly reducing block-compression artifacts on a 4K texture — a quality/performance tradeoff worth confirming with a lead before using broadly) and set its sRGB flag off (linear color — critical for any normal/data map). In the Material Graph: **Append** the packed texture's R and G channels into a 2-component vector, **Subtract 0.5** and **Multiply by 2** to remap the 0-1 stored range back to a -1..1 signed vector, then feed that into Unreal's **DeriveNormalZ** node (expects X/Y input, reconstructs Z) to rebuild a complete usable normal vector from just 2 stored channels — an equivalent simpler alternative uses a single **Constant Bias Scale** node (Bias = -0.5, Scale = 2) in place of the separate Subtract+Multiply nodes. The same texture's B and Alpha channels are wired directly into Roughness and Metallic respectively. The BaseColor+blood-mask texture's Alpha (the custom blood channel) is used two ways: (1) a **Lerp** between the plain BaseColor and a hand-picked dark blood color, alpha-driven by the mask (inverted with `1-x` since the mask read backwards), gives the visual blood-splatter color layer; (2) a **Min** node combining the stored Roughness (blue channel) with the blood mask makes the blood read as glossier/shinier than the surrounding rough material — verified by right-click → "Start Previewing Node" on individual graph nodes to isolate and check each step's output. Both the color-Lerp and roughness-Min results are then blended a second time via two more **Lerp** nodes (original vs. blood-modified color, and original vs. blood-modified roughness) driven by one shared **Scalar Parameter** ("Blood", 0-1 range) — converted from a constant to a parameter, then exposed and controlled live via a **Material Instance**, letting an artist (or later, gameplay Blueprint logic) dynamically fade blood damage in and out on the shield in real time without ever re-exporting from Painter.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Understand the baseline: a full PBR export can produce 5+ separate texture maps per asset (BaseColor, Roughness, Metallic, Normal, optionally Emissive/Height/AO) — this multiplies fast across many assets in a scene.
+2. Start from **Unreal Engine 4 (Packed)** output template (already merges Occlusion/Roughness/Metallic into one RGB image); duplicate it to create a custom variant (e.g. "Min Max") for further reduction.
+3. Delete unneeded maps from the custom template (e.g. Emissive, if the asset doesn't use it).
+4. Delete the standalone Normal map output and rebuild it as a custom RGBA channel-pack: Normal DirectX **X → R** (Greyscale channel), Normal DirectX **Y → G** (Greyscale channel), **Roughness → B**, **Metallic → Alpha** — freeing a whole separate texture, since the normal map's Blue/Z channel is mathematically re-derivable from X/Y at render time and doesn't need to be stored.
+5. Repurpose the BaseColor map's now-unused Alpha slot (if the asset has no real Opacity) for a custom mask instead.
+6. Add a **User Channel** (Texture Set Settings → Channels → + → User Channels → User0, rename as desired e.g. "Blood") to hold that custom mask data inside the Painter project.
+7. Build the custom mask entirely with Painter's standard toolkit — Fill layer + black mask + Grunge fills for shape, a generator (e.g. curvature-based) flipped and set to **Multiply** to exclude crevices, a second Grunge on **Multiply** for further breakup — verified via the `C` channel-cycle hotkey to preview the raw mask channel.
+8. Map that custom User Channel into the export template's freed Alpha slot (replacing Opacity).
+9. (Optional, shown as a general technique) Build a fully-loaded secondary "masks" export template packing AO + Thickness + Curvature + Height into one RGBA texture, for handing technical/shader artists a rich look-dev toolkit in a single custom map — works in any DCC/engine, not Unreal-specific.
+10. Export as **TGA** (not PNG) whenever using alpha channels — TGA is lossless and keeps alpha fully separate; PNG's alpha gets pre-multiplied into RGB, changing the stored color data.
+11. In Unreal: import both packed textures; set the reconstructed-normal texture's compression to **BC7** (instead of default BC1/DXT1) for less block-compression artifacting at high resolution — a deliberate quality/file-size tradeoff, confirm with a lead before using broadly; set its **sRGB flag off** (linear color, essential for any normal/data map).
+12. Rebuild the normal map in the Material Graph: **Append** the packed texture's R+G channels into a 2-component vector → **Subtract 0.5** → **Multiply by 2** (remaps 0-1 stored data back to a -1..1 signed vector) → Unreal's **DeriveNormalZ** node (reconstructs the missing Z/Blue component from X/Y) → plug into the Normal input.
+13. Simplify steps 12's Subtract+Multiply pair into a single **Constant Bias Scale** node (Bias = -0.5, Scale = 2) for the same result with fewer nodes.
+14. Wire the same packed texture's Blue channel into Roughness and Alpha channel into Metallic.
+15. Build the blood color layer: a **Lerp** between plain BaseColor and a hand-picked dark blood color, alpha-driven by the imported blood-mask channel (invert with `1 - x` if the mask reads backwards) — plug into BaseColor.
+16. Build the blood roughness layer: a **Min** node combining stored Roughness with the blood mask so blood-covered areas read glossier/shinier than the surrounding material — verify each graph node's isolated output via right-click → **Start Previewing Node**.
+17. Add a second layer of Lerps (original color vs. blood-modified color; original roughness vs. blood-modified roughness), both driven by one shared **Scalar Parameter** ("Blood," range 0-1) converted from a constant — wire into final BaseColor/Roughness material inputs.
+18. Create a **Material Instance** from the material to expose the Blood parameter as a live, artist- (or Blueprint-gameplay-) controllable slider that fades blood damage in/out in real time with zero re-export from Painter.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Painter: custom duplicated **Output Template** (Export Textures → Output Templates), per-channel RGBA remapping (drag an input map onto R/G/B/A, Greyscale vs. Alpha channel mode)
+- **User Channel** (Texture Set Settings → Channels → + → User Channels)
+- Custom mask built from standard Fill/mask/Grunge/generator toolkit, previewed via `C` hotkey
+- Export format: **TGA** (lossless, alpha kept separate) preferred over PNG (alpha pre-multiplied into RGB) whenever alpha channels are used
+- Unreal texture import: **sRGB off** for normal/data maps, **BC7** compression (vs. default BC1/DXT1) for higher quality at a size/perf cost
+- Unreal Material Graph nodes: `Append`, `Subtract`, `Multiply` (or the combined `Constant Bias Scale`, Bias -0.5/Scale 2), `DeriveNormalZ`, `Lerp`, `Min`, `Component Mask`, `Scalar Parameter` (converted from constant), right-click → **Start Previewing Node** for graph debugging
+- `Material Instance` (exposes a parameterized, live-editable slider from a base Material)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Expert — combines advanced Painter export/channel-packing knowledge with genuine shader-graph math (tangent-space normal reconstruction, Lerp/Min-based mask compositing) inside Unreal Engine; explicitly flagged by the creator as more technical than typical texturing content.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen for either Substance Painter or Unreal Engine.
 
 ### Tags
-[PENDING EXTRACTION]
+`texture-set` `channel-packing` `export` `export-preset` `basecolor` `roughness` `metallic` `normal-map` `ambient-occlusion` `curvature` `thickness` `height` `alpha` `masks` `generator` `procedural` `blend-mode` `game-engine` `unreal-export` `color-management` `advanced` `expert`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Zbrush to Substance Painter Bridge! NEW TOOL!](zbrush-to-substance-painter-bridge-new-tool.md) — same creator (Abe Leal 3D); a ZBrush-PolyPaint-to-ID-map workflow that shares this video's "custom Texture Set channel used for an unconventional masking purpose" spirit, applied to per-part masking instead of channel-packed export.
+- [Substance Painter Tutorial: Texturing the Coin](substance-painter-tutorial-texturing-the-coin.md) — same creator; shares this creator's export-to-game-engine focus and small-prop production pipeline mindset.
+- [Complex Wooden Medieval Door Tutorial in Substance 3D Painter](complex-wooden-medieval-door-tutorial-in-substance-3d-painter.md) — same creator; a larger production project sharing the same procedural-mask-building toolkit (generators, grunges, Multiply breakup) this video uses to build its custom blood channel.
