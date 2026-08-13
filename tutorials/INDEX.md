@@ -679,10 +679,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=_HcSf9i4kIY
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `layers` `paint-layer` `procedural` `alpha` `emissive` `basecolor` `beginner`
+- **Summary:** Artist-philosophy piece (French interview, translated), Chapter 3 of a multi-app project-breakdown series — mostly interview B-roll rather than a software walkthrough. Describes a working principle: build a complex procedural base pass first, then hand-paint a deliberately illustrative 2D-style layer on top (flat colors, visible brush marks, texture-baked highlights rather than renderer-generated light), treating texturing and lighting as co-developed and iterative through to final render. Also covers real-world texture sampling and importing Photoshop brushes into Painter.
 - **File:** tutorials/izakayas-paradigm-chapter-3-substance-3d-painter-adobe-substance-3d.md
 
 
