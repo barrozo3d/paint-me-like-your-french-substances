@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=QSVgnyiDADc
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "10.0.0 (stated in narration: '10.0 and above'; also visible in the cache-usage readout 'Version: 10.0.0 (OpenCL)')"
+tags: [layers, fill-layer, masks, alpha, texture-set, MatFX, procedural, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/custom-fonts-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 4
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Custom Fonts in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py custom-fonts-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -107,30 +103,57 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:40] tutorials/frames/custom-fonts-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [1:14] tutorials/frames/custom-fonts-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [1:45] tutorials/frames/custom-fonts-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [2:35] tutorials/frames/custom-fonts-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A new **Text resource** type (Painter 10.0+) that behaves exactly like any other image/grayscale resource — drag it onto the model, a layer, or a channel slot — but generates its pixel content dynamically from live-editable text properties (content, font, size, color, spacing) instead of a fixed bitmap, and can swap fonts non-destructively without losing any of those settings.
 
 ### Summary
-[PENDING EXTRACTION]
+Official Adobe feature-tour video (espresso-machine asset) introducing dynamic text resources. Text resources appear in a new dedicated **T (filter) icon** tab in the Assets panel alongside the usual resource categories. Dragging one onto a mesh, the layer stack, or any channel slot works identically to a normal texture resource — including using it as a mask. All text properties (content, font size, alignment, color, plus Advanced: line spacing, character spacing, horizontal/vertical offset, background fill/opacity, resolution) live-edit in the Properties panel exactly like editing a material parameter. Setting Font Size to **Auto** fits the text to the projected square image automatically (adjusting line/character spacing but not offset). Swapping fonts is fully non-destructive: dragging a new font onto the resource box changes only the typeface — text content, size, alignment, and all Advanced parameters are preserved. Text resources are called out as ideal grayscale/image inputs for SBSAR MatFX-style materials (Custom Spray Paint, Stickers, Stamps, Wood Carvings, Metal Engraving, and similar), remaining fully editable even after being fed into those materials. Font sourcing: every font already installed at the OS level auto-loads into Painter; additional font library folders can be added in the Settings panel; fonts can also be imported ad hoc by dragging font files onto the Mesh/Layer Stack/Assets panel, or via File > Import Resources. Fonts with licensing restrictions are silently blocked from import, surfaced via a log error (manual import) or a red tooltip/viewport message (drag-and-drop). Most fonts and character sets are supported, including right-to-left scripts; unsupported characters render as a rectangle placeholder.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Open the Assets panel and select the new **T (text)** filter tab to browse installed Text resources.
+2. Drag a text resource onto the model in the viewport, onto a layer in the Layer Stack, or directly onto a channel slot (works in any texture channel, or as a mask) — projection settings work the same as for any standard texture resource.
+3. Select the resource and open the **Properties** panel to edit the text content, font size, alignment, and color, exactly like editing a material's parameters.
+4. Expand **Advanced** for finer control: line spacing, character spacing, horizontal offset, vertical offset, background fill, background opacity, and resolution.
+5. Set **Font Size** to **Auto** to have Painter automatically size the text (adjusting line/character spacing) to fully fit the projected square image — offset is not affected by Auto sizing.
+6. To try different typefaces without losing work, drag a new font directly onto the existing text resource's box in the Assets panel/resource slot — content, size, alignment, and all Advanced parameters carry over unchanged.
+7. Feed a text resource into MatFX-style SBSAR materials (Custom Spray Paint, Stickers, Stamps, Wood Carvings, Metal Engraving, etc.) as their grayscale/image input for dynamic, fully-editable stenciled text.
+8. Fonts installed at the OS level are auto-detected; for additional font folders, add the library location under the **Settings** panel.
+9. Import a specific font file by dragging it onto the Mesh, Layer Stack, or Assets panel, or via **File > Import Resources**.
+10. If an imported font is license-restricted, Painter blocks it: check the log for the error (manual import) or watch for a red tooltip/viewport warning (drag-and-drop import).
+11. Right-to-left scripts and most non-Latin character sets are supported; any unsupported glyph renders as a placeholder rectangle instead of failing the whole import.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Assets panel > T (text) filter tab** — new resource category for Text resources
+- **Properties panel** parameters on a Text resource: Text (content), Font size (numeric or Auto), Alignment, Color, and Advanced group (Line spacing, Character spacing, Horizontal offset, Vertical offset, Background fill, Background opacity, Resolution)
+- Non-destructive **font-swap** workflow: drag new font onto the resource box, all other parameters persist
+- **MatFX / SBSAR materials** compatible as text input: Custom Spray Paint, Stickers, Stamps, Wood Carvings, Metal Engraving
+- **Settings panel** — add custom font library folder locations
+- Import routes: drag-and-drop onto Mesh/Layer Stack/Assets, or **File > Import Resources**
+- Licensing enforcement: blocked fonts surfaced via log error or red tooltip/viewport message
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner (drag-and-drop resource workflow, no masking/generator chains involved).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter **10.0.0** — stated explicitly in narration ("available to you in Substance 3D Painter 10.0 and above") and confirmed on-screen via the cache-usage readout ("Version: 10.0.0 (OpenCL)").
 
 ### Tags
-[PENDING EXTRACTION]
+`layers`, `fill-layer`, `masks`, `alpha`, `texture-set`, `MatFX`, `procedural`, `beginner`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Native Illustrator File Support in Substance 3D Painter](native-illustrator-file-support-in-substance-3d-painter.md) — same channel (Adobe), same short feature-tour format; a complementary new-resource-type addition (vector .ai import) from the same Painter version era.
+- [3D Path Tool Updates in Substance 3D Painter](3d-path-tool-updates-in-substance-3d-painter.md) — same channel (Adobe), same short feature-tour format covering another 10.x-era Painter workflow addition.
+- [6 Powerful New Filters in Substance 3D Painter](6-powerful-new-filters-in-substance-3d-painter.md) — same channel (Adobe); same "official new-feature tour" structure, different Painter version's headline additions.

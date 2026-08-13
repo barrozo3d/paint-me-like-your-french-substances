@@ -745,10 +745,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=QSVgnyiDADc
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 10.0.0 (stated in narration + confirmed via on-screen cache-usage readout)
+- **Tags:** `layers` `fill-layer` `masks` `alpha` `texture-set` `MatFX` `procedural` `beginner`
+- **Summary:** Official feature-tour of the new Text resource type (10.0+): drag text onto a model/layer/channel/mask like any other resource; live-edit content/font/size/alignment/color plus Advanced spacing/offset/background/resolution in the Properties panel; swap fonts non-destructively without losing other parameters. Ideal grayscale input for MatFX SBSAR materials (Spray Paint, Stickers, Stamps, Wood Carvings, Metal Engraving). Covers font sourcing (OS-installed auto-load, custom library folders, drag-drop or File > Import Resources import, licensing-restriction blocking, RTL/unsupported-glyph handling).
 - **File:** tutorials/custom-fonts-in-substance-3d-painter-adobe-substance-3d.md
 
 ---
