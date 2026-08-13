@@ -487,6 +487,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/how-to-create-a-paint-peeling-effect-in-substance-painter.md
 
+
+### Footwear Texturing from Start to Finish – Live Tutorial in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=s59xbaF4Q14
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad.md
+
 ---
 
 ## Tag Reference
