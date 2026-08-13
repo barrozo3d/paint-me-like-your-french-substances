@@ -734,11 +734,22 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=dGmVGU7aHb4
 - **Author:** 3DRedBox
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; "newest version" name-checked for the duplicate-path-preserves-settings stitching feature, not otherwise pinned
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `smart-material` `generator` `anchor-point` `blend-mode` `baking` `mesh-maps` `ambient-occlusion` `curvature` `thickness` `high-to-low-poly` `world-space-normal` `texture-set` `uv` `pbr` `basecolor` `roughness` `height` `normal-map` `alpha` `procedural` `particle-brush` `intermediate` `advanced`
+- **Summary:** Military-cap texturing pipeline built on two throughline techniques: baking Curvature/Thickness from a separate TurboSmooth-subdivided high-poly stand-in (same UVs) to eliminate low-poly mesh-wire edge artifacts in those two mesh maps, and an anchor-point-driven dynamic mask combination (two Anchor Points, second set to Soft Track blend) so a folder's mask self-updates instead of needing a manual Subtract layer. Also covers Wrap Projection for placing a fabric patch decal across a UV seam, a free Height-from-Base-Color-reference noise trick, and duplicating a placed stitch Path (geometry preserved) to reuse it with a different stitch-style preset.
+- **File:** tutorials/how-to-texture-navycap-in-substance-painter-in-english.md
+
+
+### Custom Fonts in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=QSVgnyiDADc
+- **Author:** Adobe Substance 3D
 - **App:** [PENDING]
 - **Version:** [PENDING]
 - **Tags:** [PENDING]
 - **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/how-to-texture-navycap-in-substance-painter-in-english.md
+- **File:** tutorials/custom-fonts-in-substance-3d-painter-adobe-substance-3d.md
 
 ---
 
