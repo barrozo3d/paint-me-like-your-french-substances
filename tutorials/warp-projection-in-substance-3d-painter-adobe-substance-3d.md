@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=6_8CCf6v-uM
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "7.4.0 (visible on-screen in the viewport's cache-usage readout: 'Cache Disk Usage: 81% | Version: 7.4.0'); narration separately states Warp projection mode 'was added in Painter 7.3.1' — see App & Version note below for a version-tracker cross-reference finding"
+tags: [layers, fill-layer, masks, alpha, procedural, uv, viewport, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/warp-projection-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Warp Projection in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py warp-projection-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -153,30 +149,68 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:52] tutorials/frames/warp-projection-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [1:24] tutorials/frames/warp-projection-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [2:19] tutorials/frames/warp-projection-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [2:46] tutorials/frames/warp-projection-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [5:53] tutorials/frames/warp-projection-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [6:38] tutorials/frames/warp-projection-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+- [9:46] tutorials/frames/warp-projection-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Using Warp Projection mode (available only on fills, driven by a deformable on-surface grid) to manually bend and align a flat 2D alpha/texture onto complex or mismatched 3D geometry — demonstrated first on a simple arrow shape, then on the much harder real-world case of wrapping a flat photogrammetry face scan onto a differently-proportioned sculpted head.
 
 ### Summary
-[PENDING EXTRACTION]
+Explains and demonstrates Warp Projection, a fill-only projection mode (Fill properties → Projection dropdown → Warp projection, alongside UV/Tri-planar/Planar/Spherical/Cylindrical) that overlays an editable on-surface grid for manually deforming a 2D image so it conforms to 3D geometry — conceptually similar to a 2D/3D "bend" or free-transform tool. Basic workflow demoed on a red arrow alpha on a fill layer's mask: switch Projection to Warp, use the Surface tool (**Shift+W**) to snap/align the warp grid onto the target surface, **R** to scale, adjust grid **Rows/Columns**, **Handle Size**, and **Grid Color** in the warp Settings panel, then use the mode dropdown next to the subdivision settings to switch between **Transform Warp** (move/rotate/scale the whole grid) and **Edit Vertices** (box-select individual grid points and move/rotate/drag them individually with the regular 2D/3D manipulation tools — **W** move, **E** rotate, **R** scale). The real demonstration is wrapping a TexturingXYZ face scan (height + roughness + base color maps from a real scanned person) onto a sculpted head with different proportions: set up a fill layer feeding the scan's maps into Base Color/Roughness/Height (Height tamed with a Levels adjustment since the raw scan data is too strong), switch Projection to Warp with **UV Wrap = None**, position/scale the floating warp grid roughly over the face, then iteratively refine in Edit Vertices — dragging outer points wraps them around the sides of the head toward the ears, tuning **Projection Depth** to control how far the projection reaches into the surface, and using **quick-move-to-surface-snapping** (grabbing a point and it snaps instantly onto the mesh) for fast rough placement of major landmark points (eyes, nose, mouth) before manual fine-tuning. When specific regions won't align no matter how many points are added (e.g. the mouth), the advice is explicitly **not** to keep adding density to that one area — instead crop just that region out in an external image editor (Photoshop used here), put it on its own separate fill layer/warp projection with its own paint mask, and align that smaller region independently on top of the main warp. Grid density is increased locally via **Split Warp Horizontally / Split Warp Vertically** (adds a new row/column of edit points at the current selection) rather than a single dense global grid — explicit warning that too many total points makes the grid unmanageably hard to manage. Closes with a UI tip: disabling **Show Normals** in the warp settings declutters the on-screen overlay once the grid gets busy with many points.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Create a fill layer (set an obvious color, e.g. red, for visibility while learning); add a black mask; add a fill inside the mask (**Warp Projection only works on fills, not directly on paint strokes**); drop an alpha/texture into the fill's grayscale/image slot.
+2. In the Fill's Properties panel, change **Projection** from UV projection to **Warp projection** (other listed modes: Fill/Match per UV Tile, UV, Tri-planar, Planar, Spherical, Cylindrical).
+3. Fix the warp grid's initial misalignment: activate the **Surface tool** (hotkey **Shift+W**) and drag over the target surface to snap the whole warp grid onto it.
+4. Scale the grid down to a usable size with **R** (viewed from a convenient angle, e.g. top-down); optionally set **UV Wrap to None** if repeating tiling is undesired (irrelevant on a tiling plane test surface).
+5. Open the warp **Settings** panel (icon in the fill's warp toolbar) to configure **Rows/Columns** (can be unlocked to set independently), **Handle Size**, and **Grid Color** (useful to change for visibility against the underlying texture).
+6. Use the mode dropdown next to the subdivision controls to switch between **Transform Warp** (move/rotate/scale the entire grid as one unit — good for coarse initial placement) and **Edit Vertices** (select and manipulate individual grid points).
+7. In Edit Vertices mode: drag a selection box to multi-select points, then use the standard transform hotkeys — **W** (move), **E** (rotate), **R** (scale) — to reposition selected points; individual points can also just be dragged directly for fine control.
+8. Switch back to Transform Warp at any time to move the entire warped shape as a unit again, exactly as before entering vertex editing.
+9. **Complex example — face scan onto mismatched sculpt:** build a fill layer feeding the scanned face's texture maps into Base Color, Roughness, and Height; tame an overly strong Height contribution with a **Levels** adjustment limiting its output range.
+10. Set this fill's Projection to **Warp**, **UV Wrap = None**; the projection initially floats disconnected in 3D space — move/aim it roughly toward the target area (e.g. center of the face) first.
+11. Scale the warp down to approximate real proportions in both viewing directions before fine positioning.
+12. Enter **Edit Vertices** and progressively wrap the grid's outer points around the sides of the target geometry (e.g. toward the ears) to better match the surface's actual curvature; adjust **Projection Depth** to control how far into the surface the projected image reaches (deeper settings used here for a more robust result).
+13. Key production tip: **use as few grid points as possible** — more points make the grid dramatically harder to manage and align.
+14. Use **quick move-to-surface snapping**: grabbing an edit point and moving it causes it to snap instantly onto the underlying mesh surface — a fast way to rough-place major landmark points (eyes, nose, mouth) before fine-tuning; note some points can behave "funky" (jump unexpectedly) after snapping and may need manual rotation correction instead of relying on the snap.
+15. Add local grid density only where actually needed: use **Split Warp Vertically** / **Split Warp Horizontally** (each requires re-selecting the target row/column before splitting again) to insert new edit points around specific landmarks (eyes, mouth, nose) rather than densifying the whole grid uniformly.
+16. If a specific small region (e.g. the mouth) still won't align well no matter how many local points are added, stop adding density there — instead, crop just that region out of the source image in an external editor (Photoshop used here), place it on its own separate fill layer with its own Warp projection and its own hand-painted mask, and align that small warp independently, blending on top of the main projection.
+17. UI decluttering tip: in the warp Settings, disable **Show Normals** once the grid becomes visually busy with many points — makes vertex/point visibility much clearer while editing.
+18. Recap given at the close: Warp Projection requires a fill (not paint strokes directly); keep point counts low; use the W/E/R-plus-drag shortcut set together with Shift+W surface snapping for efficient placement.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Fill layer → Fill (inside a mask or directly) → Properties → Projection = Warp projection** (fill-only feature).
+- **Surface tool** (Shift+W) — snaps/aligns the warp grid to the target surface.
+- Standard transform hotkeys inside warp editing: **W** move, **E** rotate, **R** scale.
+- Warp **Settings** panel: Rows, Columns (lockable/independent), Handle Size, Grid Color, **Show Normals** toggle.
+- Warp mode dropdown: **Transform Warp** vs. **Edit Vertices**.
+- **Split Warp Horizontally / Split Warp Vertically** — adds local grid density at the current selection.
+- **Projection Depth** — controls how far the projected image reaches into the surface.
+- **UV Wrap** setting (None used to disable tiling repetition on a warp-projected fill).
+- **Levels** adjustment — used to tame an overly strong Height channel contribution from real scan data.
+- External image editor (Photoshop) — used to crop a problem region (e.g. mouth) into its own separately-aligned warp layer.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate for the basic arrow-on-a-plane case; Advanced for the multi-landmark face-scan alignment workflow (iterative, non-trivial to get right, explicitly described by the presenter as "not exactly a fast process").
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. **Version-tracking note:** the narration states Warp Projection "was added in Painter 7.3.1," and the viewport's own cache-usage readout in a captured frame confirms the build actually running in this video is **7.4.0** (frame text: "Cache Disk Usage: 81% | Version: 7.4.0"). This is notably earlier than the version this skill's `references/release-notes-painter-12.0.md` was originally expected to pin Warp Projection to — cross-checking the two: 12.0.0's Added section lists **"Automatic warping for Warp projections ('Warp to Geometry')"**, which reads as a NEW automatic/assisted warping capability layered onto an already-existing manual Warp Projection mode, not the introduction of Warp Projection itself. This video's entirely manual, hand-edited grid workflow (no "Warp to Geometry" auto-fit feature appears anywhere) is consistent with the older ~7.3.1/7.4.0 dating shown on screen, predating 12.0's automatic-warping enhancement by many major versions. **Recommendation for this skill:** treat Warp Projection mode itself as a pre-8.0 (7.3.x/7.4.0-era) feature, and treat 12.0.0's "Automatic warping for Warp projections" as a distinct, later usability improvement on top of the same underlying tool — the two should not be conflated as the same version event.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers`, `fill-layer`, `masks`, `alpha`, `procedural`, `uv`, `viewport`, `intermediate`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+None found sharing 2+ tags with an existing entry at ingestion time — this is the knowledge base's first Warp-Projection-focused entry.

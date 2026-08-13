@@ -668,10 +668,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=6_8CCf6v-uM
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 7.4.0 confirmed on-screen; narration says the feature was added in 7.3.1 — see version-tracker cross-reference note in the file (Warp Projection itself predates 12.0.0's "Automatic warping" enhancement, they are not the same version event)
+- **Tags:** `layers` `fill-layer` `masks` `alpha` `procedural` `uv` `viewport` `intermediate` `advanced`
+- **Summary:** Fill-only Warp Projection mode: an editable on-surface grid (Transform Warp vs. Edit Vertices, Shift+W surface snapping, W/E/R hotkeys, Split Warp Horizontally/Vertically for local density) for manually bending a 2D image onto 3D geometry. Basic case on a red arrow alpha; advanced case wraps a TexturingXYZ face scan onto a differently-proportioned sculpted head, including Projection Depth tuning, snap-to-surface point placement, and the key tip of cropping stubborn regions (e.g. the mouth) into their own separately-aligned warp layer rather than over-densifying one grid. **Version note:** on-screen build is 7.4.0, contradicting an assumption that Warp Projection was introduced in 12.0.0 — 12.0.0 instead added an automatic "Warp to Geometry" assist on top of this older manual tool.
 - **File:** tutorials/warp-projection-in-substance-3d-painter-adobe-substance-3d.md
 
 
