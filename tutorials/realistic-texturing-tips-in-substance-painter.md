@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=_qirDRMN1WI
 author: FastTrack Tutorials
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; no version-pinning UI element visible in any captured frame"
+tags: [layers, fill-layer, masks, generator, blend-mode, roughness, basecolor, metallic, height, alpha, procedural, texture-set, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/realistic-texturing-tips-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 9
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Realistic Texturing Tips in Substance Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py realistic-texturing-tips-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -185,30 +181,67 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:54] tutorials/frames/realistic-texturing-tips-in-substance-painter/frame_000.jpg
+- [1:46] tutorials/frames/realistic-texturing-tips-in-substance-painter/frame_001.jpg
+- [4:00] tutorials/frames/realistic-texturing-tips-in-substance-painter/frame_002.jpg
+- [5:51] tutorials/frames/realistic-texturing-tips-in-substance-painter/frame_003.jpg
+- [8:06] tutorials/frames/realistic-texturing-tips-in-substance-painter/frame_004.jpg
+- [9:48] tutorials/frames/realistic-texturing-tips-in-substance-painter/frame_005.jpg
+- [14:18] tutorials/frames/realistic-texturing-tips-in-substance-painter/frame_006.jpg
+- [16:06] tutorials/frames/realistic-texturing-tips-in-substance-painter/frame_007.jpg
+- [18:05] tutorials/frames/realistic-texturing-tips-in-substance-painter/frame_008.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Five independently-demonstrated "realism tips" for a stacked-metal-pot material, all built from Substance Painter's stock procedural maps (never custom textures): (1) subtle noise-driven roughness/color breakup with the Roughness/BaseColor channel blend mode switched to `Overlay`, (2) a hand-painted multi-color heat-discoloration gradient, (3) layered grime built from Dirt generators and stock grunge maps combined via `Multiply`/`Subtract`, cleaned up with manual paintbrush touch-ups, (4) procedural dents from inverted Cells noise cut/broken-up by additional subtracted noise layers, and (5) a dried-drip stain using Painter's purpose-built "Leak Small" texture. Each tip stresses that individually the layers look unconvincing, but stacked together they read as one cohesive, believable material.
 
 ### Summary
-[PENDING EXTRACTION]
+A practical "5 tips" tutorial (not a full step-by-step build) demonstrated on a stainless-steel cooking pot, isolating and explaining one technique at a time via layer visibility toggling. **Tip 1 (metal base):** a `Dirt 3` procedural map tiled to ~14, added as a Roughness-only layer (value ~0.21) with the channel's blend mode changed from the Roughness tab's default `Normal` to **`Overlay`** — explicitly flagged as important because Overlay makes the noise progressively more visible as more layers stack on top, unlike Normal. A matching Color-channel copy of the same noise (same map, different channel, also Overlay) reinforces the same pattern in BaseColor. A `Directional Scratches` stock map layer is added and combined with a "dirt scratchy grunge" layer via **`Subtract`** blend mode (tiled ~4) for a brushed-metal look, then duplicated twice more with rotation offsets on each duplicate for non-repeating variation. **Tip 2 (heat discoloration):** a `Black and White Spots` stock map set to blend mode `Normal`, hand-painted only onto the areas that should discolor (not left covering the whole model), Blurred (~1 intensity) for a natural fade, then duplicated per color (yellow, red, etc., verified: the *tiling value must stay identical between color duplicates* while only `Balance` is adjusted, e.g. 0.5 -> 0.3) to build a smooth multi-color gradient. **Tip 3 (grime):** two separate Dirt-generator passes — one restrained (Metallic channel active, dielectric/metalness dialed down to read as "dirt" rather than pure metal, kept subtle) combined with a `Grunge Concrete Tile` mask via `Subtract`; a second, heavier "caked-on dirt" pass uses a highly-contrasted Dirt generator combined via `Multiply` with a **Moisture noise** node (used non-standardly to fake accumulated grime, tiling ~8), manually cleaned up with the **Artistic Heavy Sponge** brush, then layered with a `Galvanic Large` map (chosen for its sharp contrast cutoffs) at `Multiply`, hand-painted-out selectively, and finished with a **color-variation** pass (`Grunge Concrete` map, Color channel only, blend mode `Overlay`, left untiled). **Tip 4 (dents):** built from `Cells 1` noise inverted (~0.68 value), combined with a `Black and White Spots` layer at `Subtract` (intensity halved to preserve some dent visibility while adding internal variation) and a `Blur` filter for softening; a second, more severe dent pass uses `Clouds` noise duplicated and subtracted against itself (with an intentional offset + retiled) for thinner, sharper dent shapes, again finished with Blur and paintbrush touch-ups. **Tip 5 (dried water drip):** Painter's purpose-built **`Leak Small`** stock texture applied directly (built specifically for this exact "drip stain" effect), combined with a `Black and White Spots` layer at `Subtract` to break up repetition, cleaned with a Subtract paintbrush pass; final material values tuned toward "dirty metal" (Roughness raised, Metallic pulled away from pure-metal toward the dirt/dielectric end) rather than pure Base Color changes, to sell the idea of dried mineral residue rather than paint.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Base material roughness break-up:** add a `Dirt 3` procedural map as a Roughness-only Fill layer, tile to ~14, set Roughness value to ~0.21, then go to the Roughness channel's own blend-mode dropdown and change it from `Normal` to **`Overlay`** so the noise's visibility scales correctly as more layers are added on top.
+2. **Mirror the same noise into Base Color:** duplicate the roughness-noise setup as a Color-only layer (different seed to avoid perfectly overlapping with the roughness noise), also set that channel's blend mode to `Overlay`; adjust scale up if the asset will be viewed from far away (e.g. on a shelf in Unreal Engine) versus close-up.
+3. **Add directional brushed-metal detail:** add `Directional Scratches` (a stock Painter map, searchable by name) as its own layer; add a "dirt scratchy grunge" layer set to blend mode **`Subtract`**, tiled ~4, so it carves variation out of the scratch pattern rather than overwriting it; duplicate this combo 2 more times, rotating each duplicate slightly to avoid an obviously-repeating pattern.
+4. **Build a hand-painted heat-discoloration gradient:** add a `Black and White Spots` stock map layer (blend mode `Normal`), then manually paint (not procedurally mask) only the areas meant to discolor; add a `Blur` filter (~1 intensity) to soften the paint edges into a natural fade; duplicate the whole layer per additional color, keeping the **tiling value identical** across duplicates and only adjusting `Balance` (e.g. 0.5 for the first color, 0.3 for the next) so the colors read as one continuous gradient rather than disconnected patches.
+5. **Add restrained base grime:** add a `Dirt` generator on a mask, combine with a `Grunge Concrete Tile` texture via blend mode `Subtract` for subtle variation; on the material layer itself use Color+Roughness+Metallic channels, and deliberately reduce the Metallic/dielectric value below 100% so the result reads as accumulated dirt rather than pure metal — keep this pass restrained/subtle.
+6. **Add heavier "caked-on" dirt:** a second, more contrasted `Dirt` generator combined via blend mode `Multiply` with a **Moisture noise** node (tiling ~8, used non-standardly here purely for its blotchy pattern, not for actual wetness) to fill in heavier grime; manually refine with the **Artistic Heavy Sponge** brush to selectively paint the effect in/out for a natural, non-uniform coverage.
+7. **Add a directional/sharp-edged grime layer:** add a `Galvanic Large` map (chosen specifically for its sharp, high-contrast cutoffs) set to blend mode `Multiply`, hand-paint out unwanted areas with the same brush, and note that when using 100% Subtract paint strength it can still be useful to partially erase/soften your own subtraction strokes afterward to leave a little residual dirt rather than a hard clean edge.
+8. **Add one more directional-noise subtract pass** (same noise family as the Tip 1 scratches) at `Subtract` to reinforce the brushed-metal look consistently across the grime buildup, then use paintbrushes set to Subtract to clean the inside/interior areas that shouldn't carry grime.
+9. **Finish grime with a color-variation pass:** add a `Grunge Concrete` map as a Color-only layer, left untiled (scale 1, adjust to taste based on target resolution), set blend mode to `Overlay` — the final subtle step that, combined with all the roughness/color/grime layers above, makes everything read as one cohesive material rather than a stack of individually-unconvincing layers.
+10. **Build a first dent pass:** add `Cells 1` noise, invert it, set value to ~0.68; add a second Fill layer set to `Subtract` using `Black and White Spots` (tiled high) at roughly half-strength intensity — enough to preserve some of the base dent shape while adding internal breakup — then add a `Blur` filter to soften into a believable, non-artificial dent profile.
+11. **Build a second, more severe dent pass:** add `Clouds` noise, duplicate it, set the duplicate to `Subtract` with an intentional position offset and different tiling value so the two Clouds layers don't cancel out symmetrically — creates thinner/sharper dent shapes than pass 1; finish with `Blur` and manual paintbrush cleanup, and add one more `Subtract` layer to remove unwanted coverage at the object's base.
+12. **Add the dried-drip effect:** apply Painter's built-in **`Leak Small`** texture (purpose-built for exactly this kind of drip-stain look) directly as a layer; add a `Black and White Spots` layer set to `Subtract` to break up any obvious repetition; clean up with a Subtract-mode paintbrush rather than fighting with re-tiling to fix small placement issues.
+13. **Tune final material values for "dirty metal" realism:** raise the drip layer's Roughness above the base pot's roughness, and pull Metallic away from pure white/100% toward the dirt/dielectric end — communicates dried mineral/dirt residue rather than a painted-on color change.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Base roughness/color noise:** `Dirt 3` map, Roughness ~0.21 / Color duplicate, both channels' blend mode set to `Overlay` (not default Normal)
+- **Brushed-metal detail:** `Directional Scratches` + grunge layer at `Subtract` (tiled ~4), duplicated x2 more with rotation offsets
+- **Heat discoloration:** `Black and White Spots` (Normal blend), hand-painted mask, `Blur` ~1 intensity, duplicated per color with identical tiling and only `Balance` varied
+- **Restrained grime:** `Dirt` generator + `Grunge Concrete Tile` at `Subtract`; Metallic/dielectric value reduced below 100%
+- **Heavy caked grime:** contrasted `Dirt` generator + **Moisture noise** (tiled 8) at `Multiply`; **Artistic Heavy Sponge** brush for manual refinement
+- **Sharp grime detail:** `Galvanic Large` map at `Multiply`, hand-painted with Subtract-mode brushes
+- **Color variation (grime finish):** `Grunge Concrete` map, Color-only, untiled, blend mode `Overlay`
+- **Dent pass 1:** `Cells 1` (inverted, ~0.68) + `Black and White Spots` at `Subtract` (half-strength) + `Blur`
+- **Dent pass 2:** `Clouds` noise duplicated + offset + retiled, one copy at `Subtract`, + `Blur` + Subtract paintbrush cleanup
+- **Dried drip:** Painter's built-in `Leak Small` texture + `Black and White Spots` at `Subtract`, Subtract-mode paintbrush cleanup; final Roughness raised, Metallic pulled toward dielectric/dirt
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — no exotic tools, but the tutorial assumes comfort reading and adjusting blend modes (Overlay/Multiply/Subtract), reading masks independently from material view, and the general "combine several stock procedural maps with different blend modes, then hand-paint touch-ups" workflow rather than following one single prescriptive recipe.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen in any captured frame — no visible version-number UI element. UI (Texture Set List, layer stack, generator/mask editor) is consistent with this skill's other modern-era ingested tutorials, but not independently version-pinned here.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, masks, generator, blend-mode, roughness, basecolor, metallic, height, alpha, procedural, texture-set, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Realistic Painted Metal in Substance Painter | M24 Grenade Texturing](realistic-painted-metal-in-substance-painter-m24-grenade-texturing.md) — different creator (Dolinskyi); shares the same "stack several small procedural noise/grunge layers, individually subtle, collectively convincing" metal-wear philosophy.
+- [Substance Painter Tutorial for Beginners - Texturing A Rock 3D Model](substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model.md) — different creator (3DWolf); shares the channel-restricted Fill layer + stock procedural map + Tri-Planar approach to adding surface variation without hand-painting.
+- [SUBSTANCE PAINTER: Building Masks Explained](substance-painter-building-masks-explained.md) — different creator (Jared Chavez); shares the blend-mode-stacking-as-mask-math approach (this pot video applies the same Multiply/Subtract/Overlay logic across grime, dents, and discoloration passes).

@@ -525,10 +525,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=_qirDRMN1WI
 - **Author:** FastTrack Tutorials
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `masks` `generator` `blend-mode` `roughness` `basecolor` `metallic` `height` `alpha` `procedural` `texture-set` `intermediate`
+- **Summary:** Five realism tips on a stacked metal pot, all from stock procedural maps: noise-driven roughness/color breakup with channel blend mode set to Overlay, a hand-painted multi-color heat-discoloration gradient, layered grime (Dirt generators, Moisture noise, Galvanic Large, Multiply/Subtract) with manual brush cleanup, procedural dents from inverted Cells/Clouds noise, and a dried-drip stain using Painter's built-in Leak Small texture.
 - **File:** tutorials/realistic-texturing-tips-in-substance-painter.md
 
 
