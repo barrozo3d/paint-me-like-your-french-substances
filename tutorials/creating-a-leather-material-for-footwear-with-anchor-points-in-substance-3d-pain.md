@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=xXad_mS7K9s
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; window title reads 'License: 109 days remaining - 03 Leather'"
+tags: [anchor-point, masks, layers, fill-layer, paint-layer, smart-mask, generator, blend-mode, curvature, ambient-occlusion, height, basecolor, roughness, procedural, tri-planar, alpha, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter | Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -286,30 +282,72 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [2:44] tutorials/frames/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain/frame_000.jpg
+- [6:12] tutorials/frames/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain/frame_001.jpg
+- [8:25] tutorials/frames/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain/frame_002.jpg
+- [11:35] tutorials/frames/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain/frame_003.jpg
+- [14:44] tutorials/frames/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain/frame_004.jpg
+- [15:53] tutorials/frames/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain/frame_005.jpg
+- [18:06] tutorials/frames/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain/frame_006.jpg
+- [19:56] tutorials/frames/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Building a complete production leather material from two chained Anchor Points: a base "roughness/AO" anchor that drives edge highlights, dirt, and an overall white-fade highlight layer, and a second "folds/creases" anchor (itself hand-painted) that drives fold coloring and fold-specific dirt via Micro Height-referencing generators — the longest and most complete entry in the footwear anchor-points series.
 
 ### Summary
-[PENDING EXTRACTION]
+Third video in the "advanced anchor points" footwear series. Starts from a shoe with a base leather material already confined to a color-selection mask. Builds roughness variation that will double as the series' primary anchor point: a "Leather_Roughness_Base" fill layer (Roughness only, shine ≈0.4) masked by an **Ambient Occlusion** generator, cleaned up with a Blur filter (to fix AO's inherent dotty/noisy look) and a Levels adjustment (push black point down to darken/dull the occluded areas); hand-paints out unwanted occlusion on the laces with a white soft-brush paint layer (temporarily hiding the laces mesh part via its visibility checkbox to paint around it more easily) — explicitly called out as something that must happen **before** adding the anchor point. Adds the anchor point to this mask (kept the same layer name for later reference) inside a new "Leather_Details" folder, then builds, in order: **Edge Highlights** (Color+Roughness fill, black mask via a "Edge Dusty" Smart Mask, tuned toward darkening rather than brightening — presenter jokes it should've been called "edge darkening"); **Dirt** (Color+Roughness fill, brownish/dull, black mask referencing the Leather_Roughness_Base anchor via a fill with an Input button for extra control, topped with a **Dirt** generator set to Multiply so it combines with the AO to read as faded, worn dirt rather than sharp/localized dirt, softened with a Blur filter since leather dirt should look faded not crisp); and **Overall Highlights** (Color set to flat white, Roughness kept slightly shiny, black mask referencing the Leather_Roughness_Base anchor via Levels pushed strong, then blended in more naturally with a second fill using a Grunge map — "Grunge Wipe Smudgy Soft" — set to Multiply, scaled ~10, with the fill's Projection switched from UV to **Tri-Planar** to eliminate a visible UV seam; finished by dialing Overall Highlights' own layer Opacity down to ~10-15%). Moves on to **folds/creases**: a "folds_height" fill layer (Height only, negative) with a hand-painted black mask (rough shape painted with a soft brush, cleaned up with a strong Blur for a smooth outline fade), then a **Creases Soft** grayscale texture dropped into the mask's fill, Scale ≈10 initially then refined to ≈7-8, Projection switched to **Tri-Planar** (fixes creases all pointing in inconsistent directions under plain UV projection) with **E** used to rotate the tri-planar projection to align creases with the shoe's actual flex joints (storytelling logic: creases happen where the shoe physically bends — toe joints, front), the whole creases fill set to **Multiply** blend so it only shows within the hand-painted mask area, with further manual touch-up painting layered on top and an Opacity dial on the creases-texture layer if the effect reads too strong. Adds a second **Anchor Point** on the finished folds_height mask. Builds **Folds Color** (a Smart Mask — "Dust Occlusion" — whose generator settings are pointed at the folds anchor via **Micro Height → Anchor Points → folds height**, with **Micro Details → Micro Height** enabled and **Invert** turned on so the generated dirt/AO effect sits *inside* the painted creases rather than on top of them; colored a dark reddish leather tone, Roughness duller, generator Intensity and layer Opacity both tuned down for subtlety). Finally, folds get their own dirt contribution: a new fill dragged beneath the existing Dirt layer's generators/blur inside the Dirt group, referencing the **folds anchor point**, blend mode set to **Add**, producing a subtle extra darkening specifically inside the creases. Closes by noting the whole material is reusable on other assets — only the hand-painted folds mask (and possibly the AO in/out balance) needs to change per new use.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Start from a shoe with a base leather material already isolated to a color-selection mask (prerequisite, not built in this video).
+2. Build the base roughness/AO anchor: new "Leather_Roughness_Base" fill layer, Roughness only, dialed to a shine value around 0.4-0.45.
+3. Add a black mask, then a generator set to **Ambient Occlusion** — darkens/dulls roughness in occluded crevices.
+4. Clean up AO's inherently noisy/dotty look: add a filter with **Blur** for a smoother transition.
+5. Add a **Levels** adjustment, push the black point down to strengthen/darken the occlusion-area dulling (check the effect with base color temporarily enabled for clarity, then disable it again).
+6. Hand-fix unwanted occlusion in awkward areas (e.g. shoelaces): add a paint layer, use a basic soft brush with white color (press X to flip color), optionally hide the offending mesh part's visibility checkbox temporarily to paint around it more easily. **Must be done before adding the anchor point.**
+7. Add the **Anchor Point** to this Leather_Roughness_Base mask, keeping the layer's name for easy future reference — this becomes the series' primary anchor.
+8. Create a "Leather_Details" folder to hold everything that follows.
+9. Edge Highlights: new fill layer (Color + Roughness only), black mask via a **Smart Mask** (e.g. "Edge Dusty"), tune Balance for strength; adjust the fill's own Base Color darker (functions more as edge darkening than brightening) and Roughness duller; optionally push the mask's own levels further.
+10. Dirt: new fill layer (Color + Roughness, dull roughness, brownish color), black mask referencing the **Leather_Roughness_Base anchor** via a fill (grayscale → anchor points), using the fill's Input control for extra placement control; add a **Dirt** generator on top set to **Multiply** so it combines with the AO reference to read as worn/faded dirt rather than isolated splotches; soften with a **Blur** filter (leather dirt should look faded, not crisp); fine-tune overall Base Color strength.
+11. Overall Highlights: new fill layer, Roughness kept slightly shiny, Base Color set to flat white (mimics the pale surface fade common on real leather); black mask referencing the Leather_Roughness_Base anchor via a fill, pushed strong with **Levels**.
+12. Blend the highlight in more naturally: add a second fill inside the same mask using a **Grunge map** (e.g. "Grunge Wipe Smudgy Soft"), set its blend mode to **Multiply**, Scale ≈10, tune Balance/Contrast; switch this fill's **Projection from UV to Tri-Planar** to eliminate a visible seam (note: switching to Tri-Planar shrinks the apparent scale, so re-tune Scale afterward).
+13. Dial the whole Overall Highlights layer's **Opacity** down to roughly 10-15% for subtlety; adjust Roughness to taste.
+14. Folds/creases height: new "folds_height" fill layer, Height only, negative value; add a black mask and hand-paint a rough crease-area shape with a basic soft brush (doesn't need to look good yet).
+15. Add a filter with a strong **Blur** to the mask for a smooth, well-faded outline before adding the actual crease texture.
+16. Add a fill inside the mask referencing a **Creases Soft** grayscale texture from the built-in texture library; set initial Scale ≈10.
+17. Fix inconsistent crease direction: switch the fill's Projection from **UV to Tri-Planar**; re-tune Scale (≈7-8) afterward; press **E** to enter rotation mode and rotate the tri-planar projection so creases align with the shoe's real flex points (toe/front joints — think about where the shoe physically bends when walked in).
+18. Set this creases fill's blend mode from Normal to **Multiply** so creases only appear within the hand-painted mask area; manually paint more/less creases directly with the soft brush as needed; if too strong, reduce the creases-texture layer's own Opacity.
+19. Add a second **Anchor Point**, this time on the finished folds_height mask — this becomes the "folds" anchor, distinct from the roughness/AO anchor.
+20. Folds Color: new "folds_color" fill layer, black mask via a **Smart Mask** (e.g. "Dust Occlusion"); open its generator settings, scroll to **Micro Height**, and under Anchor Points select the **folds height** anchor; enable **Micro Details → Micro Height**; enable **Invert** so the generated effect sits inside the creases rather than on top of them.
+21. Color the folds a dark reddish leather tone; disable all channels except Base Color and Roughness (duller); tune the generator's Intensity and the layer's own Opacity down for a subtle result.
+22. Add fold-specific dirt: inside the existing Dirt group, add a new fill positioned below the existing Dirt generators/Blur, referencing the **folds Anchor Point**, blend mode set to **Add** — layers a subtle extra darkening specifically inside the painted creases.
+23. Final material is fully reusable on other assets: reusing it elsewhere mainly requires repainting the folds mask and rebalancing how much ambient occlusion shows through for the new geometry.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Leather_Roughness_Base** fill layer (Roughness only) — the primary anchor point, masked by Ambient Occlusion generator + Blur filter + Levels, with hand-painted paint-layer correction (e.g. laces) done before anchoring.
+- **Leather_Details folder** containing: **Edge_highlights** (Color+Roughness, Smart Mask "Edge Dusty"), **Dirt** (Color+Roughness, anchor-referenced fill + Dirt generator in Multiply + Blur filter, later augmented with a folds-anchor-referenced Add-mode fill), **Overall_highlights** (Color+Roughness, anchor-referenced Levels mask + Grunge-map Multiply fill with Tri-Planar projection, layer Opacity ~10-15%).
+- **folds_height** fill layer (Height only, negative) — hand-painted mask + Blur + Creases Soft texture fill (Tri-Planar projection, rotation via E, Multiply blend) — carries the second Anchor Point ("folds").
+- **folds_color** fill layer — Smart Mask ("Dust Occlusion") with generator Micro Height referencing the folds Anchor Point, Invert enabled, Micro Details → Micro Height on.
+- Recurring tools: Ambient Occlusion generator, Dirt generator, Smart Masks (Edge Dusty, Dust Occlusion), Grunge maps, Blur filter, Levels adjustment, Tri-Planar projection (with E-key rotation), Micro Height anchor referencing inside generator settings.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced (two chained anchor points, generator Micro Height anchor-referencing, Tri-Planar seam/rotation management, multi-layer subtle blending).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number stated on screen; window title bar reads "License: 109 days remaining - 03 Leather" (subscription license countdown, not a version indicator).
 
 ### Tags
-[PENDING EXTRACTION]
+`anchor-point`, `masks`, `layers`, `fill-layer`, `paint-layer`, `smart-mask`, `generator`, `blend-mode`, `curvature`, `ambient-occlusion`, `height`, `basecolor`, `roughness`, `procedural`, `tri-planar`, `alpha`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Creating Fabric stitches for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter.md`) — first video in the same footwear/anchor-points series, same shoe asset.
+- **Creating Sole Patterns for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a.md`) — second video in the same series.
+- **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's independent anchor-point deep-dive; this video's Micro Height anchor-referencing inside a generator is an advanced variant of the same core reuse technique.
+- **Anchor Point Magic 01-04** (Substance3D official series, if ingested) — the "basic anchor point series" this video explicitly builds on; Anchor Point Magic 02 specifically covers Micro Normals & Micro Height, directly relevant to this video's folds-color technique.
