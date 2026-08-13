@@ -685,6 +685,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/izakayas-paradigm-chapter-3-substance-3d-painter-adobe-substance-3d.md
 
+
+### Speeding Up Character Texturing with Smart Masks - Substance Painter
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=qkRJjA5rTcY
+- **Author:** FlippedNormals
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/speeding-up-character-texturing-with-smart-masks---substance-painter.md
+
 ---
 
 ## Tag Reference
