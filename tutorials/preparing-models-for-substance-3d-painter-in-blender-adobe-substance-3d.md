@@ -161,3 +161,4 @@ Blender (model prep side, version not stated on screen) + Substance 3D Painter (
 ## Related Tutorials
 - **Preparing Models for Substance 3D Painter in Maya** (`tutorials/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d.md`) — same 3-app prep series, Maya-side equivalent of this exact workflow (texture sets, UV packing, ID maps, geometry masks).
 - **Preparing Models for Substance 3D Painter in 3DS Max** (`tutorials/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d.md`) — same series, 3ds Max-side equivalent.
+- **Preparing a 3D Asset in Substance 3D Painter | 3D in After Effects Part 1** (`tutorials/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su.md`) — same channel (Adobe), same "asset preparation" framing, but downstream-focused (readying a Painter-textured asset for After Effects) rather than upstream DCC mesh prep.

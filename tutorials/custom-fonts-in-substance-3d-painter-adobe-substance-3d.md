@@ -154,6 +154,7 @@ Substance 3D Painter **10.0.0** — stated explicitly in narration ("available t
 ---
 
 ## Related Tutorials
-- [Native Illustrator File Support in Substance 3D Painter](native-illustrator-file-support-in-substance-3d-painter.md) — same channel (Adobe), same short feature-tour format; a complementary new-resource-type addition (vector .ai import) from the same Painter version era.
-- [3D Path Tool Updates in Substance 3D Painter](3d-path-tool-updates-in-substance-3d-painter.md) — same channel (Adobe), same short feature-tour format covering another 10.x-era Painter workflow addition.
-- [6 Powerful New Filters in Substance 3D Painter](6-powerful-new-filters-in-substance-3d-painter.md) — same channel (Adobe); same "official new-feature tour" structure, different Painter version's headline additions.
+- [Native Illustrator File Support in Substance 3D Painter](native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe), same short feature-tour format; a complementary new-resource-type addition (vector .ai import) from the same Painter version era.
+- [3D Path Tool Updates in Substance 3D Painter](3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe), same short feature-tour format covering another Painter workflow addition (3D Paths tool, 9.0.0).
+- [6 Powerful New Filters in Substance 3D Painter](6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe); same "official new-feature tour" structure, different Painter version's headline additions.
+- [Preparing a 3D Asset in Substance 3D Painter | 3D in After Effects Part 1](preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su.md) — same channel (Adobe); beginner-fundamentals video that briefly touches vector-decal texturing, complementary to this video's dedicated text-resource feature tour.

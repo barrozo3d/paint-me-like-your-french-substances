@@ -165,4 +165,5 @@ Substance 3D Painter **10.0.0-BetaFMX** — confirmed via the on-screen cache-us
 
 ## Related Tutorials
 - [Custom Fonts in Substance 3D Painter](custom-fonts-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe), same 10.0-era feature-tour format and same "new dynamic/vector resource type" theme (text vs. Illustrator artwork); both cover a non-destructive swap-without-losing-settings workflow.
-- [3D Path Tool Updates in Substance 3D Painter](3d-path-tool-updates-in-substance-3d-painter.md) — same channel (Adobe), same short feature-tour format from the same era.
+- [3D Path Tool Updates in Substance 3D Painter](3d-path-tool-updates-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe), same short feature-tour format from the same era.
+- [Preparing a 3D Asset in Substance 3D Painter | 3D in After Effects Part 1](preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su.md) — same channel (Adobe); that beginner walkthrough briefly touches the same "drag a 2D/vector graphic in as a texture" theme (Illustrator-made watch-band pattern + SVG watch-face decal) that this video covers in full depth.

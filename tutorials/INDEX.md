@@ -800,10 +800,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=aZ8bzxuZ-pM
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated/legible
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `blend-mode` `texture-set` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `opacity` `viewport` `alpha` `beginner`
+- **Summary:** Beginner fundamentals video (Part 1/2, smartwatch asset; Part 2 covers After Effects and is out of scope). Covers paint vs. fill layers, environment/lighting basics (World vs. Camera alignment), sourcing/applying smart materials with Tiling, black-mask + Object Fill (Mesh Fill) per-part masking, applying 2D Illustrator textures and SVG vector decals (dragged onto the 3D model directly), and building a working glass material via a custom Opacity channel plus Shader Settings' Alpha Blending toggle. Finishes with a layer-reorder fix (bottom-to-top compositing) for a graphic's background color.
 - **File:** tutorials/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su.md
 
 ---

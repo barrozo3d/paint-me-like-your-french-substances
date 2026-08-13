@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=aZ8bzxuZ-pM
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not clearly legible on screen in captured frames; no version number stated in narration"
+tags: [layers, fill-layer, paint-layer, masks, blend-mode, texture-set, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, opacity, viewport, alpha, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Preparing a 3D Asset in Substance 3D Painter | 3D in After Effects Part 1 | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Getting Started [0:00]
@@ -233,30 +229,74 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:20] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_000.jpg
+- [2:37] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_001.jpg
+- [3:18] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_002.jpg
+- [5:40] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_003.jpg
+- [6:33] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_004.jpg
+- [7:27] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_005.jpg
+- [8:46] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_006.jpg
+- [10:34] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_007.jpg
+- [13:15] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_008.jpg
+- [15:03] tutorials/frames/preparing-a-3d-asset-in-substance-3d-painter-3d-in-after-effects-part-1-adobe-su/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A ground-up beginner walkthrough of Painter's core texturing fundamentals — paint vs. fill layers, layer masking with the Object Fill (Mesh Fill) tool, applying flat 2D/vector textures (Illustrator raster + SVG vector) as their own fill layers, and building a working glass material via a custom Opacity channel plus shader-level Alpha Blending — using a smartwatch asset that will be exported to After Effects in Part 2 (out of scope for this Painter-only skill).
 
 ### Summary
-[PENDING EXTRACTION]
+Official Adobe beginner video (Part 1 of a 2-part "3D in After Effects" series). Sources a smartwatch FBX from Substance 3D Assets (Creative Cloud Desktop app), creates a new Painter project from the default **ASM PBR Metallic Roughness** template, and lets Painter auto-generate UVs on import if the model lacks them. Tours the core UI (Assets, 3D/2D view, Texture Set List, Layer Stack, Properties) and 3D navigation (Alt/Option+LMB orbit, Alt/Option+RMB zoom, Alt/Option+MMB pan). Explains the two fundamental layer types: a **paint layer** (paintable directly on the model, material values set first — color/roughness/metallic — each Texture Set/material has its own independent Layer Stack, so painting cannot cross material boundaries) versus a **fill layer** (non-paintable, fills the whole active Texture Set with set material values). Covers environment/lighting basics in **Display Settings** (Opacity, Blur, Rotation of the HDRI environment map; Shift+RMB-drag to rotate lighting interactively) and **Environment Alignment** (World vs. **Camera** — Camera-attached lighting stays consistent while orbiting, useful for seeing detail on the underside of a model). Demonstrates sourcing additional materials from Substance 3D Assets via Creative Cloud's "Send to Substance Painter" action, applying a **Metal Sandblasted** smart material to the watch body as a fill layer, adjusting **Tiling** (UV transformations, Repeat mode, scale value 6) and per-material parameters (Metal Type dropdown → Aluminum, Roughness slider), then confining that material to specific mesh areas with a **black mask + Object Fill tool** (Mesh Fill mode, value 1/white) painted on by clicking mesh regions directly (Photoshop-style masking). Applies a 2D Illustrator-made pattern to the watch band by dragging the image file into the Layer Stack (choosing **Base Color** as the target channel from the drop prompt), using the **3D/2D Split View** and the layer's **Transform Tool** to align the texture's aspect ratio, then masking it to the band with the same black-mask + Object-Fill workflow. Applies a second graphic — this time an **SVG vector** — by dragging it directly onto the 3D model itself (rather than into the Layer Stack), which auto-creates a positionable decal with its own Translate/Rotate/Scale gizmo tools and Properties options for Outline (stroke color + thickness) and material channels (Roughness/Metallic/Height), used here for the watch-face graphic. Builds a working glass material for the watch crystal: temporarily disables the Glass Texture Set (eye icon) to work underneath it, then re-enables it and, with Glass selected, adds a custom **Opacity** channel via Texture Set Settings' channel-add (+) button, creates an "Opacity" fill layer to control the opacity slider — which has no visible viewport effect until **Shader Settings > Opacity > Enable Alpha Blending** is turned on for the active shader instance. Once alpha blending is enabled, lowering the Opacity fill layer's value from 1 toward 0 makes the glass genuinely transparent (kept slightly above 0 rather than fully transparent), paired with a low Roughness value for a shiny glass look. Finishes with a background color fix for the LED watch-face graphic: adds a new "Color" fill layer, samples a blue tone directly from the viewport with the **Eyedropper** tool, then reorders it beneath the graphic layer in the stack (Painter composites bottom-up, same as Photoshop) so the sampled color shows through as the graphic's background instead of overriding it.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Source a 3D asset:** browse/download a model (FBX) from Substance 3D Assets via the Creative Cloud Desktop app.
+2. **Create a new project:** File > New, choose the **ASM PBR Metallic Roughness** template, select the FBX/OBJ mesh, set document resolution, leave other settings default; Painter auto-generates UVs on import if the mesh lacks them.
+3. **Learn 3D navigation:** Alt/Option+Left-drag to orbit, Alt/Option+Right-drag to zoom, Alt/Option+Middle-drag to pan; switch the top-bar view mode to "3D only" while working.
+4. **Create a paint layer** (Add Layer button) to paint directly on the model: pick a brush from Assets, set Material Values (color/roughness/metallic) in the Properties panel, then paint — remember each Texture Set/material has its own independent Layer Stack, so you must select the correct material (e.g. body vs. glass) before painting on it.
+5. **Create a fill layer** (paint-bucket icon) as a non-paintable alternative that fills the whole active Texture Set with set material values (roughness, metallic, etc.).
+6. **Configure environment lighting** in Display Settings: set Environment Opacity/Blur/Rotation to preview and adjust the HDRI backdrop and its lighting direction; Shift+Right-drag in the viewport also rotates the environment interactively.
+7. **Source additional materials** from Substance 3D Assets (Creative Cloud, Stock and Marketplace > 3D) and use **Send to Substance Painter** to download and import them directly into the open project's asset shelf.
+8. **Apply a smart material as a fill layer** by dragging it onto the model; adjust **Tiling** (UV transformations > Scale/Tiling, set to Repeat with a chosen value) and material-specific parameters (e.g. Metal Type dropdown, Roughness slider) in the Properties panel.
+9. **Mask a material to specific mesh areas:** select the fill layer, add a black mask (fully transparent/hidden), select the **Object Fill** tool with **Mesh Fill** mode and value **1 (white)**, then click mesh regions in the viewport to paint the mask in per-mesh-part (not freehand) — exactly like a Photoshop layer mask workflow.
+10. **Switch Environment Alignment from World to Camera** (in Display Settings) when working on hard-to-light areas (e.g. the underside of a model) so the lighting rotates with the camera instead of staying fixed.
+11. **Apply a flat 2D texture (e.g. an Illustrator-made pattern):** drag the image file directly into the Layer Stack, choose the target channel (e.g. Base Color) from the drop prompt, switch to **3D/2D Split View** to see UV placement, and use the layer's **Transform Tool** to correct aspect ratio/scale so it matches the target surface.
+12. **Mask the 2D texture to its intended area** using the same black-mask + Object-Fill (Mesh Fill, white) technique as step 9.
+13. **Apply a vector (SVG) graphic as a positioned decal:** drag the SVG file directly onto the **3D model** (not the Layer Stack) to auto-create a decal with its own Translate/Rotate/Scale transform gizmo; Properties expose an **Outline** option (stroke color + thickness) and optional material channels (Roughness, Metallic, Height) for the decal.
+14. **Build a working glass material:** with the Glass Texture Set selected, open **Texture Set Settings**, use the **+** button to add a custom **Opacity** channel (not present by default).
+15. **Create an Opacity-purpose fill layer** and use its Opacity slider — note it has zero visible effect until the shader itself is configured to respect it.
+16. **Enable Alpha Blending:** open **Shader Settings**, scroll to the Opacity section, check **Enable Alpha Blending** on the active shader instance (Main shader / `asm-metal-rough` in this project) — only then does lowering the Opacity fill layer's value produce visible transparency.
+17. **Tune the glass look:** lower the Opacity layer's value from 1 toward (but not fully to) 0 for believable glass transparency, and lower Roughness toward 0 for a shiny/reflective glass finish.
+18. **Fix a graphic's background color:** add a new fill layer, use the **Eyedropper** tool to sample a color directly from the viewport, then **drag-reorder that fill layer below** the graphic layer in the Layer Stack (Painter composites bottom-to-top, same convention as Photoshop) so the sampled color reads as the graphic's background instead of covering it.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Layer types:** Paint layer (paintable, per-material-independent Layer Stack) vs. Fill layer (non-paintable, whole-Texture-Set material fill)
+- **Display Settings:** Environment Opacity/Blur/Rotation, **Environment Alignment** (World vs. Camera)
+- **Masking:** black mask + **Object Fill** tool (Mesh Fill mode, value 1/white) for per-mesh-part masking by clicking
+- **Fill layer Properties:** Projection (UV projection), Filtering, UV Wrap, UV transformations (Scale, Tiling/Repeat, Rotation, Offset), Material tabs (color/height/rough/metal), per-material dropdown parameters (e.g. Metal Type)
+- **2D texture import:** drag into Layer Stack (choose target channel: e.g. Base Color) + **Transform Tool** + **3D/2D Split View**
+- **Vector (SVG) decal import:** drag directly onto the 3D model; Translate/Rotate/Scale gizmo tools; Properties: Outline (color + thickness), optional Roughness/Metallic/Height channels
+- **Texture Set Settings:** add custom channels via the **+** button (used here to add **Opacity**)
+- **Shader Settings > Opacity:** Enable alpha test, **Enable alpha blending** (required for any Opacity-channel value to actually render as transparency)
+- **Eyedropper tool** (in Fill layer Properties) to sample viewport colors directly
+- **Layer reordering** by drag-and-drop — bottom-to-top compositing, same as Photoshop
+- Source assets: Substance 3D Assets (Creative Cloud Desktop, Stock and Marketplace > 3D), "Send to Substance Painter" action
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner (explicitly a fundamentals video — paint/fill layers, basic masking, texture import, and one intermediate topic: Opacity channel + shader Alpha Blending for glass).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number is stated in narration or clearly legible in the captured frames; project template used is "ASM - PBR Metallic Roughness."
 
 ### Tags
-[PENDING EXTRACTION]
+`layers`, `fill-layer`, `paint-layer`, `masks`, `blend-mode`, `texture-set`, `pbr`, `metal-rough`, `basecolor`, `roughness`, `metallic`, `height`, `normal-map`, `opacity`, `viewport`, `alpha`, `beginner`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Native Illustrator File Support in Substance 3D Painter](native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe); a much deeper dive into the same "drag a 2D/vector graphic in as a texture" theme this video only touches briefly for the watch-band pattern and watch-face SVG.
+- [Custom Fonts in Substance 3D Painter](custom-fonts-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe); another dynamic-resource-as-texture feature from the same 10.x-era, complementary to this video's SVG-decal-as-fill-layer workflow.
+- [Preparing Models for Substance 3D Painter in Blender / Maya / 3DS Max](preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d.md) — same channel (Adobe); shares this video's "asset preparation before texturing" framing, though for DCC-side mesh prep rather than downstream-app (After Effects) export prep.
