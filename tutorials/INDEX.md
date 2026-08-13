@@ -608,6 +608,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/how-to-enable-auto-updates-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### Shading & Lighting a Character - Blender and Substance 3D Painter Workflow
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=2lHAio4DoWw
+- **Author:** FlippedNormals
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/shading-lighting-a-character---blender-and-substance-3d-painter-workflow.md
+
 ---
 
 ## Tag Reference
