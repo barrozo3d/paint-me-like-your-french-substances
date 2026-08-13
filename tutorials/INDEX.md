@@ -910,10 +910,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=XXEgE2rJ09c
 - **Author:** Dolinskyi
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `layers` `paint-layer` `masks` `generator` `anchor-point` `blend-mode` `procedural` `alpha` `metal-rough` `roughness` `height` `basecolor` `texture-set` `viewport` `intermediate` `advanced`
+- **Summary:** 8-trick grab bag: viewport/hotkey setup, a White-Noise+Histogram-Scan parkerizing-damage grain mask, a black-Paint-layer-on-Multiply trick for hand-guiding an automatic generator's reveal, black-and-white Photoshop decals placed with Edit Vertices + Surface Tool snapping, Auto Update Resources for live PSD re-linking, a Gradient-Linear mold seam, a two-Fill-layer (raised-lip + carved-groove) Anchor-Point scratch-depth technique for plastic damage, and — the video's centerpiece — a weld-seam rainbow heat-tint effect built by blurring/expanding the seam's own mask, capturing it as an Anchor Point, and feeding it into the creator's own Tempering Colors smart material in place of its default mask.
 - **File:** tutorials/powerful-substance-painter-tricks-that-you-need-to-know.md
 
 ---

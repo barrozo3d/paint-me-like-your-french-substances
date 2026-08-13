@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=XXEgE2rJ09c
 author: Dolinskyi
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen"
+tags: [layers, paint-layer, masks, generator, anchor-point, blend-mode, procedural, alpha, metal-rough, roughness, height, basecolor, texture-set, viewport, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 11
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Powerful Substance Painter Tricks That You Need To Know
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py powerful-substance-painter-tricks-that-you-need-to-know <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -231,30 +227,73 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:40] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_000.jpg
+- [2:05] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_001.jpg
+- [4:20] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_002.jpg
+- [6:15] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_003.jpg
+- [8:10] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_004.jpg
+- [9:15] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_005.jpg
+- [11:20] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_006.jpg
+- [14:00] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_007.jpg
+- [16:45] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_008.jpg
+- [21:00] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_009.jpg
+- [23:30] tutorials/frames/powerful-substance-painter-tricks-that-you-need-to-know/frame_010.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A grab-bag of 8 personal workflow tricks (viewport setup, hotkeys, and 6 texturing techniques) for firearm-reference hard-surface work, culminating in a **weld-seam heat-tinting/rainbow oxide effect** that explicitly reuses the mask this same creator built for the already-ingested "Tempering Colors in Substance Painter" smart material via an Anchor Point.
 
 ### Summary
-[PENDING EXTRACTION]
+**Viewport settings**: Studio Camera environment (no colored lighting), Environment Alignment set to camera-following (not world) so lighting always favors the current view angle, personal-preference focal length to minimize distortion, Temporal Anti-Aliasing at maximum, Anisotropic Filtering 8 / Mipmap Bias 2 for distance sharpness, Shader Settings at Very High (Ultra gives minimal extra quality for a viewport-performance cost), Ambient Occlusion toned down or Bent Normals enabled for more accurate AO. **Hotkeys**: `Ctrl+Alt+Right-click` on any object jumps straight to its Texture Set (no need to hunt the list); `Alt+Left-click` a texture set's eye icon isolates it without switching selection; `Alt+Q` isolates the current texture set's objects; right-click any channel's blend mode → **Apply to all channels** (e.g. to push a Sharpen filter onto every channel at once); `Alt+Left-click` a channel icon to isolate just that channel; when importing many textures, select them all with Shift then set the resource type on just one to apply it to the whole selection. **Parkerizing/gun-metal damage**: a pure-metal Fill layer, black mask, nested Paint layer; add a White Noise texture set to **Subtract** blend mode with tiling matched to reference grain size, then a **Histogram Scan** filter above it with Position ≈0.9-0.95 to threshold it into a fine grain pattern; paint the damage by hand with a semi-transparent brush tip guided by real damage-photo references. **Mask reveal trick**: add a Metal Edge Wear generator, then a Paint layer above it filled entirely black and set to **Multiply** — painting white on that paint layer selectively reveals the generator only where painted, giving hand-guided control over an otherwise fully-automatic generator mask. **Decals**: build a black-and-white alpha decal in Photoshop (easier to control color/other channels downstream than a color decal), group it in a folder, drag onto the model, then fix a crooked/misaligned placement by switching to **Edit Vertices** mode to reshape the projection grid and using the **Surface Tool** to snap the decal's vertices to the actual mesh surface for organic-surface placement (e.g. markings on cables) beyond what a flat Warp/Planar projection alone achieves. **Auto Update Resources**: enable via the arrows-icon button in the bottom-right of the Assets panel, checking both "Asset Panel" and "resources used in project" — after that, re-saving a source PSD (e.g. changing decal text) in Photoshop automatically refreshes the resource back in Painter with no manual re-import, extremely useful for iterating decal text/logos across many placements. **Mold seam (plastic)**: a new Fill layer with a **Gradient Linear 2/3** mask (white-to-black-to-white, Repeat disabled) aligned along a grip's center axis, Base Color channel disabled and Height enabled, refined with a **Slope Blur** filter for irregular distortion, then a regular **Blur** plus **Levels** to thin/sharpen the line into a realistic seam, optionally hand-touched with a brush for asymmetry. **Plastic damage/scratches**: a black-masked Paint layer with only Height enabled, hand-painted scratch alphas, contrast-cleaned with Levels; add Diffuse (slightly lighter than base) and Glossiness (more matte) variants; capture the scratch mask as an **Anchor Point**, then build the scratch's actual depth from *two* Fill layers referencing that same Anchor Point — one blurred with reduced positive Height (the raised/worn lip) and one set to **Subtract** blend mode with reduced negative Height (the carved groove) — giving a scratch real dimensional depth rather than a single flat height dip; additional Blur+Levels tames noise so it reads correctly from a distance; new scratches are added by reselecting the original base paint layer and continuing to paint (the anchor-fed depth layers update automatically). **Weld seam rainbow/heat-tint effect (the video's most advanced trick)**: after creating a standard Painter weld seam, extract/copy that seam's own mask, **Blur** it outward to expand around the seam (not directly on it — subtract the seam itself from the blurred result, since the heat-discoloration halo surrounds a weld seam rather than sitting on top of it), keep a wide white-to-black gradient range for full color-spectrum heat tinting, blur the contour further to avoid an unnaturally sharp edge, then capture that processed mask as a new **Anchor Point** and swap it in as the mask source on the creator's own **Tempering Colors** smart material (see the companion "Tempering Colors in Substance Painter" video, also in this library) in place of its default mask. Boost contrast with Levels (and subtract the seam itself again) to properly bring out the near-white maximum-heat tone and the blue tones at peak temperature; soften remaining sharp edges; experiment with the smart material's blend mode; finally break up the effect's otherwise too-uniform look with a procedural noise texture layered on top (simulating uneven real-world welding-torch heat) and a touch of extra Roughness variation for the oxide layer.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Viewport: Environment = Studio Camera (or similarly neutral studio HDRI), Environment Alignment = camera-following, personal focal length, TAA = maximum, Anisotropic Filtering = 8, Mipmap Bias = 2, Shader Settings = Very High, tone down AO or enable Bent Normals for accuracy.
+2. Hotkey: `Ctrl+Alt+Right-click` an object to jump directly to its Texture Set.
+3. Hotkey: `Alt+Left-click` a texture set's eye icon to isolate it without switching selection; `Alt+Q` isolates the current texture set's objects.
+4. Hotkey: right-click any channel's blend mode → **Apply to all channels** to propagate a change (e.g. Sharpen) across every channel at once.
+5. Hotkey: `Alt+Left-click` a channel icon to isolate just that channel in the properties view.
+6. Hotkey: when importing many textures, Shift-select them all then set the resource type on one to apply it to the whole selection.
+7. Parkerizing damage: pure-metal Fill layer → black mask → nested Paint layer; add a **White Noise** texture on **Subtract** blend mode (tiling matched to reference grain size) then a **Histogram Scan** filter (Position ≈0.9-0.95) above it to threshold into a fine grain; hand-paint damage with a semi-transparent brush guided by real reference photos.
+8. Mask-reveal trick: **Metal Edge Wear** generator, then a black-filled Paint layer on **Multiply** above it — painting white selectively reveals the generator only where painted, adding hand control to an automatic generator mask.
+9. Decals: build a black-and-white alpha in Photoshop (not color, for easier downstream channel control), group in a folder, drag onto the model; fix crooked placement via **Edit Vertices** (reshape the projection grid) + the **Surface Tool** (snap decal vertices to the actual mesh surface) for accurate placement on complex/organic geometry.
+10. Enable **Auto Update Resources** (arrows-icon button, bottom-right of Assets panel; check "Asset Panel" and "resources used in project") so re-saving a source PSD in Photoshop live-updates the resource in Painter with no manual re-import.
+11. Mold seam: Fill layer with **Gradient Linear 2/3** mask (white-black-white, Repeat off) aligned along the part's axis, Base Color off / Height on, **Slope Blur** for irregular distortion, regular **Blur + Levels** to thin/sharpen into a realistic seam line, optional hand touch-up.
+12. Plastic scratch damage: black-masked Paint layer (Height only), hand-painted alphas, Levels contrast cleanup, plus Diffuse/Glossiness variant layers.
+13. Capture the scratch mask as an **Anchor Point**; build real scratch depth from two separate Fill layers referencing that Anchor Point — one Blurred with reduced positive Height (raised lip), one on **Subtract** blend mode with reduced negative Height (carved groove) — rather than one flat height dip.
+14. Add new scratches by reselecting the original base paint layer and continuing to paint — the anchor-referenced depth layers update automatically.
+15. Weld-seam heat-tint: after building a standard Painter weld seam, extract/copy its mask, **Blur** it outward around the seam (subtracting the seam itself from the result, since heat discoloration halos the seam rather than covering it), keep a wide gradient range for full heat-color spectrum, blur the contour further for a natural edge.
+16. Capture the processed halo mask as a new **Anchor Point** and use it as the mask source on the **Tempering Colors** smart material (from the companion video) in place of its default mask.
+17. Refine with Levels (increase contrast, subtract the seam again) to bring out near-white peak-heat and blue maximum-temperature tones; soften remaining sharp edges; experiment with blend modes.
+18. Break up the effect's uniformity with a procedural noise layer on top (simulating uneven real welding heat) plus extra Roughness variation for a believable oxide layer.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Viewport: Studio Camera environment, camera-aligned environment, TAA max, Anisotropic Filtering 8, Mipmap Bias 2, Shader Quality Very High, Bent Normals
+- Hotkeys: `Ctrl+Alt+RMB` (jump to texture set), `Alt+LMB` on eye icon (isolate set), `Alt+Q` (isolate current set's objects), `Alt+LMB` on channel (isolate channel), right-click blend mode → Apply to all channels
+- `White Noise` texture (Subtract), `Histogram Scan` filter (Position ~0.9-0.95)
+- `Metal Edge Wear` generator + black Paint layer (Multiply) for hand-guided generator reveal
+- Decal workflow: black-and-white Photoshop alpha, `Edit Vertices` mode, `Surface Tool` (vertex-to-mesh snapping)
+- `Auto Update Resources` (Assets panel arrows-icon button)
+- `Gradient Linear 2/3` mask (Repeat off), `Slope Blur`, `Blur`, `Levels`
+- `Anchor Point` (scratch depth: two Fill layers, one Blur+reduced-positive-Height, one Subtract+reduced-negative-Height)
+- Weld seam: seam-mask extraction, `Blur` (expand halo), `Anchor Point` (feeds into the `Tempering Colors` smart material's mask slot), `Levels`, procedural noise breakup, Roughness variation
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced — assumes familiarity with generators, anchor points, and blend modes; the weld-seam rainbow effect explicitly builds on the creator's own separate Tempering Colors smart material.
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen; UI consistent with this creator's other modern-era ingested Substance Painter videos.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `paint-layer` `masks` `generator` `anchor-point` `blend-mode` `procedural` `alpha` `metal-rough` `roughness` `height` `basecolor` `texture-set` `viewport` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Tempering Colors in Substance Painter | Steel Heat Effects](tempering-colors-in-substance-painter-steel-heat-effects.md) — same creator (Dolinskyi); this video's weld-seam rainbow effect explicitly reuses that video's Tempering Colors smart material, swapping in a custom Anchor-Point-fed mask built from the weld seam's own blurred/expanded mask.
+- [Realistic Painted Metal in Substance Painter | M24 Grenade Texturing](realistic-painted-metal-in-substance-painter-m24-grenade-texturing.md) — same creator; shares the compact 4-layer anchor-point peeling/damage-mask philosophy this video's two-Fill-layer scratch-depth trick (raised lip + carved groove from one shared anchor) builds on.
+- [Realistic Wood in Substance Painter | M24 Grenade Texturing](realistic-wood-in-substance-painter-m24-grenade-texturing.md) — same creator, same M24 Grenade project series — cross-link once ingested.
