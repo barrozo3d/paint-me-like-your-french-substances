@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=ZbrZR-9iX_Q
 author: Jared Chavez
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified"
+tags: [paint-layer, fill-layer, layers, masks, ambient-occlusion, blend-mode, procedural, particle-brush, basecolor, beginner, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 9
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to Make  HAND PAINTED POKEMON in Substance Painter | Tutorial
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-make-hand-painted-pokemon-in-substance-painter-tutorial <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -88,30 +84,68 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:15] tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/frame_000.jpg
+- [1:15] tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/frame_001.jpg
+- [2:25] tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/frame_002.jpg
+- [3:20] tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/frame_003.jpg
+- [4:45] tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/frame_004.jpg
+- [6:35] tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/frame_005.jpg
+- [8:35] tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/frame_006.jpg
+- [8:58] tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/frame_007.jpg
+- [10:20] tutorials/frames/how-to-make-hand-painted-pokemon-in-substance-painter-tutorial/frame_008.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A progressive "foundation-then-freehand" hand-painting workflow — establish primary color/value groundwork with gradients, AO-tinted shadow color, and brushstroke-feel procedurals first, then commit to a single freehand paint layer on top using a modified Palette Knife brush, deliberately never undoing strokes so each color decision must be lived with and refined rather than erased.
 
 ### Summary
-[PENDING EXTRACTION]
+This is Jared Chavez's "Paris" video — the demonic Parasect Pokémon piece explicitly referenced in his later Dragonite video as "the first video I actually planned out for this channel" (Dragonite reused a Smart Material exported from this exact project). The pipeline is ZBrush sculpt (not detailed here) → Painter hand-painted texture → Marmoset Toolbag render, with heavy back-and-forth between Painter and the render engine throughout. **Foundation phase:** start with a simple base-color-plus-gradient pass across the body (frame_002: `Highlight`/`Blur`/`AO Lower Gradient`/`AO`/`Levels`/`DarkRed`/`UnderGradient` layers) — deliberately avoiding detail at this stage, focused purely on value/color decisions like keeping the upper body darker red to pull the eye down toward the story's focal point (the hand being eaten). Chavez explicitly works through one representative body part first to resolve open color/treatment questions before propagating the solution to the rest of the asset. **AO-driven color, not just AO-driven shadow:** the baked AO map is used inside a mask not just to darken recesses but to introduce actual hue shift — pushing a blue tint into occluded areas specifically to complement/contrast the model's orange base tones (a deliberate warm/cool interplay, not just value darkening). **Procedural "brushstroke" layer:** tiling procedural textures chosen specifically because they carry an inherent painterly/brushstroke-like grain are layered in next purely for surface variation and "happy accidents" — explicitly a technique for beating blank-canvas paralysis, and for getting hand-painted-looking texture "for free" before manual work starts. **Freehand hand-painting phase:** once the procedural/gradient foundation covers most of the final look, a single paint layer is added on top and painted directly — resolving light/shadow direction and value transitions (e.g. belly-to-back) by eye. The brush of choice is Painter's stock **Palette Knife** brush with its alpha modified slightly for more visible brushstroke texture. A key working discipline: strokes are essentially never undone — color choices are layered over, not erased, forcing commitment and idea-refinement rather than perfectionism. Painting is scoped to only what the final camera angle will show (a 3/4 front profile for this piece) to save time on unseen geometry. **Engine round-tripping** starts as soon as hand-painting begins — the model is pushed into Marmoset early and often so lighting/shader decisions can be validated in near-final context, with explicit care taken that the shader's own lighting/shadow behavior doesn't overpower or replace the hand-painted value work already committed to the texture. **Secondary asset workflow:** for the separate hand-being-eaten asset, the full base-layer stack from the body is copied and pasted onto the hand as a starting point, then iterated in the context of both assets together — an initial pass left the hand blending in too much with the body's color range, fixed with an **HSL adjustment** pushing the hand's values cooler, creating an intentional warm-body/cool-hand color contrast that reinforces the storytelling focal point without stealing first-glance attention from the main figure. **Final 10% polish** happens mostly in the render engine: camera focal length and position tweaks, and — called out as a genuine "happy accident" — deliberately exaggerating lens barrel/warp distortion toward a macro-insect-photography feel for the final composition. The finished piece ultimately kept full shading (a flat/unlit look was considered and set aside) because the shaded version added valuable shadow nuance to the presentation.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Foundation pass 1 — base color and gradient only:** lay down primary base color plus large soft gradients across the whole model, deliberately avoiding detail; use value placement to direct the viewer's eye toward the intended focal point (kept the upper body darker to draw attention down toward the hand).
+2. **Resolve unknowns on one representative part first** — when unsure of overall treatment, fully work through one body section to answer open questions, then apply the resolved approach to the rest of the model.
+3. **Foundation pass 2 — AO-driven color, not just shadow:** use the baked AO map as a mask to push actual hue shift (not just darkness) into recessed areas — chosen here as a cooler blue tint specifically to complement the model's warm orange base tones.
+4. **Foundation pass 3 — procedural brushstroke-feel textures:** layer in tiling procedurals chosen specifically for their inherent painterly/brushstroke grain, purely for surface variation, imperfection, and to generate "happy accidents" — a deliberate technique against blank-canvas paralysis, and a way to get hand-painted texture quality "for free" before manual painting starts.
+5. **Transition to freehand painting:** once the procedural/gradient foundation already carries most of the final look, add a single **paint layer** on top and begin freehand painting directly — resolving light/shadow direction and part-to-part color transitions (e.g. belly-to-back) by eye rather than by procedural rule.
+6. **Brush choice:** use Painter's stock **Palette Knife** brush, with its alpha slightly modified for a more textured/organic brushstroke look — matched across both the procedural and hand-painted phases for visual consistency.
+7. **Discipline: don't undo strokes.** Layer color decisions on top of each other rather than erasing/undoing — this is a deliberate constraint to force commitment to choices and drive refinement through iteration rather than perfectionist backtracking.
+8. **Scope painting to the final camera angle** — for personal/portfolio pieces with a known hero shot, skip detailed painting on geometry that won't be visible (e.g. model backside) to save time.
+9. **Round-trip into the render engine as soon as hand-painting begins**, not just at the end — push the in-progress model into Marmoset Toolbag early to validate lighting/shader response in near-final context and catch issues while they're still cheap to fix.
+10. **Guard against the shader overpowering hand-painted work** — when tuning lighting/shaders, explicitly check that the engine's own lighting isn't replacing or washing out value/color decisions already committed to the texture; iterate the shader with that constraint in mind.
+11. **Reuse a finished asset's base layer stack on a related asset:** copy the full foundation layer stack from the main body onto a secondary asset (the hand) as a starting point rather than rebuilding it from scratch.
+12. **Intentional color contrast between primary and secondary story elements:** after the copied base made the hand blend in too much with the body, apply an **HSL adjustment** to push the hand's values cooler — creating a deliberate warm/cool contrast that reinforces (without overpowering) the storytelling importance of the secondary element.
+13. **Final-polish phase happens mostly in-engine:** camera focal length, camera position, and render/lens settings are the primary levers in the last stretch, described as roughly the "last 10%" but also the trickiest to get right.
+14. **Look for engine-side happy accidents too** — deliberately exaggerating a lens's barrel/warp distortion toward a macro-photography feel is treated as a legitimate creative discovery on par with a texture-side happy accident.
+15. **Decide flat/unlit vs. shaded as a genuine late-stage creative choice** — both were seriously considered for the final presentation; shaded was chosen for the added shadow nuance it contributed to composition, not by default.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Base gradient/foundation layers: `Highlight`, `Blur`, `AO Lower Gradient`, `AO`, `Levels`, `DarkRed`, `UnderGradient` (visible in frame_002/003).
+- `YellowSpots` — hand-painted detail layer for the mushroom-cap spot pattern (frame_003).
+- **AO map** used as a mask source for hue-shifted (not just darkened) shadow color.
+- Tiling **procedural** textures chosen for inherent brushstroke/painterly grain — pure surface-variation and happy-accident layers, applied before freehand painting begins.
+- Single freehand **Paint layer** (`HandPaint`, `PaintStrokes` with a `Blur Directional` filter — frame_004/006/007) — the primary hand-painting surface for both the body and the hand asset.
+- **Palette Knife** brush (stock Painter brush, alpha modified for more visible stroke texture) — primary painting tool for both the procedural-selection phase and the freehand phase.
+- `HSL` adjustment — applied to the hand asset's copied base layers to push its color palette cooler, creating warm/cool contrast against the body.
+- External: **Marmoset Toolbag** — continuous render validation throughout, plus final camera focal length/position and lens-distortion tuning.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner/Intermediate for the Painter-specific workflow (gradient + AO-color + procedural foundation, then freehand paint layer with a modified stock brush) — approachable for artists without a hand-painted-art background, as Chavez frames the whole video around making that transition easier.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter (paired with Marmoset Toolbag for render validation) — version not specified on screen or in narration.
 
 ### Tags
-[PENDING EXTRACTION]
+paint-layer, fill-layer, layers, masks, ambient-occlusion, blend-mode, procedural, particle-brush, basecolor, beginner, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to MAKE HAND PAINTED TEXTURES and SUBSTANCE PAINTER | Dragonite](how-to-make-hand-painted-textures-and-substance-painter-dragonite.md) — same creator, direct sequel; that video explicitly reuses a Smart Material exported from this exact "Paris" project as its own starting foundation, and follows the same procedural-groundwork-then-freehand-paint structure.
+- [SUBSTANCE PAINTER: SMART MATERIALS Demonstration](substance-painter-smart-materials-demonstration.md) — same creator; general "export a finished project's layers as a reusable Smart Material" habit demonstrated in commercial-pack form, of which this project is the original source example (per the Dragonite video's own account).
+- [How to make HAND PAINTED SKIN Textures in SUBSTANCE PAINTER](how-to-make-hand-painted-skin-textures-in-substance-painter.md) — same creator; shares the "commit to hand-painted work without a photo/scan crutch" philosophy, plus the AO-as-color-source (not just shadow-source) technique.
+- [HOW TO MASTER TEXTURing in SUBSTANCE PAINTER](how-to-master-texturing-in-substance-painter.md) — same creator; conceptual companion — the foundation-first, freehand-detail-second structure here maps closely onto that video's stated Phase 1/2 (Blockout / Breakup) progression.
