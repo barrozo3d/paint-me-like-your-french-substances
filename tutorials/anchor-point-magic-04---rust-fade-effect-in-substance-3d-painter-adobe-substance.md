@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=LmtepSmnRQs
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; window title reads 'License: 171 days remaining - Anchor_Video_04_Texture_Begin' (same project/license-countdown pattern as series entries 01-03)"
+tags: [anchor-point, masks, layers, fill-layer, paint-layer, generator, smart-mask, blend-mode, height, basecolor, roughness, metallic, procedural, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Anchor Point Magic 04 - Rust Fade Effect in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -283,30 +279,74 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:12] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_000.jpg
+- [2:11] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_001.jpg
+- [2:55] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_002.jpg
+- [3:53] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_003.jpg
+- [4:50] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_004.jpg
+- [5:50] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_005.jpg
+- [6:40] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_006.jpg
+- [8:36] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_007.jpg
+- [9:35] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_008.jpg
+- [11:13] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_009.jpg
+- [12:15] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_010.jpg
+- [13:14] tutorials/frames/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+The series finale: chaining everything from entries 01-03 (basic anchor referencing, generator Micro Height referencing, and the double-reference invert+blur+Multiply-clip technique) into one composite system where a single rust material's mask drives its own rust glow, a separate rust-drip generator is spatially confined to only appear near the existing rust (via the same blur+Levels+Multiply clip trick, now applied through a **folder mask** rather than a single layer's mask), and a text-height detail is pulled in via Micro Height so recessed lettering rusts convincingly too — with everything remaining fully hand-paintable and non-destructive throughout.
 
 ### Summary
-[PENDING EXTRACTION]
+Fourth and final video in Adobe's "Anchor Point Magic" series (same bronze valve model as entries 01-03, featuring the "MADE IN SP / 17 A" embossed plate), described as the most complex setup in the series: a single rust generator drives fully generated rust, an accompanying glow around it, and dripping rust leaks — all from anchor references. **Base scene:** a dull bronze base material; a Height-only fill layer ("Text_Height") masked with the embossed text; and a "White_Paint" fill layer (white Base Color, adjustable Roughness) whose black mask is driven by the **Surface Worn** smart mask (from the Assets library) to control how much paint coverage remains. **Setup:** add an Anchor Point to the White_Paint mask, and a separate Anchor Point to the Text_Height mask — both placed early so they're ready to reference later. **Base rust:** drag one of the two library **Rust** materials onto the layer stack above White_Paint; tune its Rust Color (darker, duller, more reddish to taste), set UV Transformations Scale to around 2, and optionally adjust Cavities for more/less damage detail. Add a black mask to the rust layer, add a **fill** inside it, reference the White_Paint anchor via the fill's Anchor Points tab, then **Invert** it (via Levels) so rust appears where paint is worn away rather than where paint remains intact. **Rust glow system:** add a new plain fill layer named "Rust_Glow" — keep Metallic on, skip Normal, lower Roughness (glow shouldn't look shiny), and set Base Color to a strong orange (~`#D6700B`-range, tuned by eye). Add a black mask to it, then: (1) add a fill referencing the **same White_Paint anchor**, inverted, to place the glow relative to worn paint; (2) add a **Blur filter** on top to push the orange glow outward past the mask's hard boundary (same push-outside-the-mask trick as series entry 03's paint peel); (3) add a **Levels** adjustment for extra strength control; (4) add a **second fill**, again referencing the White_Paint anchor, this time **not inverted** and set to **Multiply** blend mode — this clips the blurred glow back down so it reads as a tight rim around the rust rather than bleeding everywhere. Boosting the White_Paint mask's own **Contrast** (in its Mask Editor) helps the glow read clearly against soft-contrast base masks. **Including the text:** scroll to the rust layer's generator's **Micro Details** section, confirm **Micro Height** is enabled, click its field, go to Anchor Points, and select the **Text_Height** anchor — the recessed lettering now rusts convincingly along with the rest of the surface; AO Radius and related sliders further tune how much rust the text detail picks up. **Hand-painting on top:** because the White_Paint mask sits below the anchor and everything downstream references it live, painting directly into that mask (e.g. painting white to erase rust along an ugly UV seam, or painting black to remove rust from an area entirely) propagates instantly through the entire rust/glow system — fully dynamic at any time. **Dripping rust leaks, confined near existing rust:** duplicate the Rust_Glow layer (to reuse its Roughness/Metallic setup), rename its mask contents "Rust_Leaks," darken its Base Color, then add the **Dripping Rust** generator to it (found by right-clicking to add a generator) — tune **Drip Intensity** and **Rust Spreading**/**Spreading Smoothness** for the desired drip look. Because a raw Dripping Rust generator drips everywhere indiscriminately (including on top of already-rusted areas, which looks wrong), the fix is: create a new **folder** ("Dripping_Rust_Masking"), drag the Rust_Leaks layer into it, add a **black mask to the folder itself** (masks can be applied at the folder level, not just per-layer), add a fill inside referencing the White_Paint anchor (confines drips to only appear near existing rust, not in open unrusted areas), add a strong **Blur filter** (pushed nearly to the point of being unrecognizable) plus a **Levels** adjustment used specifically to **clamp** the blur — dragging the black point removes flat/low-value blurred areas entirely, and dragging the white point tightens the remaining spread — finished with **Invert** so the drips concentrate specifically around, not on top of, the rust. A final **paint layer** on top allows hand-placing extra drips in specific chosen spots, white to add / black to remove, overriding the procedural system exactly where desired.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Base scene:** bronze base material; a Height-only "Text_Height" fill layer masked with the embossed text detail; a "White_Paint" fill layer (white Base Color, adjustable Roughness) whose black mask uses the **Surface Worn** smart mask to control paint coverage.
+2. **Place both Anchor Points early:** add one to the White_Paint mask and one to the Text_Height mask, before starting the rust work.
+3. **Add a library Rust material** above White_Paint; tune Rust Color (darker/duller/redder), set UV Transformations Scale (~2), and optionally adjust Cavities.
+4. **Confine rust to worn paint:** add a black mask to the rust layer, add a fill inside referencing the White_Paint anchor, and **Invert** it (via Levels) so rust shows where paint has worn away.
+5. **Build the rust glow layer:** new plain fill layer ("Rust_Glow") — Metallic on, no Normal needed, low Roughness, strong orange Base Color.
+6. **Glow mask, step 1 — placement:** black mask on Rust_Glow, add a fill referencing the White_Paint anchor, **Invert** it.
+7. **Glow mask, step 2 — push outward:** add a **Blur filter** on top to spread the orange glow past the mask's hard edge; add a **Levels** adjustment for extra strength control.
+8. **Glow mask, step 3 — clip back down:** add a second fill, reference the **same** White_Paint anchor again, **do not invert** this one, and set its blend mode to **Multiply** — this confines the blurred glow to a tight rim rather than bleeding everywhere.
+9. **Improve glow contrast:** boost the White_Paint mask's own Contrast (in its Mask Editor) if the glow struggles to read against a soft-contrast base mask.
+10. **Include the text detail:** on the rust layer's generator, open **Micro Details**, confirm **Micro Height** is enabled, reference the **Text_Height** anchor through it, then fine-tune with AO Radius and related sliders.
+11. **Hand-paint touch-ups directly into the White_Paint mask** (white to erase rust/reveal clean paint, black to remove paint/expose more rust) — changes propagate live through every downstream anchor reference.
+12. **Duplicate Rust_Glow to start the leaks layer** (reuses its Roughness/Metallic setup); rename appropriately ("Rust_Leaks"), darken its Base Color.
+13. **Add the Dripping Rust generator** to this layer's mask (right-click to add a generator, search/select "Dripping Rust"); tune Drip Intensity and Rust Spreading/Spreading Smoothness.
+14. **Confine the drips near existing rust using a folder-level mask:** create a new folder, drag the leaks layer into it, add a **black mask to the folder itself**.
+15. Inside the folder's mask: add a fill referencing the White_Paint anchor (confines drips near rust, not open unrusted space), add a strong **Blur filter**, add a **Levels** adjustment to **clamp** the blur (drag the black point to remove flat/low-value blurred zones, the white point to tighten the remaining spread), then **Invert** so drips concentrate around — not on top of — the rust.
+16. **Add a final paint layer on top** for hand-placing extra drips in specific spots (white brush to add, black to remove), overriding the procedural placement exactly where wanted.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Text_Height** — Height-only fill layer, mask = embossed text detail, carries its own Anchor Point
+- **White_Paint** — white Base Color fill layer, black mask driven by the **Surface Worn** smart mask, carries the primary Anchor Point referenced throughout the rest of the build
+- **Rust base layer** — library Rust material (Rust Color, UV Transformations Scale, Cavities); mask = fill referencing White_Paint anchor, **Invert**
+- **Rust_Glow** — plain fill layer (Metallic on, no Normal, low Roughness, strong orange Base Color ~`#D6700B`); mask = [fill referencing White_Paint anchor + Invert] → **Blur filter** → **Levels** → [second fill referencing White_Paint anchor, no invert, blend mode **Multiply**]
+- **Rust generator's Micro Details:** **Micro Height** enabled, referencing the **Text_Height** anchor; AO Radius and related sliders
+- **Rust_Leaks** — duplicated from Rust_Glow (reused Roughness/Metallic), darker Base Color, mask driven by the **Dripping Rust** generator (Drip Intensity, Rust Spreading, Spreading Smoothness)
+- **"Dripping_Rust_Masking" folder** — contains Rust_Leaks; **folder-level black mask** = [fill referencing White_Paint anchor] → strong **Blur filter** → **Levels** (used to clamp/clip the blur) → **Invert**
+- Final **paint layer** on top for manual drip placement (white add / black remove)
+- Confirmed: masks can be applied at the **folder** level, not only per-layer
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced (the series' most complex build — chains generator Micro Height referencing, double-reference invert+blur+Multiply clipping, and folder-level masking into one system; explicitly framed by the video as "a much more complex setup").
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number stated on screen; window title bar reads "License: 171 days remaining - Anchor_Video_04_Texture_Begin" (subscription license countdown plus project filename, matching the pattern in series entries 01-03 — not a version indicator).
 
 ### Tags
-[PENDING EXTRACTION]
+`anchor-point`, `masks`, `layers`, `fill-layer`, `paint-layer`, `generator`, `smart-mask`, `blend-mode`, `height`, `basecolor`, `roughness`, `metallic`, `procedural`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Anchor Point Magic 01 - Double Layer Setup in Substance 3D Painter** (`tutorials/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan.md`) — series 1/4, introduces the fundamental anchor-referencing mechanism this finale chains together.
+- **Anchor Point Magic 02 - Micro Normals & Micro Height in Substance 3D Painter** (`tutorials/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe.md`) — series 2/4, teaches the generator Micro Height anchor-referencing technique this video reuses directly to include the text detail in the rust.
+- **Anchor Point Magic 03 - Paint Peel Effect in Substance 3D Painter** (`tutorials/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc.md`) — series 3/4, teaches the double-reference invert+blur+Multiply-clip technique this video reuses twice (for the glow, and for the drip-leak confinement).
+- **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's independent anchor-point deep-dive; complementary treatment of the same core reuse mechanism this whole series is built on.
+- **Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain.md`) — footwear anchor-points trilogy; explicitly references "the basic anchor point series on this channel" (this exact series) and applies the same generator Micro Height anchor-referencing technique in production.

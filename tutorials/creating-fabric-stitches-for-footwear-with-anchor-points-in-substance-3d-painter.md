@@ -217,7 +217,7 @@ Substance 3D Painter. No version number stated on screen; the window title bar r
 ---
 
 ## Related Tutorials
-- **Creating Sole Patterns for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter.md`) — same footwear/anchor-points series, same shoe asset.
-- **Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-painter.md`) — same series, third installment.
+- **Creating Sole Patterns for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-sole-patterns-for-footwear-with-anchor-points-in-substance-3d-painter-a.md`) — same footwear/anchor-points series, same shoe asset.
+- **Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain.md`) — same series, third installment.
 - **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's dedicated anchor-point deep-dive; complementary independent treatment of the same core technique (reusable, dynamically-updating mask/layer references).
-- **Anchor Point Magic 01-04** (Substance3D official series, if ingested) — same anchor-point technique family, referenced by this video as a "basic anchor point series" on the same channel.
+- **Anchor Point Magic 01** (`tutorials/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan.md`), **02** (`tutorials/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe.md`), **03** (`tutorials/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc.md`), **04** (`tutorials/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance.md`) — the "basic anchor point series" on the same channel this video explicitly references.

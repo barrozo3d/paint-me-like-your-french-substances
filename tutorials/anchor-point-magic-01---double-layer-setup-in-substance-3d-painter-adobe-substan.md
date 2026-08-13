@@ -223,6 +223,6 @@ Substance 3D Painter. No version number stated on screen; window title bar reads
 ## Related Tutorials
 - **Anchor Point Magic 02 - Micro Normals & Micro Height in Substance 3D Painter** (`tutorials/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe.md`) — series 2/4, direct continuation.
 - **Anchor Point Magic 03 - Paint Peel Effect in Substance 3D Painter** (`tutorials/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc.md`) — series 3/4.
-- **Anchor Point Magic 04 - Rust Fade Effect in Substance 3D Painter** (`tutorials/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substanc.md`) — series 4/4.
+- **Anchor Point Magic 04 - Rust Fade Effect in Substance 3D Painter** (`tutorials/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance.md`) — series 4/4.
 - **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's independent anchor-point deep-dive; complementary treatment of the same core reuse mechanism this video introduces from first principles.
 - **Creating Fabric stitches / Sole Patterns / Leather Material for Footwear with Anchor Points** (footwear anchor-points trilogy) — all three explicitly reference "the basic anchor point series on this channel," which is this exact series.

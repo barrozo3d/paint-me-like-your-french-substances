@@ -877,10 +877,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=LmtepSmnRQs
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `anchor-point` `masks` `layers` `fill-layer` `paint-layer` `generator` `smart-mask` `blend-mode` `height` `basecolor` `roughness` `metallic` `procedural` `advanced`
+- **Summary:** 4/4, series finale (same bronze valve asset as 01-03). Chains every prior technique into one system: a rust material's mask (referencing the White_Paint anchor, inverted) drives a matching glow (double reference: inverted+Blur+Levels for the bump, non-inverted+Multiply to clip the bleed — same trick as video 03), a Micro Height reference pulls the embossed text into the rust (technique from video 02), and a Dripping Rust generator's leaks are spatially confined to only appear near existing rust via the same invert+blur+Multiply-clip trick applied at the **folder** level (masks work on folders, not just layers) — all fully hand-paintable throughout via the underlying White_Paint mask.
 - **File:** tutorials/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance.md
 
 

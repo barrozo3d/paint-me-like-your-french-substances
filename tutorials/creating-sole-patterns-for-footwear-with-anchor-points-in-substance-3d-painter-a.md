@@ -253,6 +253,6 @@ Substance 3D Painter. No version number stated on screen; window title bar reads
 
 ## Related Tutorials
 - **Creating Fabric stitches for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter.md`) — first video in the same footwear/anchor-points series, same shoe asset.
-- **Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-painter.md`) — third video in the same series.
+- **Creating a Leather Material for Footwear with Anchor Points in Substance 3D Painter** (`tutorials/creating-a-leather-material-for-footwear-with-anchor-points-in-substance-3d-pain.md`) — third video in the same series.
 - **How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`) — Jared Chavez's independent anchor-point deep-dive, same core reuse technique.
-- **Anchor Point Magic 01-04** (Substance3D official series, if ingested) — the "basic anchor point series" this video explicitly builds on.
+- **Anchor Point Magic 01** (`tutorials/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan.md`), **02** (`tutorials/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe.md`), **03** (`tutorials/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc.md`), **04** (`tutorials/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substance.md`) — the "basic anchor point series" this video explicitly builds on.
