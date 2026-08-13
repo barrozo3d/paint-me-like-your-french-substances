@@ -773,6 +773,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Official feature-tour (juice-carton packaging example) of native .ai import: drag a whole Illustrator document onto the 3D view (Warp Projection material), 2D/UV view (UV material), or Layer Stack (UV fill in a chosen channel); each artboard becomes swappable via a file-type-specific Artboard dropdown, with Resolution/Crop/Scope controls and lossless vector scaling. Layers built from the import take normal Painter filters (Drop Shadow, Levels, HSL, Outline+Emboss+metallic). Projection mode (Warp vs. UV) is switchable after placement; reloading the source .ai file propagates edits non-destructively.
 - **File:** tutorials/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d.md
 
+
+### How to Make the Substance Painter Viewport Match Unreal Engine
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=UOcNnu2uW1Y
+- **Author:** Quinn Kuslich
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-make-the-substance-painter-viewport-match-unreal-engine.md
+
 ---
 
 ## Tag Reference
