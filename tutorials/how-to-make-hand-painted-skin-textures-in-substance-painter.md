@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=GcI60mKZU0k
 author: Jared Chavez
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified"
+tags: [paint-layer, fill-layer, layers, masks, ambient-occlusion, curvature, blend-mode, procedural, particle-brush, basecolor, baking, advanced, expert]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 14
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to make HAND PAINTED SKIN Textures in SUBSTANCE PAINTER
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-make-hand-painted-skin-textures-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -184,30 +180,84 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:10] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_000.jpg
+- [2:10] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_001.jpg
+- [2:33] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_002.jpg
+- [2:55] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_003.jpg
+- [3:50] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_004.jpg
+- [4:30] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_005.jpg
+- [4:48] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_006.jpg
+- [5:25] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_007.jpg
+- [5:50] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_008.jpg
+- [6:10] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_009.jpg
+- [7:20] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_010.jpg
+- [7:40] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_011.jpg
+- [8:15] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_012.jpg
+- [9:15] tutorials/frames/how-to-make-hand-painted-skin-textures-in-substance-painter/frame_013.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A fully hand-painted (no photo/scan projection) realistic skin color map built on a two-tier anatomical model — a **Subdermal** layer group representing blood/bone/tissue colors underneath the skin, followed by an **Epidermal** layer group representing the visible surface skin — with each tier built from the same repeated logic: lay a color, localize it with a mask/generator (AO, curvature) or brush technique, evaluate, then layer another color on top.
 
 ### Summary
-[PENDING EXTRACTION]
+Direct sequel to Chavez's ZBrush/Texture XYZ skin-creation video, this one deliberately uses **no scan data at all** — the entire skin color map on an elderly priest bust is hand-painted from Pinterest and Texture XYZ cross-polarized reference photos, framed as a discipline exercise so the artist never needs a scan as a crutch. The mesh arrives pre-baked (baking itself not covered here). The **Subdermal group** (frame_001-004) is built first as a stack of large, soft color washes representing what's happening biologically beneath the skin: a dark base red for the whole face, duplicated into a second, more saturated/brighter red confined to AO-heavy areas via a mask fed by the baked AO map inside a Fill layer; a yellow representing bone proximity, deliberately scattered broadly across the whole model for underlying variation (explicitly "more variation is better" for these layers); a blue localized to beard-growth areas and under-eye bags; and a sparingly-used purple confined mostly to the eyes and lips. Layer names visible in the stack include `Subdermal`, `Purple`, `Yellow`, `Blue`, `RedDark`, `PaleSkin`. The **Epidermal group** starts with a base skin-color Fill/Paint layer using the **Dirt brush with reduced Flow/opacity** specifically so the subdermal breakup underneath still shows through rather than being fully covered — color-balanced away from either "too red" (reads sick) or "too yellow" (reads jaundiced). On top of that base, the face is conceptually divided into **three color zones** worked non-sequentially by moment-to-moment diagnosis rather than a fixed order: a red zone (middle third — nose/cheeks), a yellow zone (forehead / other bony areas), and later a blue zone (bottom third — hair-follicle areas, under-eyes). Sunspot/damage detail is added with the **Dirt 3 brush** (broad coverage via Flow/Spacing adjustment, then reduced layer opacity for subtlety) plus a peach breakup layer. **Curvature** is then used inside a Fill layer mask (frame_006/009: `RedCurve` layer) with a **Levels** clamp on top to focus a darker red specifically into cavities and pores. After the primary colors are down, the whole face is unified with one color-picked, broad-coverage layer to fix blotchiness from the many preceding passes — Chavez calls the map ~80% complete at this point. The **Details pass** (frame_010/011: `SkinDetails` group containing `RedCapillaries`, `PeachSpot`, `DarkVeinSpots`, `Levels`, `Blur`, `Warp`) repeats the same dirt-brush logic with tighter coverage control: browns/purples for closer-to-surface freckling, red veins/capillaries around the nose using the **Cracks brush** with reduced opacity so they read as under the surface rather than on top, plus a wider **procedural** vein-noise layer for broader coverage/complexity. Additional nuance layers follow: eye-area purples, a bright yellow accent in the eye corner, and — notably — hand-traced **veins following pre-sculpted high-poly guide geometry** (frame_012, traced with the Basic Soft brush, given a soft border, then blended with the Dirt brush and reduced opacity so they read as sub-surface rather than drawn-on). A final `RedCapillaries`-style **procedural "red purling noise"** layer (visible as a Marble/Vein-pattern grayscale generator in frame_011) adds one more layer of surface complexity. The **lips and waterline** (frame_013) get their own straightforward mini-process: a base lip color, several saturated/lighter variation layers via the Dirt brush, and a desaturated red blended specifically into the eye waterline (called "Caramel" color) as the final touch.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Gather **reference before opening Painter** — Pinterest for broad variety, and Texture XYZ's cross-polarized photo carousel specifically for examining subtle real-skin color nuance (even without using their scan data directly).
+2. Work from an already-baked mesh (baking process not shown in this video).
+3. **Subdermal group, base red:** lay a dark red base color across the whole face representing blood/tissue beneath the skin, then add procedural breakup on top of it.
+4. **Subdermal, AO-masked bright red:** duplicate the base red layer, push it more saturated/brighter, and mask it with the model's baked **AO map** inside a Fill layer's mask slot so the brighter red concentrates specifically in occluded/cavity areas.
+5. **Subdermal, yellow (bone proximity):** paint/scatter yellow broadly across the whole model, not localized — deliberately maximize variation at this stage rather than restrict it.
+6. **Subdermal, blue:** localize to beard-growth regions and under-eye bag areas only.
+7. **Subdermal, purple:** use sparingly — confined mostly to eye areas and a small amount around the lips.
+8. **Epidermal base layer:** lay a base skin color using the **Dirt brush with reduced initial Flow** (lower opacity) specifically so the subdermal breakup underneath remains visible through the new layer rather than being fully obscured; color-balance to avoid reading either "sick" (too red) or "jaundiced" (too yellow).
+9. Add subtle multi-hue breakup on top of the base epidermal color: reds, browns, blues, yellows, each with subtle variation, to start making the skin feel complex rather than flat.
+10. **Face zone breakdown (worked non-sequentially):** a darker red confined to the red zone (middle third — nose/cheeks), a yellow tone for the yellow zone (forehead / other areas where bone shows through), plus additional ad-hoc dark red/purple variation layers added by moment-to-moment judgment rather than a fixed sequence.
+11. **Sunspots/surface damage:** use the **Dirt 3 brush**, adjusting Flow and Spacing for broad coverage, then reduce the finished layer's opacity so the result reads as subtle nuance rather than prominent spotting; add a peach layer alongside for further breakup.
+12. **Curvature-driven pore/cavity emphasis:** add a Fill layer with a darker red color, mask it using the model's **Curvature** map, then add a **Levels** adjustment on top of that mask and clamp it down so the red concentrates specifically into cavities and pores rather than spreading broadly.
+13. **Blue zone:** localize to the bottom third of the face (hair-follicle/beard areas) and around the eyes.
+14. **Unify/de-blotch pass:** color-pick a general skin tone from the model and apply one broad-coverage layer over the entire face to resolve blotchiness introduced by the many preceding localized passes — this is the ~80%-complete checkpoint.
+15. **Detail pass — freckling/sunspot depth:** add more browns and purples using dirt-style brushes, but with tighter coverage control than the epidermal pass, aiming for these marks to read closer to the surface (as opposed to the deeper subdermal yellow/blue).
+16. **Detail pass — veins/capillaries:** use the **Cracks brush** around the nose for fine red vein/capillary detail, then reduce layer opacity so the veins read as sitting slightly beneath the surface, not drawn on top; add a second, broader **procedural** vein-noise layer for wider coverage and additional complexity.
+17. **Eye-area nuance:** add purple concentrated under/around the eyes, plus a small bright-yellow accent detail in the eye corner.
+18. **Sculpted-guide vein tracing:** for veins with a corresponding high-poly sculpted guide, trace them with the **Basic Soft brush** following the sculpted geometry, give the traced line a soft border so it isn't harsh, then blend with the **Dirt brush** and reduce opacity so the veins read as under the skin rather than illustrated on top.
+19. Add a bright blue accent under the eyes and at the corners of the mouth, plus more prominent orange/brown spot detail topped with a subtle white blotchy layer for additional complexity.
+20. **Final procedural complexity layer:** add a "red purling noise" **procedural** (a Marble/Vein-pattern generator) as one last surface-breakup pass across the whole face.
+21. **Lips:** base lip color, then several saturated/lighter-value variation layers applied with the Dirt brush for subtle surface variation.
+22. **Waterline/Caramel color:** a desaturated red blended specifically into the eye waterline as the final capping detail.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `Subdermal` layer group: base Red, duplicated brighter Red (AO-masked via Fill layer mask), Yellow (broad, unmasked), Blue (beard/under-eye localized), Purple (sparse, eyes/lips) — visible layer names include `RedDark`, `Yellow`, `Blue`, `Purple`, `PaleSkin`.
+- `Epidermal` layer group: base skin-color Paint layer (Dirt brush, reduced Flow), plus red/brown/blue/yellow subtle breakup layers.
+- **AO map** used as a Fill-layer mask source (subdermal bright-red localization).
+- **Curvature map** used as a Fill-layer mask source, refined with a **Levels** clamp (`RedCurve` layer) to concentrate color into cavities/pores.
+- **Dirt** and **Dirt 3** brushes — primary tools for base skin color and sunspot/damage coverage, tuned via Flow/Spacing/layer-opacity rather than left at defaults.
+- **Cracks brush** — used specifically for fine red vein/capillary detail around the nose.
+- **Basic Soft brush** — used for hand-tracing veins that follow pre-sculpted high-poly guide geometry.
+- `SkinDetails` layer group: `RedCapillaries`, `PeachSpot`, `DarkVeinSpots`, with `Levels`/`Blur`/`Warp` adjustment layers refining coverage and softness.
+- **Procedural** noise generators — used twice: a wide vein-coverage procedural layered under the hand-painted capillaries, and a final "red purling noise" (Marble/Vein-pattern grayscale generator, frame_011) as a last surface-complexity pass.
+- Lips: base color Fill + multiple Dirt-brush variation layers; waterline "Caramel" desaturated-red blend as the final detail.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced/Expert — no procedural shortcuts or scan-based crutches; requires strong color/anatomy judgment (subdermal-vs-epidermal color logic, zone-based face breakdown, brush opacity discipline to keep layers reading as "beneath the surface") built up through iterative, non-sequential layering rather than a fixed recipe.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not specified on screen or in narration.
 
 ### Tags
-[PENDING EXTRACTION]
+paint-layer, fill-layer, layers, masks, ambient-occlusion, curvature, blend-mode, procedural, particle-brush, basecolor, baking, advanced, expert
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to Paint Realistic Skin in Substance Painter](how-to-paint-realistic-skin-in-substance-painter.md) (FlippedNormals) — different creator; another fully hand-painted-first (no photo projection) skin color-map methodology — strong side-by-side comparison of two independent artists' approaches to the same no-scan, hand-painted skin problem.
+- [REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER](realistic-creatures-hand-painted-textures-in-sustance-painter.md) — same creator; shares the hand-painted-color-zone-blocking methodology (yellow=bone/fat, blue/purple=cavities/blood-pooling there) directly applied here to human/humanoid skin instead of a creature.
+- [How to TEXTURE in SUBSTANCE PAINTER | Creature TEXTURING](how-to-texture-in-substance-painter-creature-texturing.md) — same creator; shares the same zone-based hand-painted color layering logic and gradient-driven approach to anatomical color variation.
+- [How to TEXTURE in SUBSTANCE PAINTER | ORC TEXTURES](how-to-texture-in-substance-painter-orc-textures.md) — same creator; shares the multi-frequency-band discoloration layering approach (large/medium/small shapes there) and the subdermal-first skin methodology referenced explicitly in that video as "my standard process."
+- [SUBSURFACE SCATTERING: Subsurface Scattering in SUBSTANCE PAINTER for UNREAL ENGINE 5](subsurface-scattering-subsurface-scattering-in-substance-painter-for-unreal-engi.md) — same creator; the subdermal-layer-first mental model here (blood/bone color beneath the surface) is the direct color-channel counterpart to that video's grayscale light-transmission channel, both built on the same "author what's happening underneath the skin first" logic.
+- [Tips & Tricks in Substance 3D Painter to Make Semi-Realistic Textures](tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa.md) (Substance3D/Anna B) — different creator; presents a similar sub-dermal/dermis/makeup three-layer skin color model in conference-talk form — useful theoretical companion to this video's practical hands-on execution.
