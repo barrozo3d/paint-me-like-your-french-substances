@@ -465,6 +465,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** 3/3 of the cross-DCC prep series (same roller-skate asset as Blender/Maya entries). 3ds Max-side Texture Set/Geometry Mask/ID Map workflow: Compact Material Editor per-texture-set material assignment, Unwrap UVW + Arrange Elements UV packing (or Painter's Auto Unwrap regenerate-packing option), Vertex Paint modifier-based ID maps (Fill/Paint tools, remember to disable vertex color display before exiting) baked via Painter's Baking dialog ID Color Source, and Edit Poly + Detach for geometry-mask sub-objects.
 - **File:** tutorials/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d.md
 
+
+### 3Dconnexion SpaceMouse in Substance 3D Painter | Adobe Substance 3D
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=PvZYHYQ3_uc
+- **Author:** Adobe Substance 3D
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/3dconnexion-spacemouse-in-substance-3d-painter-adobe-substance-3d.md
+
 ---
 
 ## Tag Reference
