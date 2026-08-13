@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=_oSPDoX37lM
 author: 3DRedBox
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; the Pass tool panel is confirmed 'PAINT ALONG PATH' in captured frames (same as this creator's slipper and poison-bottles videos), pinning this to the Painter 9.x-10.x window per references/version-tracker.md"
+tags: [layers, fill-layer, paint-layer, masks, smart-material, blend-mode, baking, mesh-maps, ambient-occlusion, texture-set, pbr, metal-rough, basecolor, roughness, height, normal-map, alpha, beginner, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/speed-up-your-substance-painter-workflow-with-this-easy-trick/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Speed Up Your Substance Painter Workflow with This Easy Trick!
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py speed-up-your-substance-painter-workflow-with-this-easy-trick <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -147,30 +143,61 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:46] tutorials/frames/speed-up-your-substance-painter-workflow-with-this-easy-trick/frame_000.jpg
+- [3:12] tutorials/frames/speed-up-your-substance-painter-workflow-with-this-easy-trick/frame_001.jpg
+- [4:50] tutorials/frames/speed-up-your-substance-painter-workflow-with-this-easy-trick/frame_002.jpg
+- [6:33] tutorials/frames/speed-up-your-substance-painter-workflow-with-this-easy-trick/frame_003.jpg
+- [8:50] tutorials/frames/speed-up-your-substance-painter-workflow-with-this-easy-trick/frame_004.jpg
+- [9:22] tutorials/frames/speed-up-your-substance-painter-workflow-with-this-easy-trick/frame_005.jpg
+- [10:05] tutorials/frames/speed-up-your-substance-painter-workflow-with-this-easy-trick/frame_006.jpg
+- [10:38] tutorials/frames/speed-up-your-substance-painter-workflow-with-this-easy-trick/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+The "explode trick": temporarily separating a complex model's tightly-packed closed surfaces apart in the DCC app (after baking, before detailing) so the Pass tool / Paint Along Path stroke tool stops mis-detecting neighboring geometry, then re-importing that spread-out mesh into the same Painter project via Project Configuration without touching UVs or material names.
 
 ### Summary
-[PENDING EXTRACTION]
+Short, focused troubleshooting video for a specific, common pain point: on complex models with many closed surfaces packed tightly together (demoed on a leather belt/harness with straps, buckles, and rings all overlapping), the Pass tool used for hand-drawn stitching keeps detecting and snapping to neighboring surfaces instead of the one being worked on, breaking the stroke. After the normal setup (Double Sided shader to avoid backface issues on thin surfaces, 4K/Bent-Normal/64x-AA baking) and loading a bronze-armor smart material for accessories plus a downloadable leather smart material for the belt (with its labeled layer structure explained — red-labeled layers indicate color-editable areas, and detail work like stitches/seams/trim should be added into the material's pre-built "Add Your Stitches Here"-style layers before the data-collection layer so downstream effects update automatically), the video demonstrates the problem live: drawing a stitch path near an overlapping strap causes the tool to break. The fix is done entirely outside Painter: duplicate the mesh in the DCC app (3ds Max shown, but Blender/Maya work identically), separate/detach the model's small closed-surface pieces and physically move them apart in space ("explode" them) — critically, without renaming materials or repacking UVs, since the goal is a geometry-only variant that still matches Painter's existing texture-set/material assignments. Re-export and re-import this exploded mesh into the same Painter project via Edit → Project Configuration (pointing at a new FBX rather than overwriting the original), which lets detail work (stitches, seams, trims) be painted cleanly on now-isolated surfaces with the Pass tool having no neighboring geometry left to accidentally snap to. A side effect — the AO baked into the original mesh distances no longer matches the exploded spacing and visibly "bothers" the result — is handled by temporarily removing the Ambient Occlusion channel from Texture Set Settings (which disables any generators/filters depending on it) while detailing, then re-adding it once done. After finishing detail work, switching the Project Configuration back to the original (non-exploded) mesh recombines the pieces for final, artifact-free rendering — explicitly noted as a technique to apply only after baking, not before.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Standard setup first:** load the model, enable `Double Sided` in Shader Settings (avoids backface visibility issues on thin closed surfaces), then bake mesh maps at 4K output, `Bent Normal` on, 64x anti-aliasing.
+2. **Build base materials as usual:** apply the built-in `Bronze Armor` smart material to metal accessories, and a downloadable leather smart material to the belt/strap texture set (drag-and-drop).
+3. **Understand a pre-built smart material's editable structure before modifying it:** open the folder and read its layer names — red-labeled layers indicate color/value-editable areas; dedicated layers like "Add Your Stitches Here," "Add Your Seams Here," "Add Your Trim Here" are meant to receive new detail work; anything added to those layers must sit *before* the material's internal "Data Collection" layer so downstream generators/effects pick it up automatically.
+4. **Demonstrate the problem live:** use the Pass tool (Paint Along Path) on the "Add Your Stitches Here" layer to draw a stitch line near tightly-packed overlapping surfaces (straps, buckles) — the tool detects and interferes with the neighboring surface, breaking the stroke and producing unwanted effects on unrelated geometry.
+5. **Apply the fix only after baking is already complete** (explicitly emphasized): go to the DCC app (3ds Max demoed; Blender/Maya work the same way) and duplicate the whole model as a new object (e.g. named `_explode`).
+6. **Detach/separate the model's small closed-surface pieces in the duplicate and physically move them apart in 3D space** — the goal is purely spatial separation so surfaces are no longer touching or overlapping, not a topology change.
+7. **Export the exploded duplicate without altering anything else about the model:** do not rename materials, do not repack or otherwise modify UVs — only the spatial arrangement of the separated pieces should differ from the original.
+8. **Re-import the exploded mesh into the same Painter project via `Edit` → `Project Configuration`**, pointing at a newly exported FBX (rather than overwriting/re-importing over the original FBX) so both the compact and exploded versions remain available to switch between.
+9. **Expect and address an AO mismatch side effect:** since baked Ambient Occlusion reflects the original (compact) mesh's proximity relationships, it visibly "bothers" the result once pieces are spread apart — fix by going to the correct Texture Set in the Texture Set List, opening Texture Set Settings, and removing the `Ambient Occlusion` channel (this breaks any generators/filters currently depending on AO, expected and temporary).
+10. **Do all detail work (stitches, seams, trims) on the now-isolated, non-overlapping pieces** — the Pass tool now has no neighboring surface to false-detect, so strokes apply cleanly and predictably.
+11. **Once detailing is finished, re-add the Ambient Occlusion channel** in Texture Set Settings to restore AO-dependent generators/filters.
+12. **Switch Project Configuration back to the original (non-exploded) mesh** to recombine the pieces for final review/render — the painted detail (which lives in the texture, not the geometry) carries over cleanly since UVs and materials were never touched.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Smart materials used:** built-in `Bronze Armor` (accessories), a downloadable leather smart material (belt) with a labeled internal structure (`Stitches Color`, `Wrinkles`, `Edgewear`, `Leather`, `DataCollection`, `Add Your Trim Here`, `Add Your Seams Here`, `Add Your Stitches Here`)
+- **Tool used for detail work:** Pass tool / `PAINT ALONG PATH` (confirmed via captured frame panel title)
+- **Shader/baking settings:** `Double Sided` shader toggle, 4K bake output, `Bent Normal` enabled, 64x anti-aliasing
+- **Texture Set Settings:** `Ambient Occlusion` channel temporarily removed (then re-added) to suppress AO-driven artifacts from the exploded mesh's altered proximity relationships
+- **Project-level tool:** `Edit` → `Project Configuration` — used to swap the active mesh (compact vs. exploded FBX) within the same Painter project without losing texture work
+- **DCC-side technique (not Painter):** duplicate mesh, detach/separate closed-surface pieces, move apart in 3D space, re-export with materials/UVs untouched (demoed in 3ds Max; Blender/Maya equivalent)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner to Intermediate — the core insight (temporarily explode geometry to fix Pass-tool surface-detection conflicts) is simple to understand and apply, and the DCC-side steps are basic (duplicate, detach, move, export). The main prerequisite is comfort with Project Configuration for swapping meshes mid-project without disrupting existing texture work.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not stated on screen. The Pass tool's properties panel is confirmed titled `PAINT ALONG PATH` in a captured frame, matching this same creator's slipper and poison-bottles videos. Per `references/version-tracker.md`, this tool name was only used from Painter 9.0.0 until its 11.0.0 rename to Filled Path — consistent with the same Painter 9.x-10.x window as this creator's other ingested videos using this tool.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, smart-material, blend-mode, baking, mesh-maps, ambient-occlusion, texture-set, pbr, metal-rough, basecolor, roughness, height, normal-map, alpha, beginner, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to texture a realistic slipper model](how-to-texture-a-realistic-slipper-model.md) — same creator (3DRedBox); both confirmed via the "PAINT ALONG PATH" panel to date from the same Painter 9.x-10.x window, and both rely on the Pass tool for hand-drawn stitching detail.
+- [How to Create a Realistic Poison Bottles Material Using Substance Painter](how-to-create-a-realistic-poison-bottles-material-using-substance-painter.md) — same creator; also uses the Pass tool (Paint Along Path) with a custom brush preset for detail work, and shares this creator's habit of explaining a purchased smart material's internal labeled-layer structure before modifying it.
+- [Texturing a Worn Wooden Stool in Substance Painter](texturing-a-worn-wooden-stool-in-substance-painter.md) — same creator; shares the DCC-side mesh-preparation-before-Painter philosophy (overlapping UVs there for texel density, exploded geometry here for tool reliability), both explicitly timed to happen at a specific point in the baking/texturing pipeline.
