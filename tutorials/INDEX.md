@@ -448,10 +448,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=ZiWAe_iZ_CI
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 11.0.0+
+- **Tags:** `layers` `fill-layer` `masks` `smart-material` `generator` `anchor-point` `blend-mode` `curvature` `tri-planar` `procedural` `texture-set` `basecolor` `intermediate` `advanced`
+- **Summary:** Converts a hand-built, project-specific stylized-crab shell material into a portable, reusable Smart Material: layer-renaming hygiene, tri-planar-projected mask textures for UV-independence, swapping hand-painted UV-specific layers for empty placeholder paint layers, then right-click → Create Smart Material. Demonstrates dragging the result onto multiple meshes and a brand-new project, re-skinning via folder-level Gradient/HSL Perception filters, and propagating tweaks project-wide via Instantiate across Texture Sets. Version floor 11.0.0+ confirmed via an explicit name-check of the "6 new filters" batch matching release-notes-painter-11.0.md.
 - **File:** tutorials/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub.md
 
 

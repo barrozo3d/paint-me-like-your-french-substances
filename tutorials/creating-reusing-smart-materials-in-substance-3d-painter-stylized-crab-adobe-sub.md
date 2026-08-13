@@ -4,10 +4,10 @@ source: YouTube
 url: https://www.youtube.com/watch?v=ZiWAe_iZ_CI
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: needs-review
+app: "Substance 3D Painter"
+version: "11.0.0+"
+tags: [layers, fill-layer, masks, smart-material, generator, anchor-point, blend-mode, curvature, tri-planar, procedural, texture-set, basecolor, intermediate, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/
 frame_count: 0
 frame_status: pending-selection
@@ -23,11 +23,9 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-## Ingest Safeguard Report
+## Ingest Safeguard Report (reviewed, resolved)
 
-_Auto-generated at ingest/frame-capture time — explains why `extraction_status` may be `needs-review`. Safe to delete once reviewed._
-
-- **CRITICAL:** Empty transcript in chapter 'Adjusting the Smart Material project for different look'
+The flagged empty chapter ("Adjusting the Smart Material project for different look" [5:16]) is a real ~10-second on-screen transition with no dedicated narration of its own — not a content gap. The surrounding transcript flows continuously across it (creator says "we can definitely adjust things very easily... click on the magic wand" at [5:12], then the very next chapter "Adding Gradient effect" [5:26] picks up mid-thought with "Oh and by the way..."). No information was lost; extraction proceeded normally.
 
 ---
 
@@ -119,27 +117,49 @@ frontmatter before you write the Structured Notes below.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Converting a hand-built, project-specific layer setup into a portable, reusable **Smart Material** asset: clean/rename the layer stack, replace anything mesh-specific (custom paint strokes, tri-planar-set generators) with reusable equivalents, group into one folder, right-click → Create Smart Material, then drag onto entirely different meshes/projects and reskin it with folder-level filters (Gradient, HSL Perception, Curvature-driven edge highlight) propagated across a whole texture-set list via **Instantiate across Texture Sets**.
 
 ### Summary
-[PENDING EXTRACTION]
+Paulo Muñoz takes a half-finished stylized-crab shell material (custom masks, anchor points) and turns it into a reusable Smart Material asset. Part 1 is prep/hygiene: rename every layer/folder/mask/anchor-point to something self-explanatory, confirm any grayscale-driving textures (e.g. grunge) are set to **tri-planar** projection so they aren't tied to one mesh's UVs, and replace any hand-painted custom-UV paint layer with an empty placeholder paint layer (since hand-painted strokes are baked to specific UVs and won't transfer). Part 2 converts the cleaned folder stack into a Smart Material (select all folders → new folder → right-click → Create Smart Material) and demonstrates dragging it onto multiple meshes in the same project (legs/body/eyes) and then onto a completely different crab project with different UVs/bakes — same material, correctly adapted per mesh. Part 3 shows re-skinning that Smart Material for a new look without leaving the material folder: adding a **Gradient** filter (3-color remap driven by the folder's existing tones) and an **HSL Perception** filter for fast palette exploration, then adding a folder-level **Curvature**-masked edge-highlight fill layer, and propagating every tweak to the rest of the project's texture sets in one action via **Instantiate across Texture Sets**. A brief tangent name-checks Painter's then-recent "6 new filters" batch (Anisotropic Kuwahara, Bevel Smooth, Directional Distance, Grayscale Conversion, Quantize, Stylization).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Prep: with the half-finished stylized-crab shell material open (yellow base, red color-variation folder with a custom mask, and a third "custom spots" folder built on anchor points), rename every layer/folder to something self-explanatory (e.g. "darker yellow", "lighter reds 01/02", "extra scratches") so future-you (or anyone reusing the asset) understands each layer's purpose at a glance.
+2. Confirm any grayscale mask-driving texture (e.g. a grunge concrete-paint-leaks texture) is set to **tri-planar** projection rather than plain UV — this decouples the effect from any one mesh's UV layout so it transfers cleanly to new meshes/projects.
+3. Identify and remove anything tied to this mesh's specific UVs — a hand-painted custom paint layer under the anchor-point-driven folder — and replace it with a brand-new **empty paint layer** (named e.g. "paint here") as a placeholder for future manual detailing on whatever mesh the material ends up on.
+4. Rename the anchor point itself (e.g. "spot mask") and its source fill layer (e.g. "spot mask reference") for clarity.
+5. Select all the prepped folders (Shift-click), group them into one new folder, and name that folder after the material (e.g. "Stylized Crab").
+6. Right-click the folder → **Create Smart Material** — the asset now appears in the Shelf/Library, ready to reuse.
+7. Test in the same project: delete the layer stack, drag the new Smart Material onto multiple different meshes (legs, body, eyes) — the material's masks/generators adapt correctly per mesh while pulling from the same shared settings.
+8. Isolate a texture set (e.g. body only) via Texture Set Settings, open the Smart Material folder's layers, find the empty "paint here" layer, and hand-paint mesh-specific custom details on top of the shared base.
+9. Portability test: switch to a completely different project (different crab mesh, different UVs, different bake maps). Drag the same Smart Material from the Library onto the new mesh's body — it adapts automatically; the "paint here" placeholder layer is still there for fresh custom painting on the new UVs.
+10. Re-skin without leaving the material: select the Smart Material's top folder, click the **magic wand effect icon** to add a folder-level filter; search for **Gradient** — this filter reads the folder's existing color values and remaps them to a 3-color gradient (adjustable stop **Positions** for contrast, e.g. more black on flat panels, white in crevices).
+11. Recolor freely by editing each gradient stop's color (e.g. dark blue → green → yellow/light gray); set the filter's blend mode (e.g. **Overlay**) to control contrast strength.
+12. Stack a second folder-level filter, e.g. **HSL Perception**, to shift hue/saturation/lightness across the whole existing palette at once for fast exploration.
+13. Propagate the tweaked material to the rest of the project: right-click the folder → **Instantiate across Texture Sets** → in the popup, leave all target texture sets checked except the source (the mesh you edited) → OK. All other meshes now receive linked instances of the edited material; reorder the resulting instance layer in each texture set's stack as needed (e.g. eyes needed the instance moved below existing eye layers).
+14. Refine further: add a new fill layer inside the folder, black mask + **Curvature generator** to target ridges/bumps, pick a bright accent color, set blend mode to **Screen** for extra brightness, adjust the curvature Balance for contrast, name the layer (e.g. "edge"), and **Instantiate across Texture Sets** again to push this new edge-highlight layer to every other mesh too.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Layer/folder/mask/anchor-point renaming discipline for reusability
+- Tri-planar projection (mask-driving grayscale textures, for UV-independence)
+- Empty placeholder paint layer (replaces mesh-specific hand-painted strokes before converting to Smart Material)
+- Smart Material creation: multi-folder select → new folder → right-click → **Create Smart Material**
+- Texture Set Settings (isolate a single mesh/texture set)
+- Folder-level effects/filters: **Gradient** (3-color remap, stop Position, blend mode), **HSL Perception** (hue/saturation/lightness), plus a name-check of the "6 new filters" batch (Anisotropic Kuwahara, Bevel Smooth, Directional Distance, Grayscale Conversion, Quantize, Stylization)
+- **Instantiate across Texture Sets** (right-click folder; checkbox list of target texture sets, excludes source)
+- Fill layer + black mask + **Curvature generator** for edge/ridge highlighting; blend mode Screen
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate to Advanced — the core workflow (rename, group, Create Smart Material) is approachable, but getting real reuse value out of it depends on understanding tri-planar projection, anchor points, and folder-level filter stacking.
 
 ### App & Version
-[PENDING EXTRACTION]
+**Substance 3D Painter 11.0.0+** — the creator explicitly lists "six really really cool filters" by name (Anisotropic Kuwahara, Bevel Smooth, Directional Distance, Grayscale Conversion, Quantize, Stylization) as a "recent update," and `references/release-notes-painter-11.0.md` lists exactly these six filters as new in 11.0.0. Strong, explicit version floor. Exact patch build not shown on screen.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `masks` `smart-material` `generator` `anchor-point` `blend-mode` `curvature` `tri-planar` `procedural` `texture-set` `basecolor` `intermediate` `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"SUBSTANCE PAINTER: Building Masks Explained"** (`tutorials/substance-painter-building-masks-explained.md`, video `um3YRzqwYU4`) — shares the tri-planar-projection and anchor-point-driven masking fundamentals this video assumes are already in place before converting to a Smart Material.
+- **"How to TEXTURE like a PRO with ANCHOR POINTS | Substance Painter Tutorial"** (`tutorials/how-to-texture-like-a-pro-with-anchor-points-substance-painter-tutorial.md`, video `l2W67e5MQuk`) — that video's "modular anchor point library" use case (building reusable, stacked anchor-referenced materials) is the direct conceptual sibling of this video's Smart Material conversion workflow.
+- **"Texturing a Cyberpunk Building in Substance 3D Painter – Project Breakdown"** (`tutorials/texturing-a-cyberpunk-building-in-substance-3d-painter-project-breakdown-adobe-s.md`, video `gv9R6a6VPYQ`) — same Adobe-official channel; reuses the Plastic Dusty smart material across many objects the same way this video demonstrates building and reusing a custom one.
