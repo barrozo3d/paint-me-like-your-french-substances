@@ -767,10 +767,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=_lMpyz0Vhx8
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 10.0.0-BetaFMX (confirmed via on-screen cache-usage readout)
+- **Tags:** `layers` `fill-layer` `masks` `alpha` `blend-mode` `texture-set` `basecolor` `roughness` `height` `normal-map` `color-management` `procedural` `intermediate`
+- **Summary:** Official feature-tour (juice-carton packaging example) of native .ai import: drag a whole Illustrator document onto the 3D view (Warp Projection material), 2D/UV view (UV material), or Layer Stack (UV fill in a chosen channel); each artboard becomes swappable via a file-type-specific Artboard dropdown, with Resolution/Crop/Scope controls and lossless vector scaling. Layers built from the import take normal Painter filters (Drop Shadow, Levels, HSL, Outline+Emboss+metallic). Projection mode (Warp vs. UV) is switchable after placement; reloading the source .ai file propagates edits non-destructively.
 - **File:** tutorials/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d.md
 
 ---

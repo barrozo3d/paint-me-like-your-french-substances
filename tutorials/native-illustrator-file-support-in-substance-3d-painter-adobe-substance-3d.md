@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=_lMpyz0Vhx8
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "10.0.0-BetaFMX (visible on-screen in the cache-usage readout: 'Version: 10.0.0-BetaFMX (OpenGL)')"
+tags: [layers, fill-layer, masks, alpha, blend-mode, texture-set, basecolor, roughness, height, normal-map, color-management, procedural, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Native Illustrator File Support in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -112,30 +108,61 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:52] tutorials/frames/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [1:35] tutorials/frames/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [2:06] tutorials/frames/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [2:53] tutorials/frames/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [3:13] tutorials/frames/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [4:35] tutorials/frames/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+- [5:20] tutorials/frames/native-illustrator-file-support-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Drag whole Adobe Illustrator (.ai) documents directly into Painter as native, non-destructive resources — each artboard becomes a selectable graphic that can be swapped in-place (instant packaging-design variations), scaled losslessly (true vector resolution independence, sized by the Resolution setting rather than a fixed bitmap), and layered with Painter's normal filters/effects (drop shadow, emboss, levels, HSL) without ever leaving Painter or flattening to a raster first.
 
 ### Summary
-[PENDING EXTRACTION]
+Official Adobe feature-tour video (a juice-carton packaging-design example, three flavors: orange/apple/banana) introducing native Illustrator file import. Prerequisite layer structure shown: a `background` folder (per-flavor base colors), a `graphics` folder (destination for imported Illustrator artwork), a color-correction layer, and a `surface` folder (hand-added imperfections for realism). In Illustrator, each design element is placed on its own, distinctly-named artboard within a single document. Saving the file normally and dragging it into Painter offers three drop targets with different results: dropping onto the **3D viewport** places it as a material in **Warp Projection** mode (drag directly along the model's surface, ignoring UV seams); dropping onto the **2D (UV) view** places it as a material in **UV mode**; dropping directly onto the **Layer Stack** places it in UV mode inside a chosen channel (e.g. Base Color). Once placed, the Fill layer's **file type-specific settings** panel exposes an **Artboard** dropdown to switch which artboard is displayed — the core "one file, many swappable graphics" workflow — plus **Resolution** (default **Auto**, matched to the Painter project's texture resolution, or a custom/non-square override), **Crop area**, and **Scope** (lets you drill into a specific object/group inside a complex artboard, including nested groups, with thumbnail previews, rather than always using the whole artboard). Because the source is vector, scaling up never loses quality. Layers built from an imported Illustrator resource take Painter's normal filters and effects exactly like any other Fill layer: a **Drop Shadow** filter separates a logo from its background; **Levels**/**HSL** filters recolor a graphic (e.g. tinting a recycling icon green); combining an **outline** setting (in the file type-specific settings) with **emboss** and a **metallic** material response turns a flat vector graphic (e.g. a barcode or text-only scope selection) into a raised, materially-distinct decal. Warp-projected graphics are transformed with the same keyboard shortcuts as any 3D-projected decal: **W** move, **E** rotate, **R** scale, **Q** toggle the transform gizmo. A layer's projection mode is not fixed after placement — its Projection setting can be switched between Warp (3D) and UV mode at any time from the layer's projection settings. The full non-destructive payoff: keep editing the source .ai file in Illustrator and **reload the document** in Painter to push updates through to every placed instance, and generate full design variations almost for free by switching each layer's Artboard selection.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Structure the Painter layer stack before importing:** a `background` folder for base/flavor colors, an empty `graphics` folder as the destination for Illustrator imports, a color-correction layer, and a `surface` folder for hand-added realism details (dents, imperfections).
+2. **In Illustrator, place each design element on its own artboard** within a single document, and give every artboard a distinct, recognizable name (this name is what you'll pick from later inside Painter).
+3. **Save the Illustrator document normally** (no export/flatten step needed) — Painter reads native .ai files directly.
+4. **Drag-and-drop the .ai file into Painter**, choosing the drop target deliberately: 3D viewport = Warp Projection material; 2D/UV view = UV-mode material; Layer Stack = UV-mode fill inside a specific channel (e.g. Base Color).
+5. **Position, scale, and configure repeat** on the new Fill layer as needed (in most packaging-style use cases, disable tiling/repeat).
+6. **Open the layer's file type-specific settings** to find the **Artboard** dropdown — switch between any artboard in the source document to change which graphic is displayed, without re-importing.
+7. **Set Resolution** — leave on **Auto** to match the Painter project's texture resolution, or choose a custom resolution/non-square aspect ratio/crop area for a specific graphic.
+8. **Use Scope** to select a specific object, group, or nested sub-group from within a complex artboard (with thumbnail previews) rather than always using the entire artboard as one flat image.
+9. **Apply standard Painter filters/effects on top of the imported graphic** just like any Fill layer: Drop Shadow (visual separation from background), Levels/HSL (recoloring), Outline (in file type-specific settings, to isolate e.g. a barcode from its background), and combine Outline + Emboss + a metallic material response for a raised, physically-distinct decal look.
+10. **For Warp-projected (3D-view) graphics**, use **W** to move, **E** to rotate, **R** to scale along the surface, and **Q** to toggle the transform gizmo visibility.
+11. **Duplicate a placed graphic layer and change its Scope** to isolate a different sub-element (e.g. just the text portion of a logo) for independent styling (the video embosses and metallizes a duplicated text-only scope selection).
+12. **Switch a layer's projection mode after the fact** via its Projection settings if you change your mind between Warp (3D) and UV placement — no need to re-place the layer from scratch.
+13. **Iterate non-destructively:** keep the source .ai file open and editable in Illustrator; reloading the document in Painter propagates any edits. Generate full packaging variations (e.g. three flavors) largely by re-selecting each layer's Artboard.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Import routes:** drag-drop onto 3D viewport (Warp Projection material), 2D/UV view (UV-mode material), or Layer Stack (UV-mode fill in a chosen channel)
+- **Fill layer file type-specific settings** (Illustrator-specific): **Artboard** (dropdown, swap graphics from the same document), **Resolution** (Auto or custom, non-square supported), **Crop area**, **Scope** (object/group selection within an artboard, with thumbnails), **Outline** (isolate/separate an element)
+- **Projection modes:** Warp Projection (3D, surface-following, ignores UV seams) vs. UV mode (2D, standard UV-mapped)
+- **Transform shortcuts (Warp/3D placement):** W move, E rotate, R scale, Q toggle gizmo
+- **Post-import effects used:** Drop Shadow filter, Levels filter, HSL filter, Outline + Emboss + metallic material combo
+- **Channels reachable via imported graphic:** Base Color plus access to Roughness, Height, and other channels, with luminosity/contrast/hue/saturation color correction and color-space options
+- Source file location after import: Project Texture section of the asset library
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate (no masking/generator chains required, but effective use depends on understanding Painter's projection modes and file-type-specific layer settings).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter **10.0.0-BetaFMX** — confirmed via the on-screen cache-usage readout ("Version: 10.0.0-BetaFMX (OpenGL)"); same 10.0-era release window as the companion "Custom Fonts" feature-tour video.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers`, `fill-layer`, `masks`, `alpha`, `blend-mode`, `texture-set`, `basecolor`, `roughness`, `height`, `normal-map`, `color-management`, `procedural`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Custom Fonts in Substance 3D Painter](custom-fonts-in-substance-3d-painter-adobe-substance-3d.md) — same channel (Adobe), same 10.0-era feature-tour format and same "new dynamic/vector resource type" theme (text vs. Illustrator artwork); both cover a non-destructive swap-without-losing-settings workflow.
+- [3D Path Tool Updates in Substance 3D Painter](3d-path-tool-updates-in-substance-3d-painter.md) — same channel (Adobe), same short feature-tour format from the same era.
