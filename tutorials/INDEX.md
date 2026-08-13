@@ -866,10 +866,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=0V_81uje7d8
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `anchor-point` `masks` `layers` `fill-layer` `paint-layer` `generator` `blend-mode` `height` `alpha` `procedural` `advanced`
+- **Summary:** 3/4 of Adobe's Anchor Point Magic series (bronze valve, same asset as 01-02). A more advanced double anchor-reference technique for a paint-peel bump effect: a paint layer's crack mask (Mask Builder Legacy generator, inverted) gets an Anchor Point; a separate Height-only layer references that anchor twice — once inverted + Blur-softened (the bump itself, at the crack edges), once non-inverted + Multiply blend (clips the blur bleed back to just the edges) — finished with manual black hand-painting for art direction. Note: Whisper transcript came back mostly Dutch (language-ID artifact); notes reconstructed from surviving English terms + frame verification.
 - **File:** tutorials/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc.md
 
 ---

@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=0V_81uje7d8
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; window title reads 'License: 171 days remaining - Anchor_Video_03_Texture_Begin' (same project/license-countdown pattern as series entries 01-02)"
+tags: [anchor-point, masks, layers, fill-layer, paint-layer, generator, blend-mode, height, alpha, procedural, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 9
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Anchor Point Magic 03 - Paint Peel Effect in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -122,30 +118,65 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:59] tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/frame_000.jpg
+- [1:48] tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/frame_001.jpg
+- [2:10] tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/frame_002.jpg
+- [2:30] tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/frame_003.jpg
+- [2:53] tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/frame_004.jpg
+- [3:37] tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/frame_005.jpg
+- [4:09] tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/frame_006.jpg
+- [4:35] tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/frame_007.jpg
+- [5:25] tutorials/frames/anchor-point-magic-03---paint-peel-effect-in-substance-3d-painter-adobe-substanc/frame_008.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Referencing a paint layer's Anchor Point twice (once inverted, once not) inside a separate Height-only layer's mask — the inverted copy plus a Blur filter produces a soft height bump right at the paint's crack/edge boundary, while the second, non-inverted, Multiply-blended reference clips away the unwanted blur bleeding into the paint's interior — combining into a believable peeling-paint bump/normal detail sourced entirely from the paint mask's own shape.
 
 ### Summary
-[PENDING EXTRACTION]
+Third video in Adobe's "Anchor Point Magic" series (same bronze valve model as entries 01-02), described as a more advanced anchor-point technique for a **paint peel effect** — small height-driven bumps that read as paint starting to lift/peel off the surface. **Note on this file's transcript:** the raw Whisper transcript came back almost entirely in Dutch (a language-ID artifact, not genuine Dutch narration); these notes were reconstructed from surviving recognizable technical terms plus direct verification against the captured frames, which show exact on-screen layer/generator/parameter names. **Base scene:** a bronze base material with a simple **White_Paint** fill layer on top (not fully white — a slightly off-white base color — with Roughness pushed up a bit for a subtle shine). **Building the crack mask:** add a black mask to White_Paint, then add the **Mask Builder (Legacy)** generator to it; the raw result isn't impressive until **Invert** is enabled on the generator — after inverting, tune **Level** (biggest visual impact) and **Contrast** to taste, producing a network of thin paint-crack lines across the surface. Add an **Anchor Point** to this White_Paint mask (auto-named after the layer, per the series' established mechanism). **Building the peel-height layer:** add a new layer above (arbitrary color/name — the video calls it "Paint_Peeling" and notes the actual color doesn't matter), restrict it to the **Height channel only** (peeling paint is a pure-height effect), and push the Height value up (amount fine-tuned later). Add a black mask to this new layer. **First anchor reference (the bump itself):** inside the mask, add a **fill** layer, reference the White_Paint anchor via the fill's Anchor Points tab, and set it to **Invert** — this is deliberate: inverting places the height bump on the *outside* of the paint-crack shape (i.e., right at the crack edges) rather than filling the crack interior. **Softening:** add a **Blur** filter on top of that referenced fill so the hard-edged anchor copy becomes a soft height gradient — this alone already produces a visible peeling-paint look, but blurring also unintentionally smears/"burns" excess bump into the interior of the crack shapes, which is undesirable. **Second anchor reference (the clip mask):** add a second **fill** layer above the Blur, again referencing the *same* White_Paint anchor — this time **not inverted** — and set this fill layer's **blend mode to Multiply**. Multiplying by the original (non-inverted, non-blurred) paint-mask shape clips the blurred bump back down so it only reads at the crack edges, removing the unwanted interior bleed. **Finishing touch:** hand-paint (black, to erase) directly into the peel layer's own mask wherever bare bronze base material should show through, completing the composited peeling-paint look. **Tuning after the fact:** revisit the Height-layer's own value to control how strong/pronounced the peel bump reads overall, and revisit the mask's Blur amount to control how large/soft the transition edge is — from a tight, sharp peel line to a broad, soft one — both non-destructively adjustable at any time since everything routes through the live anchor reference.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Start from a base material (bronze) with a simple fill layer on top (e.g. **White_Paint** — off-white Base Color, slightly raised Roughness for shine).
+2. Add a **black mask** to the paint layer, then add the **Mask Builder (Legacy)** generator to it.
+3. Enable the generator's **Invert** option (the un-inverted result isn't usable), then tune **Level** (biggest visual impact) and **Contrast** to produce a convincing network of paint-crack lines.
+4. Add an **Anchor Point** to this paint layer's mask (auto-named after the layer).
+5. Add a new layer above it (name/color arbitrary — this is the peel-height layer) and restrict its active channel to **Height only**; push the Height value up (amount to be tuned later).
+6. Add a **black mask** to this new Height-only layer.
+7. Inside that mask, add a **fill** layer, reference the paint layer's Anchor Point via the fill's Anchor Points tab, and enable **Invert** on it — this places the height detail on the outside of the crack shapes (at the crack edges), not inside them.
+8. Add a **Blur** filter on top of that referenced-and-inverted fill to soften the hard anchor-copy edge into a smooth height gradient — this alone produces a visible but imperfect peeling look (excess blur bleeds into the crack interiors).
+9. Add a **second fill layer** above the Blur, referencing the **same anchor again** — this time **without** inverting.
+10. Set this second fill layer's **blend mode to Multiply** — multiplying by the original crisp (non-blurred, non-inverted) mask shape clips away the unwanted interior blur bleed, confining the bump to just the crack edges.
+11. **Hand-paint (black) directly into the peel layer's own mask** wherever you want bare base material to show through, to art-direct the final composited result.
+12. **Tune after the fact:** adjust the Height-layer's own value for overall peel-bump strength, and adjust the mask's Blur amount for transition size — from a tight sharp edge to a broad soft one — both non-destructive thanks to the live anchor reference.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **White_Paint fill layer** — Base Color (off-white) + Roughness (slight shine); black mask + **Mask Builder (Legacy)** generator (Invert, Level, Contrast) producing the crack pattern; carries the series' **Anchor Point**
+- **Peel-height layer (Height channel only)** — black mask containing:
+  - **Fill 1:** references the paint-layer Anchor Point, **Invert** enabled → places bump at crack edges
+  - **Blur filter** on top of Fill 1 → softens the hard edge into a gradient
+  - **Fill 2:** references the *same* Anchor Point again, **not inverted**, blend mode **Multiply** → clips the blur bleed back to just the crack-edge region
+  - Manual black hand-painting on the layer's own mask for final art direction
+- Tuning controls: Height-layer's own **Height value** (overall bump strength), mask's **Blur intensity** (transition softness/size)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced (double anchor-referencing of the same source with different Invert states plus a corrective Multiply-blended second reference is a more elaborate composition than series entries 01-02; explicitly framed by the video itself as "more advanced").
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter. No version number stated on screen; window title bar reads "License: 171 days remaining - Anchor_Video_03_Texture_Begin" (subscription license countdown plus project filename, matching the pattern in series entries 01-02 — not a version indicator).
 
 ### Tags
-[PENDING EXTRACTION]
+`anchor-point`, `masks`, `layers`, `fill-layer`, `paint-layer`, `generator`, `blend-mode`, `height`, `alpha`, `procedural`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Anchor Point Magic 01 - Double Layer Setup in Substance 3D Painter** (`tutorials/anchor-point-magic-01---double-layer-setup-in-substance-3d-painter-adobe-substan.md`) — series 1/4, direct prequel; introduces the anchor-point fundamentals this video's double-reference technique builds on.
+- **Anchor Point Magic 02 - Micro Normals & Micro Height in Substance 3D Painter** (`tutorials/anchor-point-magic-02---micro-normals-micro-height-in-substance-3d-painter-adobe.md`) — series 2/4.
+- **Anchor Point Magic 04 - Rust Fade Effect in Substance 3D Painter** (`tutorials/anchor-point-magic-04---rust-fade-effect-in-substance-3d-painter-adobe-substanc.md`) — series 4/4.
+- [Advanced Peeling Paint Effect in Substance 3D Painter](advanced-peeling-paint-effect-in-substance-3d-painter.md) — Javad Rajabzade; a more elaborate, production-depth peeling-paint build (Voronoi-fractal/Lighten-Divide mask math) that also uses an anchor point as a shared mask source, useful to compare against this video's more minimal from-scratch approach.
+- [How to create a paint peeling effect in Substance Painter](how-to-create-a-paint-peeling-effect-in-substance-painter.md) — Wes McDermott; another from-scratch peeling-paint Smart Material build, anchor point referenced by 4 downstream layers, complementary production-depth treatment of the same core idea.
