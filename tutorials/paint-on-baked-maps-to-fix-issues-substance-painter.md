@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=oRkgEuGKPtw
 author: Stu Lloyd (CG Stu)
 ingested: 2026-08-12
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (Steam Edition)"
+version: "not specified beyond \"Steam Edition\" (confirmed in the title bar: \"Adobe Substance 3D Painter (Steam Edition) - ASM - PBR Metallic Roughness\"); no version-number-pinning UI element visible"
+tags: [layers, fill-layer, paint-layer, masks, baking, mesh-maps, ambient-occlusion, normal-map, uv, texture-set, blend-mode, alpha, color-management, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/paint-on-baked-maps-to-fix-issues-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Paint On Baked Maps To Fix Issues | Substance Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py paint-on-baked-maps-to-fix-issues-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -180,30 +176,65 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:05] tutorials/frames/paint-on-baked-maps-to-fix-issues-substance-painter/frame_000.jpg
+- [0:51] tutorials/frames/paint-on-baked-maps-to-fix-issues-substance-painter/frame_001.jpg
+- [1:47] tutorials/frames/paint-on-baked-maps-to-fix-issues-substance-painter/frame_002.jpg
+- [3:01] tutorials/frames/paint-on-baked-maps-to-fix-issues-substance-painter/frame_003.jpg
+- [5:15] tutorials/frames/paint-on-baked-maps-to-fix-issues-substance-painter/frame_004.jpg
+- [8:04] tutorials/frames/paint-on-baked-maps-to-fix-issues-substance-painter/frame_005.jpg
+- [10:07] tutorials/frames/paint-on-baked-maps-to-fix-issues-substance-painter/frame_006.jpg
+- [12:34] tutorials/frames/paint-on-baked-maps-to-fix-issues-substance-painter/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A focused, problem-solving tutorial (not a full texturing pass) on directly hand-painting corrections onto baked mesh maps (Ambient Occlusion, Normal) inside Painter's layer stack — using a global "Replace" mixing mode plus a Fill-layer-holding-the-baked-map + Pass-Through paint layer trick so brushes like Clone Stamp, Blur, and Smudge can sample and repair the actual baked data rather than an empty transparent layer, fixing dodgy eye-socket bake artifacts without re-baking.
 
 ### Summary
-[PENDING EXTRACTION]
+Short, tightly-scoped tutorial demonstrating how to manually paint over and repair baked-map artifacts (shown on a character's eye/eyelid area with visible dark AO blotches and warped normal-map edges) directly inside Substance Painter, entirely without touching the source mesh or re-baking. Opens by organizing the fix work: separate folders per mesh section (`head`, `eyes`), each holding a bright-colored identifying fill layer plus a black-masked paint layer built from a `UV Shell`-mode polygon fill (100% white click-to-fill per shell) so each section can be isolated and worked independently. The Ambient Occlusion fix section is the most detailed: AO isn't exposed as a paintable channel by default, so it must be added via Texture Set Settings, given a bottom-of-stack "base" fill layer holding the actual baked AO map, and the Texture Set's AO Mixing mode changed from the default `Multiply` to `Replace` so subsequent layers overwrite rather than multiply-darken the map. A key conceptual point demonstrated live: a plain paint layer with only AO enabled defaults to full white in Multiply mode, so painting is invisible until either a darker color is used or the layer's own AO blend mode is switched from Multiply to Normal (and the containing folder's AO blend mode must also be switched to Normal, since a Multiply-mode parent folder overrides child layers). Simple color-picker-and-paint fixes work for small areas, but for anything larger the video introduces the core reusable trick: add a `Fill` layer (AO channel only) that is itself filled with the project's baked AO map, then add a regular Paint layer on top set to `Pass Through` blend mode — this makes the Clone Stamp, Blur, and Smudge tools sample and edit what visually reads as the real baked map data, because the paint layer is compositing directly against a fill of that same map rather than against transparency. The same pattern (deliberately eliminating AO around the eye socket entirely, since eyes will be animated/rotated in-engine and shouldn't carry baked-in static AO) is demonstrated for the separate `eyes` folder. The Normal map fix follows an analogous but trickier pattern: expose Normal's mixing mode as `Replace` (from default `Combine`), rebuild the base Normal fill from the project's baked Normal map, then on the fixing paint layer's own Fill sub-layer, the Normal layer mode must be switched from the default `Normal map detail` to plain `Normal` (both on the Fill and on the containing folder) or the effect doubles up incorrectly. Once corrected, a flat/neutral normal-brush paint stroke can erase small artifacts outright, but for areas where real curved surface detail must be preserved (not just flattened), the same Clone-Stamp-sampling-the-actual-map trick is used, with the Clone tool's own channel scope explicitly re-checked (a common gotcha: the Clone brush can be left scoped to AO from the previous section and silently fail to sample Normal data until manually re-set).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Organize the mesh into per-section isolation folders before fixing anything:** for each problem area (here: `head`, `eyes`), create a folder with an identifying bright-colored Fill layer inside it, then right-click the folder to add a black mask, add a `Paint` layer on the mask, switch Polygon Fill mode to `UV Shell`, and click each relevant shell at 100% white to isolate exactly that section — repeated per section so each can be worked on independently later.
+2. **Expose Ambient Occlusion as an editable channel:** AO is not enabled by default; go to `Texture Set Settings`, click the `+` symbol, and add `Ambient Occlusion` to the channel list.
+3. **Rebuild a baseline AO fill layer:** add a bottom-of-stack layer named `base`, and under its Ambient Occlusion channel, drag in the project's actual baked AO map — this becomes the foundation every subsequent AO edit layer will affect.
+4. **Switch the Texture Set's AO Mixing mode from `Multiply` (default) to `Replace`** in Texture Set Settings — under Multiply, new AO layers only darken further; under Replace, new layers can properly overwrite/repair the map.
+5. **Understand why a plain AO paint layer appears to do nothing:** a new paint layer with only AO enabled defaults to full white, and AO's per-layer blend mode defaults to `Multiply` — painting white onto a Multiply-mode layer is a no-op visually. Either paint with a darker color, or switch that layer's AO blend mode to `Normal` to make brighter/highlight painting visible.
+6. **Remember the parent-folder override:** even after switching a layer's AO mode to Normal, if its containing folder's AO blend mode is still `Multiply`, the folder overrides the child and the fix still won't show — the folder's AO mode must also be set to `Normal`.
+7. **Simple small-area fixes:** press `P` to color-pick a nearby clean AO tone, then manually paint over the small dodgy patch by hand.
+8. **The core "paint directly on the baked map" trick, for larger/harder-to-match areas:** on the fixing paint layer, right-click and `Add Fill`, scope that Fill to AO only, and drag the project's baked AO map into its AO channel slot (so the fill layer now displays the actual bake, not a flat color); then right-click and `Add Paint` on top of that fill, and set the new paint sub-layer's blend mode to `Pass Through` — this makes brush tools that sample from what's visually on-screen (Clone Stamp, Blur, Smudge) actually sample and edit the real baked AO data instead of an empty/transparent layer.
+9. **Use Clone Stamp (`V` to set sample point) to repair AO artifacts** by cloning clean nearby AO detail over the damaged area — works because of step 8's fill-then-pass-through-paint setup; follow with the Blur brush to soften any remaining harsh clone-stamp seams.
+10. **Deliberately erase AO around animated parts (eyes):** rather than fixing the eye socket's AO to look correct in the static bake, pick a bright/neutral color and paint the AO away entirely on the eyeball's own paint layer, since a rig-animated eye rotating at runtime shouldn't carry static baked-in occlusion — finish with a light Blur pass so the erased edge isn't harsh.
+11. **Expose Normal map editing the same way:** Normal is enabled by default but its Mixing mode defaults to `Combine`; switch this to `Replace` in Texture Set Settings (note: the viewport will temporarily go flat/blank until the base layer's Normal map is re-applied in the next step).
+12. **Rebuild the base Normal fill layer:** on the bottom `base` layer, with Normal enabled, drag the project's baked Normal map into the Normal channel slot to restore the correct surface detail.
+13. **Fix the doubled-normal-effect gotcha:** when a fixing layer's own Fill sub-layer has the baked Normal map dropped into it, the effect doubles up incorrectly by default because the Fill's Normal `Layer mode` is set to `Normal map detail` — change this to plain `Normal` on both the Fill sub-layer and its containing folder to make the Normal map display and composite correctly (matching how Normal detail-stacking is intended to work only for genuine additive detail, not a full-map replacement).
+14. **Paint away small normal artifacts with a flat/neutral normal brush:** add a Paint layer set to `Pass Through`, select the Normal-only brush setting (defaults to the flat/neutral base-normal color), and paint directly over small warped-edge artifacts to flatten them out.
+15. **Preserve real curved-surface detail with Clone Stamp when flattening isn't correct:** for areas with genuine normal-map curvature that must be kept (not flattened to neutral), color-pick real Normal detail from a clean nearby area and paint/clone it into the damaged region repeatedly, rather than using the flat neutral brush.
+16. **Watch for the Clone tool's channel-scope gotcha:** the Clone Stamp brush retains whatever channel scope (e.g. AO) it was last set to from an earlier fix — if it silently fails to affect the Normal map, re-check and manually re-enable `Normal` scope on the Clone brush's own channel settings.
+17. **Validate in Material/shaded viewport mode between every fix pass**, not just the raw map view, to confirm the correction actually reads correctly under real shading before moving to the next artifact.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Isolation setup:** per-section folder (`head`, `eyes`) with an identifying color Fill layer + black-masked Paint layer, Polygon Fill mode `UV Shell`, click-to-fill each shell at 100% white
+- **Ambient Occlusion channel:** added via Texture Set Settings `+`; `AO Mixing` mode switched `Multiply` -> `Replace`; base fill layer holding the real baked AO map; per-layer/per-folder AO blend mode switched `Multiply` -> `Normal` where highlight/brighten painting needs to show
+- **Normal map channel:** `Normal Mixing` mode switched `Combine` -> `Replace`; base fill layer holding the real baked Normal map; Fill sub-layer's Normal `Layer mode` switched `Normal map detail` -> `Normal` (both on the Fill and its containing folder) to avoid doubling the effect
+- **The core repair trick (both AO and Normal):** fixing Paint layer -> `Add Fill` (channel-scoped, filled with the real baked map) -> `Add Paint` on top set to `Pass Through` blend mode, so brush tools sample/edit the actual baked data
+- **Brushes used:** standard Paint brush (color-pick with `P`), `Clone Stamp` (`V` to set sample point; channel scope must be manually re-checked per fix), `Blur` brush (soften clone-stamp seams and erased edges), `Smudge` brush (mentioned as an alternative option for AO edits)
+- **Viewport modes used to validate:** raw single-channel map view (AO / Normal) vs. `Material` (shaded) mode, toggled repeatedly to confirm fixes read correctly
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — no exotic tools or PBR theory involved, but the Replace-vs-Multiply/Combine mixing-mode interactions, the folder-overrides-child-layer blend-mode gotcha, and the Fill+Pass-Through-paint trick for making brushes sample real baked data are all non-obvious UI behaviors that this video exists specifically to demystify.
 
 ### App & Version
-[PENDING EXTRACTION]
+Confirmed on-screen in the title bar as **"Adobe Substance 3D Painter (Steam Edition)"** (`ASM - PBR Metallic Roughness` shader preset) — no specific version number visible in any captured frame. UI matches the modern layer-stack/Texture-Set-Settings layout consistent with this skill's other post-8.3 ingested tutorials.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, baking, mesh-maps, ambient-occlusion, normal-map, uv, texture-set, blend-mode, alpha, color-management, intermediate
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to TEXTURE EVERYTHING in Substance Painter](how-to-texture-everything-in-substance-painter.md) — different creator (J Hill); also touches on fixing/adjusting baked-map issues (curvature/cavity cleanup) as part of a much larger full-texturing workflow, whereas this video is a dedicated deep-dive purely on the baked-map-repair mechanic.
+- [Texturing Creatures for Games in Substance Painter | Full Process](texturing-creatures-for-games-in-substance-painter-full-process.md) — different creator (Logan Wiesen); shares the same baked-AO/Normal-map-as-editable-channel-source philosophy (there used constructively to drive color variation, here used correctively to repair bake artifacts) and the same emphasis on verifying bakes look clean before proceeding.

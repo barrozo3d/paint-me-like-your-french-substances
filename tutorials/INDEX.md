@@ -291,17 +291,6 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **File:** tutorials/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d.md
 
 
-### Paint On Baked Maps To Fix Issues | Substance Painter
-- **Source:** YouTube
-- **URL:** https://www.youtube.com/watch?v=oRkgEuGKPtw
-- **Author:** Stu Lloyd (CG Stu)
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/paint-on-baked-maps-to-fix-issues-substance-painter.md
-
-
 ### Texturing Gothic Architecture in Substance 3D Painter: Part 1 | Adobe
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=UQkmXEWJr80
