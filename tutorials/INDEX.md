@@ -987,10 +987,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=mLsXRzm7K0c
 - **Author:** Jared Chavez
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not specified
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `anchor-point` `blend-mode` `height` `generator` `procedural` `particle-brush` `intermediate` `advanced`
+- **Summary:** Direct continuation of Chavez's Building Masks Explained: builds a freehand-paintable lifted/flaking metal-edge paint-peel effect from a single Anchor Point referenced twice — one reference grown via Blur/Levels, a second identical reference set to `Subtract` blend mode cancels the interior, leaving only the grown edge ring (the lifted lip). Edge irregularity added via Warp/`Blur Slope` (Maximum blend) and layered Clouds/Grunge noise (Multiply/Overlay). Second demo extends the same architecture to pressure-sensitive dents/bubbling. Cross-linked with Building Masks Explained, Anchor Point Magic 03, Advanced Peeling Paint Effect (Javad Rajabzade), and How to create a paint peeling effect (Wes McDermott).
 - **File:** tutorials/how-to-make-a-peeled-paint-effect-with-anchor-points-substance-painter.md
 
 ---
