@@ -905,6 +905,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Exceptionally thorough 2h55m foundations course (25 chapters, two assets — a mascot character then a Sci-Fi Crate) covering Fill-layer PBR basics, Tri-Planar texture projection, mask-building from stacked/blended generator+fill+paint effects (Dirt via baked AO, Metal Edge Wear via baked Curvature), per-channel independent blend-mode/opacity, Smart Material creation/reuse, exhaustive brush/symmetry/distance paint-tool controls, multi-Texture-Set blending, the Height-vs-Normal-channel distinction, hand-sculpting real height detail with Anchor-Point-fed Micro-Height generator inputs, and the full pipeline into Unreal Engine 5 Nanite tessellated displacement (custom export template, Use Height, Enable Tessellation, Displacement Scaling). One of the most exhaustive single tutorials in this library.
 - **File:** tutorials/substance-painter-beginner-tutorial-for-unreal-engine-5.md
 
+
+### Powerful Substance Painter Tricks That You Need To Know
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=XXEgE2rJ09c
+- **Author:** Dolinskyi
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/powerful-substance-painter-tricks-that-you-need-to-know.md
+
 ---
 
 ## Tag Reference
