@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=hKg_N96EUjA
 author: 3DWolf
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (Substance Edition)"
+version: "not stated on screen beyond \"Substance Edition\" in the title bar; no version-number-pinning UI element visible"
+tags: [layers, fill-layer, masks, generator, smart-mask, curvature, texture-set, pbr, roughness, height, basecolor, tri-planar, procedural, alpha, blend-mode, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Substance Painter Tutorial for Beginners - Texturing A Rock 3D Model
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -125,30 +121,59 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:22] tutorials/frames/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model/frame_000.jpg
+- [1:32] tutorials/frames/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model/frame_001.jpg
+- [2:27] tutorials/frames/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model/frame_002.jpg
+- [3:24] tutorials/frames/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model/frame_003.jpg
+- [4:49] tutorials/frames/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model/frame_004.jpg
+- [5:57] tutorials/frames/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model/frame_005.jpg
+- [7:26] tutorials/frames/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A short beginner-focused rock/stone-column texturing pass built from a tri-planar-projected concrete base plus 4-5 stacked procedural material/mask layers (curvature edge-lightening, a height/roughness-only dirt-detail layer, a scratches layer, and two rust/leak passes — one auto-driven by a Smart Mask, one hand-painted for placement control).
 
 ### Summary
-[PENDING EXTRACTION]
+Follow-up to a prior baking video (referenced but not shown), starting directly in Substance Painter with an already-baked rock-column low poly. Builds the material bottom-up: a Concrete Simple base material with Tri-Planar projection fixes UV seams and gets a lighter recolor; a duplicated copy adds a Curvature generator on a black mask to lighten edges/high points; a height+roughness-only Fill layer using the "Dirt 5" procedural map (all other channels disabled) adds fine rock-surface roughness break-up without touching color; a second channel-restricted Fill layer (roughness=1, height=-0.2) masked by the "Grunge Scratch Rough" procedural adds carved scratch detail at reduced opacity; a "Rust Coarse" smart material recolored darker gets its coverage driven by the built-in "Ground Dirt" Smart Mask (auto-applies to base-of-object grime) before hand-adjusting the mask's own Contrast/Balance; a second "Rust Coarse" instance uses a Dirt generator (Tri-Planar enabled, Contrast and Dirt Level raised) for broader rust coverage; and a final "Large Rust Leaks" material (vertical streak texture) is manually resized/positioned in the 2D view with the projection gizmo, then confined to specific areas via a hand-painted black mask (paint layer) rather than left covering the whole model.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Start from an already-baked low poly** (baking covered in a separate prior video, not shown here) and drag a base material ("Concrete Simple") from the Shelf directly onto the model to auto-create a Fill layer.
+2. **Fix visible tri-planar seams** by setting the layer's Projection to `Tri-Planar` and slightly increasing its Scale; also recolor the base material lighter via the Color swatch.
+3. **Add edge/high-point lightening:** duplicate the base layer, recolor it, right-click to add a black mask, add a `Curvature` generator to that mask, and tune the generator's own Balance (~0.3) and Contrast (~0.6); adjust the layer color again if needed.
+4. **Add fine surface-roughness detail without affecting color:** add a new Fill layer, add a black mask with a Fill sub-layer, drop in the `Dirt 5` procedural map (from Procedural Maps, not Materials), set its Projection to Tri-Planar with Scale ~15; on the Fill layer itself set Roughness ~0.8 and Height ~0.1-0.25, then disable the Color, Metal, and Normal channels so only Height and Roughness are affected.
+5. **Add scratches the same channel-restricted way:** new Fill layer with Color/Metal/Normal disabled, Roughness=1 and Height=-0.2 (carves in), black mask with a Fill sub-layer using the `Grunge Scratch Rough` procedural, Projection set to Tri-Planar, Scale left at 1 (or raised for more scratches), Scratch Length reduced to ~0.7, Scratch Width increased to ~0.8, and layer Opacity turned down to ~30%.
+6. **Add base grime via a Smart Material + Smart Mask combo:** drag the `Rust Coarse` material onto the layer stack, set Projection to Tri-Planar with a larger Scale, recolor darker, then open its Smart Masks shelf and drag the `Ground Dirt` smart mask onto the material — this auto-generates position/gravity-aware base-of-object dirt coverage; refine further by opening the Mask Editor and raising Contrast / lowering Balance (~0.85).
+7. **Add a second, broader rust pass:** drag another `Rust Coarse` instance in, Tri-Planar projection with a smaller Scale (~5) for bigger rust shapes, lighter recolor, black mask with a `Dirt` generator, enable the generator's own `Tri-Planar`/`Use Tri-Planar` option, raise Contrast, and raise Dirt Level (~0.7-0.73) for more coverage.
+8. **Add directional rust streaks with manual placement:** drag in `Large Rust Leaks`, set Projection to Tri-Planar, recolor, switch the viewport to split 3D+2D view, select the material's texture layer and use the on-screen projection gizmo to drag/pull the streak texture vertically into position.
+9. **Confine the streak texture to chosen areas rather than the whole model:** add a black mask, add a `Paint` sub-layer, and hand-paint (brush) only where streaks should show (demonstrated on a few vertical faces and the top).
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Base:** `Concrete Simple` material, Projection `Tri-Planar`, Scale increased, Color lightened
+- **Edge highlight:** duplicated base layer + black mask + `Curvature` generator (Balance ~0.3, Contrast ~0.6)
+- **Surface detail:** Fill layer, Color/Metal/Normal channels disabled (Height + Roughness only), Roughness ~0.8, Height ~0.1-0.25, mask Fill = `Dirt 5` procedural, Tri-Planar, Scale 15
+- **Scratches:** Fill layer, Color/Metal/Normal disabled, Roughness 1, Height -0.2, mask Fill = `Grunge Scratch Rough` procedural, Tri-Planar, Scratch Length ~0.7, Scratch Width ~0.8, layer Opacity ~30%
+- **Base grime:** `Rust Coarse` smart material + `Ground Dirt` Smart Mask (drag-and-drop from Smart Masks shelf), Mask Editor Contrast up / Balance ~0.85
+- **Broad rust:** second `Rust Coarse` instance + black mask + `Dirt` generator (Tri-Planar/Use Tri-Planar enabled, Contrast up, Dirt Level ~0.7-0.73)
+- **Streaks:** `Large Rust Leaks` material, Tri-Planar projection, manually repositioned via the 2D-view projection gizmo, confined with a black mask + `Paint` sub-layer (hand-painted)
+- **App title bar:** "Adobe Substance 3D Painter (Substance Edition) - ASM - PBR Metallic Roughness"
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner — explicitly framed as a beginner tutorial; techniques used (Tri-Planar projection, channel-disabling on Fill layers, Smart Masks, generator tuning, manual mask painting) are all foundational Painter moves shown at a simple, uncomplicated pace on a single small prop.
 
 ### App & Version
-[PENDING EXTRACTION]
+Confirmed on-screen as **"Adobe Substance 3D Painter (Substance Edition)"** (`ASM - PBR Metallic Roughness` shader preset) — no specific version number visible in any captured frame. UI (Smart Masks shelf, generator/mask-editor layout) matches this skill's other modern-era ingested tutorials.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, masks, generator, smart-mask, curvature, texture-set, pbr, roughness, height, basecolor, tri-planar, procedural, alpha, blend-mode, beginner
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Texturing a Worn Wooden Stool in Substance Painter](texturing-a-worn-wooden-stool-in-substance-painter.md) — different creator (3DRedBox); shares the same small-hard-surface-prop, channel-restricted-Fill-layer approach to adding roughness/height surface break-up.
+- [Realistic Painted Metal in Substance Painter | M24 Grenade Texturing](realistic-painted-metal-in-substance-painter-m24-grenade-texturing.md) — different creator (Dolinskyi); shares the Dirt-generator-driven rust/grime buildup approach, here applied to stone rather than metal.
+- [Paint On Baked Maps To Fix Issues | Substance Painter](paint-on-baked-maps-to-fix-issues-substance-painter.md) — different creator (Stu Lloyd); this rock tutorial's final hand-painted mask (confining the Large Rust Leaks streak texture to specific faces) is the same manual black-mask-painting primitive used there for map repair, applied here for material placement instead.

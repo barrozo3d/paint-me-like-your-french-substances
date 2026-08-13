@@ -393,10 +393,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=jCwTEEyDX3Y
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Blender (model prep) + Substance 3D Painter (import/baking)
+- **Version:** not stated on screen
+- **Tags:** `texture-set` `uv` `id-map` `mesh-maps` `baking` `beginner`
+- **Summary:** 1/3 of a cross-DCC prep series (Blender/Maya/3DS Max). Explains Painter's three model-splitting mechanisms — Texture Sets (auto-named from source-app materials), Geometry Masks (sub-mesh membership), ID Maps (baked per-region data for Ctrl+drag material assignment) — and Auto-UV Unwrap (cut/unfold/pack, preserves existing UV data). Demoed in Blender on a roller skate: material-per-texture-set assignment, UV repacking (Blender Pack UVs or Painter's Recompute Only the Packing), vertex-color ID-map painting + Painter's Baker ID-tab Vertex Color bake, and mesh separation (P) for geometry masks.
 - **File:** tutorials/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d.md
 
 
@@ -404,10 +404,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=hKg_N96EUjA
 - **Author:** 3DWolf
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter (Substance Edition)
+- **Version:** not stated on screen beyond "Substance Edition"
+- **Tags:** `layers` `fill-layer` `masks` `generator` `smart-mask` `curvature` `texture-set` `pbr` `roughness` `height` `basecolor` `tri-planar` `procedural` `alpha` `blend-mode` `beginner`
+- **Summary:** Short beginner rock-column texturing pass: Tri-Planar concrete base, Curvature-generator edge lightening, channel-restricted (height/roughness-only) Fill layers for surface detail and scratches, a Rust Coarse smart material driven by the built-in Ground Dirt Smart Mask, a Dirt-generator broad-rust pass, and a hand-painted mask confining a Large Rust Leaks streak texture to specific faces.
 - **File:** tutorials/substance-painter-tutorial-for-beginners---texturing-a-rock-3d-model.md
 
 ---

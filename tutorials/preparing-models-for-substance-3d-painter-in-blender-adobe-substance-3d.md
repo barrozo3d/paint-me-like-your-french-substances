@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=jCwTEEyDX3Y
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Blender (model prep) + Substance 3D Painter (import/baking)"
+version: "not stated on screen"
+tags: [texture-set, uv, id-map, mesh-maps, baking, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Preparing Models for Substance 3D Painter in Blender | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -115,30 +111,53 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:04] tutorials/frames/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d/frame_000.jpg
+- [2:20] tutorials/frames/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d/frame_001.jpg
+- [3:50] tutorials/frames/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d/frame_002.jpg
+- [4:20] tutorials/frames/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d/frame_003.jpg
+- [5:00] tutorials/frames/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d/frame_004.jpg
+- [5:27] tutorials/frames/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d/frame_005.jpg
+- [5:48] tutorials/frames/preparing-models-for-substance-3d-painter-in-blender-adobe-substance-3d/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Preparing a Blender model (demoed on a roller skate) for a clean Substance Painter import: assigning named materials to drive automatic Texture Set splitting, packing/auto-repacking UVs per texture set, and building either a vertex-color ID map or separate sub-meshes so Painter can generate masks per model region.
 
 ### Summary
-[PENDING EXTRACTION]
+Explains Painter's three model-splitting mechanisms — Texture Sets (auto-created from the material names assigned in the source 3D app; each texture set is effectively its own layered document with its own layer stack and exported bitmaps, and needs its own efficiently-packed UV layout), Geometry Masks (masking by sub-object/sub-mesh membership, toggled per-layer by checking/unchecking parts from a list), and ID Maps (baked textures encoding per-region data, letting Ctrl+drag-assign a material straight onto a specific mesh section) — then demonstrates each from the Blender side. Also covers Painter's Auto-UV Unwrap feature (up to 3 steps: cut seams, unfold/flatten islands, pack islands into an efficient layout; each step can preserve UV data already made in the source app), used here specifically to re-pack UVs efficiently across newly-split texture sets. In Blender: assign a distinctly-named material per object (or, for a single mesh, select faces in Edit Mode and assign a new named material per desired texture set) to drive automatic Texture Set creation on import; repack UVs either directly in Blender (Pack UVs) or let Painter's Auto Unwrap (Recompute Only the Packing option) handle it on import, following the material-driven texture-set split. For an ID map: in Edit Mode select target faces, switch to Vertex Paint mode, enable Paint Mask, pick a color, and paint/set vertex color (Shift+K) per region — then in Painter, bake an ID map via the Baker's ID tab with Color Source set to Vertex Color. For geometry masks: select faces in Edit Mode, press P to separate into a new sub-mesh (choosing the appropriate separation method), name it clearly, and use it later in Painter as an additional geometry mask source.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Understand the three model-splitting mechanisms Painter offers: **Texture Sets** (one per assigned material, each its own layered document/UV layout), **Geometry Masks** (masking by sub-mesh membership), and **ID Maps** (baked per-region color data enabling Ctrl+drag material assignment).
+2. On import, Painter automatically creates one Texture Set per material found on the model, using each material's name as the texture set name.
+3. Each texture set needs its own efficiently packed UV layout — because texture sets are independent layouts, UV packing should be organized per texture set, not globally.
+4. Painter's **Auto-UV Unwrap** can perform up to 3 steps (cut seams / unfold+flatten / pack islands) and can preserve any UV data already authored in the source app at each step — models do not need a full manual unwrap before import.
+5. In Blender, to create multiple texture sets: if the model is already split into separate objects, assign a distinct, clearly-named material to each object (material name becomes the Painter texture set name — visual color-coding in Blender is just for the artist's convenience, Painter ignores it).
+6. If the model is a single mesh, enter Edit Mode, select the faces for one texture set, use the Material Properties panel's **+** to create a new material, assign it to the selection, and give it a clear name; repeat per desired texture set.
+7. Repack UVs after splitting into texture sets: either use Blender's **Pack UVs** function per texture set, or let Painter do it automatically on import by checking **Auto Unwrap** and, in its Options window, choosing **Recompute Only the Packing** so Painter reorganizes UV islands to match the newly-created texture sets.
+8. To build an ID map via vertex color: in Edit Mode select the target region's faces, switch to **Vertex Paint** mode, enable **Paint Mask**, choose a color, then paint or use **Set Vertex Color** (Shift+K) to apply it.
+9. In Painter, bake an ID map from this vertex-color data via the **Baker → ID tab**, setting **Color Source = Vertex Color**.
+10. To build geometry masks: in Edit Mode, select the faces to split out, press **P** and choose the appropriate separation method to create a new sub-mesh; name it clearly — this becomes an available geometry-mask source in Painter for later masking during texturing.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Blender**: Material Properties panel (+ to add/assign named materials per texture set), Edit Mode face selection, Vertex Paint mode + Paint Mask option + Set Vertex Color (Shift+K), Pack UVs, P (Separate) for splitting sub-meshes.
+- **Substance 3D Painter**: Auto Unwrap import option (Options window: Recompute Only the Packing), Baker → ID tab → Color Source = Vertex Color (also Material Color / File ID / Mesh ID / Polygroup options visible in the Baker dialog), Texture Set List panel, per-layer Geometry Mask (check/uncheck sub-objects).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Beginner (model/UV/material prep fundamentals, no advanced texturing).
 
 ### App & Version
-[PENDING EXTRACTION]
+Blender (model prep side, version not stated on screen) + Substance 3D Painter (import/baking side, version not stated on screen).
 
 ### Tags
-[PENDING EXTRACTION]
+`texture-set`, `uv`, `id-map`, `mesh-maps`, `baking`, `beginner`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **Preparing Models for Substance 3D Painter in Maya** (`tutorials/preparing-models-for-substance-3d-painter-in-maya-adobe-substance-3d.md`) — same 3-app prep series, Maya-side equivalent of this exact workflow (texture sets, UV packing, ID maps, geometry masks).
+- **Preparing Models for Substance 3D Painter in 3DS Max** (`tutorials/preparing-models-for-substance-3d-painter-in-3ds-max-adobe-substance-3d.md`) — same series, 3ds Max-side equivalent.
