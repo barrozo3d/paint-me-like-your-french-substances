@@ -943,10 +943,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=JMtw05Cj1gE
 - **Author:** Wes McDermott
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter (primary) + Substance 3D Stager (render preview) + Unreal Engine 5 (Nanite delivery)
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `masks` `generator` `anchor-point` `blend-mode` `ambient-occlusion` `texture-set` `uv` `tri-planar` `pbr` `basecolor` `roughness` `height` `normal-map` `alpha` `procedural` `particle-brush` `export` `export-preset` `channel-packing` `game-engine` `unreal-export` `texel-density` `advanced` `expert`
+- **Summary:** Advanced technique for authoring real tileable environment geometry (not just texturing a prop): Tri-Planar + Physical-Size projection for auto-correct material tiling, real Shader-Settings displacement/tessellation, Clone-tool multi-channel tiling fixes, Horizon-Based AO and Height-to-Normal filters, blending two ground materials via a live, Levels-reactive Compare Mask (Add Mask with Height Combination), an Anchor-Point-fed Dirt generator Micro Normal input to work around a mesh with no baked mesh maps, Stager ray-traced displacement validation, Smudge-tool fixes for jagged displacement edges, and exporting the actual displaced/tessellated mesh (Recompute Vertex Normals disabled) as a Nanite mesh for Unreal Engine 5.
 - **File:** tutorials/creating-environment-materials-and-meshes-in-substance-3d-painter.md
 
 ---

@@ -213,4 +213,4 @@ Substance 3D Painter. **Version-tracking note:** the narration states Warp Proje
 ---
 
 ## Related Tutorials
-None found sharing 2+ tags with an existing entry at ingestion time — this is the knowledge base's first Warp-Projection-focused entry.
+- [Creating environment materials and meshes in Substance 3D Painter](creating-environment-materials-and-meshes-in-substance-3d-painter.md) — same channel (Adobe Substance 3D); both videos hinge on precise, real-world-unit-aware projection control (this video's surface-snapped Warp grid vs. that video's Tri-Planar + Physical Size auto-tiling) as the key to making a texture read correctly on specific geometry.

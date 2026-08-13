@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=JMtw05Cj1gE
 author: Wes McDermott
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter (primary) + Substance 3D Stager (render preview) + Unreal Engine 5 (Nanite delivery)"
+version: "not stated on screen"
+tags: [layers, fill-layer, masks, generator, anchor-point, blend-mode, ambient-occlusion, texture-set, uv, tri-planar, pbr, basecolor, roughness, height, normal-map, alpha, procedural, particle-brush, export, export-preset, channel-packing, game-engine, unreal-export, texel-density, advanced, expert]
+extraction_status: complete
 frames_dir: tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 16
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Creating environment materials and meshes in Substance 3D Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py creating-environment-materials-and-meshes-in-substance-3d-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -910,30 +906,85 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [1:55] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_000.jpg
+- [6:55] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_001.jpg
+- [8:40] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_002.jpg
+- [10:40] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_003.jpg
+- [14:20] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_004.jpg
+- [15:35] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_005.jpg
+- [18:05] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_006.jpg
+- [21:45] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_007.jpg
+- [23:55] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_008.jpg
+- [25:35] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_009.jpg
+- [28:15] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_010.jpg
+- [33:15] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_011.jpg
+- [36:50] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_012.jpg
+- [39:15] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_013.jpg
+- [41:00] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_014.jpg
+- [43:55] tutorials/frames/creating-environment-materials-and-meshes-in-substance-3d-painter/frame_015.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Using Substance Painter as a full **tileable environment-material and mesh authoring tool** (not just a prop texturing app) — physically-scaled Substance material tiling, real geometric height displacement/tessellation, blending two ground materials by comparing their own height data, and exporting the actual displaced/tessellated mesh (not just textures) as a ready-to-use Nanite mesh for Unreal Engine 5.
 
 ### Summary
-[PENDING EXTRACTION]
+Built on a pre-made 4m×4m ground plane whose edges deliberately slope down to zero at the grid boundary (visualized via green mesh wireframe display), so that multiple tiles can be pushed together edge-to-edge later and their dense height detail hides the seam. Two Substance materials (sent directly from the Creative Cloud Desktop app's Stock/Marketplace browser into Painter via "Send to," bypassing manual download/import; frequently-used materials tagged as Favorites for fast re-access) are layered and blended. **Setup per material**: disable Normal (Painter already fakes a normal from Height data via the shader — stacking a real normal map on top produces an incorrect "double normal"); set Shader Settings quality to Very High (the low default sample count under-represents Roughness, making materials read falsely rough); set a material's UV projection to **Tri-Planar** with **Scale = Physical Size** so Painter auto-tiles the material correctly against the mesh's real-world dimensions (read from the material's own metadata) instead of manually computing a tiling multiplier. **Displacement/tessellation**: under Shader Settings → Displacement and Tessellation, set a small Scale value (e.g. 0.02, art-directed against the real Z-height of the reference photo material, not treated as sacred) and push Subdivision Count up for enough real tessellated geometry to displace into. **Fixing repeating patterns**: a dedicated "tiling fix" paint layer with BaseColor/Height/Roughness all set to **Pass Through**, then the **Clone tool** (`V` to sample, click-drag to stamp) clones data across all those channels simultaneously — using a grungy alpha shape (not the default circle) for more organic-looking clone edges. **Ambient Occlusion**: add an AO channel via Texture Set Settings → Channels, then drag the **Horizon-Based Ambient Occlusion** filter to the top of the stack (note: Painter's version has no real-world-unit controls, purely visual tuning). **Height to Normal**: the **Height to Normal** filter (also filter-based, dropped at the top) generates a proper normal map from the accumulated height data below it — with real-world-unit support (set physical size in cm and a height-depth value matching the material's real Z-scale) so this generated normal is more accurate than the shader's implicit height-to-normal fake. **Blending two materials**: a second material dropped in initially looks broken because its per-channel blend modes (e.g. Height defaulting to an additive mode) combine with the first material's data rather than overriding it — set Height's blend mode to **Normal** to override cleanly, and set the new material's own UV projection to Tri-Planar + Physical Size just like the first. A **Levels** filter (Affected Channel: Height) with the White Input point pushed up increases the second material's displacement intensity/prominence. The actual blend between the two materials' height data uses **Add Mask with Height Combination (Compare Mask)** — the mask compares the layer's height against everything below it via an operand (e.g. Greater Than) and generates a live, interactive mask from that comparison; because it's live, subsequently adjusting either layer's Levels (Input/Output White/Black points) directly and interactively re-sculpts how deep rocks sink into or rise above the base surface — described as feeling like a genuine interactive blending control. Custom (non-physically-accurate) tiling scale can then be art-directed on top once the physically-accurate baseline is established. A **Paint effect** on the same layer, restricted to Height, lets you hand-paint specific height pushes/pulls on top of the automatic Compare Mask blend (paint must stay on the correct side of the comparison operand to have a visible effect) for final manual sculpting of individual rock placement. **Color matching** for a Substance material is done via the material's own exposed Substance Parameters — the eyedropper/color-pick tool samples a value directly from the reference/background and applies it live to the material's color parameter. A "dirt" **unification pass** (Fill layer, black mask, **Dirt generator**) is added on top to visually tie the two blended materials together — but since the generator needs baked mesh-map inputs (Curvature/AO) this custom mesh never had, an **Anchor Point** is placed on the accumulated Height-to-Normal layer, then referenced as the Dirt generator's **Micro Normal** image input (Detail section) so the generator can read real accumulated surface detail instead of falling back to flat noise; the generator picks up dirt correctly in the resulting occluded crevices between rocks. **Rendering validation with Stager**: File → Send to → Substance 3D Stager imports the plane with displacement pre-wired; raise the tessellation face budget (default too low, e.g. 10,000 → 2,000,000) for a usable preview, apply an environment-light panorama (matching Painter's own viewport lighting for consistency), enable ray tracing for a live-updating preview render, and use this to spot real-world displacement problems invisible in Painter's own viewport. **Fixing jagged displacement edges**: straight-up vertical displacement stretches/tears at steep rock edges — fix with a dedicated "smoothing" layer using the **Smudge** (or Blur) brush restricted to Height (Pass Through), painted directly over problem edges to soften the geometry transition; follow with a **Sharpen** filter afterward to recover crispness lost from smudging, and always re-check/re-tune at final export resolution (2K while working, bumped to 4K before final render/export, since displacement detail reads very differently at each). **Exporting for Unreal Engine 5 Nanite**: File → Export Mesh → **with displacement and tessellation**, and critically **disable "Recompute Vertex Normals"** so the exported mesh geometry doesn't carry baked vertex normals that would conflict with (double up against) the separately exported normal map — the mesh's shading is intended to rely entirely on the normal map texture, not vertex normals. In Unreal: import with **Build Nanite** enabled; the geometry looks visually wrong/faceted at first because it has no vertex normals, resolved once the matching normal-map material is applied. Export textures using the **Unreal Engine 4 Packed** output template (RGB-packed: R=AO, G=Roughness, B=Metallic), disable sRGB on the packed map import, wire BaseColor/Normal/the packed map's R-G-B channels into a new Material, and optionally lower the Specular constant (e.g. 0.35) for a more natural ground-surface look. Multiple duplicated/kitbashed copies of the tile in Unreal show no visible seams thanks to Nanite's dense real displacement detail.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Use a pre-made ground plane whose edges slope to zero at the tile boundary (visualize via green mesh wireframe display) so multiple tiles can be pushed together with hidden seams later.
+2. Import Substance materials directly via the Creative Cloud Desktop app's Stock/Marketplace → "Send to" Painter (skips manual download/re-import); tag frequently-used materials as **Favorites** for fast retrieval.
+3. Per material: disable the Normal channel (Painter's shader already fakes normals from Height data — a real normal map stacked on top creates an incorrect double-normal); set Shader Settings quality to **Very High** (the default low sample count falsely exaggerates Roughness).
+4. Set the material's UV Projection to **Tri-Planar**, Scale = **Physical Size**, so Painter auto-tiles correctly to the mesh's real-world dimensions using the material's own embedded physical-size metadata.
+5. Shader Settings → Displacement and Tessellation: set a small displacement Scale (art-directed against the material's real Z-height, not treated as a fixed rule) and raise Subdivision Count for enough tessellated geometry to actually displace.
+6. Fix visible tiling repetition with a dedicated paint layer (BaseColor/Height/Roughness all set to **Pass Through**) and the **Clone tool** (`V` to sample, click-drag to stamp across all pass-through channels at once); use a grungy alpha instead of a plain circle for more organic clone edges.
+7. Add Ambient Occlusion (Texture Set Settings → Channels → +) then drag the **Horizon-Based Ambient Occlusion** filter to the top of the stack (visual-only tuning, no real-world-unit controls in this filter).
+8. Generate a proper Normal map from accumulated Height data with the **Height to Normal** filter (top of stack), using its real-world-unit controls (physical size in cm + height depth matched to the material's real scale) for accuracy.
+9. Layer a second material: fix its initially-broken blend by setting the Height channel's blend mode to **Normal** (overrides rather than additively combines with the layer below); set its own projection to Tri-Planar + Physical Size.
+10. Use a **Levels** filter (Affected Channel: Height, White Input point raised) to increase the second material's displacement prominence before blending.
+11. Blend the two materials via **Add Mask with Height Combination (Compare Mask)** — generates a live mask by comparing this layer's height against the layers below via an operand (e.g. Greater Than); subsequent Levels adjustments on either layer interactively re-sculpt how deep/high the blended detail sits, functioning as a genuine live blending control.
+12. Art-direct the tiling scale away from strict physical accuracy once the accurate baseline is set, purely by feel.
+13. Add a **Paint effect** restricted to Height on the same blended layer for final hand-sculpted pushes/pulls of individual rock placement on top of the automatic Compare Mask blend (must paint on the correct side of the comparison operand to have any visible effect).
+14. Match a Substance material's color to its surroundings using its own exposed **Substance Parameters** color swatch + the eyedropper/color-pick tool sampled directly from a reference/background.
+15. Add a "dirt" unification pass (Fill layer, black mask, **Dirt generator**) to visually tie the blended materials together; since this custom mesh has no baked Curvature/AO for the generator to read, add an **Anchor Point** on the accumulated Height-to-Normal layer and reference it as the Dirt generator's **Micro Normal** image input (under Detail) so dirt correctly concentrates in real occluded crevices instead of falling back to flat noise.
+16. Validate with **Substance 3D Stager**: File → Send to → Stager; raise the tessellation face budget (default far too low for detailed displacement); apply a matching environment-light panorama; enable ray tracing for a live preview render to catch displacement problems invisible in Painter's own viewport.
+17. Fix jagged/torn displacement edges (from purely-vertical displacement stretching at steep rock faces) with a dedicated "smoothing" layer using the **Smudge** (or Blur) brush restricted to Height (Pass Through), painted directly over problem edges; follow with a **Sharpen** filter to recover crispness; re-check at final export resolution (work at 2K, bump to 4K for final render/export — displacement detail reads very differently between the two).
+18. Export the mesh via File → Export Mesh **with displacement and tessellation**, and **disable "Recompute Vertex Normals"** — the exported geometry should have no baked vertex normals so it relies entirely on the separately exported normal map, avoiding a double-normal conflict.
+19. Import into Unreal Engine 5 with **Build Nanite** enabled (geometry looks faceted/wrong until the matching normal-map material is applied); export textures with the **Unreal Engine 4 Packed** output template (R=AO, G=Roughness, B=Metallic), disable sRGB on the packed texture's import settings, wire the maps into a new Material (optionally lower a Specular constant, e.g. 0.35, for a more natural ground look).
+20. Duplicate/kitbash multiple tile instances in Unreal — Nanite's dense real displacement detail hides seams between tiles with no visible repetition.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- `Tri-Planar` projection + `Scale: Physical Size` (auto-tiling against real-world mesh dimensions)
+- `Shader Settings`: quality Very High, `Displacement and Tessellation` (Scale + Subdivision Count)
+- `Clone` tool (`V` to sample) with per-channel `Pass Through` blend modes for multi-channel cloning
+- `Horizon-Based Ambient Occlusion` filter, `Height to Normal` filter (with real-world-unit controls)
+- Per-channel blend mode override (`Normal` to replace vs. additive default) when layering a second material
+- `Levels` filter (Affected Channel targeting, e.g. Height) for displacement intensity tuning
+- `Add Mask with Height Combination` (**Compare Mask**) — live, Levels-reactive interactive height-based blending between two materials
+- `Paint` effect restricted to a single channel (e.g. Height) for hand-sculpted final adjustments
+- Substance material `Substance Parameters` + eyedropper/color-pick tool for color matching
+- `Dirt` generator + `Anchor Point` referenced as a generator's `Micro Normal` image input (Detail section) — feeds real accumulated height/normal data into a generator with no baked mesh maps to read
+- `Smudge` / `Blur` brush restricted to Height (Pass Through) for fixing jagged displacement edges; `Sharpen` filter afterward
+- Export: `File → Export Mesh → with displacement and tessellation`, **Recompute Vertex Normals disabled**
+- Export textures: `Unreal Engine 4 Packed` template (RGB = AO/Roughness/Metallic), sRGB disabled on packed-map import
+- `Substance 3D Stager`: File → Send to, tessellation face budget, environment-light panorama, ray-tracing preview
 
 ### Difficulty
-[PENDING EXTRACTION]
+Expert — assumes fluent familiarity with Painter's full toolset (generators, anchor points, compare masks, per-channel blend modes) and applies it toward an unusual, advanced goal (authoring real displaced/tessellated environment geometry, not just texturing an existing prop).
 
 ### App & Version
-[PENDING EXTRACTION]
+Not stated on screen for Substance Painter; paired with Substance 3D Stager (rendering) and Unreal Engine 5 (Nanite mesh delivery).
 
 ### Tags
-[PENDING EXTRACTION]
+`layers` `fill-layer` `masks` `generator` `anchor-point` `blend-mode` `ambient-occlusion` `texture-set` `uv` `tri-planar` `pbr` `basecolor` `roughness` `height` `normal-map` `alpha` `procedural` `particle-brush` `export` `export-preset` `channel-packing` `game-engine` `unreal-export` `texel-density` `advanced` `expert`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Substance 3D Stager - Rendering assets from Substance 3D Painter](substance-3d-stager---rendering-assets-from-substance-3d-painter-adobe-substance.md) — same creator's channel (Adobe Substance 3D); the Send-to-Stager handoff and ray-traced preview workflow this video uses for displacement validation is the same feature documented at greater depth there.
+- [Warp Projection in Substance 3D Painter](warp-projection-in-substance-3d-painter-adobe-substance-3d.md) — same channel; both videos hinge on precise, real-world-unit-aware projection control (Physical Size scale here, Warp Projection's surface-snapped grid there) as the key to getting a texture to read correctly on a specific mesh.
+- [How to Create a Realistic Poison Bottles Material Using Substance Painter](how-to-create-a-realistic-poison-bottles-material-using-substance-painter.md) — different creator (3DRedBox); shares the Anchor-Point-feeding-a-generator's-Micro-Height/Micro-Normal-input technique this video uses to work around missing baked mesh maps.
