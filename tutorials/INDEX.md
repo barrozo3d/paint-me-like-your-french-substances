@@ -492,10 +492,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=s59xbaF4Q14
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen
+- **Tags:** `layers` `fill-layer` `masks` `blend-mode` `texture-set` `pbr` `roughness` `height` `normal-map` `emissive` `stencil` `alpha` `uv` `viewport` `intermediate`
+- **Summary:** Live project breakdown for a performance-inspired sneaker: rapid material assignment (leather/fabric/plastic/knit/vinyl/carbon fiber) with a small consistent palette, reused across parts via copy → Paste Layer as Instance rather than re-tuning. Adds Emissive-channel glow to vinyl accent panels, layered Multiply/Screen blend-mode surface flecks, a Height-slider logo emboss/deboss, and a hexagon-stencil-masked outsole detail. Whisper mis-detected large transcript stretches as Arabic — notes reconstructed from clear English fragments + frames, same approach as the Create Trim Sheets Part 1 tutorial. Version not stated on screen.
 - **File:** tutorials/footwear-texturing-from-start-to-finish-live-tutorial-in-substance-3d-painter-ad.md
 
 
@@ -508,6 +508,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Tags:** `anchor-point` `masks` `layers` `fill-layer` `paint-layer` `blend-mode` `height` `basecolor` `roughness` `alpha` `particle-brush` `intermediate`
 - **Summary:** 1/3 of a footwear anchor-points series. Paints stitches with the built-in Stitches brush on a base layer, adds an Anchor Point, then builds a Deform layer (negative Height, anchor-referenced mask with Extract Alpha, double-blur transition trick) and a Color layer (Base Color+Roughness, same anchor referencing) — both automatically apply to any future stroke on the base layer, demonstrated by swapping in a different brush for a plain seam line that still gets the same denting/color treatment. Also shows isolating mesh parts (e.g. hiding laces) while painting.
 - **File:** tutorials/creating-fabric-stitches-for-footwear-with-anchor-points-in-substance-3d-painter.md
+
+
+### How to use UDIMs properly!
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=yf9CPHE5BYg
+- **Author:** 3DRedBox
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-use-udims-properly.md
 
 ---
 
