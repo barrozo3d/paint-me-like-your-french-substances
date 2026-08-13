@@ -894,6 +894,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Silent, unnarrated 168-minute speed-texturing follow-along on the same wooden barrel as the companion "Beginner To Advanced" video — the creator explicitly skips narration since he "already explained it in the previous video." No usable audio (Whisper hallucinated song lyrics over background music for the whole runtime); Structured Notes reconstructed entirely from 16 frames spread across the full video. Shows a more advanced pass: ID-map-masked wood/metal materials, rust hoops, layered dust/grunge weathering, a composite Curvature+AO+World-Space-Normal Mask Builder (Legacy) generator for edge damage, extensive hand-painting, and a closing HSL Perception + Color Correct grade before export. Cross-linked with the companion narrated video (read that one first for technique explanations) and the Beginner To Pro course.
 - **File:** tutorials/substance-painter---creating-profesional-textures.md
 
+
+### Substance Painter Beginner Tutorial for Unreal Engine 5
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=dXDWFPHkeZM
+- **Author:** Unreal Sensei
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/substance-painter-beginner-tutorial-for-unreal-engine-5.md
+
 ---
 
 ## Tag Reference
