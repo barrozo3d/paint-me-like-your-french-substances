@@ -723,10 +723,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=ng-Wb7RaYHU
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** Beta (window title only; no numeric version stated)
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `procedural` `alpha` `curvature` `thickness` `blend-mode` `basecolor` `roughness` `height` `normal-map` `texture-set` `pbr` `advanced`
+- **Summary:** Conference talk + live demo by character artist Anna B on texturing a stylized skin bust via a "three skin layers" model: Sub Dermal (flat red base + noise-generator redness + hand-painted veins + purple under-eye tint) under Dermis (semi-transparent noisy-brush skin mask + sun damage + freckles via Warp filter + curvature-masked blackheads + thickness-masked lip darkness + reused veins + makeup shading), topped with a Specular layer (used instead of Metallic, since skin isn't metal) and a Roughness layer (wet lips, oily T-zone). Core principle: many individually-subtle layers compound into realism. Q&A covers career advice and a cross-app HDRI-matching tip for color consistency between Painter and external renderers.
 - **File:** tutorials/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa.md
 
 

@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=ng-Wb7RaYHU
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "Beta (window title reads 'Adobe Substance 3D Painter Beta'); no numeric version stated"
+tags: [layers, fill-layer, paint-layer, masks, generator, procedural, alpha, curvature, thickness, blend-mode, basecolor, roughness, height, normal-map, texture-set, pbr, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 10
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Tips & Tricks in Substance 3D Painter to Make Semi-Realistic Textures | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -379,30 +375,69 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [11:17] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_000.jpg
+- [11:47] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_001.jpg
+- [12:55] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_002.jpg
+- [13:12] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_003.jpg
+- [15:16] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_004.jpg
+- [16:14] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_005.jpg
+- [17:31] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_006.jpg
+- [19:47] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_007.jpg
+- [21:10] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_008.jpg
+- [22:15] tutorials/frames/tips-tricks-in-substance-3d-painter-to-make-semi-realistic-textures-adobe-substa/frame_009.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A "three skin layers" mental model (sub-dermal → dermis → makeup/details) where every micro-effect (redness, purple under-eye circles, freckles, blackheads, sun damage, veins) is its own thin, semi-transparent, mask-driven fill/paint layer built from a combination of noise generators and hand-painting — no single layer does much on its own, but a dozen of them stacked together read as convincing skin.
 
 ### Summary
-[PENDING EXTRACTION]
+Conference talk (GDC-style) by 3D character artist Anna (10 years' experience, ex-Blizzard/Riot) presenting her personal stylized "Cyberpunk"-inspired bust, fully textured in Substance Painter except hair color (done directly in Arnold's hair shader). Talk splits into a presentation half (workflow philosophy, PBR channel choices) and a live Substance Painter walkthrough of the finished layer stack (from [10:04] to [23:19]), followed by a long audience Q&A. Core teaching: skin is built from a **sub-dermal layer** (flat red base + irregular "redness" noise + hand-painted veins + purple under-eye circles) underneath a **dermis/skin layer** (a semi-transparent noisy-brush-painted mask that lets the sub-dermal color show through irregularly, plus sun damage, freckles, blackheads, lip darkness/lightness, more veins, and makeup shading), topped by a **Specular** layer (used instead of Metallic, since skin isn't metal) and a **Roughness** layer (wet lips, oily T-zone). Emphasizes that the exact same "smooth noise brush" is reused throughout to break up flat color into organic irregularity, and that curvature/thickness generators are combined with hand-painted cleanup masks rather than used raw. Q&A covers career/style advice, reference-gathering habits, and cross-app color-consistency tips (match the HDRI between Painter and the target renderer/viewer, e.g. Marmoset).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Plan the skin as three stacked groups** before opening Painter: Sub Dermal (deep red undertone layers), Dermis (surface skin detail layers), and a final correction/makeup pass — decide the order up front so the chaotic "gray material, don't know where to start" feeling doesn't happen.
+2. **Sub Dermal folder, base layer:** flat, fully opaque red **Base Color** fill (represents blood/red undertone visible through skin) — nothing else enabled on it.
+3. **Sub Dermal folder, "Redness" layer:** irregular red-noise Base Color layer built from stacked **fill layers using cloud-style noise generators** (named noise variants visible in the mask stack, e.g. Clouds/Cells/Soft Sparks), plus **hand-painted veins** and hand-painted darkening on the lips (real lips are subtly darker/redder than surrounding skin).
+4. **Sub Dermal folder, "Purple" layer:** a subtle purple tint painted specifically around the eyes (representing under-eye circles/fatigue) — described as needing to be present but restrained ("not a lot, but somewhere it should be").
+5. **Dermis folder, "Skin Color" (skin) layer:** the key semi-transparent-mask technique — mask is neither fully white nor fully black but broken up with **noisy brushes** (the reused **"Smooth Noise" brush**, found under the standard brush shelf) so the sub-dermal red/purple shows through in patches rather than being fully covered; also layers in a dirt/fleck-style brush for extra irregularity. Add a separate **correction layer** on top to locally tone down areas that read too purple/saturated after the base pass.
+6. **Dermis folder, "Sun Damage" layer:** deliberately subtle (barely visible alone) — built from **noise generators, sharpened**, then hand-painted out (erased with the Smooth Noise brush) in areas it shouldn't appear; the talk's stated principle: many individually-subtle layers compound into a big visible difference.
+7. **Dermis folder, "Freckles" layer:** hand-painted with a dedicated freckle-shaped brush, blurred slightly, then run through a **Warp filter** so the freckles aren't perfectly circular (Warp distorts the painted dots into more organic, irregular shapes).
+8. **Dermis folder, "Blackheads" layer:** masked using the **Curvature generator** (picks up recessed pore-like areas) plus a hand-painted **Paint** sub-layer on top of the generator to selectively erase/limit where blackheads show — confirmed in Q&A that pore detail itself (the sculpted texture, separate from this blackhead color layer) also comes from a curvature generator.
+9. **Dermis folder, "Lips" group — Darkness layer:** masked using the baked **Thickness map** (thinner mesh areas read differently) further refined with a **Levels** adjustment to push the darkening effect to a usable strength.
+10. **Dermis folder, "Lips" group — Lightness layer:** a mid-lip highlight masked with the **Curvature generator**, then hand-painted down in spots where the raw generator result was too bright.
+11. **Dermis folder, "Redness"/veins layer (2nd instance):** duplicated from the Sub Dermal Redness layer, then the mask manually cleared down to just the vein shapes — reused geometry/detail rather than repainting veins from scratch.
+12. **Dermis folder, final "makeup" shading layer:** subtle facial-contour darkening in the areas makeup would naturally shade, applied as the last layer in the Dermis group.
+13. **Specular channel/layer (replaces Metallic):** switch the active/visible channel to **Specular** (added via the Texture Set's channel list next to the standard PBR set) instead of painting Metallic — reasoning given: skin isn't metal, so a Metallic map would be a flat, uninformative single value, whereas Specular can vary per-region to show which areas read shinier. Built from a flat gray base, then **noise (multiple stacked generators)** for irregularity, then a **Curvature-generator "cavities"** pass for micro-shine detail in creases.
+14. **Roughness folder:** flat base roughness, then a **Lips sub-layer** (lowered roughness so lips read wetter/glossier than skin), then an **Oiliness sub-layer** (lowered roughness in T-zone/oily areas), with a manual paint-out pass to clean stray edges.
+15. **Separate Makeup texture set/layers (photo-referenced eyeshadow):** built as its own small 3-layer stack — base color, an eyeliner layer, and one extra color-accent layer — masked from a painted/photo-derived shape; only Base Color is actually exported/used (a Metallic-channel test was tried during development but discarded from the final export). The glitter effect around the eyes in the final render is NOT a Painter texture at all — it's a car-paint/crystal-flake shader effect added directly in Arnold.
+16. **Cross-app color-matching tip (from Q&A):** to make a Painter-authored look match in another renderer/viewer (e.g. Marmoset Toolbag), load the **same HDRI/environment map** in the target app that was used for lookdev in Painter — this alone resolves most "looks different after export" complaints, more so than material/preset mismatches.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Sub Dermal** folder: Base (flat red Base Color) → Redness (stacked noise-generator fill layers: Clouds/Cells/Soft Sparks variants + hand-painted veins + lip-darkening paint) → Purple (hand-painted under-eye tint)
+- **Dermis** folder: Skin Color/skin (noisy-brush semi-transparent mask + correction layer) → Sun Damage (sharpened noise generators + hand-painted mask cleanup) → Freckles (painted brush + Blur + **Warp filter**) → Blackheads (**Curvature generator** + Paint cleanup) → Lips group (Darkness via **Thickness map** + Levels; Lightness via **Curvature generator** + paint cleanup) → Redness/veins (duplicated from Sub Dermal, mask reduced to veins only) → final makeup-shading paint layer
+- **Specular** channel (used instead of Metallic) — flat gray base + stacked noise generators + Curvature-generator "cavities" pass
+- **Roughness** folder — base + Lips sub-layer (lower roughness) + Oiliness sub-layer (lower roughness, T-zone) + manual paint cleanup
+- **Makeup** texture set: Base Color + Eyeliner layer + one accent-color layer (photo/painted mask); Metallic tested but not exported
+- Repeated brush: **"Smooth Noise"** brush (standard shelf) — the single most-reused tool across nearly every mask in the video for breaking up flat color/masks into organic irregularity
+- Baked maps referenced: **Normal map** (used for texturing; Displacement also baked but reserved for render-time only, not texturing), **Thickness map** (lip darkness mask)
+- Export target: Arnold (via Maya), with HDRI-matching as the cross-app lookdev-consistency trick
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced (assumes comfort with generator/mask stacking and PBR channel theory; the actual individual techniques — noise fills, curvature masks, Levels, Warp filter — are each accessible, but the value is in the compositional "many subtle layers" discipline, which takes experience to apply well).
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — window title bar reads "Adobe Substance 3D Painter **Beta**" (project: Anna B - Head_textures); no numeric version stated in narration or on screen.
 
 ### Tags
-[PENDING EXTRACTION]
+`layers`, `fill-layer`, `paint-layer`, `masks`, `generator`, `procedural`, `alpha`, `curvature`, `thickness`, `blend-mode`, `basecolor`, `roughness`, `height`, `normal-map`, `texture-set`, `pbr`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to make SKIN TEXTURES in Substance Painter](how-to-make-skin-textures-in-substance-painter.md) — J Hill (priority creator); another dedicated skin-texturing deep-dive, complementary generator/hand-paint blend philosophy on a different (realistic, non-stylized) skin approach.
+- [REALISTIC CREATURES: HAND PAINTED TEXTURES in SUSTANCE PAINTER](realistic-creatures-hand-painted-textures-in-sustance-painter.md) — Jared Chavez (priority creator); shares the same "many thin, mostly-hand-painted layers compound into realism" philosophy applied to creature skin instead of human skin.
+- [Texturing a Clicker - FULL Substance 3D Painter Workflow](texturing-a-clicker---full-substance-3d-painter-workflow.md) — FlippedNormals; shares the curvature/generator-plus-hand-paint hybrid masking approach for organic detail (skin/decay) work.
