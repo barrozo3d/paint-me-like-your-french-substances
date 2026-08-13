@@ -1037,6 +1037,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** Full personal-project pipeline (ZBrush sculpt/pose → Painter texture → external render); Painter section (~5:17-8:44) extracted at primary depth. Speeds up start by exporting a Smart Material from a prior similar project (`UnderGradient`/`HighLight`/`2_tone_gradient` base layers), then hand-paints color/blood/light-value directly on top (graphic-not-photoreal blood shape to match a stylized concept), finishing with AO-tinted color + curvature accentuation layers. ZBrush Transpose Master posing and subsurface-scattering render glow noted briefly as pipeline context, out of Painter scope. Cross-linked with Smart Materials Demonstration, Master Texturing, Orc Textures, and FlippedNormals' realistic-skin video.
 - **File:** tutorials/how-to-make-hand-painted-textures-and-substance-painter-dragonite.md
 
+
+### How to make HAND PAINTED SKIN Textures in SUBSTANCE PAINTER
+- **Source:** YouTube
+- **URL:** https://www.youtube.com/watch?v=GcI60mKZU0k
+- **Author:** Jared Chavez
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/how-to-make-hand-painted-skin-textures-in-substance-painter.md
+
 ---
 
 ## Tag Reference
