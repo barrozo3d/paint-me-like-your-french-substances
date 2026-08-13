@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=--CvtUlcVMs
 author: 3DRedBox
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not stated on screen; the stitching tool panel is confirmed 'PAINT ALONG PATH' in a captured frame (same as this creator's slipper, poison-bottles, and speed-up-workflow videos), pinning this to the Painter 9.x-10.x window per references/version-tracker.md"
+tags: [layers, fill-layer, paint-layer, masks, generator, curvature, anchor-point, blend-mode, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, tri-planar, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/texturing-tactical-boots-in-substance-painter/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 12
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Texturing Tactical Boots In Substance Painter
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py texturing-tactical-boots-in-substance-painter <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Intro [0:00]
@@ -571,30 +567,75 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [2:59] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_000.jpg
+- [5:21] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_001.jpg
+- [6:23] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_002.jpg
+- [7:56] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_003.jpg
+- [10:34] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_004.jpg
+- [12:29] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_005.jpg
+- [15:21] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_006.jpg
+- [27:37] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_007.jpg
+- [29:21] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_008.jpg
+- [31:10] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_009.jpg
+- [34:01] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_010.jpg
+- [39:00] tutorials/frames/texturing-tactical-boots-in-substance-painter/frame_011.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Full multi-material tactical-boot build (plastic sole, steel/copper hardware, three fabric surfaces, hand-drawn stitching, and imported logo/text decals) demonstrating a broad cross-section of Painter's standard toolkit — generators (Curvature, Metal Edge, Dirt, Inflate/Shrink Wrap, UV Border), a UV-set trick for fixing inconsistent texel density between UV islands, Pass-tool stitching, and anchor-point-driven PNG decal placement with alpha extraction.
 
 ### Summary
-[PENDING EXTRACTION]
+A comprehensive, technique-survey-style build organized into folders by material type. The plastic sole starts with a dark base + roughness, layers two color-variation passes (grunge-driven, one Soft Light, one Subtract on Base Color combined with Roughness), a `Grain` filter surface-detail pass, a `Curvature`-generator "dark edge" layer (Soft Light, heavy Blur), a `Metal Edge`-generator "edge highlight" layer for reflective wear on raised edges, a roughness-only Smart Mask (`Edge Blur`) pass, and a layered scratch system (Scratch generator refined with multiple grunge maps, a second breakup grunge, and a `Warp` filter to de-uniform the scratch pattern). The metal section splits into Steel (a `Steel Dark Aged` smart material masked to the zip and hardware) and Copper (built from scratch: bright base color + Metallic on, a `B&W Spotted 2`-masked Height/Roughness surface-detail pass, a `Galvanize` filter with Tri-Planar mapping for flake intensity, and a `Dirt`-generator layer at reduced opacity). The fabric section covers three surfaces — shoelace (a `Wave 2`-alpha surface-detail pass, fixed for continuous tiling across separate UV islands by switching the mask's UV source to a dedicated secondary UV set), Fabric 1 (base + three color-variation layers of increasing complexity, including one using a `3D Linear Gradient` generator and one combining Color+Height from a grunge map, plus a `Wave 2` surface-pattern layer and a `UV Border`-generator dark-edge pass, finished with a `High Pass` + `Histogram Scan` filter combo for spot highlights), and Fabric 2 (base + grunge-driven color/roughness variation, a circle-pattern surface layer whose scale mismatch across UV islands of different relative sizes is fixed by switching to a dedicated UV set with consistent texel density — the same fix used on the shoelace — plus an `Inflate`/`Shrink Wrap`-generator "wrinkle" layer and a simple `Crease`-alpha fill for cloth folds). Stitching is added last as a dedicated Paint layer using the Pass tool's built-in Top Stitching material (Zigzag Stitch sub-style, adjustable thread thickness, Puckering set to Leather) hand-drawn around every seam, plus a supplementary gradient-times-mask detail layer for extra visual interest along the stitch lines. The video closes with imported PNG logo/text decals: each is loaded via `UV Wrap: None` positioning in the 2D view, masked using an Anchor Point + `Extract Alpha` behavior (since the PNGs have transparent backgrounds) for a dynamic, non-destructive mask, with per-layer channel blend modes forced to `Normal` to prevent bleed-through from layers beneath, then refined with Blur, HSL (hue correction), and Levels-on-Roughness filters for a more natural, non-flat decal integration; the text layer specifically uses `Linear Dodge` blend between two stacked alpha resources to avoid conflicts between overlapping decal shapes.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Organize by material type first:** after baking, create top-level folders (`Plastic`, `Metal`, `Fabric`) with proper masks before starting any texturing work.
+2. **Build the plastic sole's base + variation:** dark grey base color, Roughness 0.25; Color Variation #1 (Color only, `Grunge` alpha masked, tiling ~3, `Blur` filter, `Soft Light` blend, grey value); Color Variation #2 (Color + Roughness, `Subtract` blend on Base Color, `Fractal`/second-grunge mask with contrast/balance/opacity tuned, Roughness ~0.5).
+3. **Add a `Grain` filter surface-detail pass** (Normal channel only) for fine micro-noise, tuning scale/intensity.
+4. **Add a `Curvature`-generator "Dark Edge" layer** (Color + Roughness only, Roughness ~0.5, dark color, `Soft Light` blend, Global Blur increased) for value falloff on the sole's convex forms.
+5. **Add a `Metal Edge`-generator "Edge Highlight" layer** (mask tuned: ground amount down, wear level and wear contrast up; Roughness ~0.15) for a reflective highlight specifically on raised edges — preceded by a Smart Mask roughness-only pass (`Edge Blur` smart mask, Roughness ~0.6) to desaturate reflectivity everywhere else first.
+6. **Build a layered scratch system:** a `Scratch`-generator mask (tried multiple built-in scratch maps — rough, dirty, fine — tuning balance/tiling/contrast/scratch-amount), Height negative, `Soft Light` white color, Roughness ~1; a second breakup grunge map layered into the same mask for uniqueness; a `Warp` filter applied with a strong negative value specifically to de-uniform the scratch pattern's otherwise-too-regular shape.
+7. **Build the Steel hardware from a smart material:** apply `Steel Dark Aged` (or similarly named) smart material, mask it to the zipper and related hardware pieces via a manual multi-part paint/polygon selection.
+8. **Build the Copper hardware from scratch:** bright yellow base color, high Roughness/reflectivity initially then tuned down, Metallic enabled; a Height+Roughness surface-detail pass masked by `B&W Spotted 2` (tiling increased, `Blur` filter); a `Galvanize` filter (Normal channel, scale + flake intensity tuned, `Tri-Planar` mapping enabled) for a metallic-flake surface look; a `Dirt`-generator layer (Color + Roughness, dirt contrast/grunge scale reduced, black color, Roughness ~0.8, opacity dropped 100→50).
+9. **Build the shoelace fabric:** base color (bright/yellowish); a Height/Color/Roughness surface-detail layer masked by a `Wave 2` alpha — **fix a UV-island tiling mismatch by switching the mask's UV source to a separately-authored secondary UV set** designed to read continuously across the shoelace's split UV islands, then tune tiling (6) and pattern scale (3) once the continuity is fixed.
+10. **Build Fabric #1 with three progressively complex color-variation layers:** base color (picked from a reference image) + high Roughness; Color Variation #1 (dark grey, `Soft Light`, masked by an inverted `3D Linear Gradient` generator, balance-tuned); Color Variation #2 (Color only, white value, `Soft Light`, masked by a `Grunge Leaks` alpha + `Blur` filter, opacity dropped to ~20 for subtlety); Color Variation #3 (Color + Height, masked by a numbered grunge map with tuned balance/contrast, small positive height, `Soft Light` dark grey, opacity reduced).
+11. **Add Fabric #1's surface detail and pattern layers:** a Height/Roughness/Color surface-detail pass (white `Soft Light` color, masked by `B&W Spot #2`, tiling ~3); a `Surface Pattern` layer using a `Wave 2` alpha (tiling ~32, Height/Normal/Roughness only, Roughness ~1, negative Height, reduced color opacity) — bump the working texture-set size to 2K while tuning for a more accurate viewport preview; a `Dark Edge` layer masked by the `UV Border` generator (smoothness increased, Color only, black, `Soft Light`, opacity ~50).
+12. **Add a secondary, spot-highlight detail layer to Fabric #1** using a `B&W1` alpha run through a `High Pass` filter (tiling ~4) then a `Histogram Scan` filter (position/contrast tuned to isolate small white spots), fed into a positive Height bump — used afterward to justify reducing the main Surface Pattern layer's height amount for a stronger combined effect.
+13. **Build Fabric #2 similarly but with its own UV-consistency fix:** base color (same family as Fabric #1, slightly darker), mid Roughness; a Color+Roughness variation layer (`Crease`/`Dirt` alpha, tiling ~4); a `Surface Pattern` layer using a circle-map alpha whose apparent scale differs between the inner and outer UV islands (a side effect of UV-space optimization giving those islands different relative sizes) — **fixed the same way as the shoelace, by switching the mask's UV source to a dedicated UV set authored to carry consistent texel density across all islands** ("the newest feature in the Substance Painter" per the creator), Color+Roughness+Height enabled, Roughness ~0.75.
+14. **Add wrinkle/fold detail to Fabric #2:** an `Inflate`/`Shrink Wrap`-generator "Wrinkled" filter layer (preset `Tight`), Height only, tuned intensity; a separate simple `Crease`-alpha fill layer (Height only, tiling 5→8→6, opacity tuned down) layered on top for additional fold detail.
+15. **Add hand-drawn stitching with the Pass tool's built-in stitching material:** create a `Stitches` paint layer, select the `Top Stitching` tool/material from the library, click points around every seam to build the stitch path, adjust size/thickness via the path's control points, choose a stitch sub-style (`Zigzag Stitch` demoed), and set `Puckering` to `Leather` for a more natural pucker; supplement with a simple gradient-generator-driven detail layer multiplied against the stitch mask for extra visual richness along the seams.
+16. **Import custom logo/text PNGs (sourced online, edited in Photoshop) as decal layers:** for each logo, set `UV Wrap` to `None` and position/scale in the 2D view; add a black mask + Fill sublayer, load an **Anchor Point**, and set the mask's `Alpha Behavior` to `Extract Alpha` (since the PNG has a transparent background) for a dynamic, automatically-updating mask; add Height, tune Roughness/texture detail, then force every channel's blend mode to `Normal` (via right-click → Apply to all channels) so the decal doesn't pick up unwanted data from layers beneath.
+17. **Refine decal appearance with filters:** `Blur` (slight softening), `HSL` (hue-shift a decal's color away from an undesired default, reduce saturation), and a `Levels` filter with `Affected Channel` set to `Roughness` specifically to break up an overly-flat/noisy default roughness read on the decal.
+18. **Build the text decal from two stacked alpha resources**, changing the second one's blend mode from `Normal` to `Linear Dodge` specifically to avoid a visual conflict where the two overlapping alpha shapes would otherwise fight; final parameters kept Normal + AO + Roughness + Height + Color, white `Soft Light` color at reduced opacity, negative Height.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Smart materials used:** `Steel Dark Aged` (or similarly named steel hardware base)
+- **Generators used:** `Curvature` (dark edge), `Metal Edge` (edge highlight), `Scratch` (plastic scratches), `Dirt` (copper grime), `3D Linear Gradient` (Fabric 1 color variation), `UV Border` (Fabric 1 dark edge), `Inflate` / `Shrink Wrap` (Fabric 2 wrinkles, preset Tight)
+- **Filters used:** `Grain` (plastic micro-detail), `Warp` (de-uniform scratches), `Galvanize` (copper flakes, Tri-Planar mapping enabled), `Blur` (used repeatedly across layers), `High Pass` + `Histogram Scan` (Fabric 1 spot-highlight combo), `HSL` (decal color correction), `Levels` (decal roughness break-up, Affected Channel = Roughness)
+- **Smart Mask used:** `Edge Blur` (plastic roughness pre-pass before the edge-highlight layer)
+- **Alphas/patterns used:** `Grunge`/`Fractal` (plastic color variation), `Wave 2` (shoelace + Fabric 1 surface pattern), `B&W Spotted 2` (copper + Fabric 1 surface detail), `Grunge Leaks` (Fabric 1 color variation), numbered grunge map (Fabric 1 color variation), `Crease`/`Dirt` alpha (Fabric 2 color variation), circle-map alpha (Fabric 2 surface pattern), `B&W1` (Fabric 1 spot-highlight base)
+- **Stitching (Pass tool / Paint Along Path):** `Top Stitching` material, sub-style `Zigzag Stitch`, `Puckering: Leather`, adjustable thread thickness
+- **Decal/logo technique:** `UV Wrap: None` + 2D-view manual positioning, Anchor Point + `Extract Alpha` mask behavior for transparent PNGs, forced `Normal` blend on all channels, `Linear Dodge` blend for combining two overlapping alpha resources without conflict
+- **UV-consistency fix (used twice, shoelace and Fabric 2):** switching a mask's pattern-source UV projection to a dedicated secondary UV set authored with consistent texel density, resolving both a discontinuous-tiling problem (shoelace, split UV islands) and a scale-mismatch problem (Fabric 2, differently-sized UV islands)
+- **Blend modes used:** `Soft Light` (color variation throughout), `Subtract` (plastic color variation #2), `Linear Dodge` (text decal combine), `Normal` forced on all channels (logo/text decals), `Multiply` (stitching's supplementary gradient detail layer)
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced — not because any individual technique is exotic, but because the video functions as a broad survey of nearly every generator/filter/masking tool in Painter applied across five distinct material types in one project, plus two separate instances of the UV-set texel-density-consistency fix and a full anchor-point-driven PNG decal pipeline. Following the whole build requires comfort with the full breadth of Painter's toolkit, not just one technique in depth.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter — version not stated on screen. The stitching tool's properties panel is confirmed titled `PAINT ALONG PATH` in a captured frame, matching this same creator's slipper, poison-bottles, and speed-up-workflow videos. Per `references/version-tracker.md`, this tool name was only used from Painter 9.0.0 until its 11.0.0 rename to Filled Path — consistent with the same Painter 9.x-10.x window as this creator's other ingested videos using this tool.
 
 ### Tags
-[PENDING EXTRACTION]
+layers, fill-layer, paint-layer, masks, generator, curvature, anchor-point, blend-mode, texture-set, uv, pbr, metal-rough, basecolor, roughness, metallic, height, normal-map, alpha, procedural, tri-planar, advanced
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to texture a realistic slipper model](how-to-texture-a-realistic-slipper-model.md) — same creator (3DRedBox); both confirmed via the "PAINT ALONG PATH" panel to date from the same Painter 9.x-10.x window, and both use Pass-tool stitching materials with Puckering settings.
+- [How to use UDIMs properly!](how-to-use-udims-properly.md) — same creator; both address UV-space texel-density/consistency problems (RizomUV-side packing there, an in-Painter secondary-UV-set fix applied twice here).
+- [Texturing a shawl in substance painter](texturing-a-shawl-in-substance-painter.md) — same creator; shares heavy anchor-point usage for reusable mask sources and imported custom design/decal artwork (Midjourney design there, Photoshop-edited logo/text PNGs here).
+- More 3DRedBox tutorials (UV-set/stencil video, NavyCap) will be cross-linked here as they are ingested — see `tutorials/INDEX.md` for the current full list.

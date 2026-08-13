@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=exE0-1ftNeE
 author: Adobe Substance 3D
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "11.0.0"
+tags: [path-tool, layers, masks, paint-layer, height, normal-map, alpha, viewport, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # New Path Tool Features & Improvements in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -167,30 +163,66 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [0:36] tutorials/frames/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [0:56] tutorials/frames/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [1:45] tutorials/frames/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [2:36] tutorials/frames/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [3:19] tutorials/frames/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [4:12] tutorials/frames/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+- [4:47] tutorials/frames/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
+- [5:36] tutorials/frames/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d/frame_007.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Tour of Path-tool improvements shipped in the 11.0.0 Filled Path redesign: Filled Path shapes with adjustable Projection Depth, straight-line drawing via shift-click, converting/duplicating/syncing paths between layers (including a "paste all vertices" cross-layer trick), mesh-wireframe snapping, 45°-increment angle snapping, and a 3D transform-manipulator gizmo for moving multiple path points at once.
 
 ### Summary
-[PENDING EXTRACTION]
+Demoed on a dragon-wing scale texture and a snowy-surface test material. **Filled Path** (the second option when re-clicking the Path tool, alongside the default Paint Along Path) draws a closed shape by clicking points — closing the shape fills it with a solid value. The green stripes visible on a filled path are a visualization of its **Projection Depth/Length** — new adjustable settings in the Path Options at the top of the screen that control how far the shape projects into the surface (typeable numeric values, e.g. 0.05 → 0.03 → 0.01, to dial in a subtle two-sided projection). Holding **shift while clicking** draws straight-line segments instead of the tool's normal freeform curve, useful for jagged/angular shapes. Filled Paths only carry solid fill values (no material painting directly on them) — to paint a material through a path shape, use the path as a **mask** on a paint layer instead. Paths can be **duplicated** (Ctrl+D) and one copy converted to **Paint Along Path** (right-click → change type) to get a stroked outline running around/near a filled shape — size needs re-tuning after conversion since it inherits large default values. An alternative to duplication is copying a path and using **Paste All Vertices** on a new path in a different layer, syncing the actual vertex data across layers/paths without keeping them on the same layer. Standard layer filters (e.g. Warp) can still be applied on top of path-driven layers. The **viewport interface toggle** (not new, but easy to miss) hides/shows on-screen path handles when they get in the way. New snapping features: **mesh-wireframe snapping** (Shift+Z to toggle, hold Z for temporary snap) with a configurable snap target — vertices, edges, or edge centers — and **angle snapping** (Ctrl+Shift while drawing) that constrains path segments to a configurable angle step (1/5/15/30/45/90°) referenced to Screen space (camera-aligned), Vertex space (mesh-aligned), or World space. Finally, paths support a **transform manipulator** (3D gizmo) as an alternative to dragging points directly — shift-click multiple points to select them together, then move the whole group at once with the gizmo; the gizmo aligns to world space, which the presenter notes isn't always the most intuitive, but it's much faster than dragging every point individually.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Create a new empty layer, select the **Path tool**, then click it again to open a two-option list and choose **Filled Path** (the default is Paint Along Path).
+2. Click to place points; the tool auto-adds tangents; clicking the last point again to close the shape produces a filled solid shape on the mesh.
+3. The green stripes on a filled path show its **normal/projection direction and depth** — open the **Path Options** at the top (Type, Depth) and adjust the depth value (typeable, e.g. 0.05/0.03/0.01) to control how far the shape projects, including projecting slightly through to the opposite side of thin geometry.
+4. Hold **shift** while clicking new points to draw straight line segments instead of the tool's default curve behavior — useful for angular/jagged shapes.
+5. Remember Filled Paths only fill with solid values and cannot carry a material directly; to paint materials through a path shape, add a new mask to a paint layer and use the path there instead.
+6. To create a stroke/outline variant of an existing filled shape: select the path, **Ctrl+D** to duplicate it, then right-click the duplicate and change its type to **Paint Along Path** — re-tune the size (it starts oversized) to get a thin outline running with the original filled shape.
+7. To sync a path's exact vertex data onto a different layer without keeping both paths on the same layer: copy the source path, create a new path/layer, then use **Paste All Vertices** (not the regular Paste) to transfer the actual shape data across; the pasted path can then also be converted to Paint Along Path if needed.
+8. Regular layer filters (e.g. **Warp**) can still be stacked on top of a path-driven fill/paint layer for further tweaking.
+9. Toggle the **viewport interface** (path handles/overlay) on/off from the top toolbar when the on-screen path controls get in the way of seeing the result — an existing feature, easy to have missed.
+10. Enable **mesh-wireframe snapping** while drawing a new path (hotkey **Shift+Z** to toggle on, hold **Z** for temporary snapping); configure the snap target in settings to **vertices**, **edges**, or **edge centers** — new points snap to the nearest matching mesh feature.
+11. Enable **angle snapping** by holding **Ctrl+Shift** while drawing — constrains path segments to fixed-degree increments; open settings to change the **Angle Step** (1°, 5°, 15°, 30°, 45°, 90°) and the snap **reference space** (**Screen space** = camera-aligned, **Vertex space** / **World space** = mesh/world-aligned) for precise geometric shapes.
+12. Enable the **transform manipulator** to move path points with a 3D gizmo instead of dragging them directly; shift-click multiple points to select them as a group and move them together in one gizmo drag — much faster than repositioning each point individually, though the gizmo aligns to world space which can feel less intuitive in some cases.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- **Path tool** modes: Paint Along Path (default) vs. **Filled Path**
+- Path Options (top toolbar): **Type**, **Projection Depth/Length**
+- Shift-click while drawing → straight-line segments
+- Filled Path used as a **mask** source on a paint layer (for material painting through a path shape)
+- Path duplication (**Ctrl+D**) + right-click **change type** (Filled Path ↔ Paint Along Path)
+- **Paste All Vertices** (cross-layer/cross-path vertex-data sync, distinct from regular Paste)
+- Filters (e.g. **Warp**) stackable on path-driven layers
+- Viewport interface toggle (show/hide path handles)
+- **Mesh-wireframe snapping**: Shift+Z toggle, hold Z temporary, snap-to Vertices/Edges/Edge Centers
+- **Angle snapping**: Ctrl+Shift while drawing, Angle Step (1/5/15/30/45/90°), reference space (Screen/Vertex/World)
+- **Transform manipulator** (3D gizmo), shift-click to multi-select points
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate — straightforward to try, but getting precise, production-ready shapes (correct depth, clean angle-snapped geometry, synced multi-layer paths) takes some practice with the newer settings.
 
 ### App & Version
-[PENDING EXTRACTION]
+**Substance 3D Painter 11.0.0** — stated explicitly on screen and in narration ("new features for paths in Substance Painter 11" / "new path tools for Substance Painter 11"). Matches `references/release-notes-painter-11.0.md`'s **Filled Path tool** entry (path snapping to polygons, path-type switching, vertex copy/paste, angle/line constraints, transformation gizmos — all demonstrated here).
 
 ### Tags
-[PENDING EXTRACTION]
+`path-tool` `layers` `masks` `paint-layer` `height` `normal-map` `alpha` `viewport` `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- **"New Ribbon Paths in Substance 3D Painter"** (`tutorials/new-ribbon-paths-in-substance-3d-painter-adobe-substance-3d.md`, video `3zgD-wwANCs`) — same `path-tool` feature family (Ribbon shipped 11.1.0); covers a different Path-tool capability (ribbon presets, corner modes, custom start/end/corner images) than this video's Filled Path/snapping/transform focus.
+- **"Texturing Gothic Architecture in Substance 3D Painter: Part 1"** (`tutorials/texturing-gothic-architecture-in-substance-3d-painter-part-1-adobe.md`, video `UQkmXEWJr80`) — production use of the Path tool for decorative relief (Gothic crosses, floral motifs); this video explains the underlying Filled Path/snapping mechanics used there.
+- **"Stylized Asset Setup in Painter: Auto-Cage, PSD Workflows & Smart Detailing"** (`tutorials/stylized-asset-setup-in-painter-auto-cage-psd-workflows-smart-detailing-adobe-su.md`, video `LRy-Nc7B_bk`) — another production use of the Path tool (height-only rim ornament stroke), same 11.0.0 Filled Path tool this video documents in depth.

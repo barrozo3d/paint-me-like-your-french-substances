@@ -624,10 +624,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=--CvtUlcVMs
 - **Author:** 3DRedBox
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not stated on screen; "PAINT ALONG PATH" tool panel pins this to the Painter 9.x-10.x window
+- **Tags:** `layers` `fill-layer` `paint-layer` `masks` `generator` `curvature` `anchor-point` `blend-mode` `texture-set` `uv` `pbr` `metal-rough` `basecolor` `roughness` `metallic` `height` `normal-map` `alpha` `procedural` `tri-planar` `advanced`
+- **Summary:** Broad technique-survey build (plastic sole, steel/copper hardware, three fabric surfaces, Pass-tool stitching, anchor-point-driven logo/text decals) covering Curvature/Metal-Edge/Dirt/Inflate-Shrink-Wrap/UV-Border generators, a Galvanize+Tri-Planar copper-flake filter, and — used twice — an in-Painter fix for UV-island texel-density/tiling mismatches by switching a mask's pattern source to a dedicated secondary UV set. Decals use Anchor Point + Extract Alpha for dynamic transparent-PNG masks.
 - **File:** tutorials/texturing-tactical-boots-in-substance-painter.md
 
 
@@ -646,10 +646,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=exE0-1ftNeE
 - **Author:** Adobe Substance 3D
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 11.0.0
+- **Tags:** `path-tool` `layers` `masks` `paint-layer` `height` `normal-map` `alpha` `viewport` `intermediate`
+- **Summary:** Tour of the 11.0.0 Filled Path tool's new capabilities: Filled Path shapes with adjustable Projection Depth (green normal-direction stripes), shift-click straight-line drawing, duplicate/convert-type and cross-layer "Paste All Vertices" syncing, mesh-wireframe snapping (Shift+Z, vertices/edges/edge centers), 45°-increment angle snapping (Ctrl+Shift, configurable step + reference space), and a 3D transform-manipulator gizmo for moving multiple selected points at once. Version 11.0.0 stated explicitly on screen.
 - **File:** tutorials/new-path-tool-features-improvements-in-substance-3d-painter-adobe-substance-3d.md
 
 
