@@ -4,13 +4,14 @@ source: YouTube
 url: https://www.youtube.com/watch?v=MJxjI4pwY3g
 author: Jared Chavez
 ingested: 2026-08-13
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "not specified"
+tags: [paint-layer, basecolor, layers, beginner]
+extraction_status: complete
 frames_dir: tutorials/frames/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 7
+frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # How to MAKE POKEMON in Zbrush and Substance Painter | Gengar
@@ -23,12 +24,7 @@ frame_status: pending-selection
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py how-to-make-pokemon-in-zbrush-and-substance-painter-gengar <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Full Content [0:00]
@@ -58,30 +54,45 @@ frontmatter before you write the Structured Notes below.
 
 ---
 
+## Captured Frames
+
+- [2:00] tutorials/frames/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar/frame_000.jpg
+- [6:00] tutorials/frames/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar/frame_001.jpg
+- [10:00] tutorials/frames/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar/frame_002.jpg
+- [14:00] tutorials/frames/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar/frame_003.jpg
+- [18:00] tutorials/frames/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar/frame_004.jpg
+- [22:00] tutorials/frames/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar/frame_005.jpg
+- [25:00] tutorials/frames/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar/frame_006.jpg
+
+---
+
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A silent speed-paint/sculpt timelapse (music only, no technique narration) of the third piece in Chavez's "demonic Pokémon" personal series — ZBrush sculpt, brief Substance Painter hand-painted color pass, Marmoset Toolbag render — documented here at minimal depth since almost no explanatory content exists to extract.
 
 ### Summary
-[PENDING EXTRACTION]
+**Verify-list finding:** this video is confirmed to be almost entirely a **narration-free timelapse** — the full spoken transcript is only ~90 seconds (a 0:00-1:21 intro/outro: "we're making Gengar, this is my third demonic Pokémon, hope you enjoyed this timelapse"), with the remaining ~25 minutes of runtime being pure sped-up screen-capture footage under music, no voiceover explaining any decision or technique. Sampling frames across the full runtime confirms the same ZBrush-sculpt → Substance-Painter-hand-paint → Marmoset-Toolbag-render pipeline seen in Chavez's narrated Pokémon videos (Dragonite "Paris"), but here with no commentary at all — the vast majority of visible runtime is ZBrush sculpting (frame_000-002) and Marmoset lighting/render setup (frame_003, frame_004, frame_006), with Substance Painter appearing only briefly (frame_005: `Gengar` Texture Set, `HandPaint` paint layer, base-color picker open on a magenta/pink accent tone matching the character's final glowing-mouth color) and no narration to confirm what technique is being demonstrated at that moment. Given the near-total absence of explained technique, this entry is kept intentionally short rather than speculatively reconstructing Key Steps from a couple of silent frames — the same underlying hand-painted-Pokémon workflow is documented in full, narrated detail in this creator's other two Pokémon videos.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Same overall pipeline as this creator's other demonic-Pokémon pieces: ZBrush sculpt → Substance Painter hand-painted color pass → Marmoset Toolbag render — see the fully-narrated equivalent videos for step-by-step technique.
+2. The one Painter moment visible with any specificity is base-color picking on a `HandPaint` paint layer within a `Gengar` Texture Set, choosing a saturated magenta/pink for the character's mouth/glow accent color — consistent with the finished render.
 
 ### Layers / Tools / Settings
-[PENDING EXTRACTION]
+- Substance Painter: `Gengar` Texture Set, `HandPaint` paint layer (visible briefly, no further detail legible or narrated).
+- (Non-Painter, majority of runtime) ZBrush sculpting tools; Marmoset Toolbag lighting/materials setup (`Gengar`, `GengarEyes`, `GengarTeeth` materials visible).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Not assessable — insufficient narrated technique content to rate.
 
 ### App & Version
-[PENDING EXTRACTION]
+Substance 3D Painter (brief appearance within a ZBrush + Marmoset Toolbag pipeline) — version not specified; no narration or legible on-screen version indicator.
 
 ### Tags
-[PENDING EXTRACTION]
+paint-layer, basecolor, layers, beginner
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [How to MAKE HAND PAINTED TEXTURES and SUBSTANCE PAINTER | Dragonite](how-to-make-hand-painted-textures-and-substance-painter-dragonite.md) — same creator, same "demonic Pokémon" series and pipeline (ZBrush → Painter hand-paint → Marmoset), but fully narrated — the recommended source for the actual technique this video shows silently.
+- [How to Make HAND PAINTED POKEMON in Substance Painter | Tutorial](how-to-make-hand-painted-pokemon-in-substance-painter-tutorial.md) — same creator, same series ("Paris") and pipeline, also fully narrated — covers the foundation-then-freehand hand-painting method this video's brief `HandPaint` layer glimpse is presumably applying.

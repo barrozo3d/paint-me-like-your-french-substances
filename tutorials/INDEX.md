@@ -1075,10 +1075,10 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=MJxjI4pwY3g
 - **Author:** Jared Chavez
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** not specified
+- **Tags:** `paint-layer` `basecolor` `layers` `beginner`
+- **Summary:** Verify-list finding: confirmed silent timelapse (music only, ~90s of narration total) — ZBrush sculpt / Painter hand-paint / Marmoset render pipeline for the third piece in Chavez's demonic-Pokémon series, same style as Dragonite and "Paris." Kept minimally documented (no fabricated Key Steps) since there's no narrated technique to extract; Painter appears only briefly (`Gengar` Texture Set, `HandPaint` layer, magenta base-color pick). Cross-linked to the fully-narrated Dragonite and Paris videos, which cover this exact workflow in depth.
 - **File:** tutorials/how-to-make-pokemon-in-zbrush-and-substance-painter-gengar.md
 
 ---
