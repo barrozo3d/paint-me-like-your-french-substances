@@ -9,8 +9,8 @@ version: "11.0.0+"
 tags: [layers, fill-layer, masks, smart-material, generator, anchor-point, blend-mode, curvature, tri-planar, procedural, texture-set, basecolor, intermediate, advanced]
 extraction_status: complete
 frames_dir: tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
 ---
 
 # Creating & Reusing Smart Materials in Substance 3D Painter | Stylized Crab | Adobe Substance 3D
@@ -111,6 +111,19 @@ frontmatter before you write the Structured Notes below.
 [10:03] So if you're going to go ahead and try this out let me know how you go and don't forget to subscribe to this channel if you want to see more of this content on Adobe Substance 3D.
 
 
+
+---
+
+## Captured Frames
+
+- [0:03] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_000.jpg
+- [0:20] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_001.jpg
+- [1:15] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_002.jpg
+- [3:25] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_003.jpg
+- [3:50] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_004.jpg
+- [5:50] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_005.jpg
+- [6:35] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_006.jpg
+- [7:52] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_007.jpg
 
 ---
 

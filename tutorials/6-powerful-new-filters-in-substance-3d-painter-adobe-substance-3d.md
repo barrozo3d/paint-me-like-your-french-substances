@@ -9,8 +9,8 @@ version: "11.0.0"
 tags: [layers, masks, generator, anchor-point, procedural, height, alpha, basecolor, roughness, normal-map, viewport, intermediate, advanced]
 extraction_status: complete
 frames_dir: tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/
-frame_count: 0
-frame_status: pending-selection
+frame_count: 8
+frame_status: complete
 ---
 
 # 6 Powerful New Filters in Substance 3D Painter | Adobe Substance 3D
@@ -207,6 +207,19 @@ frontmatter before you write the Structured Notes below.
 [9:35] d'avoir été tune pour plus de tutoriels vidéo.
 
 
+
+---
+
+## Captured Frames
+
+- [0:34] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [1:30] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [3:15] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [4:40] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [6:00] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [6:50] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+- [7:15] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
+- [9:00] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_007.jpg
 
 ---
 
