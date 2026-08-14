@@ -194,17 +194,6 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **File:** tutorials/how-to-texture-a-realistic-slipper-model.md
 
 
-### Texturing Creatures for Games in Substance Painter | Full Process
-- **Source:** YouTube
-- **URL:** https://www.youtube.com/watch?v=dHATe4tKd_Q
-- **Author:** Logan Wiesen
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/texturing-creatures-for-games-in-substance-painter-full-process.md
-
-
 ### Substance 3D Painter & ACES - 03 - Textures in Maya and Blender | Adobe Substance 3D
 - **Source:** YouTube
 - **URL:** https://www.youtube.com/watch?v=Lksg6Fum3gw

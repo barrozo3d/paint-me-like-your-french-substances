@@ -278,4 +278,4 @@ Substance 3D Painter is referenced only as the eventual destination for the trim
 ---
 
 ## Related Tutorials
-- **Create Trim Sheets in Substance 3D Painter - Part 1** (`tutorials/create-trim-sheets-in-substance-3d-painter-part-1.md`) and **- Part2** (`tutorials/create-trim-sheets-in-substance-3d-painter-part-2.md`) — same broader trim-sheet topic from the same Adobe Substance3D channel; those two cover building/painting the trim sheet material itself inside Painter, while this video covers the DCC-side UV unwrap that consumes it. Ingest together as one trim-sheet workflow trio.
+- **Create Trim Sheets in Substance 3D Painter - Part 1** (`tutorials/create-trim-sheets-in-substance-3d-painter---part-1-adobe-substance-3d.md`) and **- Part2** (`tutorials/create-trim-sheets-in-substance-3d-painter---part2-adobe-substance-3d.md`) — same broader trim-sheet topic from the same Adobe Substance3D channel; those two cover building/painting the trim sheet material itself inside Painter, while this video covers the DCC-side UV unwrap that consumes it. Ingest together as one trim-sheet workflow trio.
