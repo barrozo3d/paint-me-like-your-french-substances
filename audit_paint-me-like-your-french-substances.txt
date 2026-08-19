@@ -1,24 +1,30 @@
 
 ?? === foundations-pbr-texturing-theory.md (class: topic-reference, verified: no) ===
    ASSERTED (table/code): 0/2 uncorroborated (0%)   [multi-word/CamelCase only: 0/1 = 0%]
+   topic coverage: 42 corpus files
    all terms: 0/4 (0%)   |   weak (1-2 files): 0   |   stem-only: 0   |   release-notes-only: 0
 
 ?? === substance-painter-baking.md (class: topic-reference, verified: no) ===
    ASSERTED (table/code): 1/2 uncorroborated (50%)   [multi-word/CamelCase only: 1/2 = 50%]
+   topic coverage: 39 corpus files
    all terms: 1/9 (11%)   |   weak (1-2 files): 0   |   stem-only: 0   |   release-notes-only: 0
      [table] Match by ID
 
 ?? === substance-painter-export-pipeline.md (class: topic-reference, verified: no) ===
    ASSERTED (table/code): 0/3 uncorroborated (0%)   [multi-word/CamelCase only: 0/0 = 0%]
-   all terms: 1/9 (11%)   |   weak (1-2 files): 2   |   stem-only: 0   |   release-notes-only: 0
+   topic coverage: 51 corpus files
+   all terms: 2/9 (22%)   |   weak (1-2 files): 3   |   stem-only: 0   |   release-notes-only: 0
      [prose] Export Preset Editor
+     [prose] tif
 
    === substance-painter-layers-masks.md (class: topic-reference, verified: no) ===
    ASSERTED (table/code): 0/10 uncorroborated (0%)   [multi-word/CamelCase only: 0/3 = 0%]
+   topic coverage: undetermined
    all terms: 0/18 (0%)   |   weak (1-2 files): 0   |   stem-only: 0   |   release-notes-only: 0
 
 !! === substance-painter-python-scripting.md (class: topic-reference, verified: no) ===
    ASSERTED (table/code): 9/11 uncorroborated (82%)   [multi-word/CamelCase only: 3/3 = 100%]
+   topic coverage: 4 corpus files  <-- TOO THIN to judge by corroboration
    all terms: 11/16 (69%)   |   weak (1-2 files): 0   |   stem-only: 0   |   release-notes-only: 4
      [table] ExportTexturesEnded
      [table] ProjectOpened
@@ -34,17 +40,12 @@
 
 ?? === substance-painter-shaders-channels.md (class: topic-reference, verified: no) ===
    ASSERTED (table/code): 0/0 uncorroborated (0%)   [multi-word/CamelCase only: 0/0 = 0%]
+   topic coverage: 49 corpus files
    all terms: 0/5 (0%)   |   weak (1-2 files): 0   |   stem-only: 0   |   release-notes-only: 0
 
 ======================================================================
 RANKED BY ZERO-CORROBORATION RATIO (most suspect first)
   calibration: fabricated copernicus.md scores 31% strict-zero (23/74)
 ======================================================================
- !!  81.8%     9/11    substance-painter-python-scripting.md
-      0.0%     0/10    substance-painter-layers-masks.md
-
-  too few asserted terms to score (<8) -- review by hand, the ratio would be noise:
- ??           1/2     substance-painter-baking.md
- ??           0/3     substance-painter-export-pipeline.md
- ??           0/2     foundations-pbr-texturing-theory.md
- ??           0/0     substance-painter-shaders-channels.md
+ ??  81.8%     9/11    cov=4    substance-painter-python-scripting.md  (thin coverage -- unmeasurable, verify vs docs)
+      0.0%     0/10    cov=n/a  substance-painter-layers-masks.md  (topic undetermined from filename)
