@@ -1,3 +1,11 @@
+---
+class: release-notes
+verified: partial
+sources:
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/all-changes
+last_verified: never
+version_basis: "painter 11.1"
+---
 # Substance 3D Painter 11.1 — Release Notes
 
 **Released:** 11.1.0 — November 18, 2025 · Patches: 11.1.1 (December 9, 2025), 11.1.2 (January 13, 2026), 11.1.3 (February 12, 2026)

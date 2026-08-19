@@ -1,3 +1,11 @@
+---
+class: release-notes
+verified: partial
+sources:
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/all-changes
+last_verified: never
+version_basis: "painter 9.0"
+---
 # Substance 3D Painter 9.0 — Release Notes
 
 **Released:** 9.0.0 — June 20, 2023 · Patch: 9.0.1 (September 19, 2023)

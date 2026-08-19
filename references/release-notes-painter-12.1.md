@@ -1,3 +1,13 @@
+---
+class: release-notes
+verified: partial
+sources:
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/version-12-1
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/all-changes
+  - https://community.adobe.com/announcements-57/substance-3d-painter-12-1-is-here-auto-rebake-openpbr-support-and-more-1629231
+last_verified: never
+version_basis: "painter 12.1"
+---
 # Substance 3D Painter 12.1 — Release Notes
 
 **Released:** 12.1.0 — June 23, 2026 · Patches: 12.1.1 (July 9, 2026), 12.1.2 (August 3, 2026)

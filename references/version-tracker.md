@@ -1,3 +1,13 @@
+---
+class: operational
+verified: n/a
+sources:
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/release-notes
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/beta
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/all-changes
+last_verified: never
+version_basis: "unknown"
+---
 # Version Tracker
 
 Tracks the known version history of Adobe Substance 3D Painter and when this file was last checked against Adobe's release-notes pages. Mirrors the Auto-Changelog Rule in `SKILL.md` (Mode 0).

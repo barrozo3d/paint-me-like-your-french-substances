@@ -1,3 +1,12 @@
+---
+class: release-notes
+verified: partial
+sources:
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/version-12-0
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/all-changes
+last_verified: never
+version_basis: "painter 12.0"
+---
 # Substance 3D Painter 12.0 — Release Notes
 
 **Released:** 12.0.0 — March 9, 2026 · Patches: 12.0.1 (March 18, 2026, hotfix), 12.0.2 (April 7, 2026), 12.0.3 (May 5, 2026)

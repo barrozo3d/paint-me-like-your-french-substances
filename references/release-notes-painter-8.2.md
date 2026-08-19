@@ -1,3 +1,11 @@
+---
+class: release-notes
+verified: partial
+sources:
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/all-changes
+last_verified: never
+version_basis: "painter 8.2"
+---
 # Substance 3D Painter 8.2 — Release Notes
 
 **Released:** October 6, 2022

@@ -1,3 +1,11 @@
+---
+class: release-notes
+verified: partial
+sources:
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/all-changes
+last_verified: never
+version_basis: "painter 8.3"
+---
 # Substance 3D Painter 8.3 — Release Notes
 
 **Released:** 8.3.0 — January 10, 2023 · Patch: 8.3.1 (April 27, 2023)

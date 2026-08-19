@@ -1,3 +1,11 @@
+---
+class: release-notes
+verified: partial
+sources:
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/all-changes
+last_verified: never
+version_basis: "painter 10.1"
+---
 # Substance 3D Painter 10.1 — Release Notes
 
 **Released:** 10.1.0 — September 17, 2024 · Patches: 10.1.1 (November 5, 2024), 10.1.2 (December 3, 2024)

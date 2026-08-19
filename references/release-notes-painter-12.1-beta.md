@@ -1,3 +1,11 @@
+---
+class: release-notes
+verified: partial
+sources:
+  - https://community.adobe.com/announcements-57/substance-painter-2026-skew-openpbr-beta-1556690
+last_verified: never
+version_basis: "painter 12.1 beta"
+---
 # Substance 3D Painter 12.1 Beta ("Skew & OpenPBR" open beta) — Release Notes
 
 **Released:** Announced ~April 7, 2026 (unverified — secondary source only, see note below), preceding the 12.1.0 stable release of June 23, 2026

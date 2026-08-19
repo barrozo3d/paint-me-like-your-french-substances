@@ -1,3 +1,11 @@
+---
+class: release-notes
+verified: partial
+sources:
+  - https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/release-notes/all-changes
+last_verified: never
+version_basis: "painter 8.1"
+---
 # Substance 3D Painter 8.1 — Release Notes
 
 **Released:** 8.1.0 — June 7, 2022 · Patches: 8.1.1 (June 28, 2022), 8.1.2 (July 19, 2022), 8.1.3 (August 25, 2022)
