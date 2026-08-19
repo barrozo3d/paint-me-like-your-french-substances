@@ -1,7 +1,7 @@
 
 ?? === foundations-pbr-texturing-theory.md (class: topic-reference, verified: no) ===
    ASSERTED (table/code): 0/2 uncorroborated (0%)   [multi-word/CamelCase only: 0/1 = 0%]
-   topic coverage: 42 corpus files
+   topic coverage: 4 corpus files  <-- TOO THIN to judge by corroboration
    all terms: 0/4 (0%)   |   weak (1-2 files): 0   |   stem-only: 0   |   release-notes-only: 0
 
 ?? === substance-painter-baking.md (class: topic-reference, verified: no) ===
@@ -40,7 +40,7 @@
 
 ?? === substance-painter-shaders-channels.md (class: topic-reference, verified: no) ===
    ASSERTED (table/code): 0/0 uncorroborated (0%)   [multi-word/CamelCase only: 0/0 = 0%]
-   topic coverage: 49 corpus files
+   topic coverage: 8 corpus files  <-- TOO THIN to judge by corroboration
    all terms: 0/5 (0%)   |   weak (1-2 files): 0   |   stem-only: 0   |   release-notes-only: 0
 
 ======================================================================
@@ -49,3 +49,9 @@ RANKED BY ZERO-CORROBORATION RATIO (most suspect first)
 ======================================================================
  ??  81.8%     9/11    cov=4    substance-painter-python-scripting.md  (thin coverage -- unmeasurable, verify vs docs)
       0.0%     0/10    cov=n/a  substance-painter-layers-masks.md  (topic undetermined from filename)
+
+  too few asserted terms to score (<8) -- review by hand, the ratio would be noise:
+ ??           1/2     cov=39   substance-painter-baking.md
+ ??           0/3     cov=51   substance-painter-export-pipeline.md
+ ??           0/2     cov=4    foundations-pbr-texturing-theory.md
+ ??           0/0     cov=8    substance-painter-shaders-channels.md
