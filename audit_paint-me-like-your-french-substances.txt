@@ -1,0 +1,59 @@
+
+?? === foundations-pbr-texturing-theory.md (class: topic-reference, verified: no) ===
+   ASSERTED (table/code): 0/5 uncorroborated (0%)   [multi-word/CamelCase only: 0/4 = 0%]
+   all terms: 0/7 (0%)   |   weak (1-2 files): 0
+
+?? === substance-painter-baking.md (class: topic-reference, verified: no) ===
+   ASSERTED (table/code): 1/2 uncorroborated (50%)   [multi-word/CamelCase only: 1/2 = 50%]
+   all terms: 1/9 (11%)   |   weak (1-2 files): 0
+     [table] Match by ID
+
+?? === substance-painter-export-pipeline.md (class: topic-reference, verified: no) ===
+   ASSERTED (table/code): 0/3 uncorroborated (0%)   [multi-word/CamelCase only: 0/0 = 0%]
+   all terms: 1/10 (10%)   |   weak (1-2 files): 3
+     [prose] Export Preset Editor
+
+   === substance-painter-layers-masks.md (class: topic-reference, verified: no) ===
+   ASSERTED (table/code): 0/10 uncorroborated (0%)   [multi-word/CamelCase only: 0/3 = 0%]
+   all terms: 2/21 (10%)   |   weak (1-2 files): 0
+     [prose] Assets → smart materials
+     [prose] stacked mask effects
+
+!! === substance-painter-python-scripting.md (class: topic-reference, verified: no) ===
+   ASSERTED (table/code): 14/14 uncorroborated (100%)   [multi-word/CamelCase only: 6/6 = 100%]
+   all terms: 18/19 (95%)   |   weak (1-2 files): 0
+     [table] Batch export
+     [table] Batch material application
+     [table] ExportTexturesEnded
+     [table] Headless-ish scripting
+     [table] ProjectOpened
+     [table] resource.ResourceID
+     [table] substance_painter.baking
+     [table] substance_painter.event
+     [table] substance_painter.export
+     [table] substance_painter.layerstack
+     [table] substance_painter.project
+     [table] substance_painter.resource
+     [table] substance_painter.textureset
+     [table] substance_painter.ui
+     [prose] plugins
+     [prose] Python Console
+     [prose] substance_painter
+     [prose] sys.path
+
+?? === substance-painter-shaders-channels.md (class: topic-reference, verified: no) ===
+   ASSERTED (table/code): 0/0 uncorroborated (0%)   [multi-word/CamelCase only: 0/0 = 0%]
+   all terms: 0/6 (0%)   |   weak (1-2 files): 1
+
+======================================================================
+RANKED BY ZERO-CORROBORATION RATIO (most suspect first)
+  calibration: fabricated copernicus.md scores 45% asserted (33/74)
+======================================================================
+ !! 100.0%    14/14    substance-painter-python-scripting.md
+      0.0%     0/10    substance-painter-layers-masks.md
+
+  too few asserted terms to score (<8) -- review by hand, the ratio would be noise:
+ ??           1/2     substance-painter-baking.md
+ ??           0/5     foundations-pbr-texturing-theory.md
+ ??           0/3     substance-painter-export-pipeline.md
+ ??           0/0     substance-painter-shaders-channels.md
