@@ -1,0 +1,13 @@
+========================================================================
+scan_promo.py -- promotional / no-content candidates (READ-ONLY)
+========================================================================
+scanned 97 tutorials in C:\Users\KABUM\.claude\skills\paint-me-like-your-french-substances\tutorials
+threshold 50 | 0 candidate(s) (0 allowlisted)
+score distribution: max 25 | p95 22 | median 0 | zero-score 77
+
+no candidates at this threshold.
+------------------------------------------------------------------------
+This tool WRITES NOTHING and DECIDES NOTHING. Every candidate above
+needs hand triage: REMOVE (pure promo) / DEMOTE (real content, oversold
+tags) / KEEP (false positive or deliberate gap-filler). Record the
+decisions in PROMO_ENTRY_CLEANUP_PLAN.md Findings -- batches A4/A5.
