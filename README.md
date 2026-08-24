@@ -147,4 +147,4 @@ Same ingest/validate/setup architecture as this skill's siblings — `blender-mo
 
 ## Status
 
-Public personal project, no warranty, not affiliated with or endorsed by Adobe. **98 tutorials ingested** (count auto-updates on every `ingest.py` run — do not hand-edit this line).
+Public personal project, no warranty, not affiliated with or endorsed by Adobe. **97 tutorials ingested** (count is written by `update_readme_tutorial_count()` and verified against disk by `validate.py` check #13 — do not hand-edit this line).
