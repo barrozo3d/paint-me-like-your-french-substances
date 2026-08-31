@@ -73,6 +73,26 @@ skill — exactly the profile that made `copernicus.md` wrong in `houdini-wand`.
 > * Do **not** ingest a third-party mirror of the API docs — provenance for this
 >   reference file is the entire point of the gap.
 
+### 2b. 🔴 Texture transfer: scanned high-poly → retopologized low-poly — **found by a real question, 2026-08-31**
+
+A user question F4 could not answer: *"how to correctly transpose a texture from a
+3D-scanned asset to a retopologized asset (using Substance for example)?"*
+
+Retrieval surfaced **39** baking entries, and the top hits are all about baking
+**mesh maps** — normal, AO, curvature, skew. That is a **different operation**.
+The question is about carrying an existing **albedo/colour texture** from a dense
+photogrammetry scan onto a clean retopo mesh: cage/max-distance handling for a
+noisy scan, `Bake Mesh Maps > Diffuse/Base Color from mesh`, UV correspondence
+when the two meshes disagree, and what to do where the scan has holes.
+
+**Adjacent material exists; the operation does not.** Recorded rather than
+answered from model memory — this skill's Python-API gap is already the
+`copernicus.md` profile and one uncorroborated area is enough.
+
+- [ ] **Texture/colour transfer from a scanned mesh to a retopo mesh** — cage and
+      max-distance for noisy scans, baking Base Color from mesh, UV mismatch,
+      filling scan holes
+
 ### 2. Channel packing — **1 tutorial**
 
 `SKILL.md` advertises "channel packing/export presets". Exactly one file covers
