@@ -36,6 +36,43 @@ skill — exactly the profile that made `copernicus.md` wrong in `houdini-wand`.
 - [ ] **UI + events** — `substance_painter.ui` menus/docks and the event
       callbacks (`ExportTexturesEnded`, project open/close)
 
+> 🔴 **D4b target 2 attempted 2026-08-31 — BLOCKED, and the reason is worth
+> keeping.** The three items above cannot currently be filled from vendor docs.
+>
+> **1. The Python API documentation is not publicly reachable.** Adobe moved the
+> Substance 3D docs to Experience League. `substance3d.adobe.com/documentation/ptpy/`
+> and every path under it redirect to a **generic "General knowledge" page**.
+>
+> **2. ⚠️ The URL probe used throughout D4b gives FALSE POSITIVES on this site.**
+> `curl -sL -o /dev/null -w "%{http_code}"` returned **200** for
+> `ptpy/api-reference`, `ptpy/getting-started` and `ptpy/substance_painter.html`.
+> All three are catch-all redirects to the same 1,262-char page with **zero**
+> occurrences of `substance_painter`, `start_plugin` or `close_plugin`. On
+> Foundry's docs a 404 was a real 404 and the probe was sound; **on Adobe's it is
+> not.** Always confirm the *final* URL and measure the text for the topic —
+> `-w "%{url_effective}"`.
+>
+> **3. Adobe says the docs ship inside the application.** The Experience League
+> plugins page states the scripting documentation is *"available from the help
+> menu of the application"*. It also describes plugins as *"wrote in Javascript
+> and can be combined with the QML language"* — i.e. that page documents the
+> **legacy JS/QML plugin API, not the Python API** the reference file is about.
+>
+> **4. Substance 3D Painter is not installed on this machine**, so the in-app
+> documentation is not reachable here either.
+>
+> ✅ **Nothing was written from model knowledge**, deliberately. This gap is
+> recorded as *"exactly the profile that made `copernicus.md` wrong"* — a
+> reference file with no corroborating source — and filling it from memory would
+> reproduce that failure rather than fix it.
+>
+> **How it could actually be closed:**
+> * Open Substance 3D Painter on a machine that has it → **Help menu → scripting
+>   documentation**, and ingest from there (the other device may have Painter).
+> * Or capture the in-app doc pages and ingest them as pasted content via Mode 3.
+> * Do **not** ingest a third-party mirror of the API docs — provenance for this
+>   reference file is the entire point of the gap.
+
 ### 2. Channel packing — **1 tutorial**
 
 `SKILL.md` advertises "channel packing/export presets". Exactly one file covers
