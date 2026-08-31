@@ -68,6 +68,10 @@ Frames captured — see "Captured Frames" section below.
 
 ## Structured Notes
 
+**Transcript note.** This video has **no narration** past its opening. The speaker talks for 81 seconds and signs off — *"I hope you guys enjoyed this time lapse, and I'll see you guys in the next one"* — over a silent 25-minute time-lapse. The 1,237 characters on file are the complete spoken content.
+
+Tested rather than assumed, per the Whisper-recovery rule: re-transcribed 2026-08-31 at two model sizes against freshly downloaded audio. **`small` returned 1,237 chars ending at 1:21; `medium` returned 1,226 chars ending at 1:21** — both identical in substance to what was already here. YouTube also offers **no automatic captions** for this video, which it generates for anything with sustained speech. Three independent signals agree the narration genuinely ends at 1:21.
+
 ### Core Technique
 A silent speed-paint/sculpt timelapse (music only, no technique narration) of the third piece in Chavez's "demonic Pokémon" personal series — ZBrush sculpt, brief Substance Painter hand-painted color pass, Marmoset Toolbag render — documented here at minimal depth since almost no explanatory content exists to extract.
 

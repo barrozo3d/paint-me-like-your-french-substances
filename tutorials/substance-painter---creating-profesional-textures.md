@@ -792,6 +792,8 @@ Frames captured — see "Captured Frames" section below.
 
 ## Structured Notes
 
+**Transcript note.** This video has **no narration**. The creator says so in its opening line — *"In this video I'm gonna texture this asset, I'm not gonna talk over it and explain what I'm doing, as I already did it in the previous video"* — so 12,950 characters across 2h48m is the complete spoken content, not a truncation. See the reviewed Ingest Safeguard Report in the Raw Data section.
+
 ### Core Technique
 A **silent, unnarrated speed-texturing follow-along** on the same wooden barrel asset as the companion "Substance Painter Tutorial - Beginner To Advanced" video — the creator explicitly states upfront he will not explain anything since he "already did it in the previous video," making this the visual "watch the finished technique executed at full production speed/detail" companion rather than an independent lesson. Reconstructed here entirely from 16 frames spread across the full 168-minute runtime (no usable audio — see the Ingest Safeguard Report note above the transcript), showing a materially more advanced/polished pass over the same barrel: ID-map-masked wood-plank materials, rusted metal hoop bands, layered dust/grunge weathering, a Curvature/AO/World-Space-Normal-driven **Mask Builder (Legacy)** generator for edge damage, extensive hand-painted highlight/scuff detail, and a closing HSL Perception + Color Correct grading pass before export.
 
