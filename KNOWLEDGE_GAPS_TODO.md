@@ -20,58 +20,83 @@ pattern: **they are capabilities `SKILL.md` advertises that no tutorial teaches.
 
 ## Pending
 
-### 1. 🔴 The `substance_painter` Python API — **ZERO tutorials**
+### 1. ✅ The `substance_painter` Python API — **CLOSED 2026-09-04** (was ZERO)
 
-`SKILL.md` advertises "the Python scripting API" and "writing Painter Python
-plugins" as a headline capability, and `references/substance-painter-python-scripting.md`
-exists. **No ingested tutorial mentions the `substance_painter` module at all**
-(0 of 97). The reference file is therefore uncorroborated by any source in this
-skill — exactly the profile that made `copernicus.md` wrong in `houdini-wand`.
+Five pages ingested and extracted, taking `substance_painter` from **0 of 97** to
+**5 of 102**. `references/substance-painter-python-scripting.md` now has the
+corroborating source it never had — the profile that made `copernicus.md` wrong.
 
-- [ ] **Painter Python plugin basics** — plugin folder layout, `start_plugin` /
+- [x] **Painter Python plugin basics** — plugin folder layout, `start_plugin` /
       `close_plugin`, the Python console, reloading during development
-      Source: Adobe official — Substance 3D Painter Python API documentation
-- [ ] **Automating exports with Python** — `substance_painter.export`, export
+      ✅ `substance-painter-plugins-module.md` — `substance_painter_plugins.path`
+      and `SUBSTANCE_PAINTER_PLUGINS_PATH`; the three expected subdirectories
+      (`plugins/` optional, `startup/` always loaded, `modules/` shared, and
+      `plugins/` takes precedence); `update_sys_path()` which must be called
+      explicitly after changing `path`; `start_plugin` / `close_plugin` /
+      `is_plugin_started` / `close_all_plugins`; and `reload_plugin()` including
+      the plugin's own `reload_plugin` hook, which is the only way a package
+      reloads its sub-modules.
+      ✅ `versioning-plugin-example.md` — Adobe's complete `versioning_plugin.py`
+      skeleton, the best single reference for the *shape* of a real plugin.
+- [x] **Automating exports with Python** — `substance_painter.export`, export
       presets driven from script, batch export across texture sets
-- [ ] **UI + events** — `substance_painter.ui` menus/docks and the event
+      ✅ `python-api-export-module.md` — the full `json_config` schema:
+      `exportPath`, `defaultExportPreset`, `exportPresets` with `fileName`
+      wildcards, `channels` (`destChannel`/`srcChannel`/`srcMapType`/`srcMapName`
+      across `documentMap`, `meshMap`, `virtualMap`, `defaultMap`), `exportList`
+      by `rootPath` with `outputMaps`/`uvTiles` filters, and the **ordered**
+      `exportParameters` override rules. Plus `sizeLog2` as an exponent, the five
+      padding algorithms and which need `dilationDistance`,
+      `list_project_textures()` as a dry run, `PredefinedExportPreset` vs
+      `ResourceExportPreset`, `export_mesh()` with `MeshExportOption`, and the
+      rule that the returned status is never `Error` because failures raise.
+- [x] **UI + events** — `substance_painter.ui` menus/docks and the event
       callbacks (`ExportTexturesEnded`, project open/close)
+      ✅ `python-api-ui-module.md` — `get_main_window`, `add_dock_widget`,
+      `add_toolbar`, `add_plugins_toolbar_widget`, `add_menu`, `add_action`,
+      `delete_ui_element`; `UIMode` flags and layout save/restore; the
+      `windowIcon` quick-button and the unique `objectName` that makes geometry
+      persist; `ServiceNotFoundError` before the UI service starts.
+      ✅ `python-api-event-module.md` — `DISPATCHER`, **weak `connect()` vs strong
+      `connect_strong()`**, `ExportTexturesAboutToStart`/`Ended`, the baking and
+      texture-state events, and the async-loading trap:
+      **`ProjectEditionEntered`, not `ProjectOpened`,** means ready to work with.
 
-> 🔴 **D4b target 2 attempted 2026-08-31 — BLOCKED, and the reason is worth
-> keeping.** The three items above cannot currently be filled from vendor docs.
+> 🔴 **The 2026-08-31 block on this item was FALSE, and it cost four days.**
+> It read: *"Substance 3D Painter is not installed on this machine, so the in-app
+> documentation is not reachable here either."* **Painter 12.1.4 is installed**,
+> at `C:\Program Files\Adobe Substance 3D Painter`, and it ships the complete
+> Python API documentation at `resources\python-doc` — **53 HTML pages**, Python
+> API **0.3.5**, reachable in-app via Help → scripting documentation. Every other
+> finding in that block was correct: Adobe's public `ptpy/` paths really do
+> redirect to a generic page, the `curl` status-code probe really does give false
+> 200s on that site, and the Experience League plugins page really does document
+> the legacy JS/QML API rather than the Python one. The single unverified claim
+> was the one about this machine — and it was the one that closed the door.
 >
-> **1. The Python API documentation is not publicly reachable.** Adobe moved the
-> Substance 3D docs to Experience League. `substance3d.adobe.com/documentation/ptpy/`
-> and every path under it redirect to a **generic "General knowledge" page**.
->
-> **2. ⚠️ The URL probe used throughout D4b gives FALSE POSITIVES on this site.**
-> `curl -sL -o /dev/null -w "%{http_code}"` returned **200** for
-> `ptpy/api-reference`, `ptpy/getting-started` and `ptpy/substance_painter.html`.
-> All three are catch-all redirects to the same 1,262-char page with **zero**
-> occurrences of `substance_painter`, `start_plugin` or `close_plugin`. On
-> Foundry's docs a 404 was a real 404 and the probe was sound; **on Adobe's it is
-> not.** Always confirm the *final* URL and measure the text for the topic —
-> `-w "%{url_effective}"`.
->
-> **3. Adobe says the docs ship inside the application.** The Experience League
-> plugins page states the scripting documentation is *"available from the help
-> menu of the application"*. It also describes plugins as *"wrote in Javascript
-> and can be combined with the QML language"* — i.e. that page documents the
-> **legacy JS/QML plugin API, not the Python API** the reference file is about.
->
-> **4. Substance 3D Painter is not installed on this machine**, so the in-app
-> documentation is not reachable here either.
->
-> ✅ **Nothing was written from model knowledge**, deliberately. This gap is
-> recorded as *"exactly the profile that made `copernicus.md` wrong"* — a
-> reference file with no corroborating source — and filling it from memory would
-> reproduce that failure rather than fix it.
->
-> **How it could actually be closed:**
-> * Open Substance 3D Painter on a machine that has it → **Help menu → scripting
->   documentation**, and ingest from there (the other device may have Painter).
-> * Or capture the in-app doc pages and ingest them as pasted content via Mode 3.
-> * Do **not** ingest a third-party mirror of the API docs — provenance for this
->   reference file is the entire point of the gap.
+> **The lesson is the same one this file already teaches, pointed at the machine
+> instead of the corpus: suspect the instrument before the data.** A claim about
+> the local environment is a measurement like any other, it goes stale, and it is
+> cheaper to re-run than any of the ingests it blocks. Re-check before treating
+> "not installed / not available here" as a blocker, and prefer recording the
+> command that would settle it over recording the conclusion.
+
+> ⚙️ **How these were ingested — reusable for any bundled/local doc set.**
+> `ingest.py` takes a `file://` URL directly (`urllib.request.urlopen` handles
+> the scheme), so no new flag was needed:
+> `python ingest.py "file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/substance_painter/ui.html" --skip-video --title "Python API: ui Module" --author "..."`
+> — percent-encode the spaces, or build the URI with `pathlib.Path(...).as_uri()`.
+> Two cautions, both learned by reverting a commit:
+> **(1) Sphinx `index.html` pages are tables of contents.** `plugins/index.html`
+> yielded 673 chars of real content and was reverted as a stub — measure with
+> `fetch_article()` before ingesting a doc set, not after.
+> **(2) A dotted module name collapses in the slug**: "substance_painter.export
+> Module" became `substance-painterexport-module`. Titled as
+> `Python API: export Module` instead.
+> This ingest also exposed a real defect, fixed across all five skills: the ASR
+> hallucination safeguard was running on article text that never went through
+> ASR, and flagged the `export` page because its closing code example
+> legitimately repeats "export" 10×. `run_safeguards()` now takes `is_asr`.
 
 ### 2b. 🔴 Texture transfer: scanned high-poly → retopologized low-poly — **found by a real question, 2026-08-31**
 
