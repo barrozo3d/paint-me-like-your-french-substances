@@ -1114,6 +1114,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/python-api-ui-module.md
 
+
+### Python API: event Module
+- **Source:** Article
+- **URL:** file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/substance_painter/event.html
+- **Author:** Adobe Substance 3D Painter 12.1.4 bundled docs
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/python-api-event-module.md
+
 ---
 
 ## Tag Reference
