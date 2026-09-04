@@ -1075,55 +1075,60 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** Article
 - **URL:** file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/plugins/substance_painter_plugins.html
 - **Author:** Adobe Substance 3D Painter 12.1.4 bundled docs
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc
+- **Tags:** python-scripting, python-api, plugin, painter-12, intermediate
+- **Summary:** The substance_painter_plugins module: how Painter finds, starts, stops and reloads a plugin. A plugin is a plain Python module on substance_painter_plugins.path exposing start_plugin() and close_plugin(). Covers the SUBSTANCE_PAINTER_PLUGINS_PATH environment variable, the three expected subdirectories (plugins/ optional, startup/ always loaded, modules/ shared utilities, with plugins/ taking precedence), update_sys_path() which must be called explicitly after changing path, and reload_plugin() for iterating during development including the plugin's own reload_plugin hook for reloading sub-modules.
 - **File:** tutorials/substance-painter-plugins-module.md
+- **Related:** Versioning Plugin Example (`versioning-plugin-example.md`), Python API: event Module (`python-api-event-module.md`), Python API: ui Module (`python-api-ui-module.md`) — share `python-scripting`, `python-api`, `plugin`; the plugin lifecycle these all hang off.
 
 
 ### Versioning Plugin Example
 - **Source:** Article
 - **URL:** file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/plugins/versioning_plugin.html
 - **Author:** Adobe Substance 3D Painter 12.1.4 bundled docs
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc
+- **Tags:** python-scripting, python-api, plugin, ui-plugin, export, painter-12, intermediate
+- **Summary:** Adobe's complete versioning_plugin.py skeleton - the best single reference for the shape of a real Painter plugin. Builds a PySide6 dock widget with add_dock_widget(), adds a Versioned Export action to ApplicationMenu.File with add_action(), connects five project lifecycle events through event.DISPATCHER, tears the UI down in __del__ with delete_ui_element(), and implements module-level start_plugin()/close_plugin(). Its export slot builds a json_config by hand - inline export preset packing R/G/B/A from the BaseColor document map, png/8-bit/dithering/infinite padding - and assembles exportList by walking all_texture_sets() and keeping stacks whose BaseColor channel is_color().
 - **File:** tutorials/versioning-plugin-example.md
+- **Related:** substance_painter_plugins Module (`substance-painter-plugins-module.md`), Python API: ui Module (`python-api-ui-module.md`), Python API: event Module (`python-api-event-module.md`), Python API: export Module (`python-api-export-module.md`) — share `python-scripting`, `python-api`; this file is the worked example that uses all four.
 
 
 ### Python API: export Module
 - **Source:** Article
 - **URL:** file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/substance_painter/export.html
 - **Author:** Adobe Substance 3D Painter 12.1.4 bundled docs
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc
+- **Tags:** python-scripting, python-api, export, export-preset, channel-packing, painter-12, advanced
+- **Summary:** substance_painter.export - scripted texture and mesh export, the scripting equivalent of the Export textures and Export mesh windows. Full json_config schema: exportPath, defaultExportPreset, exportPresets with maps/fileName wildcards ($textureSet, $udim, $mesh, $project, $sceneMaterial), channels (destChannel/srcChannel/srcMapType/srcMapName across documentMap, meshMap, virtualMap and defaultMap), exportList by rootPath with outputMaps and uvTiles filters, and ordered exportParameters override rules. Also sizeLog2 as an exponent, the five paddingAlgorithm values and which need dilationDistance, list_project_textures() as a dry run, PredefinedExportPreset vs ResourceExportPreset and list_output_maps(), export_mesh() with MeshExportOption, and the rule that the returned status is never Error because failures raise instead.
 - **File:** tutorials/python-api-export-module.md
+- **Related:** Versioning Plugin Example (`versioning-plugin-example.md`), Python API: event Module (`python-api-event-module.md`) — share `python-scripting`, `python-api`, `export`.
 
 
 ### Python API: ui Module
 - **Source:** Article
 - **URL:** file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/substance_painter/ui.html
 - **Author:** Adobe Substance 3D Painter 12.1.4 bundled docs
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc
+- **Tags:** python-scripting, python-api, ui-plugin, painter-12, intermediate
+- **Summary:** substance_painter.ui - the entry points for putting PySide6 widgets into Painter: get_main_window(), add_dock_widget(), add_toolbar(), add_plugins_toolbar_widget(), add_menu(), add_action() against the six ApplicationMenu entries (File, Edit, Mode, Window, Viewport, Help), and delete_ui_element() to clean up. UIMode flags (Edition, Visualisation/Iray, Baking) scope where UI appears and drive get_layout/set_layout/get_layout_mode/reset_layout. Practical details: a widget's windowIcon becomes the quick button to reopen a closed dock, a unique objectName is what makes geometry save and restore (mandatory for add_toolbar), add_action clears the action's tooltip, and nearly every call raises ServiceNotFoundError before the UI service has started.
 - **File:** tutorials/python-api-ui-module.md
+- **Related:** Versioning Plugin Example (`versioning-plugin-example.md`), Python API: event Module (`python-api-event-module.md`), substance_painter_plugins Module (`substance-painter-plugins-module.md`) — share `python-scripting`, `python-api`.
 
 
 ### Python API: event Module
 - **Source:** Article
 - **URL:** file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/substance_painter/event.html
 - **Author:** Adobe Substance 3D Painter 12.1.4 bundled docs
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter
+- **Version:** 12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc
+- **Tags:** python-scripting, python-api, plugin, painter-12, intermediate
+- **Summary:** substance_painter.event - subscribing to application events via DISPATCHER.connect(EventClass, callback). connect() holds a WEAK reference and silently disconnects once the callback is garbage collected; connect_strong() never does - the usual cause of a handler that mysteriously stops firing. Project loading is asynchronous, so ProjectEditionEntered, not ProjectOpened, is the event that means ready to work with. Covers ExportTexturesAboutToStart/Ended, baking events with StopSource and progress, TextureStateEvent with its persistent cache_key and global 500ms throttling floor, LayerStacksModelDataChanged, shelf crawling, resource reload, BusyStatusChanged and GraphicalUserInterfaceStarted - the event to wait for before building any UI.
 - **File:** tutorials/python-api-event-module.md
+- **Related:** Versioning Plugin Example (`versioning-plugin-example.md`), Python API: export Module (`python-api-export-module.md`), Python API: ui Module (`python-api-ui-module.md`) — share `python-scripting`, `python-api`, `plugin`.
 
 ---
 

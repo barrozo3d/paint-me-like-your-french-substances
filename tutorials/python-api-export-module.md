@@ -4,10 +4,10 @@ source: Article
 url: file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/substance_painter/export.html
 author: Adobe Substance 3D Painter 12.1.4 bundled docs
 ingested: 2026-09-04
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc"
+tags: [python-scripting, python-api, export, export-preset, channel-packing, painter-12, advanced]
+extraction_status: complete
 frames_dir: tutorials/frames/python-api-export-module/
 frame_count: 0
 frame_status: skipped
@@ -37,27 +37,65 @@ Frame capture was skipped for this ingest (--skip-video). Text-only extraction.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Scripted texture and mesh export: build a `json_config` dict — or reference an existing export preset by name or `ResourceID` URL — dry-run it through `list_project_textures()`, then write to disk with `export_project_textures()`.
 
 ### Summary
-[PENDING EXTRACTION]
+This module is the scripting equivalent of the **Export textures** and **Export mesh** windows, and its centre of gravity is the `json_config` schema. Four top-level keys carry the work: `exportPath`, `defaultExportPreset` (a name defined in `exportPresets`, or a `substance_painter.resource.ResourceID(...).url()`), `exportList` (which Texture Sets / stacks to export, by `rootPath`, optionally filtered by `outputMaps` and `uvTiles`), and `exportParameters` (an ordered list of override rules, each with a `filter`). The override model is worth reading twice: each parameter starts from the preset map's own `parameters`, then every rule in `exportParameters` is applied **in order** where its filter matches — and if any parameter of any texture file is still undefined at the end, the whole configuration is invalid. Presets come in two flavours: `PredefinedExportPreset` (embedded, dynamic map list, may run pre/post processes such as glTF, not editable) and `ResourceExportPreset` (a shelf resource, user-editable), and both expose `list_output_maps()` returning maps in the same format as the JSON `maps` list — which is how the docs' second example appends a `View_2D` virtual map to the stock *PBR Metallic Roughness* preset and exports under a new name.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Open or confirm a project (`substance_painter.project.open(...)`) — every call here raises `ProjectError` without one.
+2. Choose how the preset is supplied: reference a shelf preset with `substance_painter.resource.ResourceID(context="starter_assets", name="Arnold (AiStandard)").url()`, or define one inline under `exportPresets`.
+3. Define each map: **`fileName`** (wildcards `$project`, `$mesh`, `$textureSet`, `$sceneMaterial`, `$udim`, `$uvTileName`, `$colorSpace`) and a **`channels`** list of `{destChannel, srcChannel, srcMapType, srcMapName}`.
+4. Pick `srcMapType` per channel — **`documentMap`** (basecolor, height, roughness, metallic, normal, opacity, emissive, ambientOcclusion, user0–user7 …), **`meshMap`** (ambient_occlusion, id, curvature, normal_base, world_space_normals, position, thickness), **`virtualMap`** (Normal_OpenGL, Normal_DirectX, AO_Mixed, f0, 1/ior, Glossiness2, View_2D …), or **`defaultMap`** (`black`, `white`).
+5. Respect the destination-channel rule: besides alpha, either **R+G+B** must be specified **or L only**. A colour source read into `L` generates a mix of R+G+B.
+6. Set per-map `parameters`: `fileFormat`, `bitDepth` (must be supported by the format), `dithering`, `sizeLog2`, `paddingAlgorithm`, `dilationDistance`.
+7. Understand **`sizeLog2`**: an exponent, so `10` = 1024. A single integer applies to the **larger** side and preserves aspect (a 2048×4096 map exported at `10` becomes 512×1024); a two-integer array ignores aspect entirely.
+8. Choose a **`paddingAlgorithm`** from `passthrough`, `color`, `transparent`, `diffusion`, `infinite` — and supply `dilationDistance` for `transparent`, `color` and `diffusion`, which need it.
+9. Build **`exportList`**: one entry per `rootPath` (a Texture Set name, or `TextureSet/Stack` when the set has stacks), optionally narrowed by `filter.outputMaps` (matching the preset's `fileName` including wildcards) and `filter.uvTiles` (`[[1,1],[1,2]]`), optionally overriding `exportPreset`.
+10. Layer **`exportParameters`** rules in order — `{"filter": {}}` matches everything, `{"filter": {"dataPaths": ["01_Head"]}}` matches Texture Sets, `{"filter": {"outputMaps": [...]}}` matches maps. Good practice per the docs: define a catch-all rule so no parameter can end up undefined.
+11. **Dry-run first:** `list_project_textures(json_config)` returns exactly what would be written, keyed by `(Texture Set name, stack name)`. Then `export_project_textures(json_config)` returns a `TextureExportResult` with `status`, `message` and `textures`.
+12. Read the status honestly: the returned status is **never `Error`** — a failing export raises instead (`ValueError` for an ill-formed or contextually invalid config, `ProjectError` for no project), though the `ExportTexturesEnded` event *does* receive `Error`. A user cancellation returns `Cancelled` **plus the files already written**.
+13. For meshes: pick a `MeshExportOption` — the docs' example tests `scene_is_triangulated()` and `scene_has_tessellation()` to choose between `TriangulatedMesh` and `TessellationNormalsBaseMesh` — then `export_mesh(filename, export_option)` and check `export_result.status`.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Nodes / Tools / Settings
+- **Functions:** `list_project_textures(json_config)`, `export_project_textures(json_config)`, `export_mesh(filename, option)`, `get_default_export_path()`, `list_predefined_export_presets()`, `list_resource_export_presets()`.
+- **Classes:** `ExportStatus` (`Success`, `Cancelled`, `Warning`, `Error`), `TextureExportResult` (`status`, `message`, `textures`), `PredefinedExportPreset` (`name`, `url`, `list_output_maps(stack)`), `ResourceExportPreset` (`resource_id`, `list_output_maps()`), `MeshExportOption`, `scene_is_triangulated()`, `scene_has_tessellation()`.
+- **`json_config` keys:** `exportPath`, `exportShaderParams`, `defaultExportPreset`, `exportPresets[].{name,maps[]}`, `maps[].{fileName,channels[],parameters}`, `channels[].{destChannel,srcChannel,srcMapType,srcMapName}`, `exportList[].{rootPath,filter{outputMaps,uvTiles},exportPreset}`, `exportParameters[].{filter{dataPaths,outputMaps},parameters}`.
+- **Parameters:** `fileFormat`, `bitDepth`, `dithering`, `sizeLog2`, `paddingAlgorithm`, `dilationDistance`.
+- **Filename wildcards:** `$project`, `$mesh`, `$textureSet`, `$sceneMaterial`, `$udim`, `$uvTileName`, `$colorSpace`.
+- **Related events:** `substance_painter.event.ExportTexturesAboutToStart`, `ExportTexturesEnded`.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Advanced
 
-### App & Version
-[PENDING EXTRACTION]
+### Foundry App & Version
+Substance 3D Painter 12.1.4, Python API 0.3.5.
 
 ### Tags
-[PENDING EXTRACTION]
+`python-scripting`, `python-api`, `export`, `export-preset`, `channel-packing`, `painter-12`, `advanced`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Versioning Plugin Example](versioning-plugin-example.md) — a minimal working `json_config` in context, inside a real plugin.
+- [Python API: event Module](python-api-event-module.md) — `ExportTexturesAboutToStart` / `ExportTexturesEnded` and their payloads.
+- [substance_painter_plugins Module](substance-painter-plugins-module.md) — how the exporting plugin gets loaded.
+
+> **Note on the `channel-packing` tag.** The `channels` block of an export preset
+> — `destChannel` / `srcChannel` / `srcMapType` / `srcMapName` — *is* channel
+> packing, expressed as configuration: this is how you write roughness into G and
+> metallic into B from script. It is the scripted counterpart to the UI-driven
+> packing entry in this library, not a replacement for it, and it teaches the
+> mechanism rather than the reasoning about which packing a given engine wants.
+
+---
+
+> **Provenance.** Ingested from the Python API documentation **bundled inside**
+> Substance 3D Painter 12.1.4 on this machine
+> (`C:\Program Files\Adobe Substance 3D Painter\resources\python-doc`, reached in
+> the app via Help → scripting documentation). It is first-party Adobe
+> documentation, but the `url:` is a local `file://` path and therefore not
+> reachable from another machine — the public Experience League paths for the
+> Python API redirect to a generic page, which is why the bundled copy is the
+> source. Re-fetchable on any machine with Painter installed at the same path;
+> the API version (`0.3.5`) is the thing to check before trusting a signature.

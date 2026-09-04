@@ -4,10 +4,10 @@ source: Article
 url: file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/plugins/versioning_plugin.html
 author: Adobe Substance 3D Painter 12.1.4 bundled docs
 ingested: 2026-09-04
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc"
+tags: [python-scripting, python-api, plugin, ui-plugin, export, painter-12, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/versioning-plugin-example/
 frame_count: 0
 frame_status: skipped
@@ -37,27 +37,56 @@ Frame capture was skipped for this ingest (--skip-video). Text-only extraction.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A complete, runnable plugin skeleton that wires all three halves of the API together: a docked Qt log widget, a custom **File** menu action, subscriptions to the five project lifecycle events, and a scripted texture export — written as the integration point for a versioning system.
 
 ### Summary
-[PENDING EXTRACTION]
+Adobe ships this as `versioning_plugin.py`, and it is the most useful single file in the bundled docs because it shows the *shape* of a real plugin rather than one call at a time. A `VersioningPlugin` class builds a read-only `QTextEdit` and registers it with `substance_painter.ui.add_dock_widget()`, adds a "Versioned Export..." `QAction` to `ApplicationMenu.File`, and connects five project events through `substance_painter.event.DISPATCHER`. Every handler is named `on_*` and left deliberately empty with a marked comment block — the documented seam where studio integration code goes. `__del__` tears the UI back down with `delete_ui_element()`, and module-level `start_plugin()` / `close_plugin()` satisfy the plugin contract. The export action builds a complete `json_config` by hand — export path, an inline preset packing R/G/B/A from the **BaseColor** document map, PNG/8-bit/dithering/infinite padding parameters, and an `exportList` assembled by walking `all_texture_sets()` and keeping the stacks whose BaseColor channel `is_color()`.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. **Build the UI in `__init__`:** create a read-only `QtWidgets.QTextEdit`, set its `windowTitle`, and register it with `substance_painter.ui.add_dock_widget(self.log)`.
+2. **Add the menu action:** `QtGui.QAction("Versioned Export...")`, connect `triggered` to the export slot, then `substance_painter.ui.add_action(substance_painter.ui.ApplicationMenu.File, self.export_action)`.
+3. **Subscribe to lifecycle events** by iterating a `{event_class: callback}` dict and calling `substance_painter.event.DISPATCHER.connect(event, callback)` — `ProjectOpened`, `ProjectCreated`, `ProjectAboutToClose`, `ProjectAboutToSave`, `ProjectSaved`.
+4. **Write the `on_*` handlers** as the integration seam. Each logs and carries a `####` comment block for custom code. Note `on_project_about_to_save(e)` reads **`e.file_path`** off the event object — events carry payload.
+5. **Tear down in `__del__`:** `substance_painter.ui.delete_ui_element()` for both the dock widget and the action. Skipping this leaves orphaned UI behind on unload.
+6. **Ask the user for a destination** with `QtWidgets.QFileDialog.getExistingDirectory(substance_painter.ui.get_main_window(), ...)` — parenting to the main window is what `get_main_window()` is for — and abort quietly when the dialog returns empty.
+7. **Compose the export config:** `exportPath` = chosen directory + project name; `exportShaderParams: False`; an inline `exportPresets` entry named `OnlyBaseColorExamplePreset` whose single map `$textureSet_BaseColor` maps each of R/G/B/A from `srcMapType: "DocumentMap"`, `srcMapName: "BaseColor"`; and `exportParameters` of `png` / `8`-bit / `dithering: True` / `paddingAlgorithm: "infinite"`.
+8. **Build `exportList` defensively:** for each `substance_painter.textureset.all_texture_sets()`, `get_stack()`, `get_channel(ChannelType.BaseColor)`, and append `{"rootPath": texture_set.name(), "exportPreset": ...}` only when `channel.is_color()` — wrapped in `try/except` so a texture set without that channel is skipped rather than fatal.
+9. **Run it through the plugin's own hooks:** call `on_export_about_to_start(json_config)`, then `substance_painter.export.export_project_textures(json_config)` inside `try/except ValueError`, passing the result to `on_export_finished(res)` (which walks `res.textures.values()` to log every written file) or the error to `on_export_error(err)`.
+10. **Satisfy the plugin contract at module level:** a global instance created in `start_plugin()` and deleted in `close_plugin()`, plus an `if __name__ == "__main__": start_plugin()` for direct execution.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Nodes / Tools / Settings
+- **UI:** `substance_painter.ui.add_dock_widget()`, `add_action()`, `ApplicationMenu.File`, `get_main_window()`, `delete_ui_element()`.
+- **Events:** `substance_painter.event.DISPATCHER.connect()`; `ProjectOpened`, `ProjectCreated`, `ProjectAboutToClose`, `ProjectAboutToSave` (payload `file_path`), `ProjectSaved`.
+- **Export:** `substance_painter.export.export_project_textures(json_config)`; result fields `message`, `textures` (dict keyed by stack); raises `ValueError` on an invalid config.
+- **Texture sets:** `substance_painter.textureset.all_texture_sets()`, `Stack.get_channel()`, `ChannelType.BaseColor`, `channel.is_color()`.
+- **Qt:** PySide6 — `QtWidgets.QTextEdit`, `QtGui.QAction`, `QtWidgets.QFileDialog.getExistingDirectory`, `@QtCore.Slot()`.
+- **Plugin contract:** module-level `start_plugin()` / `close_plugin()` holding a global instance.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate
 
-### App & Version
-[PENDING EXTRACTION]
+### Foundry App & Version
+Substance 3D Painter 12.1.4, Python API 0.3.5. UI code is **PySide6** — an older plugin written against PySide2 will not import unchanged.
 
 ### Tags
-[PENDING EXTRACTION]
+`python-scripting`, `python-api`, `plugin`, `ui-plugin`, `export`, `painter-12`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [substance_painter_plugins Module](substance-painter-plugins-module.md) — the `start_plugin`/`close_plugin` contract this file implements.
+- [Python API: ui Module](python-api-ui-module.md) — full reference for the dock/menu/toolbar calls used here.
+- [Python API: event Module](python-api-event-module.md) — every event class this plugin connects to, plus the export events.
+- [Python API: export Module](python-api-export-module.md) — the full `json_config` schema this plugin writes a minimal version of.
+
+---
+
+> **Provenance.** Ingested from the Python API documentation **bundled inside**
+> Substance 3D Painter 12.1.4 on this machine
+> (`C:\Program Files\Adobe Substance 3D Painter\resources\python-doc`, reached in
+> the app via Help → scripting documentation). It is first-party Adobe
+> documentation, but the `url:` is a local `file://` path and therefore not
+> reachable from another machine — the public Experience League paths for the
+> Python API redirect to a generic page, which is why the bundled copy is the
+> source. Re-fetchable on any machine with Painter installed at the same path;
+> the API version (`0.3.5`) is the thing to check before trusting a signature.

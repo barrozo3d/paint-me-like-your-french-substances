@@ -4,10 +4,10 @@ source: Article
 url: file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/substance_painter/ui.html
 author: Adobe Substance 3D Painter 12.1.4 bundled docs
 ingested: 2026-09-04
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc"
+tags: [python-scripting, python-api, ui-plugin, painter-12, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/python-api-ui-module/
 frame_count: 0
 frame_status: skipped
@@ -37,27 +37,54 @@ Frame capture was skipped for this ingest (--skip-video). Text-only extraction.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+The documented entry points for putting your own PySide6 widgets into Painter's interface — dock widgets, toolbars, menu actions — plus reading, restoring and resetting the layout per UI mode.
 
 ### Summary
-[PENDING EXTRACTION]
+`substance_painter.ui` is small and almost entirely Qt-shaped: it hands you the real `QMainWindow` (`get_main_window()`), accepts your `QWidget` as a dock (`add_dock_widget`), your `QMenu` (`add_menu`), your `QAction` against one of six standard application menus (`add_action`), and creates toolbars for you (`add_toolbar`). Two enums govern placement: **`UIMode`** (`Edition` 1, `Visualisation` 2 — Iray, `Baking` 4 — note the values are **flags**, and several calls take "a combination of UIMode flags") and **`ApplicationMenu`** (`File`, `Edit`, `Mode`, `Window`, `Viewport`, `Help`). Almost every function raises **`ServiceNotFoundError`** if Painter has not started its UI service, which is the concrete reason a plugin should wait for the `GraphicalUserInterfaceStarted` event before touching any of it. Two details save real debugging time: a widget's **`windowIcon`** becomes the quick-button used to reopen a closed dock, and a **unique `objectName`** is what makes dock and toolbar geometry save and restore correctly — for `add_toolbar` the docs call a unique `object_name` *mandatory*.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Wait for the UI to exist — connect to `substance_painter.event.GraphicalUserInterfaceStarted` before instantiating widgets, or expect `ServiceNotFoundError`.
+2. Get the application window with **`get_main_window()`** (returns a real `PySide6.QtWidgets.QMainWindow`) and use it to parent dialogs.
+3. Add a panel with **`add_dock_widget(widget, ui_modes=UIMode.Edition)`** — returns the created `QDockWidget`. Set the widget's `windowIcon` so a closed dock can be reopened from its quick button, and give it a unique `objectName` so its position and geometry persist.
+4. Add a toolbar with **`add_toolbar(title, object_name, ui_modes=UIMode.Edition)`** — a **unique** `object_name` is mandatory for layout save/restore — or drop a single widget into the shared plugins toolbar with **`add_plugins_toolbar_widget(widget)`**.
+5. Add commands with **`add_action(ApplicationMenu.File, action)`** (⚠️ this **clears the action's tooltip**) or install a whole `QMenu` with **`add_menu(menu)`**.
+6. Scope UI to modes by combining `UIMode` flags, and read or change the mode at runtime with **`get_current_mode()`** and **`switch_to_mode(mode)`**.
+7. Save and restore layouts: **`get_layout(mode)`** returns `bytes`, **`get_layout_mode(layout)`** tells you which mode a saved blob belongs to, **`set_layout(layout)`** restores it and returns the restored mode, **`reset_layout(mode)`** goes back to default. Bad layout data raises `RuntimeError`.
+8. Clean up on unload with **`delete_ui_element(element)`** for every widget and action you added — the object is destroyed, and any later call on it raises.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Nodes / Tools / Settings
+- **Enums:** `UIMode` — `Edition` (1), `Visualisation` (2, Iray), `Baking` (4); `ApplicationMenu` — `File`, `Edit`, `Mode`, `Window`, `Viewport`, `Help`. Both expose `.name` (standard `enum.Enum`).
+- **Window:** `show_main_window()`, `get_main_window() -> QMainWindow`.
+- **Adding UI:** `add_dock_widget(widget, ui_modes) -> QDockWidget`, `add_plugins_toolbar_widget(widget)`, `add_menu(menu)`, `add_toolbar(title, object_name, ui_modes) -> QToolBar`, `add_action(menu, action)`.
+- **Removing UI:** `delete_ui_element(element)`.
+- **Modes:** `get_current_mode()`, `switch_to_mode(mode)`.
+- **Layouts:** `get_layout(mode) -> bytes`, `get_layout_mode(layout) -> UIMode`, `set_layout(layout) -> UIMode`, `reset_layout(mode)`.
+- **Exceptions:** `ServiceNotFoundError` (UI service not started) on nearly every call; `RuntimeError` on malformed layout data.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate
 
-### App & Version
-[PENDING EXTRACTION]
+### Foundry App & Version
+Substance 3D Painter 12.1.4, Python API 0.3.5. Widgets are **PySide6** (`PySide6.QtWidgets`, `PySide6.QtGui`).
 
 ### Tags
-[PENDING EXTRACTION]
+`python-scripting`, `python-api`, `ui-plugin`, `painter-12`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Versioning Plugin Example](versioning-plugin-example.md) — `add_dock_widget`, `add_action` and `delete_ui_element` used end to end.
+- [Python API: event Module](python-api-event-module.md) — `GraphicalUserInterfaceStarted`, the event to wait for before building UI.
+- [substance_painter_plugins Module](substance-painter-plugins-module.md) — the plugin lifecycle that owns these widgets.
+
+---
+
+> **Provenance.** Ingested from the Python API documentation **bundled inside**
+> Substance 3D Painter 12.1.4 on this machine
+> (`C:\Program Files\Adobe Substance 3D Painter\resources\python-doc`, reached in
+> the app via Help → scripting documentation). It is first-party Adobe
+> documentation, but the `url:` is a local `file://` path and therefore not
+> reachable from another machine — the public Experience League paths for the
+> Python API redirect to a generic page, which is why the bundled copy is the
+> source. Re-fetchable on any machine with Painter installed at the same path;
+> the API version (`0.3.5`) is the thing to check before trusting a signature.

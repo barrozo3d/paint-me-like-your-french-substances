@@ -4,10 +4,10 @@ source: Article
 url: file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/substance_painter/event.html
 author: Adobe Substance 3D Painter 12.1.4 bundled docs
 ingested: 2026-09-04
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc"
+tags: [python-scripting, python-api, plugin, painter-12, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/python-api-event-module/
 frame_count: 0
 frame_status: skipped
@@ -37,27 +37,55 @@ Frame capture was skipped for this ingest (--skip-video). Text-only extraction.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Subscribe callbacks to application events through `substance_painter.event.DISPATCHER.connect(EventClass, callback)` — with `connect` holding a **weak** reference and `connect_strong` holding a strong one.
 
 ### Summary
-[PENDING EXTRACTION]
+The event module is how a plugin reacts instead of polls. One global `DISPATCHER` carries every event class, and the weak/strong distinction is the first thing to get right: **`connect()` stores the callback as a weak reference and silently disconnects itself once the callback is garbage collected**, which is exactly why a handler bound to a short-lived local object stops firing for no visible reason; `connect_strong()` never auto-disconnects. The event families are project lifecycle, export, baking, shelf, layer stack, resources, display and application. The single most load-bearing note on the page is about project loading being **asynchronous**: `ProjectOpened` and `ProjectCreated` fire while the project *may still be loading*, and the event that means "ready to work with" is **`ProjectEditionEntered`** — the point at which querying or editing project properties, baking, or exporting is actually safe.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Connect with `substance_painter.event.DISPATCHER.connect(EventClass, callback)`; keep a reference to the callback's owner alive, or use **`connect_strong()`** when you cannot.
+2. Disconnect explicitly with `disconnect(EventClass, callback)` when tearing a plugin down.
+3. **Do work on `ProjectEditionEntered`, not `ProjectOpened`** — opening is asynchronous and the project may still be loading. `ProjectEditionLeft` marks the end of editability.
+4. Use the rest of the project lifecycle for integration hooks: `ProjectCreated`, `ProjectAboutToSave` (payload **`file_path`**), `ProjectSaved`, `ProjectAboutToClose`, `ProjectClosed`.
+5. Wait for **`GraphicalUserInterfaceStarted`** before instantiating any UI — the page states plainly that if you want every widget to exist, wait for this first.
+6. Hook exports with `ExportTexturesAboutToStart` (payload: the files *about to be* written, grouped by `(Texture Set name, stack name)`) and `ExportTexturesEnded` (payload: `status`, human-readable `message`, and the files actually written).
+7. Track long operations: `BakingProcessAboutToStart` (carries a `StopSource` you can compare against the one returned by `bake_async()` to identify *which* bake), `BakingProcessProgress` (`progress` 0.0–1.0), `BakingProcessEnded` (`status`). For general busyness use `BusyStatusChanged(busy)` alongside `project.is_busy()` / `project.execute_when_not_busy()`.
+8. Watch document textures with `TextureStateEvent` — `action` (`ADD`/`UPDATE`/`REMOVE` via `TextureStateEventAction`), `stack_id` (usable to build a `textureset.Stack`), `tile_indices`, `channel_type`, and a **session-persistent `cache_key`**. ⚠️ Throttling is **global**: `set_cache_key_invalidation_throttling_period(period)` refuses anything below **500 ms** and the docs warn that heavy work in this callback can badly hurt painting responsiveness.
+9. Follow the layer stack with `LayerStacksModelDataChanged` — the page's own example connects it, then calls `sp.textureset.get_active_stack()` and `sp.layerstack.get_selected_nodes(stack)` to read the current selection.
+10. Others worth knowing: `ShelfCrawlingStarted` / `ShelfCrawlingEnded` (`shelf_name`, paired with `Shelf.is_crawling()`), `ReloadResourcesStarted` / `ReloadResourcesEnded` (carrying `reloaded_resources` and per-resource `resource_errors`), `EngineComputationsStatusChanged`, and `CameraPropertiesChanged(camera_id)`.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Nodes / Tools / Settings
+- **Dispatcher:** `DISPATCHER`, `Dispatcher.connect()` (weak ref, auto-disconnects on GC), `connect_strong()` (strong ref), `disconnect()`.
+- **Project:** `ProjectOpened`, `ProjectCreated`, `ProjectAboutToClose`, `ProjectClosed`, `ProjectAboutToSave(file_path)`, `ProjectSaved`, **`ProjectEditionEntered`**, `ProjectEditionLeft`, `BusyStatusChanged(busy)`.
+- **Export:** `ExportTexturesAboutToStart(textures)`, `ExportTexturesEnded(status, message, textures)`.
+- **Baking:** `BakingProcessAboutToStart(stop_source)`, `BakingProcessProgress(progress)`, `BakingProcessEnded(status)`.
+- **Textures:** `TextureStateEvent(action, stack_id, tile_indices, channel_type, cache_key)`, `TextureStateEventAction` (`ADD`/`UPDATE`/`REMOVE`), `cache_key_invalidation_throttling_period()`, `set_cache_key_invalidation_throttling_period(period)` (≥ 500 ms, global, `ValueError` below).
+- **Others:** `GraphicalUserInterfaceStarted`, `LayerStacksModelDataChanged`, `ShelfCrawlingStarted/Ended(shelf_name)`, `ReloadResourcesStarted/Ended`, `ReloadedResourceResult`, `ReloadedResourceError`, `EngineComputationsStatusChanged`, `CameraPropertiesChanged(camera_id)`, base class `Event`.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate
 
-### App & Version
-[PENDING EXTRACTION]
+### Foundry App & Version
+Substance 3D Painter 12.1.4, Python API 0.3.5.
 
 ### Tags
-[PENDING EXTRACTION]
+`python-scripting`, `python-api`, `plugin`, `painter-12`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Versioning Plugin Example](versioning-plugin-example.md) — connects five of these project events in a `{event: callback}` dict.
+- [Python API: export Module](python-api-export-module.md) — the export the export events wrap.
+- [Python API: ui Module](python-api-ui-module.md) — why `GraphicalUserInterfaceStarted` matters before building widgets.
+
+---
+
+> **Provenance.** Ingested from the Python API documentation **bundled inside**
+> Substance 3D Painter 12.1.4 on this machine
+> (`C:\Program Files\Adobe Substance 3D Painter\resources\python-doc`, reached in
+> the app via Help → scripting documentation). It is first-party Adobe
+> documentation, but the `url:` is a local `file://` path and therefore not
+> reachable from another machine — the public Experience League paths for the
+> Python API redirect to a generic page, which is why the bundled copy is the
+> source. Re-fetchable on any machine with Painter installed at the same path;
+> the API version (`0.3.5`) is the thing to check before trusting a signature.

@@ -4,10 +4,10 @@ source: Article
 url: file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/plugins/substance_painter_plugins.html
 author: Adobe Substance 3D Painter 12.1.4 bundled docs
 ingested: 2026-09-04
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter"
+version: "12.1.4 (Python API 0.3.5) -- bundled docs, resources/python-doc"
+tags: [python-scripting, python-api, plugin, painter-12, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/substance-painter-plugins-module/
 frame_count: 0
 frame_status: skipped
@@ -37,27 +37,53 @@ Frame capture was skipped for this ingest (--skip-video). Text-only extraction.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+A Substance 3D Painter plugin is an ordinary Python module placed on `substance_painter_plugins.path`, exposing `start_plugin()` and `close_plugin()`; the `substance_painter_plugins` module lists, starts, stops and reloads them.
 
 ### Summary
-[PENDING EXTRACTION]
+This is the plugin host: the module that discovers plugin modules, tracks which are running, and loads or unloads them. `substance_painter_plugins.path` is a list of search paths initialised from the **`SUBSTANCE_PAINTER_PLUGINS_PATH`** environment variable plus the Painter installation directory and the user resources directory — and changing it does nothing until `update_sys_path()` is called explicitly. Each plugins directory is expected to hold **three subdirectories**, all added to `sys.path`: `plugins/` (optional components), `startup/` (always loaded at application startup), and `modules/` (shared utility code). Modules in `plugins/` and `startup/` must define `start_plugin()` and `close_plugin()`, called after load and before unload respectively, and **`plugins/` takes precedence over `startup/`** when the same module name appears in both.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Put the plugin `.py` module (or package) in a `plugins/` subdirectory of a path on `substance_painter_plugins.path`.
+2. To add a search path from script, append to `substance_painter_plugins.path` and then call **`update_sys_path()`** — the update is not automatic. To add one from outside the app, set **`SUBSTANCE_PAINTER_PLUGINS_PATH`**.
+3. Give the module a **`start_plugin()`** and a **`close_plugin()`**; Painter calls them after loading and before unloading.
+4. Enumerate what is available with **`plugin_module_names()`** (from `plugins/`) and **`startup_module_names()`** (from `startup/`).
+5. Import a plugin by name with `importlib.import_module("hello_plugin")`, then guard with **`is_plugin_started(module)`** before calling **`start_plugin(module)`** — the pattern in the module's own example.
+6. Stop one with **`close_plugin(module, gc_collect=True)`** (a full garbage collection runs when `gc_collect` is True), or stop everything with **`close_all_plugins()`**.
+7. **Iterate during development with `reload_plugin(module)`** — it closes, reloads and restarts. If the plugin defines its own `reload_plugin` method, that runs *between* close and restart, which is where a package reloads its own sub-modules (plain `importlib.reload` will not).
+8. `load_startup_modules()` loads everything in `startup/`; `substance_painter_plugins.plugins` is the dict of currently started plugins.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Nodes / Tools / Settings
+- **`substance_painter_plugins.path`** (list) — search paths; initialised from `SUBSTANCE_PAINTER_PLUGINS_PATH`, the install directory and the user resources directory.
+- **Directory contract:** `plugins/` (optional, `start_plugin`/`close_plugin` required), `startup/` (always loaded at startup, same contract), `modules/` (shared utilities). `plugins/` wins over `startup/`.
+- **`update_sys_path()`** — must be called after modifying `path`.
+- **`start_plugin(module)`**, **`close_plugin(module, gc_collect=True)`**, **`is_plugin_started(module)`**, **`reload_plugin(module)`**, **`close_all_plugins()`**, **`load_startup_modules()`**.
+- **`plugin_module_names()`**, **`startup_module_names()`** — discovery; **`plugins`** (dict) — what is running.
+- Environment variable: **`SUBSTANCE_PAINTER_PLUGINS_PATH`**.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate
 
-### App & Version
-[PENDING EXTRACTION]
+### Foundry App & Version
+Substance 3D Painter 12.1.4, Python API 0.3.5. (This skill's `App & Version` heading is shared with the Foundry-suite sibling skills; the app here is Adobe's.)
 
 ### Tags
-[PENDING EXTRACTION]
+`python-scripting`, `python-api`, `plugin`, `painter-12`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Versioning Plugin Example](versioning-plugin-example.md) — a complete plugin built on this contract, with `start_plugin`/`close_plugin` at the bottom of the file.
+- [Python API: event Module](python-api-event-module.md) — what a started plugin subscribes to.
+- [Python API: ui Module](python-api-ui-module.md) — what a started plugin adds to the interface.
+
+---
+
+> **Provenance.** Ingested from the Python API documentation **bundled inside**
+> Substance 3D Painter 12.1.4 on this machine
+> (`C:\Program Files\Adobe Substance 3D Painter\resources\python-doc`, reached in
+> the app via Help → scripting documentation). It is first-party Adobe
+> documentation, but the `url:` is a local `file://` path and therefore not
+> reachable from another machine — the public Experience League paths for the
+> Python API redirect to a generic page, which is why the bundled copy is the
+> source. Re-fetchable on any machine with Painter installed at the same path;
+> the API version (`0.3.5`) is the thing to check before trusting a signature.
