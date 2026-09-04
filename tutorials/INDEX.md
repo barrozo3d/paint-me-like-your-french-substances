@@ -1092,17 +1092,6 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/versioning-plugin-example.md
 
-
-### substance_painter.export Module
-- **Source:** Article
-- **URL:** file:///C:/Program%20Files/Adobe%20Substance%203D%20Painter/resources/python-doc/substance_painter/export.html
-- **Author:** Adobe Substance 3D Painter 12.1.4 bundled docs
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
-- **File:** tutorials/substance-painterexport-module.md
-
 ---
 
 ## Tag Reference
