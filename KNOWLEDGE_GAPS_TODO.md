@@ -118,25 +118,56 @@ answered from model memory — this skill's Python-API gap is already the
       max-distance for noisy scans, baking Base Color from mesh, UV mismatch,
       filling scan holes
 
-### 2. Channel packing — **1 tutorial**
+### 2. ✅ Channel packing — **CLOSED 2026-09-04** — **4** (was 1)
 
-`SKILL.md` advertises "channel packing/export presets". Exactly one file covers
-it (`optimizing-textures---how-to-pack-masks-like-a-pro.md`), and "export
-preset|export template" matches only 5.
+- [x] **Channel packing** — what goes in which channel, and why
+      ✅ `python-api-export-module.md` (2026-09-04) — the **mechanism** in Painter:
+      an export preset's `channels` block is channel packing expressed as
+      configuration (`destChannel` / `srcChannel` / `srcMapType` / `srcMapName`),
+      with the rule that besides alpha you must specify either **R+G+B or L
+      only**, and a colour source read into `L` mixes R+G+B.
+      ✅ `godot-standard-material-3d-and-orm-material-3d.md` and
+      `unity-metallic-mode-reflections-and-channels.md` — the **reasoning**: what
+      each engine actually wants, which is the half the mechanism cannot tell you.
+      **They disagree, and that is the point** — Godot ORM is one texture with
+      Occlusion/Roughness/Metallic in RGB, while Unity's metallic workflow is
+      **R = Metallic, G and B unused, A = Smoothness**. Unity also wants
+      *smoothness*, the inverse of the roughness Painter authors, so a preset must
+      **invert** that channel rather than merely re-route it. One preset cannot
+      serve both engines, and now the library says why.
 
-- [ ] **Channel packing for engines in depth** — building a packed ORM/RMA
-      export preset from scratch, per-channel source mapping, sRGB vs linear
-      per slot, and verifying the result in-engine
+### 3. ✅ Unity and Godot export — **CLOSED 2026-09-04** — Unity **5** (was 2), Godot **3** (was ZERO)
 
-### 3. Unity and Godot export — **2 and 0 tutorials**
+- [x] **Export presets for Unity and Godot**
+      ✅ `unity-metallic-mode-reflections-and-channels.md` — the metallic and
+      specular packings, URP vs Built-In workflow selection, and Unity's own
+      notice that the **Built-In Render Pipeline is deprecated** (supported
+      through the Unity 6.7 LTS lifecycle).
+      ✅ `godot-standard-material-3d-and-orm-material-3d.md` — **the direct answer
+      to "how do I export for Godot": use Painter's Unreal Engine export preset**,
+      because Unreal uses ORM too. Godot's documentation states this outright;
+      Adobe's reachable documentation does not state it anywhere.
+      ✅ `godot-model-export-considerations.md` — the mesh side of the same
+      handoff: the right-handed Y-up -Z-forward convention (and that an oriented
+      asset's **front is +Z**, so **+Y is rear in Blender**), triangulating in the
+      DCC rather than trusting import-time triangulation with N-gons, applying
+      transforms, and exporting at rest pose.
 
-`SKILL.md` advertises export pipelines "for game engines (Unreal/Unity/Godot)".
-Measured: Unreal **31**, Unity **2** (both incidental mentions inside broader
-videos, not dedicated workflows), Godot **0**.
-
-- [ ] **Painter → Unity** — Unity's metallic/specular setups, the Unity export
-      preset, HDRP vs URP channel expectations
-- [ ] **Painter → Godot** — Godot 4 material channels and the ORM convention
+> ⚙️ **Why engine documentation is filed in a Substance skill.** These pages are
+> the *receiving end* of a Painter export and they answer what Painter's own docs
+> do not: **which packing the target wants**. It is a deliberate choice, recorded
+> so nobody later reads it as scope drift.
+>
+> 🔴 **Adobe's Substance 3D Painter user documentation is still unreachable —
+> re-probed 2026-09-04.** `helpx.adobe.com/substance-3d-painter/using/export.html`
+> and the Experience League `user-guide/exporting/export-presets` path both **404**,
+> and `substance3d.adobe.com/documentation/spdoc/...` still redirects to a generic
+> **2,876-character** page with **zero** topic hits — the same false-positive
+> pattern D4b recorded on 2026-08-31, confirmed a second time a week later.
+> **Painter 12.1.4 is installed here and ships only API documentation**
+> (`python-doc`, `javascript-doc`, `qml-doc`, `shader-doc`) — **no user manual** —
+> so the bundled-docs route that closed gap #1 does not reach these topics.
+> Engine vendors are the reliable first-party source for the export question.
 
 ### 4. Substance Designer interop — **5 tutorials** (adjacent, low priority)
 

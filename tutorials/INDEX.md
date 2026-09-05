@@ -1135,33 +1135,36 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** Article
 - **URL:** https://docs.godotengine.org/en/stable/tutorials/3d/standard_material_3d.html
 - **Author:** docs.godotengine.org (Godot stable docs)
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Godot (receiving end of a Substance 3D Painter export)
+- **Version:** Godot stable docs (4.x); page notes Godot 4.5 behaviour for stencil outlines
+- **Tags:** channel-packing, godot-export, game-engine, pbr, metal-rough, intermediate
+- **Summary:** Godot's ORMMaterial3D packs Occlusion, Roughness and Metallic into ONE texture's colour channels instead of three separate maps - and the page names the export route from Painter explicitly: use the UNREAL ENGINE export preset, because Unreal uses ORM too. That single sentence is the practical answer to how to export for Godot, and it is not stated anywhere in Adobe's own reachable documentation. Also covers the four material assignment levels and their override order (mesh, node, Material Override, Material Overlay), and the ranked transparency modes with what each costs: Alpha Scissor for foliage and fences (casts shadows, no sorting issues), Alpha Hash for hair, Alpha for VFX, Depth Pre-Pass for mostly-correct sorting - plus the settings that silently FORCE alpha blending (non-Mix blend mode, Refraction, Proximity Fade, Distance Fade).
 - **File:** tutorials/godot-standard-material-3d-and-orm-material-3d.md
+- **Related:** Unity Metallic Mode Reflections and Channels (`unity-metallic-mode-reflections-and-channels.md`) — shares `channel-packing`, `game-engine`, `pbr`; the same question with a different answer. Python API: export Module (`python-api-export-module.md`) — building this packing from script. Godot Model Export Considerations (`godot-model-export-considerations.md`).
 
 
 ### Godot Model Export Considerations
 - **Source:** Article
 - **URL:** https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/model_export_considerations.html
 - **Author:** docs.godotengine.org (Godot stable docs)
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Godot (receiving end of a Substance 3D Painter / Blender export)
+- **Version:** Godot stable docs (4.x)
+- **Tags:** godot-export, game-engine, export, uv, intermediate
+- **Summary:** Preparing a model for Godot before it leaves the DCC. Godot is right-handed, Y-up, -Z forward (OpenGL-like), while an oriented asset faces the opposite way so +Z is its FRONT - which in Blender means +Y rear and -Y front; for terrain use cardinals instead (+X east, +Z south, so +Y north in Blender). Triangulate in the modelling application rather than on import, because Godot's import triangulation may be unpredictable or incorrect with N-gons: in Blender add a Triangulate modifier and tick Apply Modifiers. Apply object transforms to avoid editor selection problems, and make sure the skeleton is at rest pose so bones do not deform the exported mesh. Any PBR-capable texturing tool works - the Substance suite, ArmorPaint, Material Maker - and lights are better authored in Godot than imported.
 - **File:** tutorials/godot-model-export-considerations.md
+- **Related:** Godot Standard Material 3D and ORM Material 3D (`godot-standard-material-3d-and-orm-material-3d.md`) — shares `godot-export`, `game-engine`; what happens to the textures once the mesh arrives. Unity Metallic Mode Reflections and Channels (`unity-metallic-mode-reflections-and-channels.md`).
 
 
 ### Unity Metallic Mode Reflections and Channels
 - **Source:** Article
 - **URL:** https://docs.unity3d.com/Manual/StandardShaderMaterialParameterMetallic.html
 - **Author:** docs.unity3d.com (Unity Manual)
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Unity (receiving end of a Substance 3D Painter export)
+- **Version:** Unity 6.6 (6000.6); page built 2026-09-03
+- **Tags:** channel-packing, unity-export, game-engine, pbr, metal-rough, intermediate
+- **Summary:** Unity's channel convention, which is NOT Godot's: in the metallic workflow a Metallic/Smoothness map packs Red = Metallic, Green unused, Blue unused, Alpha = Smoothness; in the specular workflow the same texture is RGB = specular colour, Alpha = Smoothness. Unity also works in SMOOTHNESS, the inverse of the roughness Painter authors, so an export preset has to invert the channel rather than just re-route it. Workflow selection differs by pipeline: URP sets Workflow Mode in Surface Options, while the Built-In Render Pipeline picks the Standard or Standard (Specular setup) shader - and that pipeline is deprecated, supported through the Unity 6.7 LTS lifecycle. Together with the Godot ORM page this is why one export preset cannot serve both engines.
 - **File:** tutorials/unity-metallic-mode-reflections-and-channels.md
+- **Related:** Godot Standard Material 3D and ORM Material 3D (`godot-standard-material-3d-and-orm-material-3d.md`) — shares `channel-packing`, `game-engine`, `pbr`, `metal-rough`; the contrasting ORM layout. Python API: export Module (`python-api-export-module.md`) — `destChannel`/`srcChannel` for either packing.
 
 ---
 

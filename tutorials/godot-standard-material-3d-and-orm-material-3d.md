@@ -4,10 +4,10 @@ source: Article
 url: https://docs.godotengine.org/en/stable/tutorials/3d/standard_material_3d.html
 author: docs.godotengine.org (Godot stable docs)
 ingested: 2026-09-04
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Godot (receiving end of a Substance 3D Painter export)"
+version: "Godot stable docs (4.x); page notes Godot 4.5 behaviour for stencil outlines"
+tags: [channel-packing, godot-export, game-engine, pbr, metal-rough, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/godot-standard-material-3d-and-orm-material-3d/
 frame_count: 0
 frame_status: skipped
@@ -45,27 +45,70 @@ Frame capture was skipped for this ingest (--skip-video). Text-only extraction.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+**ORMMaterial3D** replaces Godot's separate occlusion, roughness and metallic inputs with **one packed ORM texture**, whose colour channels carry the three parameters — and the documented way to produce it from Substance 3D Painter is the **Unreal Engine export preset**.
 
 ### Summary
-[PENDING EXTRACTION]
+This page answers the Painter-side question that Adobe's own docs do not: what to export for Godot. StandardMaterial3D and **ORMMaterial3D** (Occlusion, Roughness, Metallic) are Godot's two built-in 3D materials, identical in settings except for one thing — ORM takes **a single texture whose channels hold the three parameters** instead of three separate maps. The page names the tools that can produce that layout and how: *"Programs such as **Substance Painter** and Armor Paint will give you the option to export in this format, for these two programs it's with the **export preset for unreal engine**, which also uses ORM textures."* That single sentence is the practical answer to "how do I export for Godot" — use the Unreal preset. The rest of the page covers where a material can be assigned and the ranked cost of transparency, which matters because it decides whether the alpha you painted is usable: **Disabled** (opaque, fastest, all features), **Alpha** (true translucency but slow, casts no shadows, invisible in screen-space reflections), **Alpha Scissor** (all-or-nothing above/below a threshold, no sorting issues, **casts shadows** — the right choice for foliage and fences), **Alpha Hash** (dithered, also all-or-nothing, casts shadows, suited to realistic hair), and **Depth Pre-Pass** (opaque pixels first, then blended — mostly-correct sorting, casts shadows).
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Choose the material type: **StandardMaterial3D** for separate occlusion/roughness/metallic textures, **ORMMaterial3D** for one packed ORM texture.
+2. **Export ORM from Substance 3D Painter using the Unreal Engine export preset** — the page states this explicitly, because Unreal uses the same packing.
+3. Assign the material at the right level, knowing the override order: on the **mesh** (every use of that mesh gets it), on the **node** (overrides the mesh's), **Material Override** on the node (overrides both), and **Material Overlay** (renders *over* the current material — e.g. a transparent shield effect).
+4. Leave transparency **Disabled** unless the material genuinely needs it — opaque is fastest and supports every rendering feature.
+5. Pick the transparency mode by asset, not by habit: **Alpha Scissor** for foliage and fences (hard edges, correct sorting, casts shadows), **Alpha Hash** for realistic hair, **Alpha** for particles and VFX, **Depth Pre-Pass** where sorting must be mostly right.
+6. ⚠️ Know what alpha blending costs: significantly slower when overlapping, **sorting errors** between transparent surfaces, **no shadow casting**, and absence from reflections other than reflection probes.
+7. ⚠️ Watch the implicit switches — Godot **forces** alpha blending if you set a blend mode other than **Mix**, or enable **Refraction**, **Proximity Fade** or **Distance Fade**, even when you did not choose the Alpha mode.
+8. Convert the material to shader code only when you need functionality beyond these parameters.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Nodes / Tools / Settings
+- **StandardMaterial3D** / **ORMMaterial3D** — ORM = **Occlusion, Roughness, Metallic** packed into one texture's colour channels.
+- Export route from Painter: **the Unreal Engine export preset** (Unreal uses ORM too). Armor Paint likewise.
+- Assignment levels: mesh Material, node Material, **Material Override**, **Material Overlay**.
+- Transparency modes: **Disabled**, **Alpha**, **Alpha Scissor** (+ Alpha Scissor Threshold), **Alpha Hash**, **Depth Pre-Pass**.
+- Forced-transparency triggers: non-**Mix** blend mode, **Refraction**, **Proximity Fade**, **Distance Fade**.
+- All settings sit under the **BaseMaterial3D** category.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate
 
-### App & Version
-[PENDING EXTRACTION]
+### Foundry App & Version
+Godot (stable docs, 4.x) — documentation for the engine consuming the export, not for Painter itself.
 
 ### Tags
-[PENDING EXTRACTION]
+`channel-packing`, `godot-export`, `game-engine`, `pbr`, `metal-rough`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Python API: export Module](python-api-export-module.md) — the `channels` block that builds exactly this packing from script.
+- [Unity Metallic Mode Reflections and Channels](unity-metallic-mode-reflections-and-channels.md) — the same question answered by a different engine, with a **different** answer.
+- [Godot Model Export Considerations](godot-model-export-considerations.md) — the mesh side of the same handoff.
+
+---
+
+> ⚠️ **This entry's Raw Data is TRUNCATED — and this time it cost real content.**
+> The page holds **30,351 characters**; `fetch_article`'s cap keeps 25,000, so
+> **5,351 were dropped**. The captured text ends inside the **Grow** description.
+> Verified against the live page, the missing tail covers the rest of **Grow**
+> (the smooth-vs-flat-shading caveat and the Godot 4.5 stencil-outline
+> alternative) and the whole **Transform** section — **Fixed Size**, **Use Point
+> Size**, **Point Size**, **Use Particle Trails**, **Use Z Clip Scale**. **None of
+> it bears on channel packing, ORM, or texture export**, which is what this entry
+> exists for, so the notes above are complete for their purpose. Open the source
+> URL for billboard and transform options.
+>
+> This ingest is also the first real catch by the truncation warning added the
+> same day — before it, this loss would have been silent.
+
+---
+
+> **Why engine documentation lives in a Substance skill.** These pages are the
+> *receiving end* of a Painter export, and they answer the half Painter's own
+> docs never state: **which channel packing a given engine actually wants**.
+> `python-api-export-module.md` teaches the mechanism (`destChannel` /
+> `srcChannel` / `srcMapType` / `srcMapName`); these teach the target. Adobe's
+> Substance 3D Painter user documentation remains unreachable — re-probed
+> 2026-09-04, and `substance3d.adobe.com/documentation/spdoc/...` still redirects
+> to a generic 2,876-character page with zero topic hits — so the engine vendors
+> are the reliable first-party source for this, and they are explicit where Adobe
+> is silent.

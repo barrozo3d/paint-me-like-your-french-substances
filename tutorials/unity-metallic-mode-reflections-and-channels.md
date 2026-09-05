@@ -4,10 +4,10 @@ source: Article
 url: https://docs.unity3d.com/Manual/StandardShaderMaterialParameterMetallic.html
 author: docs.unity3d.com (Unity Manual)
 ingested: 2026-09-04
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Unity (receiving end of a Substance 3D Painter export)"
+version: "Unity 6.6 (6000.6); page built 2026-09-03"
+tags: [channel-packing, unity-export, game-engine, pbr, metal-rough, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/unity-metallic-mode-reflections-and-channels/
 frame_count: 0
 frame_status: skipped
@@ -37,27 +37,52 @@ Frame capture was skipped for this ingest (--skip-video). Text-only extraction.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Unity's metallic workflow packs **Metallic in the Red channel and Smoothness in the Alpha channel**, leaving Green and Blue unused — a different layout from Godot's ORM, and the reason an export preset cannot be shared between the two engines.
 
 ### Summary
-[PENDING EXTRACTION]
+This is the Unity half of the "which packing does the target want" question, and the answer is explicit and unlike Godot's. In the **metallic workflow**, a map controlling Metallic and Smoothness uses **Red = Metallic values, Green = unused, Blue = unused, Alpha = Smoothness values**. In the **specular workflow** the same texture is read differently: **Red, Green and Blue carry specular colour, Alpha carries Smoothness**. Note also that Unity works in **Smoothness**, not roughness — the inverse of what Painter authors by default — which is exactly the kind of conversion an export preset has to perform rather than the artist doing it by hand. Workflow selection differs by pipeline: in **URP**, set **Workflow Mode** to Metallic or Specular in Surface Options; in the **Built-In Render Pipeline**, choose the **Standard** shader for metallic or **Standard (Specular setup)** for specular. ⚠️ The page carries Unity's own deprecation notice: **the Built-In Render Pipeline is deprecated** and will be made obsolete in a future release, supported through the Unity 6.7 LTS lifecycle.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Choose the workflow: **URP** → Surface Options → **Workflow Mode** = Metallic or Specular. **Built-In** → Shader = **Standard** (metallic) or **Standard (Specular setup)**.
+2. For a uniform material, set **Metallic** to 1 or 0 (values between blend the two results) and use **Smoothness** for reflection blurriness or sharpness.
+3. For a varying material — fabric with metal zips and buckles is the page's example — supply a texture map and pack it as **R = Metallic, G unused, B unused, A = Smoothness**.
+4. In the **specular** workflow instead, pack **RGB = specular colour, A = Smoothness**; black specular means no reflections, white means full reflection.
+5. Remember Unity wants **Smoothness**, the inverse of roughness — the export preset must invert, not just re-route, the channel.
+6. Use *Reference for metallic and specular values of real surfaces* to set physically plausible values.
+7. ⚠️ Factor in the deprecation: the **Built-In Render Pipeline** is deprecated, supported through Unity 6.7 LTS, with migration to URP documented separately.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Nodes / Tools / Settings
+- **Metallic workflow packing**: **R = Metallic**, G unused, B unused, **A = Smoothness**.
+- **Specular workflow packing**: **RGB = Specular colour**, **A = Smoothness**.
+- Properties: **Metallic** (0–1, blends between), **Smoothness**, **Specular** colour.
+- Pipeline selection: URP **Workflow Mode** (Surface Options); Built-In **Standard** / **Standard (Specular setup)** shaders.
+- Reference: *Reference for metallic and specular values of real surfaces*, *Metallic and specular workflows*.
+- ⚠️ Built-In Render Pipeline **deprecated**, supported through the Unity 6.7 LTS lifecycle.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate
 
-### App & Version
-[PENDING EXTRACTION]
+### Foundry App & Version
+Unity 6.6 (6000.6) — documentation for the engine consuming the export, not for Painter itself.
 
 ### Tags
-[PENDING EXTRACTION]
+`channel-packing`, `unity-export`, `game-engine`, `pbr`, `metal-rough`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Godot Standard Material 3D and ORM Material 3D](godot-standard-material-3d-and-orm-material-3d.md) — the contrasting ORM layout; the two cannot share a preset.
+- [Python API: export Module](python-api-export-module.md) — building either packing from script with `destChannel` / `srcChannel`.
+
+---
+
+> **Why engine documentation lives in a Substance skill.** These pages are the
+> *receiving end* of a Painter export, and they answer the half Painter's own
+> docs never state: **which channel packing a given engine actually wants**.
+> `python-api-export-module.md` teaches the mechanism (`destChannel` /
+> `srcChannel` / `srcMapType` / `srcMapName`); these teach the target. Adobe's
+> Substance 3D Painter user documentation remains unreachable — re-probed
+> 2026-09-04, and `substance3d.adobe.com/documentation/spdoc/...` still redirects
+> to a generic 2,876-character page with zero topic hits — so the engine vendors
+> are the reliable first-party source for this, and they are explicit where Adobe
+> is silent.

@@ -4,10 +4,10 @@ source: Article
 url: https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/model_export_considerations.html
 author: docs.godotengine.org (Godot stable docs)
 ingested: 2026-09-04
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Godot (receiving end of a Substance 3D Painter / Blender export)"
+version: "Godot stable docs (4.x)"
+tags: [godot-export, game-engine, export, uv, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/godot-model-export-considerations/
 frame_count: 0
 frame_status: skipped
@@ -37,27 +37,55 @@ Frame capture was skipped for this ingest (--skip-video). Text-only extraction.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+Prepare a model for Godot before it leaves the DCC: match Godot's **right-handed, Y-up, -Z-forward** axis convention, **triangulate in the modelling application** rather than on import, apply transforms, and export PBR textures separately.
 
 ### Summary
-[PENDING EXTRACTION]
+The mesh-side companion to the material page. Godot uses a **right-handed, Y-is-up** coordinate system with **-Z as the camera's forward direction** (the same as OpenGL), so +Z is back, +X is right. The asset convention is the *opposite* — an oriented asset such as a character faces the camera, so **+Z is its front**, which in Blender means **+Y is rear and -Y is front**. For assets with no intrinsic front, use cardinal directions instead: +X east, -X west, and because of the handedness, **+Z south, -Z north** (in Blender, +Y north, -Y south). On textures, the page is direct and useful for this skill: Godot uses PBR, so **any texturing program that can export PBR textures works**, naming the **Substance suite**, ArmorPaint and Material Maker — and pointing at the Standard/ORM material page for how the channels are consumed. The triangulation advice is the one that silently damages assets: GPUs only draw triangles, Godot can triangulate on import, but **results may be unpredictable or incorrect, especially with N-gons** — so triangulate in the DCC. In Blender that means a **Triangulate modifier** with **Apply Modifiers** checked in the export dialog, or a Triangulate Faces option if the exporter has one.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Match the axis convention: Godot is **right-handed, Y-up, -Z forward**; +Z back, +X right, -X left for a camera.
+2. Orient assets the opposite way — **+Z is an asset's front**, -Z rear, +X left, -X right. In Blender: **+Y rear, -Y front**.
+3. In Godot code, use **`use_model_front`** on `look_at` and the **`Vector3.MODEL_*`** constants to work in the asset's local space.
+4. For maps and terrain, use cardinals: **+X east, -X west, +Z south, -Z north** (Blender: +Y north, -Y south).
+5. **Triangulate before exporting** — add a **Triangulate modifier** in Blender and tick **Apply Modifiers**, or enable the exporter's Triangulate Faces option. Do not rely on import-time triangulation, especially with N-gons.
+6. **Apply the object transform** before export to avoid 3D selection problems in the Godot editor.
+7. ⚠️ Make sure the mesh is **not deformed by bones** at export — reset the skeleton to T-pose or the default rest pose.
+8. Export **textures separately** where convenient; any PBR-capable texturing tool works — the Substance suite, ArmorPaint, Material Maker.
+9. Prefer to **light the scene in Godot** rather than importing lights, since engines render lights differently and imported lights often arrive too strong or too faint.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Nodes / Tools / Settings
+- Coordinate system: right-handed, **Y-up**, **-Z forward** (OpenGL-like); glTF 2.0 codifies the asset-facing convention.
+- Asset orientation: +Z front / -Z rear / +X left / -X right; Blender equivalent +Y rear, -Y front.
+- Cardinals: +X east, -X west, +Z south, -Z north (Blender +Y north, -Y south).
+- Code helpers: **`use_model_front`** on `look_at`, **`Vector3.MODEL_*`** constants.
+- Export hygiene: **Triangulate modifier** + **Apply Modifiers**, applied object transform, skeleton at rest pose.
+- Textures: PBR from the **Substance suite**, ArmorPaint or Material Maker; see Standard/ORM material for channel use.
+- Lighting: design in the Godot editor rather than importing from glTF/.blend/Collada.
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate
 
-### App & Version
-[PENDING EXTRACTION]
+### Foundry App & Version
+Godot (stable docs, 4.x), with Blender named as the source application throughout.
 
 ### Tags
-[PENDING EXTRACTION]
+`godot-export`, `game-engine`, `export`, `uv`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Godot Standard Material 3D and ORM Material 3D](godot-standard-material-3d-and-orm-material-3d.md) — what happens to the textures once the mesh arrives.
+- [Unity Metallic Mode Reflections and Channels](unity-metallic-mode-reflections-and-channels.md) — the other engine's conventions.
+
+---
+
+> **Why engine documentation lives in a Substance skill.** These pages are the
+> *receiving end* of a Painter export, and they answer the half Painter's own
+> docs never state: **which channel packing a given engine actually wants**.
+> `python-api-export-module.md` teaches the mechanism (`destChannel` /
+> `srcChannel` / `srcMapType` / `srcMapName`); these teach the target. Adobe's
+> Substance 3D Painter user documentation remains unreachable — re-probed
+> 2026-09-04, and `substance3d.adobe.com/documentation/spdoc/...` still redirects
+> to a generic 2,876-character page with zero topic hits — so the engine vendors
+> are the reliable first-party source for this, and they are explicit where Adobe
+> is silent.
