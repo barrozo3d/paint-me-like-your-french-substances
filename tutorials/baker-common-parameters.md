@@ -4,10 +4,10 @@ source: Article
 url: https://experienceleague.adobe.com/en/docs/substance-3d/bakers/bakers-settings/common-parameters
 author: Adobe Experience League (Substance 3D bakers documentation)
 ingested: 2026-09-04
-app: "[PENDING]"
-version: "[PENDING]"
-tags: []
-extraction_status: pending
+app: "Substance 3D Painter / Designer / Automation Toolkit (some parameters Designer-only)"
+version: "Adobe Substance 3D bakers documentation, last update 2026-05-01"
+tags: [baking, cage, high-to-low-poly, mesh-maps, intermediate]
+extraction_status: complete
 frames_dir: tutorials/frames/baker-common-parameters/
 frame_count: 0
 frame_status: skipped
@@ -37,27 +37,53 @@ Frame capture was skipped for this ingest (--skip-video). Text-only extraction.
 ## Structured Notes
 
 ### Core Technique
-[PENDING EXTRACTION]
+The parameters shared by every "from mesh" baker — **cage vs max frontal/rear ray distance**, **Relative to Bounding Box**, **Match by name**, **skew correction**, dilation and anti-aliasing — which together decide whether a bake off a noisy high-poly succeeds.
 
 ### Summary
-[PENDING EXTRACTION]
+This is the page that answers the cage-and-distance half of a scan-to-retopo transfer. Ray distance and cage are **mutually exclusive**: enabling **Set Distance With Cage / Use Cage** means the cage mesh controls both the maximum ray distance *and* their direction, and the page states plainly that **Max Frontal Distance and Max Rear Distance have no effect when a cage is used**. **Frontal** is how far *above* the low-poly surface a ray starts looking for high-poly geometry; **Rear** is how far *below* it stops. **Relative to Bounding Box** decides the units those numbers are in — enabled, distances are in the low-poly's normalised space; disabled, they use the real units the mesh was exported in, which the page notes is worth doing for objects with precise measurements. **Use Low as High Definition** ignores the high-poly list and bakes the low-poly on itself, producing a perfect bake with no ray misses — the right choice when working with a high-poly directly. **Match** avoids exploding meshes by hand: `Always` matches everything, `By Mesh Name` filters using the low/high/ignore-backfaces **suffixes**. **Average Normals** controls whether rays follow averaged vertex normals or the original ones, and **Use Skew Correction** (Designer only) drives ray direction from a skew map where black uses the average normal and white the original. Finally the post-processes: **Dilation** pads pixels past the UV border to prevent seams, and **Apply Diffusion** fills outside the UVs with a smoothed gradient so reduced sizes and mipmaps stay stable. ⚠️ **Anti-Aliasing is expensive by construction** — subsampling computes at higher resolution and downscales, so 2K at 2×2 actually renders 4K; the page suggests **more rays instead of more subsampling**.
 
 ### Key Steps
-[PENDING EXTRACTION]
+1. Set **Size** (32–8192, default 2048; non-square such as 2048×1024 supported) and, outside Painter, **Format**.
+2. Decide cage versus distance: enable **Use Cage** and supply a **Cage File** to control ray length *and* direction — or leave it off and tune **Max Frontal Distance** / **Max Rear Distance**. ⚠️ **The distances do nothing while a cage is in use.**
+3. Set **Relative to Bounding Box** according to whether you want normalised distances or the mesh's real export units — disable it and enter values by hand for precisely measured objects.
+4. For a high-poly you are baking onto itself, enable **Use Low as High Definition** — ray distance is ignored and there are no ray misses or geometry mismatches.
+5. Populate **High Definition Meshes** with the high-poly files (ignored when the previous option is on).
+6. Control pairing with **Match**: `Always`, or `By Mesh Name` with the **Low Poly**, **High Poly** and **Ignore Backfaces** suffixes — the alternative to exploding the mesh manually.
+7. Set **Average Normals** — on, rays follow the averaged vertex normal; off, the original vertex normals.
+8. In Designer, use **Use Skew Correction** with a **Skew Map** (black = average normal, white = original mesh normal), and **Invert Skew Correction** if the map reads the wrong way.
+9. Add **Dilation (px)** so UV borders do not seam at reduced resolutions, and enable **Apply Diffusion** for a smoothed gradient outside the UVs.
+10. Use **Anti-Aliasing** (None / 2×2 / 4×4 / 8×8 subsampling) sparingly — prefer raising ray counts first.
 
-### Layers / Tools / Settings
-[PENDING EXTRACTION]
+### Nodes / Tools / Settings
+- **General**: **Size** (32–8192, default 2048, non-square supported), **Format** (not in Painter), **Anti-Aliasing** (None / Subsampling 2×2 / 4×4 / 8×8), **UV Set** (not in Painter), **Dilation (px)**, **Apply Diffusion**, **Average Normals**.
+- **High-poly**: **High Definition Meshes**, **Use Low as High Definition**, **Set Distance With Cage / Use Cage**, **Cage File**, **Max Frontal Distance**, **Max Rear Distance**, **Relative to Bounding Box**.
+- **Matching**: **Match** (`Always` / `By Mesh Name`), suffixes for **Low Poly Mesh**, **High Poly Mesh**, **Ignore Backfaces**.
+- **Skew** (not in Painter): **Use Skew Correction**, **Skew Map**, **Invert Skew Correction**.
+- ⚠️ Cage overrides both max distances. ⚠️ Subsampling multiplies the computed resolution (2K @ 2×2 = 4K).
 
 ### Difficulty
-[PENDING EXTRACTION]
+Intermediate
 
-### App & Version
-[PENDING EXTRACTION]
+### Foundry App & Version
+Substance 3D Painter, Designer and the Automation Toolkit — with **Format**, **UV Set** and the **skew correction** group marked as not available in Painter. Behaviour may differ slightly per application.
 
 ### Tags
-[PENDING EXTRACTION]
+`baking`, `cage`, `high-to-low-poly`, `mesh-maps`, `intermediate`
 
 ---
 
 ## Related Tutorials
-[PENDING EXTRACTION]
+- [Transferred Texture from Mesh Baker](transferred-texture-from-mesh-baker.md) — the scan-to-retopo transfer these parameters govern.
+- [Color Map from Mesh Baker](color-map-from-mesh-baker.md) — the other colour-producing baker, and its different input.
+
+---
+
+> **Provenance, and a correction worth keeping.** These come from
+> `experienceleague.adobe.com/en/docs/substance-3d/bakers/...`, which **is
+> reachable** — verified 2026-09-04 with the final URL and topic-hit check, not a
+> bare status code. This is a **real exception** to this skill's standing finding
+> that Adobe's documentation is unreachable: the Painter **user guide** and the
+> **Python API** paths still 404 or redirect to a generic page, and `helpx.adobe.com`
+> times out entirely from here — but the **bakers** doc set is live and specific.
+> The earlier conclusion was right about the paths it tested and **over-generalised
+> to "Adobe docs are unreachable"**. Probe the doc set you actually need.

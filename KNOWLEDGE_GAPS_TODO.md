@@ -98,25 +98,56 @@ corroborating source it never had — the profile that made `copernicus.md` wron
 > ASR, and flagged the `export` page because its closing code example
 > legitimately repeats "export" 10×. `run_safeguards()` now takes `is_asr`.
 
-### 2b. 🔴 Texture transfer: scanned high-poly → retopologized low-poly — **found by a real question, 2026-08-31**
+### 2b. ✅ Texture transfer: scanned high-poly → retopologized low-poly — **CLOSED 2026-09-04**
 
-A user question F4 could not answer: *"how to correctly transpose a texture from a
-3D-scanned asset to a retopologized asset (using Substance for example)?"*
+The question that opened this item, from a real session F4 could not answer:
+*"how to correctly transpose a texture from a 3D-scanned asset to a retopologized
+asset (using Substance for example)?"*
 
-Retrieval surfaced **39** baking entries, and the top hits are all about baking
-**mesh maps** — normal, AO, curvature, skew. That is a **different operation**.
-The question is about carrying an existing **albedo/colour texture** from a dense
-photogrammetry scan onto a clean retopo mesh: cage/max-distance handling for a
-noisy scan, `Bake Mesh Maps > Diffuse/Base Color from mesh`, UV correspondence
-when the two meshes disagree, and what to do where the scan has holes.
+**The answer is that Substance 3D Painter cannot do it.** The operation is the
+**Transferred Texture from Mesh** baker, and Adobe's own documentation states it
+is available in **Substance Designer and the Substance Automation Toolkit** — not
+Painter. That is why retrieval surfaced 39 baking entries and none of them fit:
+the library was not missing a tutorial, it was missing the fact that the
+operation lives in a different application.
 
-**Adjacent material exists; the operation does not.** Recorded rather than
-answered from model memory — this skill's Python-API gap is already the
-`copernicus.md` profile and one uncorroborated area is enough.
-
-- [ ] **Texture/colour transfer from a scanned mesh to a retopo mesh** — cage and
+- [x] **Texture/colour transfer from a scanned mesh to a retopo mesh** — cage and
       max-distance for noisy scans, baking Base Color from mesh, UV mismatch,
       filling scan holes
+      ✅ `transferred-texture-from-mesh-baker.md` — the operation itself: converts
+      a texture from one mesh to another **through their respective UVs**, so
+      **both meshes must have UV definitions** (a photogrammetry scan normally
+      does — dense mesh plus UV-mapped albedo). Texture File, UV Set, Filtering
+      Mode (Nearest precise/aliasing vs Bilinear default/blurry), and the normal
+      map path: Normal Map toggle → Map Type → Normal Orientation.
+      ✅ `baker-common-parameters.md` — the noisy-scan handling: **cage and ray
+      distance are mutually exclusive** (with a cage, Max Frontal and Max Rear
+      Distance have *no effect*), Relative to Bounding Box for real-unit
+      distances, Use Low as High Definition, Match by Mesh Name instead of
+      exploding geometry, skew correction, and Dilation / Apply Diffusion.
+      ✅ `color-map-from-mesh-baker.md` — the baker people reach for by mistake and
+      **why it cannot do this job**: it reads colour *properties carried on the
+      geometry* (Vertex Color, Material Color, Mesh ID, Polygroup ID), never an
+      existing texture file. A scan whose colour lives in a UV-mapped image gives
+      it nothing to read.
+
+> 🔴 **THIS ITEM'S OWN WORDING CONTAINED A FALSE PREMISE, now corrected.** It
+> asked for *"`Bake Mesh Maps > Diffuse/Base Color from mesh`"*. **No such baker
+> exists.** Painter's colour baker is **Color Map from Mesh**, and it reads vertex
+> colours and IDs, not textures. The gap was written from a plausible-sounding
+> assumption about the tool rather than from the tool's documentation — the same
+> failure the item was itself trying to avoid when it said *"recorded rather than
+> answered from model memory"*. **Recording a gap protects you from inventing an
+> answer; it does not protect you from inventing the question.**
+
+> ✅ **AND THE "ADOBE DOCS ARE UNREACHABLE" FINDING WAS OVER-GENERALISED.**
+> `experienceleague.adobe.com/en/docs/substance-3d/bakers/**` **is reachable** —
+> verified 2026-09-04 by final URL and topic-hit count, not a bare status code.
+> What is genuinely unreachable is narrower than recorded: the Painter **user
+> guide** paths (404), the **Python API** paths (redirect to a generic page), and
+> **`helpx.adobe.com`**, which times out from here entirely. The **bakers** doc
+> set is live and specific. **Probe the doc set you actually need rather than
+> carrying forward a verdict on the vendor.**
 
 ### 2. ✅ Channel packing — **CLOSED 2026-09-04** — **4** (was 1)
 

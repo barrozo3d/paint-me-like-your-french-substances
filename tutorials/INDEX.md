@@ -1171,33 +1171,36 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Source:** Article
 - **URL:** https://experienceleague.adobe.com/en/docs/substance-3d/bakers/bakers-settings/transferred-texture-from-mesh
 - **Author:** Adobe Experience League (Substance 3D bakers documentation)
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Designer / Substance Automation Toolkit (NOT available in Substance 3D Painter)
+- **Version:** Adobe Substance 3D bakers documentation, last update 2026-05-01
+- **Tags:** baking, high-to-low-poly, uv, normal-map, advanced
+- **Summary:** THE answer to transferring a texture from a 3D-scanned high-poly onto a retopologized low-poly: the Transferred Texture from Mesh baker converts a texture from one mesh to another through their respective UVs. Critically it is available in SUBSTANCE DESIGNER and the Automation Toolkit and NOT in Substance Painter - Painter cannot transfer maps from high to low at all, which is why searching its bakers for this operation finds nothing. Both meshes must have UV definitions. Parameters: Texture File, UV Set (the high-poly UVs the texture is read through), Filtering Mode (Nearest is precise but aliases, Bilinear is the default and can blur), and for normal maps a Normal Map toggle plus Map Type (World or Tangent Space) and Normal Orientation (OpenGL or DirectX) - the pair that causes inverted green channels when mismatched.
 - **File:** tutorials/transferred-texture-from-mesh-baker.md
+- **Related:** Baker Common Parameters (`baker-common-parameters.md`), Color Map from Mesh Baker (`color-map-from-mesh-baker.md`) — share `baking`, `high-to-low-poly`; the cage/distance settings that govern the transfer, and the baker commonly mistaken for it.
 
 
 ### Baker Common Parameters
 - **Source:** Article
 - **URL:** https://experienceleague.adobe.com/en/docs/substance-3d/bakers/bakers-settings/common-parameters
 - **Author:** Adobe Experience League (Substance 3D bakers documentation)
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter / Designer / Automation Toolkit (some parameters Designer-only)
+- **Version:** Adobe Substance 3D bakers documentation, last update 2026-05-01
+- **Tags:** baking, cage, high-to-low-poly, mesh-maps, intermediate
+- **Summary:** The parameters shared by every from-mesh baker, and the cage-and-distance half of any scan-to-retopo bake. Cage and ray distance are mutually exclusive: with Use Cage enabled the cage mesh controls ray length AND direction, and Max Frontal / Max Rear Distance have NO EFFECT. Frontal is how far above the low-poly a ray starts looking, Rear how far below it stops; Relative to Bounding Box decides whether those are normalised or real export units. Use Low as High Definition bakes the low-poly on itself for a perfect bake with no ray misses. Match by Mesh Name with low/high/ignore-backfaces suffixes replaces exploding meshes by hand. Also Average Normals, Designer-only skew correction with a skew map, Dilation and Apply Diffusion as UV-border post-processes, and the warning that anti-aliasing subsampling multiplies the computed resolution - 2K at 2x2 actually renders 4K, so add rays before subsampling.
 - **File:** tutorials/baker-common-parameters.md
+- **Related:** Transferred Texture from Mesh Baker (`transferred-texture-from-mesh-baker.md`), Color Map from Mesh Baker (`color-map-from-mesh-baker.md`) — share `baking`, `high-to-low-poly`, `mesh-maps`.
 
 
 ### Color Map from Mesh Baker
 - **Source:** Article
 - **URL:** https://experienceleague.adobe.com/en/docs/substance-3d/bakers/bakers-settings/color-map-from-mesh
 - **Author:** Adobe Experience League (Substance 3D bakers documentation)
-- **App:** [PENDING]
-- **Version:** [PENDING]
-- **Tags:** [PENDING]
-- **Summary:** [PENDING EXTRACTION]
+- **App:** Substance 3D Painter / Designer / Automation Toolkit
+- **Version:** Adobe Substance 3D bakers documentation, last update 2026-05-01
+- **Tags:** baking, id-map, mesh-maps, high-to-low-poly, intermediate
+- **Summary:** Color Map from Mesh projects a COLOUR PROPERTY of the high-poly mesh into a texture - Vertex Color (interpolated vertex to vertex), Material Color (per polygon face), Mesh ID (per object) or Polygroup / Submesh ID (per sub-object) - with a Color Generator of Random, Hue Shift or Grayscale for the two ID sources. Its stated purpose is baking polypaint or material IDs to create selection masks. The important negative: it reads properties carried on the geometry, NEVER an existing texture file, so a photogrammetry scan whose colour lives in a UV-mapped image has nothing here for it to read. That job belongs to Transferred Texture from Mesh in Substance Designer. Unlike that baker, this one IS available in Painter.
 - **File:** tutorials/color-map-from-mesh-baker.md
+- **Related:** Transferred Texture from Mesh Baker (`transferred-texture-from-mesh-baker.md`) — shares `baking`, `high-to-low-poly`; what to use instead when the colour is a texture rather than a vertex property. Baker Common Parameters (`baker-common-parameters.md`).
 
 ---
 
