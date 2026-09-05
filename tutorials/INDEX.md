@@ -1141,6 +1141,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/godot-standard-material-3d-and-orm-material-3d.md
 
+
+### Godot Model Export Considerations
+- **Source:** Article
+- **URL:** https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/model_export_considerations.html
+- **Author:** docs.godotengine.org (Godot stable docs)
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/godot-model-export-considerations.md
+
 ---
 
 ## Tag Reference
