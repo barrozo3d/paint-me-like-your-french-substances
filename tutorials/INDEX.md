@@ -1177,6 +1177,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/transferred-texture-from-mesh-baker.md
 
+
+### Baker Common Parameters
+- **Source:** Article
+- **URL:** https://experienceleague.adobe.com/en/docs/substance-3d/bakers/bakers-settings/common-parameters
+- **Author:** Adobe Experience League (Substance 3D bakers documentation)
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/baker-common-parameters.md
+
 ---
 
 ## Tag Reference
