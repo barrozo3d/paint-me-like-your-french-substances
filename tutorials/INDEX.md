@@ -1152,6 +1152,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/godot-model-export-considerations.md
 
+
+### Unity Metallic Mode Reflections and Channels
+- **Source:** Article
+- **URL:** https://docs.unity3d.com/Manual/StandardShaderMaterialParameterMetallic.html
+- **Author:** docs.unity3d.com (Unity Manual)
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/unity-metallic-mode-reflections-and-channels.md
+
 ---
 
 ## Tag Reference
