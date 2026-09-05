@@ -1188,6 +1188,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **Summary:** [PENDING EXTRACTION]
 - **File:** tutorials/baker-common-parameters.md
 
+
+### Color Map from Mesh Baker
+- **Source:** Article
+- **URL:** https://experienceleague.adobe.com/en/docs/substance-3d/bakers/bakers-settings/color-map-from-mesh
+- **Author:** Adobe Experience League (Substance 3D bakers documentation)
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/color-map-from-mesh-baker.md
+
 ---
 
 ## Tag Reference
