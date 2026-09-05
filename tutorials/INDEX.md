@@ -1166,6 +1166,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **File:** tutorials/unity-metallic-mode-reflections-and-channels.md
 - **Related:** Godot Standard Material 3D and ORM Material 3D (`godot-standard-material-3d-and-orm-material-3d.md`) — shares `channel-packing`, `game-engine`, `pbr`, `metal-rough`; the contrasting ORM layout. Python API: export Module (`python-api-export-module.md`) — `destChannel`/`srcChannel` for either packing.
 
+
+### Transferred Texture from Mesh Baker
+- **Source:** Article
+- **URL:** https://experienceleague.adobe.com/en/docs/substance-3d/bakers/bakers-settings/transferred-texture-from-mesh
+- **Author:** Adobe Experience League (Substance 3D bakers documentation)
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/transferred-texture-from-mesh-baker.md
+
 ---
 
 ## Tag Reference
