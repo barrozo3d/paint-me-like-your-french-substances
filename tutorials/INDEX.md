@@ -1130,6 +1130,17 @@ This is the skill's growing knowledge base, covering Adobe Substance 3D Painter.
 - **File:** tutorials/python-api-event-module.md
 - **Related:** Versioning Plugin Example (`versioning-plugin-example.md`), Python API: export Module (`python-api-export-module.md`), Python API: ui Module (`python-api-ui-module.md`) — share `python-scripting`, `python-api`, `plugin`.
 
+
+### Godot Standard Material 3D and ORM Material 3D
+- **Source:** Article
+- **URL:** https://docs.godotengine.org/en/stable/tutorials/3d/standard_material_3d.html
+- **Author:** docs.godotengine.org (Godot stable docs)
+- **App:** [PENDING]
+- **Version:** [PENDING]
+- **Tags:** [PENDING]
+- **Summary:** [PENDING EXTRACTION]
+- **File:** tutorials/godot-standard-material-3d-and-orm-material-3d.md
+
 ---
 
 ## Tag Reference
