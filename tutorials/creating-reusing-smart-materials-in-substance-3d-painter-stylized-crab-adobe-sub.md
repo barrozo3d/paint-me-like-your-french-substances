@@ -11,6 +11,7 @@ extraction_status: complete
 frames_dir: tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/
 frame_count: 8
 frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # Creating & Reusing Smart Materials in Substance 3D Painter | Stylized Crab | Adobe Substance 3D
@@ -29,12 +30,7 @@ The flagged empty chapter ("Adjusting the Smart Material project for different l
 
 ---
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### <Untitled Chapter 1> [0:00]
@@ -116,14 +112,14 @@ frontmatter before you write the Structured Notes below.
 
 ## Captured Frames
 
-- [0:03] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_000.jpg
-- [0:20] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_001.jpg
-- [1:15] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_002.jpg
-- [3:25] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_003.jpg
-- [3:50] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_004.jpg
-- [5:50] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_005.jpg
-- [6:35] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_006.jpg
-- [7:52] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_007.jpg
+- [0:15] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_000.jpg
+- [1:27] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_001.jpg
+- [2:47] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_002.jpg
+- [4:07] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_003.jpg
+- [5:30] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_004.jpg
+- [6:53] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_005.jpg
+- [7:32] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_006.jpg
+- [9:24] tutorials/frames/creating-reusing-smart-materials-in-substance-3d-painter-stylized-crab-adobe-sub/frame_007.jpg
 
 ---
 

@@ -11,6 +11,7 @@ extraction_status: complete
 frames_dir: tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/
 frame_count: 8
 frame_status: complete
+frame_selection: content-anchored (manual timestamps chosen from transcript, not blind percentages)
 ---
 
 # 6 Powerful New Filters in Substance 3D Painter | Adobe Substance 3D
@@ -23,12 +24,7 @@ frame_status: complete
 
 ## Raw Data (for Claude Code extraction)
 
-Frames are not captured yet. Read the timestamped transcript below, pick moments
-that actually show a technique/result worth a still (not blind percentages —
-even within a named chapter, verify the real moment against its timestamps), then run:
-  python select_frames.py 6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d <ts1> <ts2> ...
-(seconds or mm:ss). This appends a "Captured Frames" section and updates the
-frontmatter before you write the Structured Notes below.
+Frames captured — see "Captured Frames" section below.
 
 
 ### Introduction [0:00]
@@ -212,14 +208,14 @@ frontmatter before you write the Structured Notes below.
 
 ## Captured Frames
 
-- [0:34] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
-- [1:30] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
-- [3:15] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
-- [4:40] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
-- [6:00] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
-- [6:50] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
-- [7:15] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
-- [9:00] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_007.jpg
+- [0:15] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_000.jpg
+- [1:20] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_001.jpg
+- [2:40] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_002.jpg
+- [4:03] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_003.jpg
+- [5:25] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_004.jpg
+- [6:47] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_005.jpg
+- [7:21] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_006.jpg
+- [9:11] tutorials/frames/6-powerful-new-filters-in-substance-3d-painter-adobe-substance-3d/frame_007.jpg
 
 ---
 
